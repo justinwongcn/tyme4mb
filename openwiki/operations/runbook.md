@@ -1,4 +1,10 @@
 ---
+type: "参考"
+title: "运维手册"
+openwiki_generated: true
+---
+
+---
 title: 运维手册
 type: page
 description: 构建流程、CI/CD 配置、版本管理和故障排查指南
@@ -12,7 +18,7 @@ description: 构建流程、CI/CD 配置、版本管理和故障排查指南
 
 ```bash
 # 进入项目目录
-cd /Users/john/MoonbitProjects/tyme4mb
+cd <project-root>
 
 # 构建库
 moon build tyme

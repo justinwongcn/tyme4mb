@@ -1,10 +1,16 @@
 ---
-type: "Reference"
-title: "测试指南 / Testing Guide"
+type: "参考"
+title: "测试指南"
 openwiki_generated: true
 ---
 
-# 测试指南 / Testing Guide
+---
+type: "参考"
+title: "测试指南"
+openwiki_generated: true
+---
+
+# 测试指南
 
 ## 测试框架
 

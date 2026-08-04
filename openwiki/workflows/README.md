@@ -1,4 +1,10 @@
 ---
+type: "参考"
+title: "关键工作流"
+openwiki_generated: true
+---
+
+---
 title: 关键工作流
 type: page
 description: 常用计算流程的完整指南，包含代码示例
