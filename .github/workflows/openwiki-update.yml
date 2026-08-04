@@ -48,7 +48,7 @@ jobs:
           echo "API is reachable and responding correctly."
 
       - name: Run OpenWiki
-        timeout-minutes: 15
+        timeout-minutes: 30
         run: openwiki code --update --print --language zh-CN
         env:
           OPENWIKI_PROVIDER: openai-compatible
