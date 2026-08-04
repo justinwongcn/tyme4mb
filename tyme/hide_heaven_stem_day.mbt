@@ -8,9 +8,6 @@ pub struct HideHeavenStemDay {
 extend HideHeavenStemDay with Culture::{get_name}
 
 ///|
-extend HideHeavenStemDay with Show::{to_string}
-
-///|
 pub fn HideHeavenStemDay::new(
   o : HideHeavenStem,
   index : Int,
@@ -33,12 +30,14 @@ pub fn HideHeavenStemDay::get_day_index(self : HideHeavenStemDay) -> Int {
 }
 
 ///|
-impl Culture for HideHeavenStemDay with fn get_name(self : HideHeavenStemDay) -> String {
+pub impl Culture for HideHeavenStemDay with fn get_name(
+  self : HideHeavenStemDay,
+) -> String {
   let heaven_stem = self.get_hide_heaven_stem().get_heaven_stem()
   "\{heaven_stem.get_name()}\{heaven_stem.get_element().get_name()}"
 }
 
 ///|
-impl Show for HideHeavenStemDay with fn to_string(self : HideHeavenStemDay) -> String {
+pub impl Show for HideHeavenStemDay with fn to_string(self : HideHeavenStemDay) -> String {
   "\{self.get_name()}第\{self.abstract_culture_day.get_day_index() + 1}天"
 }

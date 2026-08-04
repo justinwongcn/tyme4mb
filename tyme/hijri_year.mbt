@@ -11,9 +11,6 @@ extend HijriYear with Culture::{get_name}
 extend HijriYear with Show::{to_string}
 
 ///|
-extend HijriYear with Tyme::{next}
-
-///|
 pub fn HijriYear::new(year_unit : YearUnit) -> HijriYear {
   { year_unit, }
 }
@@ -37,7 +34,7 @@ pub fn HijriYear::validate(year : Int) -> Result[Unit, String] {
 // from_year 从年构造
 pub fn HijriYear::from_year(year : Int) -> Result[HijriYear, String] {
   match HijriYear::validate(year) {
-    Ok(_) => Ok(HijriYear::{ year_unit: YearUnit::new(year) })
+    Ok(_) => Ok({ year_unit: YearUnit::new(year) })
     Err(e) => Err(e)
   }
 }
@@ -91,17 +88,17 @@ pub fn HijriYear::get_first_month(self : HijriYear) -> HijriMonth {
 }
 
 ///|
-impl Culture for HijriYear with fn get_name(self : HijriYear) -> String {
+pub impl Culture for HijriYear with fn get_name(self : HijriYear) -> String {
   "\{self.get_year()}年"
 }
 
 ///|
-impl Show for HijriYear with fn to_string(self : HijriYear) -> String {
+pub impl Show for HijriYear with fn to_string(self : HijriYear) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for HijriYear with fn next(self : HijriYear, n : Int) -> HijriYear {
+pub impl Tyme for HijriYear with fn next(self : HijriYear, n : Int) -> HijriYear {
   match HijriYear::from_year(self.get_year() + n) {
     Ok(y) => y
     Err(_) => self

@@ -14,23 +14,14 @@ pub struct Dipper {
 }
 
 ///|
-extend Dipper with Culture::{get_name}
-
-///|
-extend Dipper with Show::{to_string}
-
-///|
-extend Dipper with Tyme::{next}
-
-///|
 pub fn Dipper::from_index(index : Int) -> Dipper {
-  Dipper::{ loop_tyme: LoopTyme::from_index(dipper_names(), index) }
+  { loop_tyme: LoopTyme::from_index(dipper_names(), index) }
 }
 
 ///|
 pub fn Dipper::from_name(name : String) -> Result[Dipper, String] {
   match LoopTyme::from_name(dipper_names(), name) {
-    Ok(p) => Ok(Dipper::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -41,16 +32,16 @@ pub fn Dipper::get_index(self : Dipper) -> Int {
 }
 
 ///|
-impl Culture for Dipper with fn get_name(self : Dipper) -> String {
+pub impl Culture for Dipper with fn get_name(self : Dipper) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Dipper with fn to_string(self : Dipper) -> String {
+pub impl Show for Dipper with fn to_string(self : Dipper) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Dipper with fn next(self : Dipper, n : Int) -> Dipper {
+pub impl Tyme for Dipper with fn next(self : Dipper, n : Int) -> Dipper {
   Dipper::from_index(self.loop_tyme.get_index() + n)
 }

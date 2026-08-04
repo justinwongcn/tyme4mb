@@ -13,9 +13,6 @@ pub struct SixtyCycleHour {
 extend SixtyCycleHour with Culture::{get_name}
 
 ///|
-extend SixtyCycleHour with Show::{to_string}
-
-///|
 extend SixtyCycleHour with Tyme::{next}
 
 ///|
@@ -56,7 +53,7 @@ pub fn SixtyCycleHour::from_solar_time(
   }
   let y = SixtyCycleYear::from_year(lunar_year.get_year()).unwrap()
   let m = LunarMonth::from_ym(solar_year, 1).unwrap()
-  SixtyCycleHour::{
+  {
     solar_time,
     day: SixtyCycleDay::new(
       solar_time.get_solar_day(),
@@ -171,16 +168,16 @@ pub fn SixtyCycleHour::get_eight_char(self : SixtyCycleHour) -> EightChar {
 }
 
 ///|
-impl Culture for SixtyCycleHour with fn get_name(self : SixtyCycleHour) -> String {
+pub impl Culture for SixtyCycleHour with fn get_name(self : SixtyCycleHour) -> String {
   "\{self.hour.to_string()}时"
 }
 
 ///|
-impl Show for SixtyCycleHour with fn to_string(self : SixtyCycleHour) -> String {
+pub impl Show for SixtyCycleHour with fn to_string(self : SixtyCycleHour) -> String {
   self.day.to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for SixtyCycleHour with fn next(self : SixtyCycleHour, n : Int) -> SixtyCycleHour {
+pub impl Tyme for SixtyCycleHour with fn next(self : SixtyCycleHour, n : Int) -> SixtyCycleHour {
   SixtyCycleHour::from_solar_time(self.solar_time.next(n))
 }

@@ -127,7 +127,7 @@ pub fn SolarTime::from_ymdhms(
 ) -> Result[SolarTime, String] {
   match SolarTime::validate(year, month, day, hour, minute, second) {
     Ok(_) =>
-      Ok(SolarTime::{
+      Ok({
         second_unit: SecondUnit::new(
           DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
           hour,
@@ -251,7 +251,7 @@ pub fn SolarTime::get_sixty_cycle_hour(self : SolarTime) -> SixtyCycleHour {
 }
 
 ///|
-impl Culture for SolarTime with fn get_name(self : SolarTime) -> String {
+pub impl Culture for SolarTime with fn get_name(self : SolarTime) -> String {
   two_digits(self.get_hour()) +
   ":" +
   two_digits(self.get_minute()) +
@@ -260,6 +260,6 @@ impl Culture for SolarTime with fn get_name(self : SolarTime) -> String {
 }
 
 ///|
-impl Show for SolarTime with fn to_string(self : SolarTime) -> String {
+pub impl Show for SolarTime with fn to_string(self : SolarTime) -> String {
   self.get_solar_day().to_string() + " " + self.get_name()
 }

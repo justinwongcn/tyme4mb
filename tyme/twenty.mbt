@@ -14,23 +14,17 @@ pub struct Twenty {
 }
 
 ///|
-extend Twenty with Culture::{get_name}
-
-///|
 extend Twenty with Show::{to_string}
 
 ///|
-extend Twenty with Tyme::{next}
-
-///|
 pub fn Twenty::from_index(index : Int) -> Twenty {
-  Twenty::{ loop_tyme: LoopTyme::from_index(twenty_names(), index) }
+  { loop_tyme: LoopTyme::from_index(twenty_names(), index) }
 }
 
 ///|
 pub fn Twenty::from_name(name : String) -> Result[Twenty, String] {
   match LoopTyme::from_name(twenty_names(), name) {
-    Ok(p) => Ok(Twenty::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -47,16 +41,16 @@ pub fn Twenty::get_sixty(self : Twenty) -> Sixty {
 }
 
 ///|
-impl Culture for Twenty with fn get_name(self : Twenty) -> String {
+pub impl Culture for Twenty with fn get_name(self : Twenty) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Twenty with fn to_string(self : Twenty) -> String {
+pub impl Show for Twenty with fn to_string(self : Twenty) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Twenty with fn next(self : Twenty, n : Int) -> Twenty {
+pub impl Tyme for Twenty with fn next(self : Twenty, n : Int) -> Twenty {
   Twenty::from_index(self.loop_tyme.get_index() + n)
 }

@@ -9,9 +9,6 @@ pub struct MonthUnit {
 extend MonthUnit with Culture::{get_name}
 
 ///|
-extend MonthUnit with Show::{to_string}
-
-///|
 pub fn MonthUnit::new(year_unit : YearUnit, month : Int) -> MonthUnit {
   { year_unit, month }
 }
@@ -30,11 +27,11 @@ pub fn MonthUnit::get_compare_index(self : MonthUnit) -> Int {
 }
 
 ///|
-impl Culture for MonthUnit with fn get_name(self : MonthUnit) -> String {
+pub impl Culture for MonthUnit with fn get_name(self : MonthUnit) -> String {
   self.year_unit.get_name()
 }
 
 ///|
-impl Show for MonthUnit with fn to_string(self : MonthUnit) -> String {
+pub impl Show for MonthUnit with fn to_string(self : MonthUnit) -> String {
   self.get_name()
 }

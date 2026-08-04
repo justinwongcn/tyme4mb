@@ -50,23 +50,14 @@ pub struct God {
 }
 
 ///|
-extend God with Culture::{get_name}
-
-///|
-extend God with Show::{to_string}
-
-///|
-extend God with Tyme::{next}
-
-///|
 pub fn God::from_index(index : Int) -> God {
-  God::{ loop_tyme: LoopTyme::from_index(god_names(), index) }
+  { loop_tyme: LoopTyme::from_index(god_names(), index) }
 }
 
 ///|
 pub fn God::from_name(name : String) -> Result[God, String] {
   match LoopTyme::from_name(god_names(), name) {
-    Ok(p) => Ok(God::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -136,16 +127,16 @@ pub fn God::get_day_gods(
 }
 
 ///|
-impl Culture for God with fn get_name(self : God) -> String {
+pub impl Culture for God with fn get_name(self : God) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for God with fn to_string(self : God) -> String {
+pub impl Show for God with fn to_string(self : God) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for God with fn next(self : God, n : Int) -> God {
+pub impl Tyme for God with fn next(self : God, n : Int) -> God {
   God::from_index(self.loop_tyme.get_index() + n)
 }

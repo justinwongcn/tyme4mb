@@ -80,3 +80,17 @@ pub fn ChildLimitInfo::get_hour_count(self : ChildLimitInfo) -> Int {
 pub fn ChildLimitInfo::get_minute_count(self : ChildLimitInfo) -> Int {
   self.minute_count
 }
+
+///|
+pub impl Show for ChildLimitInfo with fn to_string(self : ChildLimitInfo) -> String {
+  self.get_year_count().to_string() +
+  "年" +
+  self.get_month_count().to_string() +
+  "个月" +
+  self.get_day_count().to_string() +
+  "天" +
+  self.get_hour_count().to_string() +
+  "小时" +
+  self.get_minute_count().to_string() +
+  "分钟"
+}

@@ -17,23 +17,14 @@ pub struct Sound {
 }
 
 ///|
-extend Sound with Culture::{get_name}
-
-///|
-extend Sound with Show::{to_string}
-
-///|
-extend Sound with Tyme::{next}
-
-///|
 pub fn Sound::from_index(index : Int) -> Sound {
-  Sound::{ loop_tyme: LoopTyme::from_index(sound_names(), index) }
+  { loop_tyme: LoopTyme::from_index(sound_names(), index) }
 }
 
 ///|
 pub fn Sound::from_name(name : String) -> Result[Sound, String] {
   match LoopTyme::from_name(sound_names(), name) {
-    Ok(p) => Ok(Sound::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -44,16 +35,16 @@ pub fn Sound::get_index(self : Sound) -> Int {
 }
 
 ///|
-impl Culture for Sound with fn get_name(self : Sound) -> String {
+pub impl Culture for Sound with fn get_name(self : Sound) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Sound with fn to_string(self : Sound) -> String {
+pub impl Show for Sound with fn to_string(self : Sound) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Sound with fn next(self : Sound, n : Int) -> Sound {
+pub impl Tyme for Sound with fn next(self : Sound, n : Int) -> Sound {
   Sound::from_index(self.loop_tyme.get_index() + n)
 }

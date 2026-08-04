@@ -11,23 +11,17 @@ pub struct Ecliptic {
 }
 
 ///|
-extend Ecliptic with Culture::{get_name}
-
-///|
 extend Ecliptic with Show::{to_string}
 
 ///|
-extend Ecliptic with Tyme::{next}
-
-///|
 pub fn Ecliptic::from_index(index : Int) -> Ecliptic {
-  Ecliptic::{ loop_tyme: LoopTyme::from_index(ecliptic_names(), index) }
+  { loop_tyme: LoopTyme::from_index(ecliptic_names(), index) }
 }
 
 ///|
 pub fn Ecliptic::from_name(name : String) -> Result[Ecliptic, String] {
   match LoopTyme::from_name(ecliptic_names(), name) {
-    Ok(p) => Ok(Ecliptic::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -44,16 +38,16 @@ pub fn Ecliptic::get_luck(self : Ecliptic) -> Luck {
 }
 
 ///|
-impl Culture for Ecliptic with fn get_name(self : Ecliptic) -> String {
+pub impl Culture for Ecliptic with fn get_name(self : Ecliptic) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Ecliptic with fn to_string(self : Ecliptic) -> String {
+pub impl Show for Ecliptic with fn to_string(self : Ecliptic) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Ecliptic with fn next(self : Ecliptic, n : Int) -> Ecliptic {
+pub impl Tyme for Ecliptic with fn next(self : Ecliptic, n : Int) -> Ecliptic {
   Ecliptic::from_index(self.loop_tyme.get_index() + n)
 }

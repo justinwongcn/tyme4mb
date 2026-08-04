@@ -26,13 +26,13 @@ pub fn Element::get_index(self : Element) -> Int {
 
 ///|
 pub fn Element::from_index(index : Int) -> Element {
-  Element::{ loop_tyme: LoopTyme::from_index(element_names(), index) }
+  { loop_tyme: LoopTyme::from_index(element_names(), index) }
 }
 
 ///|
 pub fn Element::from_name(name : String) -> Result[Element, String] {
   match LoopTyme::from_name(element_names(), name) {
-    Ok(p) => Ok(Element::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -74,16 +74,16 @@ pub fn Element::get_direction(self : Element) -> Direction {
 }
 
 ///|
-impl Culture for Element with fn get_name(self : Element) -> String {
+pub impl Culture for Element with fn get_name(self : Element) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Element with fn to_string(self : Element) -> String {
+pub impl Show for Element with fn to_string(self : Element) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Element with fn next(self : Element, n : Int) -> Element {
+pub impl Tyme for Element with fn next(self : Element, n : Int) -> Element {
   Element::from_index(self.loop_tyme.get_index() + n)
 }

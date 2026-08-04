@@ -29,11 +29,11 @@ pub fn DayUnit::get_compare_index(self : DayUnit) -> Int {
 }
 
 ///|
-impl Culture for DayUnit with fn get_name(self : DayUnit) -> String {
+pub impl Culture for DayUnit with fn get_name(self : DayUnit) -> String {
   self.month_unit.get_name()
 }
 
 ///|
-impl Show for DayUnit with fn to_string(self : DayUnit) -> String {
+pub impl Show for DayUnit with fn to_string(self : DayUnit) -> String {
   self.get_name()
 }

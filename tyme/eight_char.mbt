@@ -35,7 +35,7 @@ pub fn EightChar::new(
     Ok(v) => v
     Err(e) => return Err(e)
   }
-  Ok(EightChar::{ three_pillars: t, hour: h })
+  Ok({ three_pillars: t, hour: h })
 }
 
 ///|
@@ -46,10 +46,7 @@ pub fn EightChar::from_sixty_cycle(
   day : SixtyCycle,
   hour : SixtyCycle,
 ) -> EightChar {
-  EightChar::{
-    three_pillars: ThreePillars::from_sixty_cycle(year, month, day),
-    hour,
-  }
+  { three_pillars: ThreePillars::from_sixty_cycle(year, month, day), hour }
 }
 
 ///|
@@ -290,11 +287,11 @@ pub fn EightChar::equals(self : EightChar, target : EightChar) -> Bool {
 }
 
 ///|
-impl Culture for EightChar with fn get_name(self : EightChar) -> String {
+pub impl Culture for EightChar with fn get_name(self : EightChar) -> String {
   "\{self.three_pillars.to_string()} \{self.hour.to_string()}"
 }
 
 ///|
-impl Show for EightChar with fn to_string(self : EightChar) -> String {
+pub impl Show for EightChar with fn to_string(self : EightChar) -> String {
   self.get_name()
 }

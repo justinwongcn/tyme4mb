@@ -20,7 +20,7 @@ pub fn SixtyCycleYear::from_year(year : Int) -> Result[SixtyCycleYear, String] {
   if year < -1 || year > 9999 {
     return Err("illegal sixty cycle year: " + year.to_string())
   }
-  Ok(SixtyCycleYear::{ year, })
+  Ok({ year, })
 }
 
 ///|
@@ -87,17 +87,17 @@ pub fn SixtyCycleYear::get_months(
 }
 
 ///|
-impl Culture for SixtyCycleYear with fn get_name(self : SixtyCycleYear) -> String {
+pub impl Culture for SixtyCycleYear with fn get_name(self : SixtyCycleYear) -> String {
   "\{self.get_sixty_cycle().to_string()}年"
 }
 
 ///|
-impl Show for SixtyCycleYear with fn to_string(self : SixtyCycleYear) -> String {
+pub impl Show for SixtyCycleYear with fn to_string(self : SixtyCycleYear) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for SixtyCycleYear with fn next(self : SixtyCycleYear, n : Int) -> SixtyCycleYear {
+pub impl Tyme for SixtyCycleYear with fn next(self : SixtyCycleYear, n : Int) -> SixtyCycleYear {
   match SixtyCycleYear::from_year(self.year + n) {
     Ok(y) => y
     Err(_) => self

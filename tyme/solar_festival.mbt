@@ -24,7 +24,7 @@ pub fn SolarFestival::new(
   event : Event,
   day : SolarDay,
 ) -> SolarFestival {
-  SolarFestival::{ festival: AbstractFestival::new(index, event, day.day_unit) }
+  { festival: AbstractFestival::new(index, event, day.day_unit) }
 }
 
 ///|
@@ -116,14 +116,11 @@ pub fn SolarFestival::get_index(self : SolarFestival) -> Int {
 }
 
 ///|
-impl Culture for SolarFestival with fn get_name(self : SolarFestival) -> String {
+pub impl Culture for SolarFestival with fn get_name(self : SolarFestival) -> String {
   Culture::get_name(self.festival)
 }
 
 ///|
-impl Show for SolarFestival with fn to_string(self : SolarFestival) -> String {
+pub impl Show for SolarFestival with fn to_string(self : SolarFestival) -> String {
   self.get_day().to_string() + " " + self.get_name()
 }
-
-///|
-extend SolarFestival with Show::{to_string}

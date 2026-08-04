@@ -60,7 +60,7 @@ pub fn SolarDay::from_ymd(
 ) -> Result[SolarDay, String] {
   match SolarDay::validate(year, month, day) {
     Ok(_) =>
-      Ok(SolarDay::{
+      Ok({
         day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
       })
     Err(e) => Err(e)
@@ -416,7 +416,7 @@ pub fn SolarDay::get_lunar_day(self : SolarDay) -> LunarDay {
   match LunarDay::from_ymd(mm.get_year(), mm.get_month_with_leap(), days + 1) {
     Ok(d) => d
     Err(_) =>
-      LunarDay::{
+      {
         day_unit: DayUnit::new(
           MonthUnit::new(YearUnit::new(mm.get_year()), mm.get_month()),
           days + 1,
@@ -505,11 +505,11 @@ pub fn SolarDay::get_legal_holiday(self : SolarDay) -> LegalHoliday? {
 }
 
 ///|
-impl Culture for SolarDay with fn get_name(self : SolarDay) -> String {
+pub impl Culture for SolarDay with fn get_name(self : SolarDay) -> String {
   solar_day_names()[self.get_day() - 1]
 }
 
 ///|
-impl Show for SolarDay with fn to_string(self : SolarDay) -> String {
+pub impl Show for SolarDay with fn to_string(self : SolarDay) -> String {
   self.get_solar_month().to_string() + self.get_name()
 }

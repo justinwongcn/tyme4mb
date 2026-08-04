@@ -11,23 +11,17 @@ pub struct MinorRen {
 }
 
 ///|
-extend MinorRen with Culture::{get_name}
-
-///|
-extend MinorRen with Show::{to_string}
-
-///|
 extend MinorRen with Tyme::{next}
 
 ///|
 pub fn MinorRen::from_index(index : Int) -> MinorRen {
-  MinorRen::{ loop_tyme: LoopTyme::from_index(minor_ren_names(), index) }
+  { loop_tyme: LoopTyme::from_index(minor_ren_names(), index) }
 }
 
 ///|
 pub fn MinorRen::from_name(name : String) -> Result[MinorRen, String] {
   match LoopTyme::from_name(minor_ren_names(), name) {
-    Ok(p) => Ok(MinorRen::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -51,16 +45,16 @@ pub fn MinorRen::get_element(self : MinorRen) -> Element {
 }
 
 ///|
-impl Culture for MinorRen with fn get_name(self : MinorRen) -> String {
+pub impl Culture for MinorRen with fn get_name(self : MinorRen) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for MinorRen with fn to_string(self : MinorRen) -> String {
+pub impl Show for MinorRen with fn to_string(self : MinorRen) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for MinorRen with fn next(self : MinorRen, n : Int) -> MinorRen {
+pub impl Tyme for MinorRen with fn next(self : MinorRen, n : Int) -> MinorRen {
   MinorRen::from_index(self.loop_tyme.get_index() + n)
 }

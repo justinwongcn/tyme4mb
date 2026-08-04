@@ -114,7 +114,7 @@ pub fn SixtyCycleMonth::get_jupiter_direction(
 
 ///|
 // next 推移
-impl Tyme for SixtyCycleMonth with fn next(self : SixtyCycleMonth, n : Int) -> SixtyCycleMonth {
+pub impl Tyme for SixtyCycleMonth with fn next(self : SixtyCycleMonth, n : Int) -> SixtyCycleMonth {
   let y = SixtyCycleYear::from_year(
     (self.year.get_year() * 12 + self.get_index_in_year() + n) / 12,
   ).unwrap()
@@ -131,11 +131,11 @@ pub fn SixtyCycleMonth::equals(
 }
 
 ///|
-impl Culture for SixtyCycleMonth with fn get_name(self : SixtyCycleMonth) -> String {
+pub impl Culture for SixtyCycleMonth with fn get_name(self : SixtyCycleMonth) -> String {
   self.month.to_string() + "月"
 }
 
 ///|
-impl Show for SixtyCycleMonth with fn to_string(self : SixtyCycleMonth) -> String {
+pub impl Show for SixtyCycleMonth with fn to_string(self : SixtyCycleMonth) -> String {
   self.year.to_string() + self.get_name()
 }

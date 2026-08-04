@@ -16,19 +16,11 @@ pub struct PengZuEarthBranch {
 }
 
 ///|
-extend PengZuEarthBranch with Culture::{get_name}
-
-///|
 extend PengZuEarthBranch with Show::{to_string}
 
 ///|
-extend PengZuEarthBranch with Tyme::{next}
-
-///|
 pub fn PengZuEarthBranch::from_index(index : Int) -> PengZuEarthBranch {
-  PengZuEarthBranch::{
-    loop_tyme: LoopTyme::from_index(peng_zu_earth_branch_names(), index),
-  }
+  { loop_tyme: LoopTyme::from_index(peng_zu_earth_branch_names(), index) }
 }
 
 ///|
@@ -36,7 +28,7 @@ pub fn PengZuEarthBranch::from_name(
   name : String,
 ) -> Result[PengZuEarthBranch, String] {
   match LoopTyme::from_name(peng_zu_earth_branch_names(), name) {
-    Ok(p) => Ok(PengZuEarthBranch::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -47,16 +39,21 @@ pub fn PengZuEarthBranch::get_index(self : PengZuEarthBranch) -> Int {
 }
 
 ///|
-impl Culture for PengZuEarthBranch with fn get_name(self : PengZuEarthBranch) -> String {
+pub impl Culture for PengZuEarthBranch with fn get_name(
+  self : PengZuEarthBranch,
+) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for PengZuEarthBranch with fn to_string(self : PengZuEarthBranch) -> String {
+pub impl Show for PengZuEarthBranch with fn to_string(self : PengZuEarthBranch) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for PengZuEarthBranch with fn next(self : PengZuEarthBranch, n : Int) -> PengZuEarthBranch {
+pub impl Tyme for PengZuEarthBranch with fn next(
+  self : PengZuEarthBranch,
+  n : Int,
+) -> PengZuEarthBranch {
   PengZuEarthBranch::from_index(self.loop_tyme.get_index() + n)
 }

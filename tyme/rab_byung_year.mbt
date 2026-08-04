@@ -40,7 +40,7 @@ pub fn RabByungYear::new(
   if zodiac_index < 0 || zodiac_index >= zodiac_names().length() {
     return Err("illegal zodiac index: " + zodiac_index.to_string())
   }
-  Ok(RabByungYear::{ rab_byung_index, element_index, zodiac_index })
+  Ok({ rab_byung_index, element_index, zodiac_index })
 }
 
 ///|
@@ -149,7 +149,7 @@ pub fn RabByungYear::get_first_month(self : RabByungYear) -> RabByungMonth {
   match RabByungMonth::new(self.get_year(), 1) {
     Ok(m) => m
     Err(_) =>
-      RabByungMonth::{
+      {
         month_unit: MonthUnit::new(YearUnit::new(self.get_year()), 1),
         leap: false,
       }
@@ -202,7 +202,7 @@ pub fn RabByungYear::equals(self : RabByungYear, target : RabByungYear) -> Bool 
 }
 
 ///|
-impl Culture for RabByungYear with fn get_name(self : RabByungYear) -> String {
+pub impl Culture for RabByungYear with fn get_name(self : RabByungYear) -> String {
   let digits = [
     "零", "一", "二", "三", "四", "五", "六", "七", "八", "九",
   ]
@@ -230,7 +230,7 @@ impl Culture for RabByungYear with fn get_name(self : RabByungYear) -> String {
 }
 
 ///|
-impl Show for RabByungYear with fn to_string(_ : RabByungYear) -> String {
+pub impl Show for RabByungYear with fn to_string(_ : RabByungYear) -> String {
   // RabByungYear 嵌入 AbstractTyme→AbstractCulture.String() 固定返回 GetName()==""（空串）
   ""
 }

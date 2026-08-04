@@ -14,15 +14,12 @@ pub struct RabByungElement {
 extend RabByungElement with Culture::{get_name}
 
 ///|
-extend RabByungElement with Show::{to_string}
-
-///|
 extend RabByungElement with Tyme::{next}
 
 ///|
 pub fn RabByungElement::from_index(index : Int) -> RabByungElement {
-  RabByungElement::{
-    element: Element::{
+  {
+    element: {
       loop_tyme: LoopTyme::from_index(rab_byung_element_names(), index),
     },
   }
@@ -33,7 +30,7 @@ pub fn RabByungElement::from_name(
   name : String,
 ) -> Result[RabByungElement, String] {
   match LoopTyme::from_name(rab_byung_element_names(), name) {
-    Ok(p) => Ok(RabByungElement::{ element: Element::{ loop_tyme: p } })
+    Ok(p) => Ok({ element: { loop_tyme: p } })
     Err(e) => Err(e)
   }
 }
@@ -80,16 +77,16 @@ pub fn RabByungElement::get_restrained(
 }
 
 ///|
-impl Culture for RabByungElement with fn get_name(self : RabByungElement) -> String {
+pub impl Culture for RabByungElement with fn get_name(self : RabByungElement) -> String {
   self.element.get_name()
 }
 
 ///|
-impl Show for RabByungElement with fn to_string(self : RabByungElement) -> String {
+pub impl Show for RabByungElement with fn to_string(self : RabByungElement) -> String {
   self.element.get_name()
 }
 
 ///|
-impl Tyme for RabByungElement with fn next(self : RabByungElement, n : Int) -> RabByungElement {
+pub impl Tyme for RabByungElement with fn next(self : RabByungElement, n : Int) -> RabByungElement {
   RabByungElement::from_index(self.element.get_index() + n)
 }

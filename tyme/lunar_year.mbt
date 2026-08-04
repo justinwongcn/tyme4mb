@@ -88,7 +88,7 @@ let lunar_year_leap : Array[Array[Int]] = build_lunar_year_leap()
 // from_year 从年构造
 pub fn LunarYear::from_year(year : Int) -> Result[LunarYear, String] {
   match LunarYear::validate(year) {
-    Ok(_) => Ok(LunarYear::{ year_unit: YearUnit::new(year) })
+    Ok(_) => Ok({ year_unit: YearUnit::new(year) })
     Err(e) => Err(e)
   }
 }
@@ -175,7 +175,7 @@ pub fn LunarYear::get_first_month(self : LunarYear) -> LunarMonth {
   match LunarMonth::from_ym(self.get_year(), 1) {
     Ok(m) => m
     Err(_) =>
-      LunarMonth::{
+      {
         month_unit: MonthUnit::new(YearUnit::new(self.get_year()), 1),
         leap: false,
       }
@@ -210,18 +210,18 @@ pub fn LunarYear::get_kitchen_god_steed(self : LunarYear) -> KitchenGodSteed {
 }
 
 ///|
-impl Culture for LunarYear with fn get_name(self : LunarYear) -> String {
+pub impl Culture for LunarYear with fn get_name(self : LunarYear) -> String {
   // 依据国家标准《农历的编算和颁行》GB/T 33661-2017，默认采用干支纪年法
   "农历\{self.get_sixty_cycle().to_string()}年"
 }
 
 ///|
-impl Show for LunarYear with fn to_string(self : LunarYear) -> String {
+pub impl Show for LunarYear with fn to_string(self : LunarYear) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for LunarYear with fn next(self : LunarYear, n : Int) -> LunarYear {
+pub impl Tyme for LunarYear with fn next(self : LunarYear, n : Int) -> LunarYear {
   match LunarYear::from_year(self.get_year() + n) {
     Ok(y) => y
     Err(_) => self

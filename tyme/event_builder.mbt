@@ -18,7 +18,7 @@ pub fn EventBuilder::name(self : EventBuilder, name : String) -> EventBuilder {
 }
 
 ///|
-fn EventBuilder::get_char(self : EventBuilder, index : Int) -> String {
+fn EventBuilder::get_char(_ : EventBuilder, index : Int) -> String {
   event_manager_chars()[index:index + 1].to_owned()
 }
 
@@ -29,7 +29,7 @@ fn EventBuilder::set_value(
   n : Int,
 ) -> EventBuilder {
   let c = event_manager_chars()[31 + n:32 + n].to_owned()
-  EventBuilder::{
+  {
     name: self.name,
     data: self.data[0:index].to_owned() + c + self.data[index + 1:].to_owned(),
   }
@@ -68,7 +68,7 @@ pub fn EventBuilder::solar_day(
   solar_day : Int,
   delay_days : Int,
 ) -> EventBuilder {
-  self.content(EventType::SolarDay, solar_month, solar_day, delay_days)
+  self.content(SolarDay, solar_month, solar_day, delay_days)
 }
 
 ///|
@@ -79,7 +79,7 @@ pub fn EventBuilder::lunar_day(
   lunar_day : Int,
   delay_days : Int,
 ) -> EventBuilder {
-  self.content(EventType::LunarDay, lunar_month, lunar_day, delay_days)
+  self.content(LunarDay, lunar_month, lunar_day, delay_days)
 }
 
 ///|
@@ -90,7 +90,7 @@ pub fn EventBuilder::solar_week(
   week_index : Int,
   week : Int,
 ) -> EventBuilder {
-  self.content(EventType::SolarWeek, solar_month, week_index, week)
+  self.content(SolarWeek, solar_month, week_index, week)
 }
 
 ///|
@@ -100,7 +100,7 @@ pub fn EventBuilder::term_day(
   term_index : Int,
   delay_days : Int,
 ) -> EventBuilder {
-  self.content(EventType::TermDay, term_index, 0, delay_days)
+  self.content(TermDay, term_index, 0, delay_days)
 }
 
 ///|
@@ -111,7 +111,7 @@ pub fn EventBuilder::term_heaven_stem(
   heaven_stem_index : Int,
   delay_days : Int,
 ) -> EventBuilder {
-  self.content(EventType::TermHs, term_index, heaven_stem_index, delay_days)
+  self.content(TermHs, term_index, heaven_stem_index, delay_days)
 }
 
 ///|
@@ -122,7 +122,7 @@ pub fn EventBuilder::term_earth_branch(
   earth_branch_index : Int,
   delay_days : Int,
 ) -> EventBuilder {
-  self.content(EventType::TermEb, term_index, earth_branch_index, delay_days)
+  self.content(TermEb, term_index, earth_branch_index, delay_days)
 }
 
 ///|
@@ -140,7 +140,7 @@ pub fn EventBuilder::start_year(
       data[9 - i:].to_owned()
     n = n / size
   }
-  EventBuilder::{ name: self.name, data }
+  { name: self.name, data }
 }
 
 ///|

@@ -11,12 +11,6 @@ pub struct DecadeFortune {
 extend DecadeFortune with Culture::{get_name}
 
 ///|
-extend DecadeFortune with Show::{to_string}
-
-///|
-extend DecadeFortune with Tyme::{next}
-
-///|
 // from_child_limit 从童限与序号构造
 pub fn DecadeFortune::from_child_limit(
   child_limit : ChildLimit,
@@ -85,16 +79,16 @@ pub fn DecadeFortune::get_start_fortune(self : DecadeFortune) -> Fortune {
 }
 
 ///|
-impl Culture for DecadeFortune with fn get_name(self : DecadeFortune) -> String {
+pub impl Culture for DecadeFortune with fn get_name(self : DecadeFortune) -> String {
   self.get_sixty_cycle().get_name()
 }
 
 ///|
-impl Show for DecadeFortune with fn to_string(self : DecadeFortune) -> String {
+pub impl Show for DecadeFortune with fn to_string(self : DecadeFortune) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for DecadeFortune with fn next(self : DecadeFortune, n : Int) -> DecadeFortune {
+pub impl Tyme for DecadeFortune with fn next(self : DecadeFortune, n : Int) -> DecadeFortune {
   DecadeFortune::from_child_limit(self.child_limit, self.index + n)
 }

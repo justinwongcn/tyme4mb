@@ -14,23 +14,14 @@ pub struct TenStar {
 }
 
 ///|
-extend TenStar with Culture::{get_name}
-
-///|
-extend TenStar with Show::{to_string}
-
-///|
-extend TenStar with Tyme::{next}
-
-///|
 pub fn TenStar::from_index(index : Int) -> TenStar {
-  TenStar::{ loop_tyme: LoopTyme::from_index(ten_star_names(), index) }
+  { loop_tyme: LoopTyme::from_index(ten_star_names(), index) }
 }
 
 ///|
 pub fn TenStar::from_name(name : String) -> Result[TenStar, String] {
   match LoopTyme::from_name(ten_star_names(), name) {
-    Ok(p) => Ok(TenStar::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -41,16 +32,16 @@ pub fn TenStar::get_index(self : TenStar) -> Int {
 }
 
 ///|
-impl Culture for TenStar with fn get_name(self : TenStar) -> String {
+pub impl Culture for TenStar with fn get_name(self : TenStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for TenStar with fn to_string(self : TenStar) -> String {
+pub impl Show for TenStar with fn to_string(self : TenStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for TenStar with fn next(self : TenStar, n : Int) -> TenStar {
+pub impl Tyme for TenStar with fn next(self : TenStar, n : Int) -> TenStar {
   TenStar::from_index(self.loop_tyme.get_index() + n)
 }

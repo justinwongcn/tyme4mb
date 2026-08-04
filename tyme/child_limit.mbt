@@ -37,7 +37,7 @@ pub fn ChildLimit::from_solar_time(
     term = term.next(2)
   }
   let info = child_limit_provider.get_info(birth_time, term)
-  ChildLimit::{ eight_char, gender, forward, info }
+  { eight_char, gender, forward, info }
 }
 
 ///|
@@ -146,7 +146,7 @@ pub fn ChildLimit::get_end_sixty_cycle_year(
 
 ///|
 // get_start_age 开始年龄
-pub fn ChildLimit::get_start_age(self : ChildLimit) -> Int {
+pub fn ChildLimit::get_start_age(_ : ChildLimit) -> Int {
   1
 }
 
@@ -159,4 +159,15 @@ pub fn ChildLimit::get_end_age(self : ChildLimit) -> Int {
     return n
   }
   1
+}
+
+///|
+pub impl Show for ChildLimit with fn to_string(self : ChildLimit) -> String {
+  self.get_eight_char().to_string() +
+  " " +
+  self.get_gender().to_string() +
+  " " +
+  (if self.is_forward() { "顺" } else { "逆" }) +
+  " " +
+  self.info.to_string()
 }

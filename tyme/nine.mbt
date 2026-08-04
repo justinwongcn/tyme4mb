@@ -14,23 +14,14 @@ pub struct Nine {
 }
 
 ///|
-extend Nine with Culture::{get_name}
-
-///|
-extend Nine with Show::{to_string}
-
-///|
-extend Nine with Tyme::{next}
-
-///|
 pub fn Nine::from_index(index : Int) -> Nine {
-  Nine::{ loop_tyme: LoopTyme::from_index(nine_names(), index) }
+  { loop_tyme: LoopTyme::from_index(nine_names(), index) }
 }
 
 ///|
 pub fn Nine::from_name(name : String) -> Result[Nine, String] {
   match LoopTyme::from_name(nine_names(), name) {
-    Ok(p) => Ok(Nine::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -41,16 +32,16 @@ pub fn Nine::get_index(self : Nine) -> Int {
 }
 
 ///|
-impl Culture for Nine with fn get_name(self : Nine) -> String {
+pub impl Culture for Nine with fn get_name(self : Nine) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Nine with fn to_string(self : Nine) -> String {
+pub impl Show for Nine with fn to_string(self : Nine) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Nine with fn next(self : Nine, n : Int) -> Nine {
+pub impl Tyme for Nine with fn next(self : Nine, n : Int) -> Nine {
   Nine::from_index(self.loop_tyme.get_index() + n)
 }

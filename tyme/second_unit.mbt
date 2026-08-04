@@ -11,9 +11,6 @@ pub struct SecondUnit {
 extend SecondUnit with Culture::{get_name}
 
 ///|
-extend SecondUnit with Show::{to_string}
-
-///|
 pub fn SecondUnit::new(
   day_unit : DayUnit,
   hour : Int,
@@ -78,11 +75,11 @@ pub fn SecondUnit::get_compare_index(self : SecondUnit) -> Int64 {
 }
 
 ///|
-impl Culture for SecondUnit with fn get_name(self : SecondUnit) -> String {
+pub impl Culture for SecondUnit with fn get_name(self : SecondUnit) -> String {
   self.day_unit.get_name()
 }
 
 ///|
-impl Show for SecondUnit with fn to_string(self : SecondUnit) -> String {
+pub impl Show for SecondUnit with fn to_string(self : SecondUnit) -> String {
   self.get_name()
 }

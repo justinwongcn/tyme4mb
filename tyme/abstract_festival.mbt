@@ -32,14 +32,11 @@ pub fn AbstractFestival::get_index(self : AbstractFestival) -> Int {
 }
 
 ///|
-impl Culture for AbstractFestival with fn get_name(self : AbstractFestival) -> String {
+pub impl Culture for AbstractFestival with fn get_name(self : AbstractFestival) -> String {
   self.event.get_name()
 }
 
 ///|
-extend AbstractFestival with Culture::{get_name}
-
-///|
-impl Show for AbstractFestival with fn to_string(self : AbstractFestival) -> String {
+pub impl Show for AbstractFestival with fn to_string(self : AbstractFestival) -> String {
   self.get_day().to_string() + " " + Culture::get_name(self)
 }

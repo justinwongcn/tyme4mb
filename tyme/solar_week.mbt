@@ -8,9 +8,6 @@ pub struct SolarWeek {
 extend SolarWeek with Culture::{get_name}
 
 ///|
-extend SolarWeek with Show::{to_string}
-
-///|
 // validate 校验
 pub fn SolarWeek::validate(
   year : Int,
@@ -49,7 +46,7 @@ pub fn SolarWeek::from_ym(
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok(SolarWeek::{
+  Ok({
     week_unit: WeekUnit::new(
       MonthUnit::new(YearUnit::new(year), month),
       index,
@@ -159,11 +156,11 @@ pub fn SolarWeek::equals(self : SolarWeek, target : SolarWeek) -> Bool {
 }
 
 ///|
-impl Culture for SolarWeek with fn get_name(self : SolarWeek) -> String {
+pub impl Culture for SolarWeek with fn get_name(self : SolarWeek) -> String {
   week_unit_names()[self.week_unit.get_index()]
 }
 
 ///|
-impl Show for SolarWeek with fn to_string(self : SolarWeek) -> String {
+pub impl Show for SolarWeek with fn to_string(self : SolarWeek) -> String {
   self.get_solar_month().to_string() + self.get_name()
 }

@@ -11,12 +11,6 @@ pub struct Fortune {
 extend Fortune with Culture::{get_name}
 
 ///|
-extend Fortune with Show::{to_string}
-
-///|
-extend Fortune with Tyme::{next}
-
-///|
 // from_child_limit 从童限与序号构造
 pub fn Fortune::from_child_limit(
   child_limit : ChildLimit,
@@ -57,16 +51,16 @@ pub fn Fortune::get_sixty_cycle(self : Fortune) -> SixtyCycle {
 }
 
 ///|
-impl Culture for Fortune with fn get_name(self : Fortune) -> String {
+pub impl Culture for Fortune with fn get_name(self : Fortune) -> String {
   self.get_sixty_cycle().get_name()
 }
 
 ///|
-impl Show for Fortune with fn to_string(self : Fortune) -> String {
+pub impl Show for Fortune with fn to_string(self : Fortune) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for Fortune with fn next(self : Fortune, n : Int) -> Fortune {
+pub impl Tyme for Fortune with fn next(self : Fortune, n : Int) -> Fortune {
   Fortune::from_child_limit(self.child_limit, self.index + n)
 }

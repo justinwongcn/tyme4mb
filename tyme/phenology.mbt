@@ -26,19 +26,13 @@ pub struct Phenology {
 }
 
 ///|
-extend Phenology with Culture::{get_name}
-
-///|
-extend Phenology with Show::{to_string}
-
-///|
 extend Phenology with Tyme::{next}
 
 ///|
 pub fn Phenology::from_index(year : Int, index : Int) -> Phenology {
   let parent = LoopTyme::from_index(phenology_names(), index)
   let size = parent.get_size()
-  Phenology::{ loop_tyme: parent, year: (year * size + index) / size }
+  { loop_tyme: parent, year: (year * size + index) / size }
 }
 
 ///|
@@ -47,23 +41,23 @@ pub fn Phenology::from_name(
   name : String,
 ) -> Result[Phenology, String] {
   match LoopTyme::from_name(phenology_names(), name) {
-    Ok(p) => Ok(Phenology::{ loop_tyme: p, year })
+    Ok(p) => Ok({ loop_tyme: p, year })
     Err(e) => Err(e)
   }
 }
 
 ///|
-impl Culture for Phenology with fn get_name(self : Phenology) -> String {
+pub impl Culture for Phenology with fn get_name(self : Phenology) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Phenology with fn to_string(self : Phenology) -> String {
+pub impl Show for Phenology with fn to_string(self : Phenology) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Phenology with fn next(self : Phenology, n : Int) -> Phenology {
+pub impl Tyme for Phenology with fn next(self : Phenology, n : Int) -> Phenology {
   let size = self.loop_tyme.get_size()
   let i = self.loop_tyme.get_index() + n
   Phenology::from_index(

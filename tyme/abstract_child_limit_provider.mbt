@@ -1,5 +1,6 @@
 ///|
 // AbstractChildLimitProvider 童限计算抽象（next 为无 self 使用方法 → 关联函数）
+#warnings("-struct_never_constructed")
 pub struct AbstractChildLimitProvider {}
 
 ///|

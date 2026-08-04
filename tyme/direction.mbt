@@ -17,22 +17,19 @@ extend Direction with Culture::{get_name}
 extend Direction with Show::{to_string}
 
 ///|
-extend Direction with Tyme::{next}
-
-///|
 pub fn Direction::get_index(self : Direction) -> Int {
   self.loop_tyme.get_index()
 }
 
 ///|
 pub fn Direction::from_index(index : Int) -> Direction {
-  Direction::{ loop_tyme: LoopTyme::from_index(direction_names(), index) }
+  { loop_tyme: LoopTyme::from_index(direction_names(), index) }
 }
 
 ///|
 pub fn Direction::from_name(name : String) -> Result[Direction, String] {
   match LoopTyme::from_name(direction_names(), name) {
-    Ok(p) => Ok(Direction::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -56,16 +53,16 @@ pub fn Direction::get_element(self : Direction) -> Element {
 }
 
 ///|
-impl Culture for Direction with fn get_name(self : Direction) -> String {
+pub impl Culture for Direction with fn get_name(self : Direction) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Direction with fn to_string(self : Direction) -> String {
+pub impl Show for Direction with fn to_string(self : Direction) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Direction with fn next(self : Direction, n : Int) -> Direction {
+pub impl Tyme for Direction with fn next(self : Direction, n : Int) -> Direction {
   Direction::from_index(self.loop_tyme.get_index() + n)
 }

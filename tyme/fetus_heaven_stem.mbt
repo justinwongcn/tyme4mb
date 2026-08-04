@@ -14,16 +14,8 @@ pub struct FetusHeavenStem {
 extend FetusHeavenStem with Culture::{get_name}
 
 ///|
-extend FetusHeavenStem with Show::{to_string}
-
-///|
-extend FetusHeavenStem with Tyme::{next}
-
-///|
 pub fn FetusHeavenStem::new(index : Int) -> FetusHeavenStem {
-  FetusHeavenStem::{
-    loop_tyme: LoopTyme::from_index(fetus_heaven_stem_names(), index),
-  }
+  { loop_tyme: LoopTyme::from_index(fetus_heaven_stem_names(), index) }
 }
 
 ///|
@@ -32,16 +24,16 @@ pub fn FetusHeavenStem::get_index(self : FetusHeavenStem) -> Int {
 }
 
 ///|
-impl Culture for FetusHeavenStem with fn get_name(self : FetusHeavenStem) -> String {
+pub impl Culture for FetusHeavenStem with fn get_name(self : FetusHeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for FetusHeavenStem with fn to_string(self : FetusHeavenStem) -> String {
+pub impl Show for FetusHeavenStem with fn to_string(self : FetusHeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for FetusHeavenStem with fn next(self : FetusHeavenStem, n : Int) -> FetusHeavenStem {
+pub impl Tyme for FetusHeavenStem with fn next(self : FetusHeavenStem, n : Int) -> FetusHeavenStem {
   FetusHeavenStem::new(self.loop_tyme.get_index() + n)
 }

@@ -34,7 +34,7 @@ pub fn ThreePillars::new(
     Err(e) => return Err(e)
     Ok(v) => v
   }
-  Ok(ThreePillars::{ year: y, month: m, day: d })
+  Ok({ year: y, month: m, day: d })
 }
 
 ///|
@@ -44,7 +44,7 @@ pub fn ThreePillars::from_sixty_cycle(
   month : SixtyCycle,
   day : SixtyCycle,
 ) -> ThreePillars {
-  ThreePillars::{ year, month, day }
+  { year, month, day }
 }
 
 ///|
@@ -126,7 +126,7 @@ pub fn ThreePillars::get_solar_days(
 }
 
 ///|
-impl Culture for ThreePillars with fn get_name(self : ThreePillars) -> String {
+pub impl Culture for ThreePillars with fn get_name(self : ThreePillars) -> String {
   self.year.to_string() +
   " " +
   self.month.to_string() +
@@ -135,6 +135,6 @@ impl Culture for ThreePillars with fn get_name(self : ThreePillars) -> String {
 }
 
 ///|
-impl Show for ThreePillars with fn to_string(self : ThreePillars) -> String {
+pub impl Show for ThreePillars with fn to_string(self : ThreePillars) -> String {
   self.get_name()
 }
