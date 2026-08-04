@@ -51,16 +51,16 @@ pub fn MinorRen::get_element(self : MinorRen) -> Element {
 }
 
 ///|
-impl Culture for MinorRen with get_name(self : MinorRen) -> String {
+impl Culture for MinorRen with fn get_name(self : MinorRen) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for MinorRen with to_string(self : MinorRen) -> String {
+impl Show for MinorRen with fn to_string(self : MinorRen) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for MinorRen with next(self : MinorRen, n : Int) -> MinorRen {
+impl Tyme for MinorRen with fn next(self : MinorRen, n : Int) -> MinorRen {
   MinorRen::from_index(self.loop_tyme.get_index() + n)
 }

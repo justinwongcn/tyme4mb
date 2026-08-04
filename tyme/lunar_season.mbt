@@ -1,7 +1,10 @@
 ///|
 // lunar_season_names 农历季节名称
 pub fn lunar_season_names() -> Array[String] {
-  ["孟春", "仲春", "季春", "孟夏", "仲夏", "季夏", "孟秋", "仲秋", "季秋", "孟冬", "仲冬", "季冬"]
+  [
+    "孟春", "仲春", "季春", "孟夏", "仲夏", "季夏", "孟秋", "仲秋",
+    "季秋", "孟冬", "仲冬", "季冬",
+  ]
 }
 
 ///|
@@ -38,16 +41,16 @@ pub fn LunarSeason::get_index(self : LunarSeason) -> Int {
 }
 
 ///|
-impl Culture for LunarSeason with get_name(self : LunarSeason) -> String {
+impl Culture for LunarSeason with fn get_name(self : LunarSeason) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for LunarSeason with to_string(self : LunarSeason) -> String {
+impl Show for LunarSeason with fn to_string(self : LunarSeason) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for LunarSeason with next(self : LunarSeason, n : Int) -> LunarSeason {
+impl Tyme for LunarSeason with fn next(self : LunarSeason, n : Int) -> LunarSeason {
   LunarSeason::from_index(self.loop_tyme.get_index() + n)
 }

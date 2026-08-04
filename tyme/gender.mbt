@@ -2,7 +2,7 @@
 // Gender 性别
 pub(all) enum Gender {
   Woman // 女
-  Man   // 男
+  Man // 男
 }
 
 ///|
@@ -30,6 +30,9 @@ pub fn Gender::get_name(self : Gender) -> String {
 }
 
 ///|
-impl Show for Gender with to_string(self : Gender) -> String {
+impl Show for Gender with fn to_string(self : Gender) -> String {
   self.get_name()
 }
+
+///|
+extend Gender with Show::{to_string}

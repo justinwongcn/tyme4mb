@@ -9,7 +9,11 @@ test "lunar_year_0" {
 ///|
 test "lunar_year_1" {
   let m = LunarYear::from_year(2020).unwrap()
-  expect_eq(m.get_sixty_cycle().get_name(), "庚子", "LunarYear(2020).GetSixtyCycle().GetName()")
+  expect_eq(
+    m.get_sixty_cycle().get_name(),
+    "庚子",
+    "LunarYear(2020).GetSixtyCycle().GetName()",
+  )
 }
 
 ///|
@@ -25,5 +29,9 @@ test "lunar_year_2" {
 ///|
 test "lunar_year_3" {
   let m = LunarYear::from_year(1884).unwrap()
-  expect_eq(m.get_twenty().get_name(), "二运", "LunarYear(1884).GetTwenty().GetName()")
+  expect_eq(
+    m.get_twenty().get_name(),
+    "二运",
+    "LunarYear(1884).GetTwenty().GetName()",
+  )
 }

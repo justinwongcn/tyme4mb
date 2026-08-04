@@ -1,10 +1,9 @@
 ///|
 // LunarSect1ChildLimitProvider Lunar的流派1童限计算（按天数和时辰数计算，3天1年，1天4个月，1时辰10天）
-pub struct LunarSect1ChildLimitProvider {
-}
+pub struct LunarSect1ChildLimitProvider {}
 
 ///|
-impl IChildLimitProvider for LunarSect1ChildLimitProvider with get_info(
+impl IChildLimitProvider for LunarSect1ChildLimitProvider with fn get_info(
   self : LunarSect1ChildLimitProvider,
   birth_time : SolarTime,
   term : SolarTerm,
@@ -39,3 +38,6 @@ impl IChildLimitProvider for LunarSect1ChildLimitProvider with get_info(
   month = month - year * 12
   AbstractChildLimitProvider::next(birth_time, year, month, day, 0, 0, 0)
 }
+
+///|
+extend LunarSect1ChildLimitProvider with IChildLimitProvider::{get_info}

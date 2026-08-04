@@ -10,7 +10,9 @@ test "xref_gt" {
   // ---------- God 枚举本体 ----------
   for i = 0; i < 151; i = i + 1 {
     let o = God::from_index(i)
-    println("GO \{i} \{o.get_name()}|\{o.to_string()}|\{o.get_luck().get_name()}")
+    println(
+      "GO \{i} \{o.get_name()}|\{o.to_string()}|\{o.get_luck().get_name()}",
+    )
     println("GON \{i} \{o.next(37).get_name()} \{o.next(-37).get_name()}")
   }
   // ---------- Taboo 枚举本体 ----------
@@ -52,7 +54,9 @@ test "xref_gt" {
       println("GG \{m} \{d} \{join_gods(God::get_day_gods(mo, da))}")
       println("TDR \{m} \{d} \{join_taboos(Taboo::get_day_recommends(mo, da))}")
       println("TDA \{m} \{d} \{join_taboos(Taboo::get_day_avoids(mo, da))}")
-      println("THR \{m} \{d} \{join_taboos(Taboo::get_hour_recommends(mo, da))}")
+      println(
+        "THR \{m} \{d} \{join_taboos(Taboo::get_hour_recommends(mo, da))}",
+      )
       println("THA \{m} \{d} \{join_taboos(Taboo::get_hour_avoids(mo, da))}")
     }
   }

@@ -1,7 +1,10 @@
 ///|
 // dipper_names 北斗九星名称
 pub fn dipper_names() -> Array[String] {
-  ["天枢", "天璇", "天玑", "天权", "玉衡", "开阳", "摇光", "洞明", "隐元"]
+  [
+    "天枢", "天璇", "天玑", "天权", "玉衡", "开阳", "摇光", "洞明",
+    "隐元",
+  ]
 }
 
 ///|
@@ -38,16 +41,16 @@ pub fn Dipper::get_index(self : Dipper) -> Int {
 }
 
 ///|
-impl Culture for Dipper with get_name(self : Dipper) -> String {
+impl Culture for Dipper with fn get_name(self : Dipper) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Dipper with to_string(self : Dipper) -> String {
+impl Show for Dipper with fn to_string(self : Dipper) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Dipper with next(self : Dipper, n : Int) -> Dipper {
+impl Tyme for Dipper with fn next(self : Dipper, n : Int) -> Dipper {
   Dipper::from_index(self.loop_tyme.get_index() + n)
 }

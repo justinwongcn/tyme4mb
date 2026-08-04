@@ -38,16 +38,16 @@ pub fn Ten::get_index(self : Ten) -> Int {
 }
 
 ///|
-impl Culture for Ten with get_name(self : Ten) -> String {
+impl Culture for Ten with fn get_name(self : Ten) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Ten with to_string(self : Ten) -> String {
+impl Show for Ten with fn to_string(self : Ten) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Ten with next(self : Ten, n : Int) -> Ten {
+impl Tyme for Ten with fn next(self : Ten, n : Int) -> Ten {
   Ten::from_index(self.loop_tyme.get_index() + n)
 }

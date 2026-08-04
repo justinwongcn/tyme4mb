@@ -16,7 +16,7 @@ pub fn LunarWeek::validate(
   year : Int,
   month : Int,
   index : Int,
-  start : Int
+  start : Int,
 ) -> Result[Unit, String] {
   match WeekUnit::validate(year, month, index, start) {
     Err(e) => return Err(e)
@@ -27,7 +27,10 @@ pub fn LunarWeek::validate(
     Ok(m) =>
       if index >= m.get_week_count(start) {
         return Err(
-          "illegal lunar week index: " + index.to_string() + " in month: " + m.to_string(),
+          "illegal lunar week index: " +
+          index.to_string() +
+          " in month: " +
+          m.to_string(),
         )
       }
   }
@@ -40,21 +43,19 @@ pub fn LunarWeek::from_ym(
   year : Int,
   month : Int,
   index : Int,
-  start : Int
+  start : Int,
 ) -> Result[LunarWeek, String] {
   match LunarWeek::validate(year, month, index, start) {
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok(
-    LunarWeek::{
-      week_unit : WeekUnit::new(
-        MonthUnit::new(YearUnit::new(year), month),
-        index,
-        start,
-      ),
-    },
-  )
+  Ok(LunarWeek::{
+    week_unit: WeekUnit::new(
+      MonthUnit::new(YearUnit::new(year), month),
+      index,
+      start,
+    ),
+  })
 }
 
 ///|
@@ -88,12 +89,12 @@ pub fn LunarWeek::get_lunar_month(self : LunarWeek) -> LunarMonth {
 }
 
 ///|
-impl Culture for LunarWeek with get_name(self : LunarWeek) -> String {
+impl Culture for LunarWeek with fn get_name(self : LunarWeek) -> String {
   week_unit_names()[self.week_unit.index]
 }
 
 ///|
-impl Show for LunarWeek with to_string(self : LunarWeek) -> String {
+impl Show for LunarWeek with fn to_string(self : LunarWeek) -> String {
   self.get_lunar_month().to_string() + self.get_name()
 }
 
@@ -103,7 +104,10 @@ pub fn LunarWeek::get_first_day(self : LunarWeek) -> LunarDay {
   let first_day = LunarDay::from_ymd(self.get_year(), self.get_month(), 1).unwrap()
   first_day.next(
     self.week_unit.index * 7 -
-    AbstractCulture::index_of(first_day.get_week().loop_tyme.get_index() - self.week_unit.start, 7),
+    AbstractCulture::index_of(
+      first_day.get_week().loop_tyme.get_index() - self.week_unit.start,
+      7,
+    ),
   )
 }
 
@@ -131,7 +135,12 @@ pub fn LunarWeek::next(self : LunarWeek, n : Int) -> LunarWeek {
       d = d + m.get_week_count(self.week_unit.start)
     }
   }
-  LunarWeek::from_ym(m.get_year(), m.get_month_with_leap(), d, self.week_unit.start).unwrap()
+  LunarWeek::from_ym(
+    m.get_year(),
+    m.get_month_with_leap(),
+    d,
+    self.week_unit.start,
+  ).unwrap()
 }
 
 ///|

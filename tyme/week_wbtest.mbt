@@ -3,13 +3,21 @@
 ///|
 test "week_0" {
   let w = SolarDay::from_ymd(1582, 10, 1).unwrap()
-  expect_eq(w.get_week().get_name(), "一", "SolarDay(1582,10,1).GetWeek().GetName()")
+  expect_eq(
+    w.get_week().get_name(),
+    "一",
+    "SolarDay(1582,10,1).GetWeek().GetName()",
+  )
 }
 
 ///|
 test "week_1" {
   let w = SolarWeek::from_ym(2023, 10, 0, 0).unwrap()
-  expect_eq(w.get_name(), "第一周", "SolarWeek.FromYm(2023,10,0,0).GetName()")
+  expect_eq(
+    w.get_name(),
+    "第一周",
+    "SolarWeek.FromYm(2023,10,0,0).GetName()",
+  )
   expect_eq(
     w.to_string(),
     "2023年10月第一周",

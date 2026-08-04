@@ -28,7 +28,7 @@ Tyme4MB 是 [tyme4go](https://github.com/6tail/tyme4go) 的 MoonBit 移植版本
 
 ```bash
 # 通过 mooncakes.io 安装（发布后可用）
-moon add 6tail/tyme4mb
+moon add justinwongcn/tyme4mb
 ```
 
 ## 快速开始
@@ -63,13 +63,13 @@ println(eightChar.to_string())       // 丙寅 癸巳 癸酉 己未
 
 ```bash
 # 构建库
-mbt build
+moon build
 
 # 运行测试
-mbt test
+moon test
 
 # 运行示例
-mbt run --source-dir examples
+moon run examples
 ```
 
 ## 项目结构
@@ -104,7 +104,7 @@ tyme4mb/
 
 项目包含 43 个测试文件，约 3,200 行测试代码，涵盖：
 
-- 各模块的单元测试（对应 Go 版本的一一翻译）
+- 各模块的单元测试（对应 Go 版本的一比一翻译）
 - 全量交叉引用测试（`xref_all_wbtest.mbt`，~2100行）
 - 神煞/宜忌差分测试（`xref_gt_wbtest.mbt`）
 - 八字真太阳时测试
@@ -112,7 +112,7 @@ tyme4mb/
 
 ```bash
 # 运行全部测试
-mbt test
+moon test
 ```
 
 ## 移植来源
@@ -121,7 +121,7 @@ mbt test
 
 ## 致谢
 
-1. 感谢 [6tail](https://github.com/6tail) 创建并开源了 tyme4go 项目
+1. 感谢 [6tail](https://github.com/6tail) 创建并开源了 tyme4go 项目，本项目移植自该仓库
 2. 感谢许剑伟老师分享的寿星天文历，节气算法引自 [sxwnl/sxwnl](https://github.com/sxwnl/sxwnl)
 3. 感谢 [stonelf](https://github.com/stonelf)，藏历数据引自 [stonelf/zangli](https://github.com/stonelf/zangli)
 

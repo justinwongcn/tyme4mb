@@ -25,20 +25,16 @@ pub fn MonthUnit::get_month(self : MonthUnit) -> Int {
 ///|
 // get_compare_index 用于比较大小的索引
 pub fn MonthUnit::get_compare_index(self : MonthUnit) -> Int {
-  let m = if self.month > 0 {
-    self.month * 2
-  } else {
-    -self.month * 2 + 1
-  }
+  let m = if self.month > 0 { self.month * 2 } else { -self.month * 2 + 1 }
   self.year_unit.get_compare_index() + m * 100
 }
 
 ///|
-impl Culture for MonthUnit with get_name(self : MonthUnit) -> String {
+impl Culture for MonthUnit with fn get_name(self : MonthUnit) -> String {
   self.year_unit.get_name()
 }
 
 ///|
-impl Show for MonthUnit with to_string(self : MonthUnit) -> String {
+impl Show for MonthUnit with fn to_string(self : MonthUnit) -> String {
   self.get_name()
 }

@@ -1,7 +1,10 @@
 ///|
 // terrain_names 地势(长生十二神)名称
 pub fn terrain_names() -> Array[String] {
-  ["长生", "沐浴", "冠带", "临官", "帝旺", "衰", "病", "死", "墓", "绝", "胎", "养"]
+  [
+    "长生", "沐浴", "冠带", "临官", "帝旺", "衰", "病", "死", "墓",
+    "绝", "胎", "养",
+  ]
 }
 
 ///|
@@ -38,16 +41,16 @@ pub fn Terrain::get_index(self : Terrain) -> Int {
 }
 
 ///|
-impl Culture for Terrain with get_name(self : Terrain) -> String {
+impl Culture for Terrain with fn get_name(self : Terrain) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Terrain with to_string(self : Terrain) -> String {
+impl Show for Terrain with fn to_string(self : Terrain) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Terrain with next(self : Terrain, n : Int) -> Terrain {
+impl Tyme for Terrain with fn next(self : Terrain, n : Int) -> Terrain {
   Terrain::from_index(self.loop_tyme.get_index() + n)
 }

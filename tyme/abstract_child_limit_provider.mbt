@@ -1,7 +1,6 @@
 ///|
 // AbstractChildLimitProvider 童限计算抽象（next 为无 self 使用方法 → 关联函数）
-pub struct AbstractChildLimitProvider {
-}
+pub struct AbstractChildLimitProvider {}
 
 ///|
 pub fn AbstractChildLimitProvider::next(
@@ -23,7 +22,10 @@ pub fn AbstractChildLimitProvider::next(
   mi = mi % 60
   d = d + h / 24
   h = h % 24
-  let mt = SolarMonth::from_ym(birth_time.get_year() + add_year, birth_time.get_month()).unwrap()
+  let mt = SolarMonth::from_ym(
+    birth_time.get_year() + add_year,
+    birth_time.get_month(),
+  ).unwrap()
   let mut sm = mt.next(add_month)
   let mut dc = sm.get_day_count()
   while d > dc {
@@ -32,5 +34,7 @@ pub fn AbstractChildLimitProvider::next(
     dc = sm.get_day_count()
   }
   let t = SolarTime::from_ymdhms(sm.get_year(), sm.get_month(), d, h, mi, s).unwrap()
-  ChildLimitInfo::new(birth_time, t, add_year, add_month, add_day, add_hour, add_minute)
+  ChildLimitInfo::new(
+    birth_time, t, add_year, add_month, add_day, add_hour, add_minute,
+  )
 }

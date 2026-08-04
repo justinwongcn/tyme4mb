@@ -21,9 +21,5 @@ test "hide_heaven_stem_day_0" {
     "HideHeavenStemDay.GetHideHeavenStem().String()",
   )
   expect_eq(d.get_name(), "壬水", "HideHeavenStemDay.GetName()")
-  expect_eq(
-    d.to_string(),
-    "壬水第16天",
-    "HideHeavenStemDay.String()",
-  )
+  expect_eq(d.to_string(), "壬水第16天", "HideHeavenStemDay.String()")
 }

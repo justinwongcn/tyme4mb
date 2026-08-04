@@ -1,12 +1,12 @@
 ///|
 // EventType 事件类型
 pub(all) enum EventType {
-  SolarDay   // 公历日期
-  SolarWeek  // 几月第几个星期几
-  LunarDay   // 农历日期
-  TermDay    // 节气日期
-  TermHs     // 节气天干
-  TermEb     // 节气地支
+  SolarDay // 公历日期
+  SolarWeek // 几月第几个星期几
+  LunarDay // 农历日期
+  TermDay // 节气日期
+  TermHs // 节气天干
+  TermEb // 节气地支
 }
 
 ///|
@@ -46,6 +46,9 @@ pub fn EventType::get_name(self : EventType) -> String {
 }
 
 ///|
-impl Show for EventType with to_string(self : EventType) -> String {
+impl Show for EventType with fn to_string(self : EventType) -> String {
   self.get_name()
 }
+
+///|
+extend EventType with Show::{to_string}

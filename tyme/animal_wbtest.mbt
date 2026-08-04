@@ -9,5 +9,9 @@ test "animal_1" {
 ///|
 test "animal_2" {
   let animal = Animal::from_name("蛟").unwrap()
-  expect_eq(animal.next(1).to_string(), "龙", "Animal.FromName(蛟).Next(1).String()")
+  expect_eq(
+    animal.next(1).to_string(),
+    "龙",
+    "Animal.FromName(蛟).Next(1).String()",
+  )
 }

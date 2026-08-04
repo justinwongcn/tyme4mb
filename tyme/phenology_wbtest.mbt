@@ -4,8 +4,7 @@
 test "phenology_0" {
   let solar_day = SolarDay::from_ymd(2020, 4, 23).unwrap()
   let phenology_day = solar_day.get_phenology_day()
-  let three_phenology =
-    phenology_day.get_phenology().get_three_phenology()
+  let three_phenology = phenology_day.get_phenology().get_three_phenology()
 
   expect_eq(
     solar_day.get_term().get_name(),
@@ -17,16 +16,8 @@ test "phenology_0" {
     "初候",
     "Phenology.GetThreePhenology().GetName()",
   )
-  expect_eq(
-    phenology_day.get_name(),
-    "萍始生",
-    "PhenologyDay.GetName()",
-  )
-  expect_eq(
-    phenology_day.get_day_index(),
-    4,
-    "PhenologyDay.GetDayIndex()",
-  )
+  expect_eq(phenology_day.get_name(), "萍始生", "PhenologyDay.GetName()")
+  expect_eq(phenology_day.get_day_index(), 4, "PhenologyDay.GetDayIndex()")
 }
 
 ///|
@@ -34,11 +25,7 @@ test "phenology_1" {
   let p = Phenology::from_index(2026, 1)
   let jd = p.get_julian_day()
 
-  expect_eq(
-    p.get_name(),
-    "麋角解",
-    "Phenology.FromIndex(2026,1).GetName()",
-  )
+  expect_eq(p.get_name(), "麋角解", "Phenology.FromIndex(2026,1).GetName()")
   expect_eq(
     jd.get_solar_day().to_string(),
     "2025年12月26日",
@@ -76,8 +63,7 @@ test "phenology_2" {
 
 ///|
 test "phenology_3" {
-  let d =
-    SolarTime::from_ymdhms(2025, 12, 26, 20, 49, 55).unwrap()
+  let d = SolarTime::from_ymdhms(2025, 12, 26, 20, 49, 55).unwrap()
   let p = d.get_phenology()
   expect_eq(
     p.get_name(),
@@ -85,8 +71,7 @@ test "phenology_3" {
     "SolarTime(2025,12,26,20,49,55).GetPhenology().GetName()",
   )
 
-  let d2 =
-    SolarTime::from_ymdhms(2025, 12, 26, 20, 49, 56).unwrap()
+  let d2 = SolarTime::from_ymdhms(2025, 12, 26, 20, 49, 56).unwrap()
   let p2 = d2.get_phenology()
   expect_eq(
     p2.get_name(),

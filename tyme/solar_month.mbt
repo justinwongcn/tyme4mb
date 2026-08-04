@@ -1,7 +1,10 @@
 ///|
 // solar_month_names 公历月名称
 pub fn solar_month_names() -> Array[String] {
-  ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+  [
+    "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月",
+    "11月", "12月",
+  ]
 }
 
 ///|
@@ -59,9 +62,13 @@ pub fn SolarMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
 
 ///|
 // from_ym 从年月构造
-pub fn SolarMonth::from_ym(year : Int, month : Int) -> Result[SolarMonth, String] {
+pub fn SolarMonth::from_ym(
+  year : Int,
+  month : Int,
+) -> Result[SolarMonth, String] {
   match SolarMonth::validate(year, month) {
-    Ok(_) => Ok(SolarMonth::{ month_unit: MonthUnit::new(YearUnit::new(year), month) })
+    Ok(_) =>
+      Ok(SolarMonth::{ month_unit: MonthUnit::new(YearUnit::new(year), month) })
     Err(e) => Err(e)
   }
 }
@@ -101,10 +108,8 @@ pub fn SolarMonth::get_week_count(self : SolarMonth, start : Int) -> Int {
   match SolarDay::from_ymd(self.get_year(), self.get_month(), 1) {
     Ok(d) =>
       @math.ceil(
-        (
-          AbstractCulture::index_of(d.get_week().get_index() - start, 7) +
-          self.get_day_count()
-        ).to_double() /
+        (AbstractCulture::index_of(d.get_week().get_index() - start, 7) +
+        self.get_day_count()).to_double() /
         7.0,
       ).to_int()
     Err(_) => 0
@@ -135,14 +140,20 @@ pub fn SolarMonth::get_first_day(self : SolarMonth) -> SolarDay {
     Ok(d) => d
     Err(_) =>
       SolarDay::new(
-        DayUnit::new(MonthUnit::new(YearUnit::new(self.get_year()), self.get_month()), 1),
+        DayUnit::new(
+          MonthUnit::new(YearUnit::new(self.get_year()), self.get_month()),
+          1,
+        ),
       )
   }
 }
 
 ///|
 // get_weeks 本月公历周列表（参数 start：起始星期，1234560 分别代表星期一至星期天）
-pub fn SolarMonth::get_weeks(self : SolarMonth, start : Int) -> Array[SolarWeek] {
+pub fn SolarMonth::get_weeks(
+  self : SolarMonth,
+  start : Int,
+) -> Array[SolarWeek] {
   let size = self.get_week_count(start)
   let l : Array[SolarWeek] = []
   for i = 0; i < size; i = i + 1 {
@@ -158,19 +169,23 @@ pub fn SolarMonth::get_weeks(self : SolarMonth, start : Int) -> Array[SolarWeek]
 //   get_week_count / get_days / get_first_day 此前已随 SolarDay.from_ymd 译出。
 
 ///|
-impl Culture for SolarMonth with get_name(self : SolarMonth) -> String {
+impl Culture for SolarMonth with fn get_name(self : SolarMonth) -> String {
   solar_month_names()[self.get_index_in_year()]
 }
 
 ///|
-impl Show for SolarMonth with to_string(self : SolarMonth) -> String {
+impl Show for SolarMonth with fn to_string(self : SolarMonth) -> String {
   self.get_solar_year().to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for SolarMonth with next(self : SolarMonth, n : Int) -> SolarMonth {
+impl Tyme for SolarMonth with fn next(self : SolarMonth, n : Int) -> SolarMonth {
   let i = self.get_month() - 1 + n
-  match SolarMonth::from_ym((self.get_year() * 12 + i) / 12, AbstractCulture::index_of(i, 12) + 1) {
+  match
+    SolarMonth::from_ym(
+      (self.get_year() * 12 + i) / 12,
+      AbstractCulture::index_of(i, 12) + 1,
+    ) {
     Ok(m) => m
     Err(_) => self
   }

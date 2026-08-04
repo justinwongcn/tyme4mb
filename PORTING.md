@@ -91,5 +91,6 @@ Go 版本使用全局单例 + 方法接收者模式。MoonBit 版本采用**纯�
 
 - 本项目保留原项目的 MIT 许可证及版权声明
 - 原项目版权：Copyright (c) 2024 6tail
+- 移植版权：Copyright (c) 2026 justinwongcn
 - 本项目为移植项目，在 MIT 许可证下享有同等权利
 - 节气算法引自 [sxwnl/sxwnl](https://github.com/sxwnl/sxwnl)，藏历数据引自 [stonelf/zangli](https://github.com/stonelf/zangli)，均已在源码注释中标注来源

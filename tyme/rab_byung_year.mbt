@@ -202,8 +202,10 @@ pub fn RabByungYear::equals(self : RabByungYear, target : RabByungYear) -> Bool 
 }
 
 ///|
-impl Culture for RabByungYear with get_name(self : RabByungYear) -> String {
-  let digits = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
+impl Culture for RabByungYear with fn get_name(self : RabByungYear) -> String {
+  let digits = [
+    "零", "一", "二", "三", "四", "五", "六", "七", "八", "九",
+  ]
   let units = ["", "十", "百"]
   let mut n = self.rab_byung_index + 1
   let mut s = ""
@@ -218,15 +220,17 @@ impl Culture for RabByungYear with get_name(self : RabByungYear) -> String {
     n = n / 10
     pos = pos + 1
   }
-  if s.length() >= 2 && s.unsafe_charcode_at(0) == '一'.to_int() && s.unsafe_charcode_at(1) == '十'.to_int() {
+  if s.length() >= 2 &&
+    s.unsafe_get(0).to_int() == '一'.to_int() &&
+    s.unsafe_get(1).to_int() == '十'.to_int() {
     // 字节切片 s[3:] 恰去掉"一"（3 字节=1 码点），"一十六"→"十六"；MoonBit 按码点须用 1
-    s = (s[1:s.length()]).to_owned()
+    s = s[1:s.length()].to_owned()
   }
   "第\{s}饶迥\{self.get_element().get_name()}\{self.get_zodiac().get_name()}年"
 }
 
 ///|
-impl Show for RabByungYear with to_string(_ : RabByungYear) -> String {
+impl Show for RabByungYear with fn to_string(_ : RabByungYear) -> String {
   // RabByungYear 嵌入 AbstractTyme→AbstractCulture.String() 固定返回 GetName()==""（空串）
   ""
 }

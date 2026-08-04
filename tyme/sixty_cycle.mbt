@@ -2,12 +2,14 @@
 // SixtyCycleNames 六十甲子(六十干支周)名称
 pub fn sixty_cycle_names() -> Array[String] {
   [
-    "甲子", "乙丑", "丙寅", "丁卯", "戊辰", "己巳", "庚午", "辛未", "壬申", "癸酉",
-    "甲戌", "乙亥", "丙子", "丁丑", "戊寅", "己卯", "庚辰", "辛巳", "壬午", "癸未",
-    "甲申", "乙酉", "丙戌", "丁亥", "戊子", "己丑", "庚寅", "辛卯", "壬辰", "癸巳",
-    "甲午", "乙未", "丙申", "丁酉", "戊戌", "己亥", "庚子", "辛丑", "壬寅", "癸卯",
-    "甲辰", "乙巳", "丙午", "丁未", "戊申", "己酉", "庚戌", "辛亥", "壬子", "癸丑",
-    "甲寅", "乙卯", "丙辰", "丁巳", "戊午", "己未", "庚申", "辛酉", "壬戌", "癸亥",
+    "甲子", "乙丑", "丙寅", "丁卯", "戊辰", "己巳", "庚午", "辛未",
+    "壬申", "癸酉", "甲戌", "乙亥", "丙子", "丁丑", "戊寅", "己卯",
+    "庚辰", "辛巳", "壬午", "癸未", "甲申", "乙酉", "丙戌", "丁亥",
+    "戊子", "己丑", "庚寅", "辛卯", "壬辰", "癸巳", "甲午", "乙未",
+    "丙申", "丁酉", "戊戌", "己亥", "庚子", "辛丑", "壬寅", "癸卯",
+    "甲辰", "乙巳", "丙午", "丁未", "戊申", "己酉", "庚戌", "辛亥",
+    "壬子", "癸丑", "甲寅", "乙卯", "丙辰", "丁巳", "戊午", "己未",
+    "庚申", "辛酉", "壬戌", "癸亥",
   ]
 }
 
@@ -77,16 +79,21 @@ pub fn SixtyCycle::get_peng_zu(self : SixtyCycle) -> PengZu {
 // get_ten 旬
 pub fn SixtyCycle::get_ten(self : SixtyCycle) -> Ten {
   Ten::from_index(
-    (self.get_heaven_stem().get_index() - self.get_earth_branch().get_index()) / 2
+    (self.get_heaven_stem().get_index() - self.get_earth_branch().get_index()) /
+    2,
   )
 }
 
 ///|
 // get_extra_earth_branches 旬空(空亡)，因地支比天干多2个，旬空则为每一轮干支一一配对后多出来的2个地支
-pub fn SixtyCycle::get_extra_earth_branches(self : SixtyCycle) -> Array[EarthBranch] {
+pub fn SixtyCycle::get_extra_earth_branches(
+  self : SixtyCycle,
+) -> Array[EarthBranch] {
   let l : Array[EarthBranch] = []
   let first = EarthBranch::from_index(
-    10 + self.get_earth_branch().get_index() - self.get_heaven_stem().get_index()
+    10 +
+    self.get_earth_branch().get_index() -
+    self.get_heaven_stem().get_index(),
   )
   l.push(first)
   l.push(first.next(1))
@@ -94,16 +101,16 @@ pub fn SixtyCycle::get_extra_earth_branches(self : SixtyCycle) -> Array[EarthBra
 }
 
 ///|
-impl Culture for SixtyCycle with get_name(self : SixtyCycle) -> String {
+impl Culture for SixtyCycle with fn get_name(self : SixtyCycle) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for SixtyCycle with to_string(self : SixtyCycle) -> String {
+impl Show for SixtyCycle with fn to_string(self : SixtyCycle) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for SixtyCycle with next(self : SixtyCycle, n : Int) -> SixtyCycle {
+impl Tyme for SixtyCycle with fn next(self : SixtyCycle, n : Int) -> SixtyCycle {
   SixtyCycle::from_index(self.loop_tyme.get_index() + n)
 }

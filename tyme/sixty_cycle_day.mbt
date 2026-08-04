@@ -30,9 +30,7 @@ pub fn SixtyCycleDay::new(
 
 ///|
 // from_solar_day 从公历日构造
-pub fn SixtyCycleDay::from_solar_day(
-  solar_day : SolarDay,
-) -> SixtyCycleDay {
+pub fn SixtyCycleDay::from_solar_day(solar_day : SolarDay) -> SixtyCycleDay {
   let term = solar_day.get_term()
   let index = term.loop_tyme.get_index()
   let mut offset = -1
@@ -162,7 +160,11 @@ pub fn SixtyCycleDay::get_avoids(
 ///|
 // get_three_pillars 三柱
 pub fn SixtyCycleDay::get_three_pillars(self : SixtyCycleDay) -> ThreePillars {
-  ThreePillars::{ year: self.get_year(), month: self.get_month(), day: self.get_sixty_cycle() }
+  ThreePillars::{
+    year: self.get_year(),
+    month: self.get_month(),
+    day: self.get_sixty_cycle(),
+  }
 }
 
 ///|
@@ -170,7 +172,14 @@ pub fn SixtyCycleDay::get_three_pillars(self : SixtyCycleDay) -> ThreePillars {
 pub fn SixtyCycleDay::get_hours(self : SixtyCycleDay) -> Array[SixtyCycleHour] {
   let l : Array[SixtyCycleHour] = []
   let d = self.solar_day.next(-1)
-  let t = SolarTime::from_ymdhms(d.get_year(), d.get_month(), d.get_day(), 23, 0, 0).unwrap()
+  let t = SolarTime::from_ymdhms(
+    d.get_year(),
+    d.get_month(),
+    d.get_day(),
+    23,
+    0,
+    0,
+  ).unwrap()
   let mut h = SixtyCycleHour::from_solar_time(t)
   l.push(h)
   for i = 0; i < 11; i = i + 1 {
@@ -182,7 +191,7 @@ pub fn SixtyCycleDay::get_hours(self : SixtyCycleDay) -> Array[SixtyCycleHour] {
 
 ///|
 // next 推移
-impl Tyme for SixtyCycleDay with next(self : SixtyCycleDay, n : Int) -> SixtyCycleDay {
+impl Tyme for SixtyCycleDay with fn next(self : SixtyCycleDay, n : Int) -> SixtyCycleDay {
   SixtyCycleDay::from_solar_day(self.solar_day.next(n))
 }
 
@@ -196,11 +205,11 @@ pub fn SixtyCycleDay::equals(
 }
 
 ///|
-impl Culture for SixtyCycleDay with get_name(self : SixtyCycleDay) -> String {
+impl Culture for SixtyCycleDay with fn get_name(self : SixtyCycleDay) -> String {
   self.day.to_string() + "日"
 }
 
 ///|
-impl Show for SixtyCycleDay with to_string(self : SixtyCycleDay) -> String {
+impl Show for SixtyCycleDay with fn to_string(self : SixtyCycleDay) -> String {
   self.month.to_string() + self.get_name()
 }

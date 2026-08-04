@@ -67,13 +67,18 @@ pub fn SixtyCycleMonth::get_index_in_year(self : SixtyCycleMonth) -> Int {
 // get_first_day 首日
 pub fn SixtyCycleMonth::get_first_day(self : SixtyCycleMonth) -> SixtyCycleDay {
   SixtyCycleDay::from_solar_day(
-    SolarTerm::from_index(self.year.get_year(), 3 + self.get_index_in_year() * 2).get_solar_day(),
+    SolarTerm::from_index(
+      self.year.get_year(),
+      3 + self.get_index_in_year() * 2,
+    ).get_solar_day(),
   )
 }
 
 ///|
 // get_days 本月的干支日列表
-pub fn SixtyCycleMonth::get_days(self : SixtyCycleMonth) -> Array[SixtyCycleDay] {
+pub fn SixtyCycleMonth::get_days(
+  self : SixtyCycleMonth,
+) -> Array[SixtyCycleDay] {
   let l : Array[SixtyCycleDay] = []
   let mut d = self.get_first_day()
   while d.get_sixty_cycle_month().equals(self) {
@@ -109,10 +114,7 @@ pub fn SixtyCycleMonth::get_jupiter_direction(
 
 ///|
 // next 推移
-impl Tyme for SixtyCycleMonth with next(
-  self : SixtyCycleMonth,
-  n : Int,
-) -> SixtyCycleMonth {
+impl Tyme for SixtyCycleMonth with fn next(self : SixtyCycleMonth, n : Int) -> SixtyCycleMonth {
   let y = SixtyCycleYear::from_year(
     (self.year.get_year() * 12 + self.get_index_in_year() + n) / 12,
   ).unwrap()
@@ -129,11 +131,11 @@ pub fn SixtyCycleMonth::equals(
 }
 
 ///|
-impl Culture for SixtyCycleMonth with get_name(self : SixtyCycleMonth) -> String {
+impl Culture for SixtyCycleMonth with fn get_name(self : SixtyCycleMonth) -> String {
   self.month.to_string() + "月"
 }
 
 ///|
-impl Show for SixtyCycleMonth with to_string(self : SixtyCycleMonth) -> String {
+impl Show for SixtyCycleMonth with fn to_string(self : SixtyCycleMonth) -> String {
   self.year.to_string() + self.get_name()
 }

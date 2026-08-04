@@ -1,7 +1,10 @@
 ///|
 // nine_names 数九名称
 pub fn nine_names() -> Array[String] {
-  ["一九", "二九", "三九", "四九", "五九", "六九", "七九", "八九", "九九"]
+  [
+    "一九", "二九", "三九", "四九", "五九", "六九", "七九", "八九",
+    "九九",
+  ]
 }
 
 ///|
@@ -38,16 +41,16 @@ pub fn Nine::get_index(self : Nine) -> Int {
 }
 
 ///|
-impl Culture for Nine with get_name(self : Nine) -> String {
+impl Culture for Nine with fn get_name(self : Nine) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Nine with to_string(self : Nine) -> String {
+impl Show for Nine with fn to_string(self : Nine) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Nine with next(self : Nine, n : Int) -> Nine {
+impl Tyme for Nine with fn next(self : Nine, n : Int) -> Nine {
   Nine::from_index(self.loop_tyme.get_index() + n)
 }

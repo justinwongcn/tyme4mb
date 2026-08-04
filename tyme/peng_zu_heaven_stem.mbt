@@ -2,9 +2,10 @@
 // peng_zu_heaven_stem_names 天干彭祖百忌名称
 pub fn peng_zu_heaven_stem_names() -> Array[String] {
   [
-    "甲不开仓财物耗散", "乙不栽植千株不长", "丙不修灶必见灾殃", "丁不剃头头必生疮",
-    "戊不受田田主不祥", "己不破券二比并亡", "庚不经络织机虚张", "辛不合酱主人不尝",
-    "壬不泱水更难提防", "癸不词讼理弱敌强",
+    "甲不开仓财物耗散", "乙不栽植千株不长", "丙不修灶必见灾殃",
+    "丁不剃头头必生疮", "戊不受田田主不祥", "己不破券二比并亡",
+    "庚不经络织机虚张", "辛不合酱主人不尝", "壬不泱水更难提防",
+    "癸不词讼理弱敌强",
   ]
 }
 
@@ -25,11 +26,15 @@ extend PengZuHeavenStem with Tyme::{next}
 
 ///|
 pub fn PengZuHeavenStem::from_index(index : Int) -> PengZuHeavenStem {
-  PengZuHeavenStem::{ loop_tyme: LoopTyme::from_index(peng_zu_heaven_stem_names(), index) }
+  PengZuHeavenStem::{
+    loop_tyme: LoopTyme::from_index(peng_zu_heaven_stem_names(), index),
+  }
 }
 
 ///|
-pub fn PengZuHeavenStem::from_name(name : String) -> Result[PengZuHeavenStem, String] {
+pub fn PengZuHeavenStem::from_name(
+  name : String,
+) -> Result[PengZuHeavenStem, String] {
   match LoopTyme::from_name(peng_zu_heaven_stem_names(), name) {
     Ok(p) => Ok(PengZuHeavenStem::{ loop_tyme: p })
     Err(e) => Err(e)
@@ -42,16 +47,16 @@ pub fn PengZuHeavenStem::get_index(self : PengZuHeavenStem) -> Int {
 }
 
 ///|
-impl Culture for PengZuHeavenStem with get_name(self : PengZuHeavenStem) -> String {
+impl Culture for PengZuHeavenStem with fn get_name(self : PengZuHeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for PengZuHeavenStem with to_string(self : PengZuHeavenStem) -> String {
+impl Show for PengZuHeavenStem with fn to_string(self : PengZuHeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for PengZuHeavenStem with next(self : PengZuHeavenStem, n : Int) -> PengZuHeavenStem {
+impl Tyme for PengZuHeavenStem with fn next(self : PengZuHeavenStem, n : Int) -> PengZuHeavenStem {
   PengZuHeavenStem::from_index(self.loop_tyme.get_index() + n)
 }

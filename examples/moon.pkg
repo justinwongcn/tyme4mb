@@ -1,0 +1,7 @@
+import {
+  "justinwongcn/tyme4mb/tyme",
+}
+
+options(
+  "is-main": true,
+)

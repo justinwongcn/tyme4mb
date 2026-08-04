@@ -60,7 +60,10 @@ pub fn HeavenStem::get_yin_yang(self : HeavenStem) -> YinYang {
 
 ///|
 // get_ten_star 十神（生我者，正印偏印。我生者，伤官食神。克我者，正官七杀。我克者，正财偏财。同我者，劫财比肩。）
-pub fn HeavenStem::get_ten_star(self : HeavenStem, target : HeavenStem) -> TenStar {
+pub fn HeavenStem::get_ten_star(
+  self : HeavenStem,
+  target : HeavenStem,
+) -> TenStar {
   let target_index = target.get_index()
   let mut offset = target_index - self.loop_tyme.get_index()
   if self.loop_tyme.get_index() % 2 != 0 && target_index % 2 == 0 {
@@ -112,13 +115,18 @@ pub fn HeavenStem::get_mascot_direction(self : HeavenStem) -> Direction {
 
 ///|
 // get_peng_zu_heaven_stem 天干彭祖百忌
-pub fn HeavenStem::get_peng_zu_heaven_stem(self : HeavenStem) -> PengZuHeavenStem {
+pub fn HeavenStem::get_peng_zu_heaven_stem(
+  self : HeavenStem,
+) -> PengZuHeavenStem {
   PengZuHeavenStem::from_index(self.loop_tyme.get_index())
 }
 
 ///|
 // get_terrain 地势(长生十二神)
-pub fn HeavenStem::get_terrain(self : HeavenStem, earth_branch : EarthBranch) -> Terrain {
+pub fn HeavenStem::get_terrain(
+  self : HeavenStem,
+  earth_branch : EarthBranch,
+) -> Terrain {
   let earth_branch_index = earth_branch.get_index()
   let mut offset = earth_branch_index
   if Yin.get_code() == self.get_yin_yang().get_code() {
@@ -136,7 +144,7 @@ pub fn HeavenStem::get_combine(self : HeavenStem) -> HeavenStem {
 
 ///|
 // combine 合化（甲己合化土，乙庚合化金，丙辛合化水，丁壬合化木，戊癸合化火）,如果无法合化，返回None
-pub fn HeavenStem::combine(self : HeavenStem, target : HeavenStem) -> Option[Element] {
+pub fn HeavenStem::combine(self : HeavenStem, target : HeavenStem) -> Element? {
   if self.get_combine().equals(target) {
     Some(Element::from_index(self.loop_tyme.get_index() + 2))
   } else {
@@ -145,16 +153,16 @@ pub fn HeavenStem::combine(self : HeavenStem, target : HeavenStem) -> Option[Ele
 }
 
 ///|
-impl Culture for HeavenStem with get_name(self : HeavenStem) -> String {
+impl Culture for HeavenStem with fn get_name(self : HeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for HeavenStem with to_string(self : HeavenStem) -> String {
+impl Show for HeavenStem with fn to_string(self : HeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for HeavenStem with next(self : HeavenStem, n : Int) -> HeavenStem {
+impl Tyme for HeavenStem with fn next(self : HeavenStem, n : Int) -> HeavenStem {
   HeavenStem::from_index(self.loop_tyme.get_index() + n)
 }

@@ -1,7 +1,10 @@
 ///|
 // constellation_names 星座名称
 pub fn constellation_names() -> Array[String] {
-  ["白羊", "金牛", "双子", "巨蟹", "狮子", "处女", "天秤", "天蝎", "射手", "摩羯", "水瓶", "双鱼"]
+  [
+    "白羊", "金牛", "双子", "巨蟹", "狮子", "处女", "天秤", "天蝎",
+    "射手", "摩羯", "水瓶", "双鱼",
+  ]
 }
 
 ///|
@@ -21,7 +24,9 @@ extend Constellation with Tyme::{next}
 
 ///|
 pub fn Constellation::from_index(index : Int) -> Constellation {
-  Constellation::{ loop_tyme: LoopTyme::from_index(constellation_names(), index) }
+  Constellation::{
+    loop_tyme: LoopTyme::from_index(constellation_names(), index),
+  }
 }
 
 ///|
@@ -38,16 +43,16 @@ pub fn Constellation::get_index(self : Constellation) -> Int {
 }
 
 ///|
-impl Culture for Constellation with get_name(self : Constellation) -> String {
+impl Culture for Constellation with fn get_name(self : Constellation) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Constellation with to_string(self : Constellation) -> String {
+impl Show for Constellation with fn to_string(self : Constellation) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Constellation with next(self : Constellation, n : Int) -> Constellation {
+impl Tyme for Constellation with fn next(self : Constellation, n : Int) -> Constellation {
   Constellation::from_index(self.loop_tyme.get_index() + n)
 }

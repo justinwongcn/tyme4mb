@@ -68,16 +68,16 @@ pub fn NineStar::get_direction(self : NineStar) -> Direction {
 }
 
 ///|
-impl Culture for NineStar with get_name(self : NineStar) -> String {
+impl Culture for NineStar with fn get_name(self : NineStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for NineStar with to_string(self : NineStar) -> String {
+impl Show for NineStar with fn to_string(self : NineStar) -> String {
   "\{self.get_name()}\{self.get_color()}\{self.get_element()}"
 }
 
 ///|
-impl Tyme for NineStar with next(self : NineStar, n : Int) -> NineStar {
+impl Tyme for NineStar with fn next(self : NineStar, n : Int) -> NineStar {
   NineStar::from_index(self.loop_tyme.get_index() + n)
 }

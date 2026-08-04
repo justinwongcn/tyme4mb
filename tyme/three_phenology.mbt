@@ -21,11 +21,15 @@ extend ThreePhenology with Tyme::{next}
 
 ///|
 pub fn ThreePhenology::from_index(index : Int) -> ThreePhenology {
-  ThreePhenology::{ loop_tyme: LoopTyme::from_index(three_phenology_names(), index) }
+  ThreePhenology::{
+    loop_tyme: LoopTyme::from_index(three_phenology_names(), index),
+  }
 }
 
 ///|
-pub fn ThreePhenology::from_name(name : String) -> Result[ThreePhenology, String] {
+pub fn ThreePhenology::from_name(
+  name : String,
+) -> Result[ThreePhenology, String] {
   match LoopTyme::from_name(three_phenology_names(), name) {
     Ok(p) => Ok(ThreePhenology::{ loop_tyme: p })
     Err(e) => Err(e)
@@ -38,16 +42,16 @@ pub fn ThreePhenology::get_index(self : ThreePhenology) -> Int {
 }
 
 ///|
-impl Culture for ThreePhenology with get_name(self : ThreePhenology) -> String {
+impl Culture for ThreePhenology with fn get_name(self : ThreePhenology) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for ThreePhenology with to_string(self : ThreePhenology) -> String {
+impl Show for ThreePhenology with fn to_string(self : ThreePhenology) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for ThreePhenology with next(self : ThreePhenology, n : Int) -> ThreePhenology {
+impl Tyme for ThreePhenology with fn next(self : ThreePhenology, n : Int) -> ThreePhenology {
   ThreePhenology::from_index(self.loop_tyme.get_index() + n)
 }

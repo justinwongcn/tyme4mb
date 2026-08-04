@@ -1,6 +1,6 @@
 ///|
 // Tyme Tyme
-pub trait Tyme : Culture {
+pub trait Tyme: Culture {
   // next 推移
-  next(Self, Int) -> Self
+  fn next(Self, Int) -> Self
 }

@@ -1,7 +1,10 @@
 ///|
 // lunar_month_names 农历月名称
 pub fn lunar_month_names() -> Array[String] {
-  ["正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+  [
+    "正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月",
+    "九月", "十月", "十一月", "十二月",
+  ]
 }
 
 ///|
@@ -23,10 +26,7 @@ extend LunarMonth with Tyme::{next}
 
 ///|
 // validate 校验
-pub fn LunarMonth::validate(
-  year : Int,
-  month : Int,
-) -> Result[Unit, String] {
+pub fn LunarMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
   if month == 0 || month > 12 || month < -12 {
     return Err("illegal lunar month: " + month.to_string())
   }
@@ -58,12 +58,7 @@ pub fn LunarMonth::from_ym(
     leap = true
     m = -m
   }
-  Ok(
-    LunarMonth::{
-      month_unit: MonthUnit::new(YearUnit::new(year), m),
-      leap,
-    },
-  )
+  Ok(LunarMonth::{ month_unit: MonthUnit::new(YearUnit::new(year), m), leap })
 }
 
 ///|
@@ -163,10 +158,15 @@ pub fn LunarMonth::is_leap(self : LunarMonth) -> Bool {
 ///|
 // get_week_count 周数
 pub fn LunarMonth::get_week_count(self : LunarMonth, start : Int) -> Int {
-  (AbstractCulture::index_of(
-    self.get_first_julian_day().get_week().get_index() - start,
-    7,
-  ) + self.get_day_count() + 6) / 7
+  (
+    AbstractCulture::index_of(
+      self.get_first_julian_day().get_week().get_index() - start,
+      7,
+    ) +
+    self.get_day_count() +
+    6
+  ) /
+  7
 }
 
 ///|
@@ -216,7 +216,10 @@ pub fn LunarMonth::get_fetus(self : LunarMonth) -> FetusMonth {
 
 ///|
 // get_weeks 本月的农历周列表
-pub fn LunarMonth::get_weeks(self : LunarMonth, start : Int) -> Array[LunarWeek] {
+pub fn LunarMonth::get_weeks(
+  self : LunarMonth,
+  start : Int,
+) -> Array[LunarWeek] {
   let l : Array[LunarWeek] = []
   let size = self.get_week_count(start)
   let m = self.get_month_with_leap()
@@ -228,9 +231,10 @@ pub fn LunarMonth::get_weeks(self : LunarMonth, start : Int) -> Array[LunarWeek]
 
 ///|
 // next 推移
-impl Tyme for LunarMonth with next(self : LunarMonth, n : Int) -> LunarMonth {
+impl Tyme for LunarMonth with fn next(self : LunarMonth, n : Int) -> LunarMonth {
   if n == 0 {
-    return match LunarMonth::from_ym(self.get_year(), self.get_month_with_leap()) {
+    return match
+      LunarMonth::from_ym(self.get_year(), self.get_month_with_leap()) {
       Ok(m) => m
       Err(_) => self
     }
@@ -300,7 +304,7 @@ pub fn LunarMonth::get_first_day(self : LunarMonth) -> LunarDay {
 }
 
 ///|
-impl Culture for LunarMonth with get_name(self : LunarMonth) -> String {
+impl Culture for LunarMonth with fn get_name(self : LunarMonth) -> String {
   let s = lunar_month_names()[self.get_month() - 1]
   if self.leap {
     return "闰" + s
@@ -309,6 +313,6 @@ impl Culture for LunarMonth with get_name(self : LunarMonth) -> String {
 }
 
 ///|
-impl Show for LunarMonth with to_string(self : LunarMonth) -> String {
+impl Show for LunarMonth with fn to_string(self : LunarMonth) -> String {
   self.get_lunar_year().to_string() + self.get_name()
 }

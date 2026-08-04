@@ -11,7 +11,11 @@ pub struct AbstractFestival {
 
 ///|
 // new 构造
-pub fn AbstractFestival::new(index : Int, event : Event, day : DayUnit) -> AbstractFestival {
+pub fn AbstractFestival::new(
+  index : Int,
+  event : Event,
+  day : DayUnit,
+) -> AbstractFestival {
   { index, event, day }
 }
 
@@ -28,11 +32,14 @@ pub fn AbstractFestival::get_index(self : AbstractFestival) -> Int {
 }
 
 ///|
-impl Culture for AbstractFestival with get_name(self : AbstractFestival) -> String {
+impl Culture for AbstractFestival with fn get_name(self : AbstractFestival) -> String {
   self.event.get_name()
 }
 
 ///|
-impl Show for AbstractFestival with to_string(self : AbstractFestival) -> String {
-  self.get_day().to_string() + " " + self.get_name()
+extend AbstractFestival with Culture::{get_name}
+
+///|
+impl Show for AbstractFestival with fn to_string(self : AbstractFestival) -> String {
+  self.get_day().to_string() + " " + Culture::get_name(self)
 }

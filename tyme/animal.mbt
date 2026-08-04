@@ -2,8 +2,9 @@
 // animal_names 动物名称
 pub fn animal_names() -> Array[String] {
   [
-    "蛟", "龙", "貉", "兔", "狐", "虎", "豹", "獬", "牛", "蝠", "鼠", "燕", "猪",
-    "獝", "狼", "狗", "彘", "鸡", "乌", "猴", "猿", "犴", "羊", "獐", "马", "鹿", "蛇", "蚓",
+    "蛟", "龙", "貉", "兔", "狐", "虎", "豹", "獬", "牛", "蝠", "鼠",
+    "燕", "猪", "獝", "狼", "狗", "彘", "鸡", "乌", "猴", "猿", "犴",
+    "羊", "獐", "马", "鹿", "蛇", "蚓",
   ]
 }
 
@@ -41,16 +42,16 @@ pub fn Animal::get_index(self : Animal) -> Int {
 }
 
 ///|
-impl Culture for Animal with get_name(self : Animal) -> String {
+impl Culture for Animal with fn get_name(self : Animal) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Animal with to_string(self : Animal) -> String {
+impl Show for Animal with fn to_string(self : Animal) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Animal with next(self : Animal, n : Int) -> Animal {
+impl Tyme for Animal with fn next(self : Animal, n : Int) -> Animal {
   Animal::from_index(self.loop_tyme.get_index() + n)
 }

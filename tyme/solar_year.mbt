@@ -55,7 +55,7 @@ pub fn SolarYear::is_leap(self : SolarYear) -> Bool {
   if y < 1600 {
     return y % 4 == 0
   }
-  (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)
+  (y % 4 == 0 && y % 100 != 0) || y % 400 == 0
 }
 
 ///|
@@ -106,7 +106,9 @@ pub fn SolarYear::get_half_years(self : SolarYear) -> Array[SolarHalfYear] {
 
 ///|
 // get_rab_byung_year 藏历年
-pub fn SolarYear::get_rab_byung_year(self : SolarYear) -> Result[RabByungYear, String] {
+pub fn SolarYear::get_rab_byung_year(
+  self : SolarYear,
+) -> Result[RabByungYear, String] {
   RabByungYear::from_year(self.get_year())
 }
 
@@ -116,17 +118,17 @@ pub fn SolarYear::get_rab_byung_year(self : SolarYear) -> Result[RabByungYear, S
 //   2026-08-03 随 RabByungYear 译出回填）
 
 ///|
-impl Culture for SolarYear with get_name(self : SolarYear) -> String {
+impl Culture for SolarYear with fn get_name(self : SolarYear) -> String {
   self.get_year().to_string() + "年"
 }
 
 ///|
-impl Show for SolarYear with to_string(self : SolarYear) -> String {
+impl Show for SolarYear with fn to_string(self : SolarYear) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for SolarYear with next(self : SolarYear, n : Int) -> SolarYear {
+impl Tyme for SolarYear with fn next(self : SolarYear, n : Int) -> SolarYear {
   match SolarYear::from_year(self.get_year() + n) {
     Ok(y) => y
     Err(_) => self

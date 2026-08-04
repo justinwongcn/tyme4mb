@@ -1,7 +1,21 @@
 ///|
 // phenology_names 候名称
 pub fn phenology_names() -> Array[String] {
-  ["蚯蚓结", "麋角解", "水泉动", "雁北乡", "鹊始巢", "雉始雊", "鸡始乳", "征鸟厉疾", "水泽腹坚", "东风解冻", "蛰虫始振", "鱼陟负冰", "獭祭鱼", "候雁北", "草木萌动", "桃始华", "仓庚鸣", "鹰化为鸠", "玄鸟至", "雷乃发声", "始电", "桐始华", "田鼠化为鴽", "虹始见", "萍始生", "鸣鸠拂其羽", "戴胜降于桑", "蝼蝈鸣", "蚯蚓出", "王瓜生", "苦菜秀", "靡草死", "麦秋至", "螳螂生", "鵙始鸣", "反舌无声", "鹿角解", "蜩始鸣", "半夏生", "温风至", "蟋蟀居壁", "鹰始挚", "腐草为萤", "土润溽暑", "大雨行时", "凉风至", "白露降", "寒蝉鸣", "鹰乃祭鸟", "天地始肃", "禾乃登", "鸿雁来", "玄鸟归", "群鸟养羞", "雷始收声", "蛰虫坯户", "水始涸", "鸿雁来宾", "雀入大水为蛤", "菊有黄花", "豺乃祭兽", "草木黄落", "蛰虫咸俯", "水始冰", "地始冻", "雉入大水为蜃", "虹藏不见", "天气上升地气下降", "闭塞而成冬", "鹖鴠不鸣", "虎始交", "荔挺出"]
+  [
+    "蚯蚓结", "麋角解", "水泉动", "雁北乡", "鹊始巢", "雉始雊",
+    "鸡始乳", "征鸟厉疾", "水泽腹坚", "东风解冻", "蛰虫始振",
+    "鱼陟负冰", "獭祭鱼", "候雁北", "草木萌动", "桃始华", "仓庚鸣",
+    "鹰化为鸠", "玄鸟至", "雷乃发声", "始电", "桐始华", "田鼠化为鴽",
+    "虹始见", "萍始生", "鸣鸠拂其羽", "戴胜降于桑", "蝼蝈鸣",
+    "蚯蚓出", "王瓜生", "苦菜秀", "靡草死", "麦秋至", "螳螂生",
+    "鵙始鸣", "反舌无声", "鹿角解", "蜩始鸣", "半夏生", "温风至",
+    "蟋蟀居壁", "鹰始挚", "腐草为萤", "土润溽暑", "大雨行时",
+    "凉风至", "白露降", "寒蝉鸣", "鹰乃祭鸟", "天地始肃", "禾乃登",
+    "鸿雁来", "玄鸟归", "群鸟养羞", "雷始收声", "蛰虫坯户", "水始涸",
+    "鸿雁来宾", "雀入大水为蛤", "菊有黄花", "豺乃祭兽", "草木黄落",
+    "蛰虫咸俯", "水始冰", "地始冻", "雉入大水为蜃", "虹藏不见",
+    "天气上升地气下降", "闭塞而成冬", "鹖鴠不鸣", "虎始交", "荔挺出",
+  ]
 }
 
 ///|
@@ -28,7 +42,10 @@ pub fn Phenology::from_index(year : Int, index : Int) -> Phenology {
 }
 
 ///|
-pub fn Phenology::from_name(year : Int, name : String) -> Result[Phenology, String] {
+pub fn Phenology::from_name(
+  year : Int,
+  name : String,
+) -> Result[Phenology, String] {
   match LoopTyme::from_name(phenology_names(), name) {
     Ok(p) => Ok(Phenology::{ loop_tyme: p, year })
     Err(e) => Err(e)
@@ -36,20 +53,23 @@ pub fn Phenology::from_name(year : Int, name : String) -> Result[Phenology, Stri
 }
 
 ///|
-impl Culture for Phenology with get_name(self : Phenology) -> String {
+impl Culture for Phenology with fn get_name(self : Phenology) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Phenology with to_string(self : Phenology) -> String {
+impl Show for Phenology with fn to_string(self : Phenology) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Phenology with next(self : Phenology, n : Int) -> Phenology {
+impl Tyme for Phenology with fn next(self : Phenology, n : Int) -> Phenology {
   let size = self.loop_tyme.get_size()
   let i = self.loop_tyme.get_index() + n
-  Phenology::from_index((self.year * size + i) / size, self.loop_tyme.index_of(i))
+  Phenology::from_index(
+    (self.year * size + i) / size,
+    self.loop_tyme.index_of(i),
+  )
 }
 
 ///|
@@ -74,10 +94,12 @@ pub fn Phenology::get_index(self : Phenology) -> Int {
 // get_julian_day 儒略日
 pub fn Phenology::get_julian_day(self : Phenology) -> JulianDay {
   let t = sa_lon_t(
-    (self.year.to_double() -
-    2000.0 +
-    (self.loop_tyme.get_index() - 18).to_double() * 5.0 / 360.0 +
-    1.0) *
+    (
+      self.year.to_double() -
+      2000.0 +
+      (self.loop_tyme.get_index() - 18).to_double() * 5.0 / 360.0 +
+      1.0
+    ) *
     2.0 *
     @math.PI,
   )

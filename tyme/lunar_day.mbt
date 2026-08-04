@@ -2,9 +2,10 @@
 // lunar_day_names 农历日名称
 pub fn lunar_day_names() -> Array[String] {
   [
-    "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四",
-    "十五", "十六", "十七", "十八", "十九", "二十", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八",
-    "廿九", "三十",
+    "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八",
+    "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六",
+    "十七", "十八", "十九", "二十", "廿一", "廿二", "廿三", "廿四",
+    "廿五", "廿六", "廿七", "廿八", "廿九", "三十",
   ]
 }
 
@@ -54,11 +55,9 @@ pub fn LunarDay::from_ymd(
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok(
-    LunarDay::{
-      day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
-    },
-  )
+  Ok(LunarDay::{
+    day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
+  })
 }
 
 ///|
@@ -86,7 +85,10 @@ pub fn LunarDay::get_lunar_month(self : LunarDay) -> LunarMonth {
     Ok(m) => m
     Err(_) =>
       LunarMonth::{
-        month_unit: MonthUnit::new(YearUnit::new(self.get_year()), self.get_month()),
+        month_unit: MonthUnit::new(
+          YearUnit::new(self.get_year()),
+          self.get_month(),
+        ),
         leap: false,
       }
   }
@@ -102,7 +104,12 @@ pub fn LunarDay::get_week(self : LunarDay) -> Week {
 // get_sixty_cycle 干支
 pub fn LunarDay::get_sixty_cycle(self : LunarDay) -> SixtyCycle {
   SixtyCycle::from_index(
-    self.get_lunar_month().get_first_julian_day().next(self.get_day() - 12).get_day().to_int(),
+    self
+    .get_lunar_month()
+    .get_first_julian_day()
+    .next(self.get_day() - 12)
+    .get_day()
+    .to_int(),
   )
 }
 
@@ -135,7 +142,11 @@ pub fn LunarDay::get_six_star(self : LunarDay) -> SixStar {
 ///|
 // get_solar_day 公历日
 pub fn LunarDay::get_solar_day(self : LunarDay) -> SolarDay {
-  self.get_lunar_month().get_first_julian_day().next(self.get_day() - 1).get_solar_day()
+  self
+  .get_lunar_month()
+  .get_first_julian_day()
+  .next(self.get_day() - 1)
+  .get_solar_day()
 }
 
 ///|
@@ -229,7 +240,7 @@ pub fn LunarDay::get_sixty_cycle_day(self : LunarDay) -> SixtyCycleDay {
 
 ///|
 // get_festival 农历传统节日，如果当天不是农历传统节日，返回 None
-pub fn LunarDay::get_festival(self : LunarDay) -> Option[LunarFestival] {
+pub fn LunarDay::get_festival(self : LunarDay) -> LunarFestival? {
   LunarFestival::from_ymd(self.get_year(), self.get_month(), self.get_day())
 }
 
@@ -237,11 +248,25 @@ pub fn LunarDay::get_festival(self : LunarDay) -> Option[LunarFestival] {
 // get_hours 当天的农历时辰列表
 pub fn LunarDay::get_hours(self : LunarDay) -> Array[LunarHour] {
   let l : Array[LunarHour] = []
-  let t = LunarHour::from_ymd_hms(self.get_year(), self.get_month(), self.get_day(), 0, 0, 0).unwrap()
+  let t = LunarHour::from_ymd_hms(
+    self.get_year(),
+    self.get_month(),
+    self.get_day(),
+    0,
+    0,
+    0,
+  ).unwrap()
   l.push(t)
   for i = 0; i < 24; i = i + 2 {
     l.push(
-      LunarHour::from_ymd_hms(self.get_year(), self.get_month(), self.get_day(), i + 1, 0, 0).unwrap(),
+      LunarHour::from_ymd_hms(
+        self.get_year(),
+        self.get_month(),
+        self.get_day(),
+        i + 1,
+        0,
+        0,
+      ).unwrap(),
     )
   }
   l
@@ -274,16 +299,16 @@ pub fn LunarDay::get_three_pillars(self : LunarDay) -> ThreePillars {
 }
 
 ///|
-impl Culture for LunarDay with get_name(self : LunarDay) -> String {
+impl Culture for LunarDay with fn get_name(self : LunarDay) -> String {
   lunar_day_names()[self.get_day() - 1]
 }
 
 ///|
-impl Show for LunarDay with to_string(self : LunarDay) -> String {
+impl Show for LunarDay with fn to_string(self : LunarDay) -> String {
   self.get_lunar_month().to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for LunarDay with next(self : LunarDay, n : Int) -> LunarDay {
+impl Tyme for LunarDay with fn next(self : LunarDay, n : Int) -> LunarDay {
   self.get_solar_day().next(n).get_lunar_day()
 }

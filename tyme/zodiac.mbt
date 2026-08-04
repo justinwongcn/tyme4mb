@@ -1,7 +1,10 @@
 ///|
 // zodiac_names 生肖名称
 pub fn zodiac_names() -> Array[String] {
-  ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"]
+  [
+    "鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗",
+    "猪",
+  ]
 }
 
 ///|
@@ -43,16 +46,16 @@ pub fn Zodiac::get_index(self : Zodiac) -> Int {
 }
 
 ///|
-impl Culture for Zodiac with get_name(self : Zodiac) -> String {
+impl Culture for Zodiac with fn get_name(self : Zodiac) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Zodiac with to_string(self : Zodiac) -> String {
+impl Show for Zodiac with fn to_string(self : Zodiac) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Zodiac with next(self : Zodiac, n : Int) -> Zodiac {
+impl Tyme for Zodiac with fn next(self : Zodiac, n : Int) -> Zodiac {
   Zodiac::from_index(self.loop_tyme.get_index() + n)
 }

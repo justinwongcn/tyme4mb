@@ -1,10 +1,9 @@
 ///|
 // DefaultChildLimitProvider 默认的童限计算
-pub struct DefaultChildLimitProvider {
-}
+pub struct DefaultChildLimitProvider {}
 
 ///|
-impl IChildLimitProvider for DefaultChildLimitProvider with get_info(
+impl IChildLimitProvider for DefaultChildLimitProvider with fn get_info(
   self : DefaultChildLimitProvider,
   birth_time : SolarTime,
   term : SolarTerm,
@@ -26,5 +25,7 @@ impl IChildLimitProvider for DefaultChildLimitProvider with get_info(
   seconds = seconds % 30
   // 1秒 = 2分，1秒/2=0.5秒 = 1分
   let minute = seconds * 2
-  AbstractChildLimitProvider::next(birth_time, year, month, day, hour, minute, 0)
+  AbstractChildLimitProvider::next(
+    birth_time, year, month, day, hour, minute, 0,
+  )
 }

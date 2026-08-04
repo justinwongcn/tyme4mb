@@ -2,9 +2,10 @@
 // hijri_day_names 回历日名称
 pub fn hijri_day_names() -> Array[String] {
   [
-    "1日", "2日", "3日", "4日", "5日", "6日", "7日", "8日", "9日", "10日", "11日", "12日", "13日", "14日", "15日",
-    "16日", "17日", "18日", "19日", "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日", "29日",
-    "30日",
+    "1日", "2日", "3日", "4日", "5日", "6日", "7日", "8日", "9日", "10日",
+    "11日", "12日", "13日", "14日", "15日", "16日", "17日", "18日", "19日",
+    "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日",
+    "29日", "30日",
   ]
 }
 
@@ -72,14 +73,9 @@ pub fn HijriDay::from_ymd(
 ) -> Result[HijriDay, String] {
   match HijriDay::validate(year, month, day) {
     Ok(_) =>
-      Ok(
-        HijriDay::{
-          day_unit: DayUnit::new(
-            MonthUnit::new(YearUnit::new(year), month),
-            day,
-          ),
-        },
-      )
+      Ok(HijriDay::{
+        day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
+      })
     Err(e) => Err(e)
   }
 }
@@ -133,14 +129,12 @@ pub fn HijriDay::subtract(self : HijriDay, target : HijriDay) -> Int {
 // get_julian_day 儒略日
 pub fn HijriDay::get_julian_day(self : HijriDay) -> JulianDay {
   JulianDay::from_julian_day(
-    (
-      AbstractCulture::floor_div(11 * self.get_year() + 3, 30) +
-      354 * self.get_year() +
-      30 * self.get_month() -
-      AbstractCulture::floor_div(self.get_month() - 1, 2) +
-      self.get_day() +
-      1948055
-    ).to_double(),
+    (AbstractCulture::floor_div(11 * self.get_year() + 3, 30) +
+    354 * self.get_year() +
+    30 * self.get_month() -
+    AbstractCulture::floor_div(self.get_month() - 1, 2) +
+    self.get_day() +
+    1948055).to_double(),
   )
 }
 
@@ -159,16 +153,16 @@ pub fn HijriDay::equals(self : HijriDay, target : HijriDay) -> Bool {
 }
 
 ///|
-impl Culture for HijriDay with get_name(self : HijriDay) -> String {
+impl Culture for HijriDay with fn get_name(self : HijriDay) -> String {
   hijri_day_names()[self.get_day() - 1]
 }
 
 ///|
-impl Show for HijriDay with to_string(self : HijriDay) -> String {
+impl Show for HijriDay with fn to_string(self : HijriDay) -> String {
   self.get_hijri_month().to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for HijriDay with next(self : HijriDay, n : Int) -> HijriDay {
+impl Tyme for HijriDay with fn next(self : HijriDay, n : Int) -> HijriDay {
   self.get_solar_day().next(n).get_hijri_day()
 }

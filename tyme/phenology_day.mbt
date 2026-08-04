@@ -28,11 +28,11 @@ pub fn PhenologyDay::get_day_index(self : PhenologyDay) -> Int {
 }
 
 ///|
-impl Culture for PhenologyDay with get_name(self : PhenologyDay) -> String {
-  self.abstract_culture_day.get_name()
+impl Culture for PhenologyDay with fn get_name(self : PhenologyDay) -> String {
+  Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for PhenologyDay with to_string(self : PhenologyDay) -> String {
-  self.abstract_culture_day.to_string()
+impl Show for PhenologyDay with fn to_string(self : PhenologyDay) -> String {
+  Show::to_string(self.abstract_culture_day)
 }

@@ -86,23 +86,22 @@ pub fn HijriYear::get_months(self : HijriYear) -> Array[HijriMonth] {
 pub fn HijriYear::get_first_month(self : HijriYear) -> HijriMonth {
   match HijriMonth::from_ym(self.get_year(), 1) {
     Ok(m) => m
-    Err(_) =>
-      HijriMonth::new(MonthUnit::new(YearUnit::new(self.get_year()), 1))
+    Err(_) => HijriMonth::new(MonthUnit::new(YearUnit::new(self.get_year()), 1))
   }
 }
 
 ///|
-impl Culture for HijriYear with get_name(self : HijriYear) -> String {
+impl Culture for HijriYear with fn get_name(self : HijriYear) -> String {
   "\{self.get_year()}年"
 }
 
 ///|
-impl Show for HijriYear with to_string(self : HijriYear) -> String {
+impl Show for HijriYear with fn to_string(self : HijriYear) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for HijriYear with next(self : HijriYear, n : Int) -> HijriYear {
+impl Tyme for HijriYear with fn next(self : HijriYear, n : Int) -> HijriYear {
   match HijriYear::from_year(self.get_year() + n) {
     Ok(y) => y
     Err(_) => self

@@ -1,6 +1,8 @@
 ///|
 // eight_char_provider 八字计算接口实现
-pub let eight_char_provider : &IEightCharProvider = DefaultEightCharProvider::{}
+pub let eight_char_provider : &IEightCharProvider = DefaultEightCharProvider::{
+
+}
 
 ///|
 // EightChar 八字
@@ -100,8 +102,12 @@ pub fn EightChar::get_fetal_breath(self : EightChar) -> SixtyCycle {
 pub fn EightChar::get_own_sign(self : EightChar) -> SixtyCycle {
   SixtyCycle::from_index(
     self.get_year().get_heaven_stem().get_index() * 12 +
-    (27 - self.get_month().get_earth_branch().get_index() -
-    self.hour.get_earth_branch().get_index()) % 12 +
+    (
+      27 -
+      self.get_month().get_earth_branch().get_index() -
+      self.hour.get_earth_branch().get_index()
+    ) %
+    12 +
     2,
   )
 }
@@ -111,8 +117,12 @@ pub fn EightChar::get_own_sign(self : EightChar) -> SixtyCycle {
 pub fn EightChar::get_body_sign(self : EightChar) -> SixtyCycle {
   SixtyCycle::from_index(
     self.get_year().get_heaven_stem().get_index() * 12 +
-    (11 + self.get_month().get_earth_branch().get_index() +
-    self.hour.get_earth_branch().get_index()) % 12 +
+    (
+      11 +
+      self.get_month().get_earth_branch().get_index() +
+      self.hour.get_earth_branch().get_index()
+    ) %
+    12 +
     2,
   )
 }
@@ -140,9 +150,9 @@ pub fn EightChar::get_solar_times(
   // 月地支距寅月的偏移值
   let m = month.get_earth_branch().next(-2).get_index()
   // 月天干要一致
-  if !HeavenStem::from_index(
-    (year.get_heaven_stem().get_index() + 1) * 2 + m,
-  ).equals(month.get_heaven_stem()) {
+  if !HeavenStem::from_index((year.get_heaven_stem().get_index() + 1) * 2 + m).equals(
+      month.get_heaven_stem(),
+    ) {
     return l
   }
   // 1年的立春是辛酉，序号57
@@ -167,7 +177,9 @@ pub fn EightChar::get_solar_times(
     if solar_time.get_year() >= start_year {
       // 日干支和节令干支的偏移值
       let solar_day = solar_time.get_solar_day()
-      let d = day.next(-solar_day.get_lunar_day().get_sixty_cycle().get_index()).get_index()
+      let d = day
+        .next(-solar_day.get_lunar_day().get_sixty_cycle().get_index())
+        .get_index()
       if d > 0 {
         let solar_day2 = solar_day.next(d)
         let mut time = SolarTime::from_ymdhms(
@@ -175,8 +187,16 @@ pub fn EightChar::get_solar_times(
           solar_day2.get_month(),
           solar_day2.get_day(),
           hours[0],
-          if d == 0 && hours[0] == solar_time.get_hour() { solar_time.get_minute() } else { 0 },
-          if d == 0 && hours[0] == solar_time.get_hour() { solar_time.get_second() } else { 0 },
+          if d == 0 && hours[0] == solar_time.get_hour() {
+            solar_time.get_minute()
+          } else {
+            0
+          },
+          if d == 0 && hours[0] == solar_time.get_hour() {
+            solar_time.get_second()
+          } else {
+            0
+          },
         ).unwrap()
         if d == 30 {
           time = time.next(-3600)
@@ -191,8 +211,16 @@ pub fn EightChar::get_solar_times(
             solar_day2.get_month(),
             solar_day2.get_day(),
             hours[1],
-            if d == 0 && hours[1] == solar_time.get_hour() { solar_time.get_minute() } else { 0 },
-            if d == 0 && hours[1] == solar_time.get_hour() { solar_time.get_second() } else { 0 },
+            if d == 0 && hours[1] == solar_time.get_hour() {
+              solar_time.get_minute()
+            } else {
+              0
+            },
+            if d == 0 && hours[1] == solar_time.get_hour() {
+              solar_time.get_second()
+            } else {
+              0
+            },
           ).unwrap()
           if d == 30 {
             time2 = time2.next(-3600)
@@ -207,8 +235,16 @@ pub fn EightChar::get_solar_times(
           solar_day.get_month(),
           solar_day.get_day(),
           hours[0],
-          if d == 0 && hours[0] == solar_time.get_hour() { solar_time.get_minute() } else { 0 },
-          if d == 0 && hours[0] == solar_time.get_hour() { solar_time.get_second() } else { 0 },
+          if d == 0 && hours[0] == solar_time.get_hour() {
+            solar_time.get_minute()
+          } else {
+            0
+          },
+          if d == 0 && hours[0] == solar_time.get_hour() {
+            solar_time.get_second()
+          } else {
+            0
+          },
         ).unwrap()
         if d == 30 {
           time = time.next(-3600)
@@ -222,8 +258,16 @@ pub fn EightChar::get_solar_times(
             solar_day.get_month(),
             solar_day.get_day(),
             hours[1],
-            if d == 0 && hours[1] == solar_time.get_hour() { solar_time.get_minute() } else { 0 },
-            if d == 0 && hours[1] == solar_time.get_hour() { solar_time.get_second() } else { 0 },
+            if d == 0 && hours[1] == solar_time.get_hour() {
+              solar_time.get_minute()
+            } else {
+              0
+            },
+            if d == 0 && hours[1] == solar_time.get_hour() {
+              solar_time.get_second()
+            } else {
+              0
+            },
           ).unwrap()
           if d == 30 {
             time2 = time2.next(-3600)
@@ -246,11 +290,11 @@ pub fn EightChar::equals(self : EightChar, target : EightChar) -> Bool {
 }
 
 ///|
-impl Culture for EightChar with get_name(self : EightChar) -> String {
+impl Culture for EightChar with fn get_name(self : EightChar) -> String {
   "\{self.three_pillars.to_string()} \{self.hour.to_string()}"
 }
 
 ///|
-impl Show for EightChar with to_string(self : EightChar) -> String {
+impl Show for EightChar with fn to_string(self : EightChar) -> String {
   self.get_name()
 }

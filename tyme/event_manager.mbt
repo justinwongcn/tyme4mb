@@ -28,7 +28,11 @@ pub fn EventManager::new() -> EventManager {
 
 ///|
 // update 新增或更新事件（返回新管理器，不可变风格）
-pub fn EventManager::update(self : EventManager, name : String, event : Event) -> EventManager {
+pub fn EventManager::update(
+  self : EventManager,
+  name : String,
+  event : Event,
+) -> EventManager {
   let key = if event.get_name() == "" { name } else { event.get_name() }
   let m = self.data
   m.set(key, event.get_data())
@@ -40,7 +44,7 @@ pub fn EventManager::update(self : EventManager, name : String, event : Event) -
 pub fn EventManager::update_data(
   self : EventManager,
   name : String,
-  data : String
+  data : String,
 ) -> Result[EventManager, String] {
   match Event::validate(data) {
     Err(e) => return Err(e)
@@ -61,7 +65,7 @@ pub fn EventManager::remove(self : EventManager, name : String) -> EventManager 
 
 ///|
 // from_name 从名称获取事件
-pub fn EventManager::from_name(self : EventManager, name : String) -> Option[Event] {
+pub fn EventManager::from_name(self : EventManager, name : String) -> Event? {
   match self.data.get(name) {
     None => None
     Some(d) =>
@@ -76,7 +80,7 @@ pub fn EventManager::from_name(self : EventManager, name : String) -> Option[Eve
 // all 所有事件
 pub fn EventManager::all(self : EventManager) -> Array[Event] {
   let l : Array[Event] = []
-  self.data.each(fn (k, v) {
+  self.data.each(fn(k, v) {
     match Event::new(k, v) {
       Ok(e) => l.push(e)
       Err(_) => ()
@@ -87,7 +91,10 @@ pub fn EventManager::all(self : EventManager) -> Array[Event] {
 
 ///|
 // from_solar_day 指定公历日的事件列表
-pub fn EventManager::from_solar_day(self : EventManager, d : SolarDay) -> Array[Event] {
+pub fn EventManager::from_solar_day(
+  self : EventManager,
+  d : SolarDay,
+) -> Array[Event] {
   let l : Array[Event] = []
   let all = self.all()
   for i = 0; i < all.length(); i = i + 1 {

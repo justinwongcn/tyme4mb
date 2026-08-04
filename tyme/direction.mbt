@@ -56,16 +56,16 @@ pub fn Direction::get_element(self : Direction) -> Element {
 }
 
 ///|
-impl Culture for Direction with get_name(self : Direction) -> String {
+impl Culture for Direction with fn get_name(self : Direction) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Direction with to_string(self : Direction) -> String {
+impl Show for Direction with fn to_string(self : Direction) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Direction with next(self : Direction, n : Int) -> Direction {
+impl Tyme for Direction with fn next(self : Direction, n : Int) -> Direction {
   Direction::from_index(self.loop_tyme.get_index() + n)
 }

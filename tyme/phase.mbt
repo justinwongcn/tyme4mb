@@ -9,18 +9,25 @@ pub struct Phase {
 ///|
 // phase_names 月相名称
 pub fn phase_names() -> Array[String] {
-  ["新月", "蛾眉月", "上弦月", "盈凸月", "满月", "亏凸月", "下弦月", "残月"]
+  [
+    "新月", "蛾眉月", "上弦月", "盈凸月", "满月", "亏凸月", "下弦月",
+    "残月",
+  ]
 }
 
 ///|
 // from_index 从年月索引构造
-pub fn Phase::from_index(lunar_year : Int, lunar_month : Int, index : Int) -> Phase {
+pub fn Phase::from_index(
+  lunar_year : Int,
+  lunar_month : Int,
+  index : Int,
+) -> Phase {
   let m = LunarMonth::from_ym(lunar_year, lunar_month).unwrap()
   let month = m.next(index / phase_names().length())
   Phase::{
-    loop_tyme : LoopTyme::from_index(phase_names(), index),
-    lunar_year : month.get_year(),
-    lunar_month : month.get_month_with_leap(),
+    loop_tyme: LoopTyme::from_index(phase_names(), index),
+    lunar_year: month.get_year(),
+    lunar_month: month.get_month_with_leap(),
   }
 }
 
@@ -29,19 +36,13 @@ pub fn Phase::from_index(lunar_year : Int, lunar_month : Int, index : Int) -> Ph
 pub fn Phase::from_name(
   lunar_year : Int,
   lunar_month : Int,
-  name : String
+  name : String,
 ) -> Result[Phase, String] {
   let p = match LoopTyme::from_name(phase_names(), name) {
     Err(e) => return Err(e)
     Ok(v) => v
   }
-  Ok(
-    Phase::{
-      loop_tyme : p,
-      lunar_year,
-      lunar_month,
-    },
-  )
+  Ok(Phase::{ loop_tyme: p, lunar_year, lunar_month })
 }
 
 ///|
@@ -71,18 +72,27 @@ fn Phase::get_start_solar_time(self : Phase) -> SolarTime {
   ).to_int()
   let mut i = 0
   let jd = J2000.to_double() + OneThird
-  let d = LunarDay::from_ymd(self.lunar_year, self.lunar_month, 1).unwrap().get_solar_day()
+  let d = LunarDay::from_ymd(self.lunar_year, self.lunar_month, 1)
+    .unwrap()
+    .get_solar_day()
   while true {
     let t = msa_lon_t((n + i).to_double() * Pi2) * 36525.0
-    if not(JulianDay::from_julian_day(jd + t - dt_t(t)).get_solar_day().is_before(d)) {
+    if !JulianDay::from_julian_day(jd + t - dt_t(t))
+      .get_solar_day()
+      .is_before(d) {
       break
     }
     i = i + 1
   }
   let arr : Array[Int] = [0, 90, 180, 270]
   let t = msa_lon_t(
-    ((n + i).to_double() + arr[self.loop_tyme.get_index() / 2].to_double() / 360.0) * Pi2,
-  ) * 36525.0
+      (
+        (n + i).to_double() +
+        arr[self.loop_tyme.get_index() / 2].to_double() / 360.0
+      ) *
+      Pi2,
+    ) *
+    36525.0
   JulianDay::from_julian_day(jd + t - dt_t(t)).get_solar_time()
 }
 
@@ -131,19 +141,19 @@ pub fn Phase::get_lunar_month(self : Phase) -> Int {
 }
 
 ///|
-impl Culture for Phase with get_name(self : Phase) -> String {
+impl Culture for Phase with fn get_name(self : Phase) -> String {
   self.get_name()
 }
 
 ///|
-impl Show for Phase with to_string(self : Phase) -> String {
+impl Show for Phase with fn to_string(self : Phase) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for Phase with next(
-  self : Phase,
-  n : Int,
-) -> Phase {
+impl Tyme for Phase with fn next(self : Phase, n : Int) -> Phase {
   self.next(n)
 }
+
+///|
+extend Phase with Show::{to_string}

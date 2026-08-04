@@ -1,7 +1,10 @@
 ///|
 // LandNames 九野名称
 pub fn land_names() -> Array[String] {
-  ["玄天", "朱天", "苍天", "阳天", "钧天", "幽天", "颢天", "变天", "炎天"]
+  [
+    "玄天", "朱天", "苍天", "阳天", "钧天", "幽天", "颢天", "变天",
+    "炎天",
+  ]
 }
 
 ///|
@@ -49,16 +52,16 @@ pub fn Land::get_direction(self : Land) -> Direction {
 }
 
 ///|
-impl Culture for Land with get_name(self : Land) -> String {
+impl Culture for Land with fn get_name(self : Land) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Land with to_string(self : Land) -> String {
+impl Show for Land with fn to_string(self : Land) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Land with next(self : Land, n : Int) -> Land {
+impl Tyme for Land with fn next(self : Land, n : Int) -> Land {
   Land::from_index(self.loop_tyme.get_index() + n)
 }
