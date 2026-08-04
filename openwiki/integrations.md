@@ -1,4 +1,10 @@
 ---
+type: "参考"
+title: "集成点"
+openwiki_generated: true
+---
+
+---
 title: 集成点
 type: page
 description: API 参考、浏览器/服务端集成示例和错误处理指南

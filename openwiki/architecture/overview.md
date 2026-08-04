@@ -1,4 +1,10 @@
 ---
+type: "参考"
+title: "架构概览"
+openwiki_generated: true
+---
+
+---
 title: 架构概览
 type: page
 description: Tyme4MB 系统架构设计，包括层次结构、核心抽象和模块说明
@@ -160,6 +166,11 @@ pub struct SixtyCycle {
 | 月相 | `phase.mbt`, `phase_day.mbt` | 新月/蛾眉月/上弦月等月相计算 |
 | 胎神 | `fetus_month.mbt` | 逐月胎神（正十二月在床房，二三九十门户中等） |
 | 法定假日 | `legal_holiday.mbt` | 中国法定节假日及调休安排（2001年至今） |
+| 宫 | `zone.mbt` | 四方（东/南/西/北）及对应神兽 |
+| 十神 | `ten_star.mbt` | 天干生克关系（比肩/劫财/食神等） |
+| 星期 | `week.mbt` | 周日到周六，可关联七曜 |
+| 三候 | `three_phenology.mbt` | 每节气三候（初候/二候/三候） |
+| 节气日 | `solar_term_day.mbt` | 节气第几天索引 |
 
 ## 数据编码策略
 

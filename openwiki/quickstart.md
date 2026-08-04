@@ -1,4 +1,10 @@
 ---
+type: "参考"
+title: "Tyme4MB — 快速开始"
+openwiki_generated: true
+---
+
+---
 title: 快速开始
 type: page
 description: Tyme4MB 项目入门指南，包含核心概念、快速上手和项目结构
@@ -34,6 +40,11 @@ description: Tyme4MB 项目入门指南，包含核心概念、快速上手和�
 | 六曜 | 孔明六曜星 | `SixStar` |
 | 三元 | 上元/中元/下元 | `Sixty` |
 | 灶马头 | 农历年运势 | `KitchenGodSteed` |
+| 十神 | 天干生克关系 | `TenStar` |
+| 宫 | 四方神兽方位 | `Zone` |
+| 星期 | 周日到周六 | `Week` |
+| 三候 | 节气三候 | `ThreePhenology` |
+| 节气日 | 节气第几天 | `SolarTermDay` |
 
 ## 快速上手
 
