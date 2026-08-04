@@ -1,6 +1,6 @@
 {
   "is-main": true,
   "import": [
-    "6tail/tyme4mb/tyme"
+    "justinwongcn/tyme4mb/tyme"
   ]
 }

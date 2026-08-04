@@ -91,7 +91,7 @@ jobs:
 项目使用 `moon.mod` 文件管理版本：
 
 ```
-name = "6tail/tyme4mb"
+name = "justinwongcn/tyme4mb"
 version = "0.1.0"
 ```
 
@@ -158,10 +158,10 @@ import tyme.solar_term.{SolarTerm}
 
 ### 构建失败
 
-**问题**：`mbt build` 报错
+**问题**：`moon build` 报错
 
 **排查步骤**：
-1. 检查 MoonBit 工具链版本：`mbt --version`
+1. 检查 MoonBit 工具链版本：`moon --version`
 2. 清理构建缓存：`rm -rf _build/`
 3. 重新构建：`moon build tyme`
 
