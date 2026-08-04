@@ -1,4 +1,5 @@
 // J2000 2000年儒略日数(2000-1-1 12:00:00 UTC)
+
 ///|
 pub const J2000 : Int = 2451545
 
@@ -21,7 +22,7 @@ extend JulianDay with Tyme::{next}
 ///|
 // from_julian_day 从儒略日构造
 pub fn JulianDay::from_julian_day(day : Double) -> JulianDay {
-  { abstract_tyme : AbstractTyme::{}, day }
+  { abstract_tyme: AbstractTyme::{  }, day }
 }
 
 ///|
@@ -32,9 +33,11 @@ pub fn JulianDay::from_ymdhms(
   day : Int,
   hour : Int,
   minute : Int,
-  second : Int
+  second : Int,
 ) -> JulianDay {
-  let d = day.to_double() + ((second.to_double() / 60.0 + minute.to_double()) / 60.0 + hour.to_double()) / 24.0
+  let d = day.to_double() +
+    ((second.to_double() / 60.0 + minute.to_double()) / 60.0 + hour.to_double()) /
+    24.0
   let mut y = year
   let mut m = month
   let mut n = 0
@@ -47,10 +50,11 @@ pub fn JulianDay::from_ymdhms(
     n = (y.to_double() * 0.01).to_int()
     n = 2 - n + (n.to_double() * 0.25).to_int()
   }
-  let jd =
-    (365.25 * (y + 4716).to_double()).to_int().to_double() +
+  let jd = (365.25 * (y + 4716).to_double()).to_int().to_double() +
     (30.6001 * (m + 1).to_double()).to_int().to_double() +
-    d + n.to_double() - 1524.5
+    d +
+    n.to_double() -
+    1524.5
   JulianDay::from_julian_day(jd)
 }
 
@@ -140,16 +144,16 @@ pub fn JulianDay::get_solar_day(self : JulianDay) -> SolarDay {
 // 二者与 SolarTime.get_solar_day / SolarDay.next 同回合译出。
 
 ///|
-impl Culture for JulianDay with get_name(self : JulianDay) -> String {
+impl Culture for JulianDay with fn get_name(self : JulianDay) -> String {
   "\{self.day}"
 }
 
 ///|
-impl Show for JulianDay with to_string(self : JulianDay) -> String {
+impl Show for JulianDay with fn to_string(self : JulianDay) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for JulianDay with next(self : JulianDay, n : Int) -> JulianDay {
+impl Tyme for JulianDay with fn next(self : JulianDay, n : Int) -> JulianDay {
   JulianDay::from_julian_day(self.day + n.to_double())
 }

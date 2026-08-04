@@ -44,16 +44,14 @@ pub fn LunarHour::from_ymd_hms(
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok(
-    LunarHour::{
-      second_unit: SecondUnit::new(
-        DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
-        hour,
-        minute,
-        second,
-      ),
-    },
-  )
+  Ok(LunarHour::{
+    second_unit: SecondUnit::new(
+      DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
+      hour,
+      minute,
+      second,
+    ),
+  })
 }
 
 ///|
@@ -140,8 +138,9 @@ pub fn LunarHour::get_sixty_cycle(self : LunarHour) -> SixtyCycle {
     d = d.next(1)
   }
   let name = HeavenStem::from_index(
-    d.get_heaven_stem().get_index() % 5 * 2 + earth_branch_index,
-  ).get_name() + EarthBranch::from_index(earth_branch_index).get_name()
+      d.get_heaven_stem().get_index() % 5 * 2 + earth_branch_index,
+    ).get_name() +
+    EarthBranch::from_index(earth_branch_index).get_name()
   SixtyCycle::from_name(name).unwrap()
 }
 
@@ -150,7 +149,11 @@ pub fn LunarHour::get_sixty_cycle(self : LunarHour) -> SixtyCycle {
 pub fn LunarHour::get_twelve_star(self : LunarHour) -> TwelveStar {
   TwelveStar::from_index(
     self.get_sixty_cycle().get_earth_branch().get_index() +
-    (8 - self.get_sixty_cycle_hour().get_day().get_earth_branch().get_index() % 6) * 2,
+    (
+      8 -
+      self.get_sixty_cycle_hour().get_day().get_earth_branch().get_index() % 6
+    ) *
+    2,
   )
 }
 
@@ -161,7 +164,8 @@ pub fn LunarHour::get_nine_star(self : LunarHour) -> NineStar {
   let solar = d.get_solar_day()
   let dong_zhi = SolarTerm::from_index(solar.get_year(), 0)
   let earth_branch_index = self.get_index_in_day() % 12
-  let mut index = 8 - 3 * (d.get_sixty_cycle().get_earth_branch().get_index() % 3)
+  let mut index = 8 -
+    3 * (d.get_sixty_cycle().get_earth_branch().get_index() % 3)
   if !solar.is_before(dong_zhi.get_julian_day().get_solar_day()) &&
     solar.is_before(dong_zhi.next(12).get_julian_day().get_solar_day()) {
     index = 8 + earth_branch_index - index
@@ -222,9 +226,7 @@ pub fn LunarHour::get_recommends(
 
 ///|
 // get_avoids 忌
-pub fn LunarHour::get_avoids(
-  self : LunarHour,
-) -> Result[Array[Taboo], String] {
+pub fn LunarHour::get_avoids(self : LunarHour) -> Result[Array[Taboo], String] {
   Taboo::get_hour_avoids(
     self.get_sixty_cycle_hour().get_day(),
     self.get_sixty_cycle(),
@@ -244,17 +246,17 @@ pub fn LunarHour::get_eight_char(self : LunarHour) -> EightChar {
 }
 
 ///|
-impl Culture for LunarHour with get_name(self : LunarHour) -> String {
+impl Culture for LunarHour with fn get_name(self : LunarHour) -> String {
   "\{EarthBranch::from_index(self.get_index_in_day()).get_name()}时"
 }
 
 ///|
-impl Show for LunarHour with to_string(self : LunarHour) -> String {
+impl Show for LunarHour with fn to_string(self : LunarHour) -> String {
   self.get_lunar_day().to_string() + self.get_sixty_cycle().get_name() + "时"
 }
 
 ///|
-impl Tyme for LunarHour with next(self : LunarHour, n : Int) -> LunarHour {
+impl Tyme for LunarHour with fn next(self : LunarHour, n : Int) -> LunarHour {
   if n == 0 {
     return LunarHour::from_ymd_hms(
       self.get_year(),

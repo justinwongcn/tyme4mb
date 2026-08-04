@@ -9,5 +9,9 @@ test "sixty_cycle_0" {
 ///|
 test "sixty_cycle_1" {
   let o = SixtyCycle::from_name("辛酉").unwrap()
-  expect_eq(o.get_sound().get_name(), "石榴木", "SixtyCycle.FromName(辛酉).GetSound().GetName()")
+  expect_eq(
+    o.get_sound().get_name(),
+    "石榴木",
+    "SixtyCycle.FromName(辛酉).GetSound().GetName()",
+  )
 }

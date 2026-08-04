@@ -23,11 +23,17 @@ pub fn PhaseDay::get_day_index(self : PhaseDay) -> Int {
 }
 
 ///|
-impl Culture for PhaseDay with get_name(self : PhaseDay) -> String {
-  self.day.get_culture().get_name()
+impl Culture for PhaseDay with fn get_name(self : PhaseDay) -> String {
+  Culture::get_name(self.day.get_culture())
 }
 
 ///|
-impl Show for PhaseDay with to_string(self : PhaseDay) -> String {
-  self.day.to_string()
+impl Show for PhaseDay with fn to_string(self : PhaseDay) -> String {
+  Show::to_string(self.day)
 }
+
+///|
+extend PhaseDay with Show::{to_string}
+
+///|
+extend PhaseDay with Culture::{get_name}

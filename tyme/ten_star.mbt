@@ -1,7 +1,10 @@
 ///|
 // ten_star_names 十神名称
 pub fn ten_star_names() -> Array[String] {
-  ["比肩", "劫财", "食神", "伤官", "偏财", "正财", "七杀", "正官", "偏印", "正印"]
+  [
+    "比肩", "劫财", "食神", "伤官", "偏财", "正财", "七杀", "正官",
+    "偏印", "正印",
+  ]
 }
 
 ///|
@@ -38,16 +41,16 @@ pub fn TenStar::get_index(self : TenStar) -> Int {
 }
 
 ///|
-impl Culture for TenStar with get_name(self : TenStar) -> String {
+impl Culture for TenStar with fn get_name(self : TenStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for TenStar with to_string(self : TenStar) -> String {
+impl Show for TenStar with fn to_string(self : TenStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for TenStar with next(self : TenStar, n : Int) -> TenStar {
+impl Tyme for TenStar with fn next(self : TenStar, n : Int) -> TenStar {
   TenStar::from_index(self.loop_tyme.get_index() + n)
 }

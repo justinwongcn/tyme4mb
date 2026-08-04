@@ -1,7 +1,6 @@
 ///|
 // AbstractCulture 传统文化抽象
-pub struct AbstractCulture {
-}
+pub struct AbstractCulture {}
 
 ///|
 extend AbstractCulture with Culture::{get_name}
@@ -32,16 +31,19 @@ pub fn AbstractCulture::floor_div(x : Int, y : Int) -> Int {
 }
 
 ///|
-impl Culture for AbstractCulture with get_name(_ : AbstractCulture) -> String {
+impl Culture for AbstractCulture with fn get_name(_ : AbstractCulture) -> String {
   ""
 }
 
 ///|
-impl Show for AbstractCulture with to_string(self : AbstractCulture) -> String {
+impl Show for AbstractCulture with fn to_string(self : AbstractCulture) -> String {
   self.get_name()
 }
 
 ///|
-pub fn AbstractCulture::equals(self : AbstractCulture, target : AbstractCulture) -> Bool {
+pub fn AbstractCulture::equals(
+  self : AbstractCulture,
+  target : AbstractCulture,
+) -> Bool {
   self.to_string() == target.to_string()
 }

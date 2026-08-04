@@ -57,16 +57,16 @@ pub fn Fortune::get_sixty_cycle(self : Fortune) -> SixtyCycle {
 }
 
 ///|
-impl Culture for Fortune with get_name(self : Fortune) -> String {
+impl Culture for Fortune with fn get_name(self : Fortune) -> String {
   self.get_sixty_cycle().get_name()
 }
 
 ///|
-impl Show for Fortune with to_string(self : Fortune) -> String {
+impl Show for Fortune with fn to_string(self : Fortune) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for Fortune with next(self : Fortune, n : Int) -> Fortune {
+impl Tyme for Fortune with fn next(self : Fortune, n : Int) -> Fortune {
   Fortune::from_child_limit(self.child_limit, self.index + n)
 }

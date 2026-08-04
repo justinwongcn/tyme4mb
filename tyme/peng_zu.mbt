@@ -15,21 +15,23 @@ extend PengZu with Show::{to_string}
 pub fn PengZu::from_sixty_cycle(sixty_cycle : SixtyCycle) -> PengZu {
   PengZu::{
     peng_zu_heaven_stem: PengZuHeavenStem::from_index(
-      sixty_cycle.get_heaven_stem().get_index()
+      sixty_cycle.get_heaven_stem().get_index(),
     ),
     peng_zu_earth_branch: PengZuEarthBranch::from_index(
-      sixty_cycle.get_earth_branch().get_index()
-    )
+      sixty_cycle.get_earth_branch().get_index(),
+    ),
   }
 }
 
 ///|
-impl Culture for PengZu with get_name(self : PengZu) -> String {
-  self.peng_zu_heaven_stem.to_string() + " " + self.peng_zu_earth_branch.to_string()
+impl Culture for PengZu with fn get_name(self : PengZu) -> String {
+  self.peng_zu_heaven_stem.to_string() +
+  " " +
+  self.peng_zu_earth_branch.to_string()
 }
 
 ///|
-impl Show for PengZu with to_string(self : PengZu) -> String {
+impl Show for PengZu with fn to_string(self : PengZu) -> String {
   self.get_name()
 }
 

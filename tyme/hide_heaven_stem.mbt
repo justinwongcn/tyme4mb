@@ -14,7 +14,7 @@ extend HideHeavenStem with Show::{to_string}
 ///|
 pub fn HideHeavenStem::new(
   heaven_stem_name : String,
-  hide_heaven_stem_type : HideHeavenStemType
+  hide_heaven_stem_type : HideHeavenStemType,
 ) -> Result[HideHeavenStem, String] {
   match HeavenStem::from_name(heaven_stem_name) {
     Ok(h) => Ok(HideHeavenStem::{ heaven_stem: h, hide_heaven_stem_type })
@@ -25,11 +25,11 @@ pub fn HideHeavenStem::new(
 ///|
 pub fn HideHeavenStem::from_index(
   heaven_stem_index : Int,
-  hide_heaven_stem_type : HideHeavenStemType
+  hide_heaven_stem_type : HideHeavenStemType,
 ) -> HideHeavenStem {
   HideHeavenStem::{
     heaven_stem: HeavenStem::from_index(heaven_stem_index),
-    hide_heaven_stem_type: hide_heaven_stem_type
+    hide_heaven_stem_type,
   }
 }
 
@@ -46,11 +46,11 @@ pub fn HideHeavenStem::get_type(self : HideHeavenStem) -> HideHeavenStemType {
 }
 
 ///|
-impl Culture for HideHeavenStem with get_name(self : HideHeavenStem) -> String {
+impl Culture for HideHeavenStem with fn get_name(self : HideHeavenStem) -> String {
   self.heaven_stem.get_name()
 }
 
 ///|
-impl Show for HideHeavenStem with to_string(self : HideHeavenStem) -> String {
+impl Show for HideHeavenStem with fn to_string(self : HideHeavenStem) -> String {
   self.get_name()
 }

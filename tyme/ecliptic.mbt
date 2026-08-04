@@ -44,16 +44,16 @@ pub fn Ecliptic::get_luck(self : Ecliptic) -> Luck {
 }
 
 ///|
-impl Culture for Ecliptic with get_name(self : Ecliptic) -> String {
+impl Culture for Ecliptic with fn get_name(self : Ecliptic) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Ecliptic with to_string(self : Ecliptic) -> String {
+impl Show for Ecliptic with fn to_string(self : Ecliptic) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Ecliptic with next(self : Ecliptic, n : Int) -> Ecliptic {
+impl Tyme for Ecliptic with fn next(self : Ecliptic, n : Int) -> Ecliptic {
   Ecliptic::from_index(self.loop_tyme.get_index() + n)
 }

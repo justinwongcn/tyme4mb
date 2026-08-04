@@ -12,7 +12,12 @@ extend SolarWeek with Show::{to_string}
 
 ///|
 // validate 校验
-pub fn SolarWeek::validate(year : Int, month : Int, index : Int, start : Int) -> Result[Unit, String] {
+pub fn SolarWeek::validate(
+  year : Int,
+  month : Int,
+  index : Int,
+  start : Int,
+) -> Result[Unit, String] {
   match WeekUnit::validate(year, month, index, start) {
     Err(e) => return Err(e)
     Ok(_) => ()
@@ -21,7 +26,12 @@ pub fn SolarWeek::validate(year : Int, month : Int, index : Int, start : Int) ->
     Err(e) => return Err(e)
     Ok(m) =>
       if index >= m.get_week_count(start) {
-        return Err("illegal solar week index: " + index.to_string() + " in month: " + m.to_string())
+        return Err(
+          "illegal solar week index: " +
+          index.to_string() +
+          " in month: " +
+          m.to_string(),
+        )
       }
   }
   Ok(())
@@ -29,16 +39,23 @@ pub fn SolarWeek::validate(year : Int, month : Int, index : Int, start : Int) ->
 
 ///|
 // from_ym 从年月索引与起始星期构造
-pub fn SolarWeek::from_ym(year : Int, month : Int, index : Int, start : Int) -> Result[SolarWeek, String] {
+pub fn SolarWeek::from_ym(
+  year : Int,
+  month : Int,
+  index : Int,
+  start : Int,
+) -> Result[SolarWeek, String] {
   match SolarWeek::validate(year, month, index, start) {
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok(
-    SolarWeek::{
-      week_unit : WeekUnit::new(MonthUnit::new(YearUnit::new(year), month), index, start),
-    },
-  )
+  Ok(SolarWeek::{
+    week_unit: WeekUnit::new(
+      MonthUnit::new(YearUnit::new(year), month),
+      index,
+      start,
+    ),
+  })
 }
 
 ///|
@@ -77,7 +94,7 @@ pub fn SolarWeek::get_index_in_year(self : SolarWeek) -> Int {
   let mut i = 0
   let first_day = self.get_first_day()
   let mut w = SolarWeek::from_ym(self.get_year(), 1, 0, self.week_unit.start).unwrap()
-  while not (w.get_first_day().equals(first_day)) {
+  while !w.get_first_day().equals(first_day) {
     i = i + 1
     w = w.next(1)
   }
@@ -90,7 +107,10 @@ pub fn SolarWeek::get_first_day(self : SolarWeek) -> SolarDay {
   let first_day = SolarDay::from_ymd(self.get_year(), self.get_month(), 1).unwrap()
   first_day.next(
     self.week_unit.get_index() * 7 -
-      AbstractCulture::index_of(first_day.get_week().get_index() - self.week_unit.start, 7),
+    AbstractCulture::index_of(
+      first_day.get_week().get_index() - self.week_unit.start,
+      7,
+    ),
   )
 }
 
@@ -139,11 +159,11 @@ pub fn SolarWeek::equals(self : SolarWeek, target : SolarWeek) -> Bool {
 }
 
 ///|
-impl Culture for SolarWeek with get_name(self : SolarWeek) -> String {
+impl Culture for SolarWeek with fn get_name(self : SolarWeek) -> String {
   week_unit_names()[self.week_unit.get_index()]
 }
 
 ///|
-impl Show for SolarWeek with to_string(self : SolarWeek) -> String {
+impl Show for SolarWeek with fn to_string(self : SolarWeek) -> String {
   self.get_solar_month().to_string() + self.get_name()
 }

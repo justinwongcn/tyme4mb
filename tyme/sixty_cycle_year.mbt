@@ -16,13 +16,11 @@ extend SixtyCycleYear with Tyme::{next}
 
 ///|
 // from_year 从年构造
-pub fn SixtyCycleYear::from_year(
-  year : Int,
-) -> Result[SixtyCycleYear, String] {
+pub fn SixtyCycleYear::from_year(year : Int) -> Result[SixtyCycleYear, String] {
   if year < -1 || year > 9999 {
     return Err("illegal sixty cycle year: " + year.to_string())
   }
-  Ok(SixtyCycleYear::{ year })
+  Ok(SixtyCycleYear::{ year, })
 }
 
 ///|
@@ -49,7 +47,8 @@ pub fn SixtyCycleYear::get_twenty(self : SixtyCycleYear) -> Twenty {
 // get_nine_star 九星
 pub fn SixtyCycleYear::get_nine_star(self : SixtyCycleYear) -> NineStar {
   NineStar::from_index(
-    63 + self.get_twenty().get_sixty().get_index() * 3 -
+    63 +
+    self.get_twenty().get_sixty().get_index() * 3 -
     self.get_sixty_cycle().get_index(),
   )
 }
@@ -60,18 +59,24 @@ pub fn SixtyCycleYear::get_jupiter_direction(
   self : SixtyCycleYear,
 ) -> Direction {
   let arr = [0, 7, 7, 2, 3, 3, 8, 1, 1, 6, 0, 0]
-  Direction::from_index(arr[self.get_sixty_cycle().get_earth_branch().get_index()])
+  Direction::from_index(
+    arr[self.get_sixty_cycle().get_earth_branch().get_index()],
+  )
 }
 
 ///|
 // get_first_month 首月（五虎遁：甲己之年丙作首，乙庚之岁戊为头，丙辛必定寻庚起，丁壬壬位顺行流，若问戊癸何方发，甲寅之上好追求。）
-pub fn SixtyCycleYear::get_first_month(self : SixtyCycleYear) -> SixtyCycleMonth {
+pub fn SixtyCycleYear::get_first_month(
+  self : SixtyCycleYear,
+) -> SixtyCycleMonth {
   SixtyCycleMonth::new(self, SixtyCycle::from_index(self.year * 12 - 46))
 }
 
 ///|
 // get_months 干支月列表
-pub fn SixtyCycleYear::get_months(self : SixtyCycleYear) -> Array[SixtyCycleMonth] {
+pub fn SixtyCycleYear::get_months(
+  self : SixtyCycleYear,
+) -> Array[SixtyCycleMonth] {
   let l : Array[SixtyCycleMonth] = []
   let m = self.get_first_month()
   l.push(m)
@@ -82,20 +87,17 @@ pub fn SixtyCycleYear::get_months(self : SixtyCycleYear) -> Array[SixtyCycleMont
 }
 
 ///|
-impl Culture for SixtyCycleYear with get_name(self : SixtyCycleYear) -> String {
+impl Culture for SixtyCycleYear with fn get_name(self : SixtyCycleYear) -> String {
   "\{self.get_sixty_cycle().to_string()}年"
 }
 
 ///|
-impl Show for SixtyCycleYear with to_string(self : SixtyCycleYear) -> String {
+impl Show for SixtyCycleYear with fn to_string(self : SixtyCycleYear) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for SixtyCycleYear with next(
-  self : SixtyCycleYear,
-  n : Int,
-) -> SixtyCycleYear {
+impl Tyme for SixtyCycleYear with fn next(self : SixtyCycleYear, n : Int) -> SixtyCycleYear {
   match SixtyCycleYear::from_year(self.year + n) {
     Ok(y) => y
     Err(_) => self

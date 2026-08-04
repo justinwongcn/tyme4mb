@@ -53,16 +53,16 @@ pub fn Zone::get_beast(self : Zone) -> Beast {
 }
 
 ///|
-impl Culture for Zone with get_name(self : Zone) -> String {
+impl Culture for Zone with fn get_name(self : Zone) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Zone with to_string(self : Zone) -> String {
+impl Show for Zone with fn to_string(self : Zone) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Zone with next(self : Zone, n : Int) -> Zone {
+impl Tyme for Zone with fn next(self : Zone, n : Int) -> Zone {
   Zone::from_index(self.loop_tyme.get_index() + n)
 }

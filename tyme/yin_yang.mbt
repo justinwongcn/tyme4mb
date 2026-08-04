@@ -1,7 +1,7 @@
 ///|
 // YinYang 阴阳
 pub(all) enum YinYang {
-  Yin  // 阴
+  Yin // 阴
   Yang // 阳
 }
 
@@ -30,6 +30,9 @@ pub fn YinYang::get_name(self : YinYang) -> String {
 }
 
 ///|
-impl Show for YinYang with to_string(self : YinYang) -> String {
+impl Show for YinYang with fn to_string(self : YinYang) -> String {
   self.get_name()
 }
+
+///|
+extend YinYang with Show::{to_string}

@@ -44,16 +44,16 @@ pub fn Beast::get_zone(self : Beast) -> Zone {
 }
 
 ///|
-impl Culture for Beast with get_name(self : Beast) -> String {
+impl Culture for Beast with fn get_name(self : Beast) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Beast with to_string(self : Beast) -> String {
+impl Show for Beast with fn to_string(self : Beast) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Beast with next(self : Beast, n : Int) -> Beast {
+impl Tyme for Beast with fn next(self : Beast, n : Int) -> Beast {
   Beast::from_index(self.loop_tyme.get_index() + n)
 }

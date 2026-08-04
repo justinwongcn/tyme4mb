@@ -85,19 +85,16 @@ pub fn DecadeFortune::get_start_fortune(self : DecadeFortune) -> Fortune {
 }
 
 ///|
-impl Culture for DecadeFortune with get_name(self : DecadeFortune) -> String {
+impl Culture for DecadeFortune with fn get_name(self : DecadeFortune) -> String {
   self.get_sixty_cycle().get_name()
 }
 
 ///|
-impl Show for DecadeFortune with to_string(self : DecadeFortune) -> String {
+impl Show for DecadeFortune with fn to_string(self : DecadeFortune) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for DecadeFortune with next(
-  self : DecadeFortune,
-  n : Int,
-) -> DecadeFortune {
+impl Tyme for DecadeFortune with fn next(self : DecadeFortune, n : Int) -> DecadeFortune {
   DecadeFortune::from_child_limit(self.child_limit, self.index + n)
 }

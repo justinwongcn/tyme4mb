@@ -1,10 +1,9 @@
 ///|
 // China95ChildLimitProvider 元亨利贞的童限计算
-pub struct China95ChildLimitProvider {
-}
+pub struct China95ChildLimitProvider {}
 
 ///|
-impl IChildLimitProvider for China95ChildLimitProvider with get_info(
+impl IChildLimitProvider for China95ChildLimitProvider with fn get_info(
   self : China95ChildLimitProvider,
   birth_time : SolarTime,
   term : SolarTerm,

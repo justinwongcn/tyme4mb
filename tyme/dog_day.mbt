@@ -28,11 +28,11 @@ pub fn DogDay::get_day_index(self : DogDay) -> Int {
 }
 
 ///|
-impl Culture for DogDay with get_name(self : DogDay) -> String {
-  self.abstract_culture_day.get_name()
+impl Culture for DogDay with fn get_name(self : DogDay) -> String {
+  Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for DogDay with to_string(self : DogDay) -> String {
-  self.abstract_culture_day.to_string()
+impl Show for DogDay with fn to_string(self : DogDay) -> String {
+  Show::to_string(self.abstract_culture_day)
 }

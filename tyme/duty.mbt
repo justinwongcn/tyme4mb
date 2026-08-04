@@ -1,7 +1,10 @@
 ///|
 // duty_names 建除十二值神名称
 pub fn duty_names() -> Array[String] {
-  ["建", "除", "满", "平", "定", "执", "破", "危", "成", "收", "开", "闭"]
+  [
+    "建", "除", "满", "平", "定", "执", "破", "危", "成", "收", "开",
+    "闭",
+  ]
 }
 
 ///|
@@ -38,16 +41,16 @@ pub fn Duty::get_index(self : Duty) -> Int {
 }
 
 ///|
-impl Culture for Duty with get_name(self : Duty) -> String {
+impl Culture for Duty with fn get_name(self : Duty) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Duty with to_string(self : Duty) -> String {
+impl Show for Duty with fn to_string(self : Duty) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Duty with next(self : Duty, n : Int) -> Duty {
+impl Tyme for Duty with fn next(self : Duty, n : Int) -> Duty {
   Duty::from_index(self.loop_tyme.get_index() + n)
 }

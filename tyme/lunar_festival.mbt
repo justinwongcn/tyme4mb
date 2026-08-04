@@ -7,7 +7,10 @@ pub struct LunarFestival {
 ///|
 // lunar_festival_names 农历传统节日名称
 pub fn lunar_festival_names() -> Array[String] {
-  ["春节", "元宵节", "龙头节", "上巳节", "清明节", "端午节", "七夕节", "中元节", "中秋节", "重阳节", "冬至节", "腊八节", "除夕"]
+  [
+    "春节", "元宵节", "龙头节", "上巳节", "清明节", "端午节", "七夕节",
+    "中元节", "中秋节", "重阳节", "冬至节", "腊八节", "除夕",
+  ]
 }
 
 ///|
@@ -16,20 +19,25 @@ pub let lunar_festival_data : String = "2VV__0002Vj__0002WW__0002XX__0003b___000
 
 ///|
 // new 构造
-pub fn LunarFestival::new(index : Int, event : Event, day : LunarDay) -> LunarFestival {
-  LunarFestival::{
-    festival: AbstractFestival::new(index, event, day.day_unit),
-  }
+pub fn LunarFestival::new(
+  index : Int,
+  event : Event,
+  day : LunarDay,
+) -> LunarFestival {
+  LunarFestival::{ festival: AbstractFestival::new(index, event, day.day_unit) }
 }
 
 ///|
 // from_index 从索引构造
-pub fn LunarFestival::from_index(year : Int, index : Int) -> Option[LunarFestival] {
+pub fn LunarFestival::from_index(year : Int, index : Int) -> LunarFestival? {
   if index < 0 || index >= lunar_festival_names().length() {
     return None
   }
   let start = index * 8
-  let e = Event::new(lunar_festival_names()[index], "@" + (lunar_festival_data[start:start + 8]).to_owned()).unwrap()
+  let e = Event::new(
+    lunar_festival_names()[index],
+    "@" + lunar_festival_data[start:start + 8].to_owned(),
+  ).unwrap()
   match e.get_type() {
     LunarDay => {
       let (y, m) = e.get_month(year)
@@ -45,7 +53,9 @@ pub fn LunarFestival::from_index(year : Int, index : Int) -> Option[LunarFestiva
         LunarFestival::new(
           index,
           e,
-          SolarTerm::from_index(year, e.get_value(2)).get_solar_day().get_lunar_day(),
+          SolarTerm::from_index(year, e.get_value(2))
+          .get_solar_day()
+          .get_lunar_day(),
         ),
       )
     _ => None
@@ -54,7 +64,11 @@ pub fn LunarFestival::from_index(year : Int, index : Int) -> Option[LunarFestiva
 
 ///|
 // from_ymd 从年月日构造
-pub fn LunarFestival::from_ymd(year : Int, month : Int, day : Int) -> Option[LunarFestival] {
+pub fn LunarFestival::from_ymd(
+  year : Int,
+  month : Int,
+  day : Int,
+) -> LunarFestival? {
   let d = match LunarDay::from_ymd(year, month, day) {
     Err(_) => return None
     Ok(v) => v
@@ -62,7 +76,10 @@ pub fn LunarFestival::from_ymd(year : Int, month : Int, day : Int) -> Option[Lun
   for i = 0; i < lunar_festival_names().length(); i = i + 1 {
     let name = lunar_festival_names()[i]
     let start = i * 8
-    let e = Event::new(name, "@" + (lunar_festival_data[start:start + 8]).to_owned()).unwrap()
+    let e = Event::new(
+      name,
+      "@" + lunar_festival_data[start:start + 8].to_owned(),
+    ).unwrap()
     match e.get_type() {
       LunarDay => {
         let offset = e.get_value(5)
@@ -73,7 +90,9 @@ pub fn LunarFestival::from_ymd(year : Int, month : Int, day : Int) -> Option[Lun
         } else {
           let (y, m) = e.get_month(d.get_year())
           let next = d.next(-offset)
-          if next.get_year() == y && next.get_month() == m && next.get_day() == e.get_value(3) {
+          if next.get_year() == y &&
+            next.get_month() == m &&
+            next.get_day() == e.get_value(3) {
             return Some(LunarFestival::new(i, e, d))
           }
         }
@@ -104,7 +123,7 @@ pub fn LunarFestival::get_day(self : LunarFestival) -> LunarDay {
 
 ///|
 // get_solar_term 节气
-pub fn LunarFestival::get_solar_term(self : LunarFestival) -> Option[SolarTerm] {
+pub fn LunarFestival::get_solar_term(self : LunarFestival) -> SolarTerm? {
   let t = self.get_day().get_solar_day().get_term_day()
   if 0 == t.get_day_index() {
     return Some(t.get_solar_term())
@@ -114,7 +133,7 @@ pub fn LunarFestival::get_solar_term(self : LunarFestival) -> Option[SolarTerm] 
 
 ///|
 // next 推移
-pub fn LunarFestival::next(self : LunarFestival, n : Int) -> Option[LunarFestival] {
+pub fn LunarFestival::next(self : LunarFestival, n : Int) -> LunarFestival? {
   let size = lunar_festival_names().length()
   let i = self.festival.index + n
   LunarFestival::from_index(
@@ -126,7 +145,7 @@ pub fn LunarFestival::next(self : LunarFestival, n : Int) -> Option[LunarFestiva
 ///|
 // get_name 名称
 pub fn LunarFestival::get_name(self : LunarFestival) -> String {
-  self.festival.get_name()
+  Culture::get_name(self.festival)
 }
 
 ///|
@@ -136,11 +155,14 @@ pub fn LunarFestival::get_index(self : LunarFestival) -> Int {
 }
 
 ///|
-impl Culture for LunarFestival with get_name(self : LunarFestival) -> String {
-  self.festival.get_name()
+impl Culture for LunarFestival with fn get_name(self : LunarFestival) -> String {
+  Culture::get_name(self.festival)
 }
 
 ///|
-impl Show for LunarFestival with to_string(self : LunarFestival) -> String {
+impl Show for LunarFestival with fn to_string(self : LunarFestival) -> String {
   self.get_day().to_string() + " " + self.get_name()
 }
+
+///|
+extend LunarFestival with Show::{to_string}

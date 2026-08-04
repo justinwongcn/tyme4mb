@@ -1,7 +1,10 @@
 ///|
 // rab_byung_month_aliases 藏历月别名
 pub fn rab_byung_month_aliases() -> Array[String] {
-  ["神变月", "苦行月", "具香月", "萨嘎月", "作净月", "明净月", "具醉月", "具贤月", "天降月", "持众月", "庄严月", "满意月"]
+  [
+    "神变月", "苦行月", "具香月", "萨嘎月", "作净月", "明净月",
+    "具醉月", "具贤月", "天降月", "持众月", "庄严月", "满意月",
+  ]
 }
 
 ///|
@@ -20,10 +23,7 @@ extend RabByungMonth with Show::{to_string}
 
 ///|
 // validate 校验
-pub fn RabByungMonth::validate(
-  year : Int,
-  month : Int,
-) -> Result[Unit, String] {
+pub fn RabByungMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
   if month == 0 || month > 12 || month < -12 {
     return Err("illegal rab-byung month: " + month.to_string())
   }
@@ -59,15 +59,15 @@ fn build_rab_byung_month_days() -> Array[(Int, Array[Int])] {
   let mut m = 11
   let mut i = 0
   while i < n {
-    let length = data.unsafe_charcode_at(i) - '0'.to_int()
+    let length = data.unsafe_get(i).to_int() - '0'.to_int()
     let arr : Array[Int] = []
     for j = 0; j < length; j = j + 1 {
-      arr.push(data.unsafe_charcode_at(i + 1 + j) - '5'.to_int() - 30)
+      arr.push(data.unsafe_get(i + 1 + j).to_int() - '5'.to_int() - 30)
     }
     res.push((y * 13 + m, arr))
     m = m + 1
     i = i + length + 1
-    if i < n && data.unsafe_charcode_at(i) == ','.to_int() {
+    if i < n && data.unsafe_get(i).to_int() == ','.to_int() {
       i = i + 1
       y = y + 1
       m = 0
@@ -93,12 +93,10 @@ pub fn RabByungMonth::new(
   if m < 0 {
     m = -m
   }
-  Ok(
-    RabByungMonth::{
-      month_unit: MonthUnit::new(YearUnit::new(year), m),
-      leap: month < 0,
-    },
-  )
+  Ok(RabByungMonth::{
+    month_unit: MonthUnit::new(YearUnit::new(year), m),
+    leap: month < 0,
+  })
 }
 
 ///|
@@ -128,11 +126,7 @@ pub fn RabByungMonth::get_rab_byung_year(self : RabByungMonth) -> RabByungYear {
   match RabByungYear::from_year(self.get_year()) {
     Ok(y) => y
     Err(_) =>
-      RabByungYear::{
-        rab_byung_index: 0,
-        element_index: 0,
-        zodiac_index: 0,
-      }
+      RabByungYear::{ rab_byung_index: 0, element_index: 0, zodiac_index: 0 }
   }
 }
 
@@ -330,7 +324,7 @@ fn arr_contains(arr : Array[Int], v : Int) -> Bool {
 }
 
 ///|
-impl Culture for RabByungMonth with get_name(self : RabByungMonth) -> String {
+impl Culture for RabByungMonth with fn get_name(self : RabByungMonth) -> String {
   let name = lunar_month_names()[self.get_month() - 1]
   if self.leap {
     return "闰" + name
@@ -339,6 +333,6 @@ impl Culture for RabByungMonth with get_name(self : RabByungMonth) -> String {
 }
 
 ///|
-impl Show for RabByungMonth with to_string(self : RabByungMonth) -> String {
+impl Show for RabByungMonth with fn to_string(self : RabByungMonth) -> String {
   self.get_rab_byung_year().get_name() + self.get_name()
 }

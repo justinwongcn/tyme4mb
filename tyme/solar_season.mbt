@@ -67,17 +67,17 @@ pub fn SolarSeason::get_months(self : SolarSeason) -> Array[SolarMonth] {
 }
 
 ///|
-impl Culture for SolarSeason with get_name(self : SolarSeason) -> String {
+impl Culture for SolarSeason with fn get_name(self : SolarSeason) -> String {
   solar_season_names()[self.index]
 }
 
 ///|
-impl Show for SolarSeason with to_string(self : SolarSeason) -> String {
+impl Show for SolarSeason with fn to_string(self : SolarSeason) -> String {
   self.year.to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for SolarSeason with next(self : SolarSeason, n : Int) -> SolarSeason {
+impl Tyme for SolarSeason with fn next(self : SolarSeason, n : Int) -> SolarSeason {
   let i = self.index + n
   SolarSeason::from_index(
     (self.get_year() * 4 + i) / 4,

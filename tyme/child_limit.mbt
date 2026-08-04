@@ -1,6 +1,8 @@
 ///|
 // child_limit_provider 童限计算接口实现
-pub let child_limit_provider : &IChildLimitProvider = DefaultChildLimitProvider::{}
+pub let child_limit_provider : &IChildLimitProvider = DefaultChildLimitProvider::{
+
+}
 
 ///|
 // ChildLimit 童限
@@ -23,7 +25,8 @@ pub fn ChildLimit::from_solar_time(
 ) -> ChildLimit {
   let eight_char = birth_time.get_lunar_hour().get_eight_char()
   // 阳男阴女顺推，阴男阳女逆推
-  let yang = eight_char.get_year().get_heaven_stem().get_yin_yang().get_code() == 1
+  let yang = eight_char.get_year().get_heaven_stem().get_yin_yang().get_code() ==
+    1
   let man = gender.get_code() == 1
   let forward = (yang && man) || (!yang && !man)
   let mut term = birth_time.get_term()
@@ -127,13 +130,17 @@ pub fn ChildLimit::get_end_lunar_year(self : ChildLimit) -> LunarYear {
 
 ///|
 // get_start_sixty_cycle_year 开始(即出生)干支年
-pub fn ChildLimit::get_start_sixty_cycle_year(self : ChildLimit) -> SixtyCycleYear {
+pub fn ChildLimit::get_start_sixty_cycle_year(
+  self : ChildLimit,
+) -> SixtyCycleYear {
   SixtyCycleYear::from_year(self.get_start_time().get_year()).unwrap()
 }
 
 ///|
 // get_end_sixty_cycle_year 结束(即起运)干支年
-pub fn ChildLimit::get_end_sixty_cycle_year(self : ChildLimit) -> SixtyCycleYear {
+pub fn ChildLimit::get_end_sixty_cycle_year(
+  self : ChildLimit,
+) -> SixtyCycleYear {
   SixtyCycleYear::from_year(self.get_end_time().get_year()).unwrap()
 }
 

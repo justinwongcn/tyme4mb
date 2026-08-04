@@ -28,12 +28,12 @@ pub fn PlumRainDay::get_day_index(self : PlumRainDay) -> Int {
 }
 
 ///|
-impl Culture for PlumRainDay with get_name(self : PlumRainDay) -> String {
-  self.abstract_culture_day.get_name()
+impl Culture for PlumRainDay with fn get_name(self : PlumRainDay) -> String {
+  Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for PlumRainDay with to_string(self : PlumRainDay) -> String {
+impl Show for PlumRainDay with fn to_string(self : PlumRainDay) -> String {
   if self.get_plum_rain().get_index() == 0 {
     "\{self.abstract_culture_day.get_culture()}第\{self.abstract_culture_day.get_day_index() + 1}天"
   } else {

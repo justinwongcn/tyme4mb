@@ -36,11 +36,11 @@ pub fn Event::new(name : String, data : String) -> Result[Event, String] {
 ///|
 fn Event::get_char_index(self : Event, index : Int) -> Int {
   // data 为 ASCII 字符
-  let c = self.data.unsafe_charcode_at(index)
+  let c = self.data.unsafe_get(index).to_int()
   let chars = event_manager_chars()
   let mut i = 0
   while i < chars.length() {
-    if chars.unsafe_charcode_at(i) == c {
+    if chars.unsafe_get(i).to_int() == c {
       return i
     }
     i = i + 1
@@ -97,7 +97,7 @@ pub fn Event::get_start_year(self : Event) -> Int {
 
 ///|
 // get_solar_day 公历日，如果当年没有该事件，返回 None
-pub fn Event::get_solar_day(self : Event, year : Int) -> Option[SolarDay] {
+pub fn Event::get_solar_day(self : Event, year : Int) -> SolarDay? {
   if year < self.get_start_year() {
     return None
   }
@@ -121,7 +121,7 @@ pub fn Event::get_solar_day(self : Event, year : Int) -> Option[SolarDay] {
 }
 
 ///|
-fn Event::get_solar_day_by_solar_day(self : Event, year : Int) -> Option[SolarDay] {
+fn Event::get_solar_day_by_solar_day(self : Event, year : Int) -> SolarDay? {
   let (y, m) = self.get_month(year)
   let d = self.get_value(3)
   let delay = self.get_value(4)
@@ -153,7 +153,7 @@ fn Event::get_solar_day_by_solar_day(self : Event, year : Int) -> Option[SolarDa
 }
 
 ///|
-fn Event::get_solar_day_by_lunar_day(self : Event, year : Int) -> Option[SolarDay] {
+fn Event::get_solar_day_by_lunar_day(self : Event, year : Int) -> SolarDay? {
   let (y, m) = self.get_month(year)
   let d = self.get_value(3)
   let delay = self.get_value(4)
@@ -185,7 +185,7 @@ fn Event::get_solar_day_by_lunar_day(self : Event, year : Int) -> Option[SolarDa
 }
 
 ///|
-fn Event::get_solar_day_by_week(self : Event, year : Int) -> Option[SolarDay] {
+fn Event::get_solar_day_by_week(self : Event, year : Int) -> SolarDay? {
   let n = self.get_value(3)
   if n == 0 {
     return None
@@ -207,7 +207,7 @@ fn Event::get_solar_day_by_week(self : Event, year : Int) -> Option[SolarDay] {
 }
 
 ///|
-fn Event::get_solar_day_by_term(self : Event, year : Int) -> Option[SolarDay] {
+fn Event::get_solar_day_by_term(self : Event, year : Int) -> SolarDay? {
   let d = SolarTerm::from_index(year, self.get_value(2)).get_solar_day()
   let offset = self.get_value(4)
   if offset == 0 {
@@ -217,29 +217,47 @@ fn Event::get_solar_day_by_term(self : Event, year : Int) -> Option[SolarDay] {
 }
 
 ///|
-fn Event::get_solar_day_by_term_heaven_stem(self : Event, year : Int) -> Option[SolarDay] {
+fn Event::get_solar_day_by_term_heaven_stem(
+  self : Event,
+  year : Int,
+) -> SolarDay? {
   let d = match self.get_solar_day_by_term(year) {
     None => return None
     Some(v) => v
   }
-  Some(d.next(d.get_lunar_day().get_sixty_cycle().get_heaven_stem().loop_tyme.steps_to(self.get_value(3))))
+  Some(
+    d.next(
+      d.get_lunar_day().get_sixty_cycle().get_heaven_stem().loop_tyme.steps_to(
+        self.get_value(3),
+      ),
+    ),
+  )
 }
 
 ///|
-fn Event::get_solar_day_by_term_earth_branch(self : Event, year : Int) -> Option[SolarDay] {
+fn Event::get_solar_day_by_term_earth_branch(
+  self : Event,
+  year : Int,
+) -> SolarDay? {
   let d = match self.get_solar_day_by_term(year) {
     None => return None
     Some(v) => v
   }
-  Some(d.next(d.get_lunar_day().get_sixty_cycle().get_earth_branch().loop_tyme.steps_to(self.get_value(3))))
+  Some(
+    d.next(
+      d.get_lunar_day().get_sixty_cycle().get_earth_branch().loop_tyme.steps_to(
+        self.get_value(3),
+      ),
+    ),
+  )
 }
 
 ///|
-impl Culture for Event with get_name(self : Event) -> String {
+impl Culture for Event with fn get_name(self : Event) -> String {
   self.name
 }
 
 ///|
-impl Show for Event with to_string(self : Event) -> String {
+impl Show for Event with fn to_string(self : Event) -> String {
   self.name
 }

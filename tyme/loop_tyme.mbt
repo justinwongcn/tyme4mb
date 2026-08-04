@@ -22,7 +22,10 @@ pub fn LoopTyme::get_size(self : LoopTyme) -> Int {
 }
 
 ///|
-fn LoopTyme::index_of_name(self : LoopTyme, name : String) -> Result[Int, String] {
+fn LoopTyme::index_of_name(
+  self : LoopTyme,
+  name : String,
+) -> Result[Int, String] {
   for i, v in self.names {
     if v == name {
       return Ok(i)
@@ -77,7 +80,7 @@ pub fn LoopTyme::from_index(names : Array[String], index : Int) -> LoopTyme {
 ///|
 pub fn LoopTyme::from_name(
   names : Array[String],
-  name : String
+  name : String,
 ) -> Result[LoopTyme, String] {
   let instance = LoopTyme::{ names, index: 0 }
   match instance.index_of_name(name) {
@@ -90,12 +93,12 @@ pub fn LoopTyme::from_name(
 }
 
 ///|
-impl Culture for LoopTyme with get_name(self : LoopTyme) -> String {
+impl Culture for LoopTyme with fn get_name(self : LoopTyme) -> String {
   self.names[self.index]
 }
 
 ///|
-impl Show for LoopTyme with to_string(self : LoopTyme) -> String {
+impl Show for LoopTyme with fn to_string(self : LoopTyme) -> String {
   self.get_name()
 }
 

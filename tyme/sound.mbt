@@ -2,9 +2,10 @@
 // sound_names 纳音名称
 pub fn sound_names() -> Array[String] {
   [
-    "海中金", "炉中火", "大林木", "路旁土", "剑锋金", "山头火", "涧下水", "城头土",
-    "白蜡金", "杨柳木", "泉中水", "屋上土", "霹雳火", "松柏木", "长流水", "沙中金",
-    "山下火", "平地木", "壁上土", "金箔金", "覆灯火", "天河水", "大驿土", "钗钏金",
+    "海中金", "炉中火", "大林木", "路旁土", "剑锋金", "山头火",
+    "涧下水", "城头土", "白蜡金", "杨柳木", "泉中水", "屋上土",
+    "霹雳火", "松柏木", "长流水", "沙中金", "山下火", "平地木",
+    "壁上土", "金箔金", "覆灯火", "天河水", "大驿土", "钗钏金",
     "桑柘木", "大溪水", "沙中土", "天上火", "石榴木", "大海水",
   ]
 }
@@ -43,16 +44,16 @@ pub fn Sound::get_index(self : Sound) -> Int {
 }
 
 ///|
-impl Culture for Sound with get_name(self : Sound) -> String {
+impl Culture for Sound with fn get_name(self : Sound) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Sound with to_string(self : Sound) -> String {
+impl Show for Sound with fn to_string(self : Sound) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Sound with next(self : Sound, n : Int) -> Sound {
+impl Tyme for Sound with fn next(self : Sound, n : Int) -> Sound {
   Sound::from_index(self.loop_tyme.get_index() + n)
 }

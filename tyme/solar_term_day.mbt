@@ -28,11 +28,11 @@ pub fn SolarTermDay::get_day_index(self : SolarTermDay) -> Int {
 }
 
 ///|
-impl Culture for SolarTermDay with get_name(self : SolarTermDay) -> String {
-  self.abstract_culture_day.get_name()
+impl Culture for SolarTermDay with fn get_name(self : SolarTermDay) -> String {
+  Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for SolarTermDay with to_string(self : SolarTermDay) -> String {
-  self.abstract_culture_day.to_string()
+impl Show for SolarTermDay with fn to_string(self : SolarTermDay) -> String {
+  Show::to_string(self.abstract_culture_day)
 }

@@ -20,9 +20,13 @@ extend SixtyCycleHour with Tyme::{next}
 
 ///|
 // from_solar_time 从公历时刻构造
-pub fn SixtyCycleHour::from_solar_time(solar_time : SolarTime) -> SixtyCycleHour {
+pub fn SixtyCycleHour::from_solar_time(
+  solar_time : SolarTime,
+) -> SixtyCycleHour {
   let solar_year = solar_time.get_year()
-  let spring_solar_time = SolarTerm::from_index(solar_year, 3).get_julian_day().get_solar_time()
+  let spring_solar_time = SolarTerm::from_index(solar_year, 3)
+    .get_julian_day()
+    .get_solar_time()
   let lunar_hour = solar_time.get_lunar_hour()
   let lunar_day = lunar_hour.get_lunar_day()
   let mut lunar_year = lunar_day.get_lunar_month().get_lunar_year()
@@ -38,7 +42,10 @@ pub fn SixtyCycleHour::from_solar_time(solar_time : SolarTime) -> SixtyCycleHour
   let term = solar_time.get_term()
   let mut index = term.loop_tyme.get_index() - 3
   if index < 0 &&
-    term.get_julian_day().get_solar_time().is_after(
+    term
+    .get_julian_day()
+    .get_solar_time()
+    .is_after(
       SolarTerm::from_index(solar_year, 3).get_julian_day().get_solar_time(),
     ) {
     index = index + 24
@@ -53,7 +60,10 @@ pub fn SixtyCycleHour::from_solar_time(solar_time : SolarTime) -> SixtyCycleHour
     solar_time,
     day: SixtyCycleDay::new(
       solar_time.get_solar_day(),
-      SixtyCycleMonth::new(y, m.get_sixty_cycle().next(@math.floor(index.to_double() * 0.5).to_int())),
+      SixtyCycleMonth::new(
+        y,
+        m.get_sixty_cycle().next(@math.floor(index.to_double() * 0.5).to_int()),
+      ),
       d,
     ),
     hour: lunar_hour.get_sixty_cycle(),
@@ -86,7 +96,9 @@ pub fn SixtyCycleHour::get_sixty_cycle(self : SixtyCycleHour) -> SixtyCycle {
 
 ///|
 // get_sixty_cycle_day 干支日
-pub fn SixtyCycleHour::get_sixty_cycle_day(self : SixtyCycleHour) -> SixtyCycleDay {
+pub fn SixtyCycleHour::get_sixty_cycle_day(
+  self : SixtyCycleHour,
+) -> SixtyCycleDay {
   self.day
 }
 
@@ -150,20 +162,25 @@ pub fn SixtyCycleHour::get_avoids(
 ///|
 // get_eight_char 八字
 pub fn SixtyCycleHour::get_eight_char(self : SixtyCycleHour) -> EightChar {
-  EightChar::from_sixty_cycle(self.get_year(), self.get_month(), self.get_day(), self.hour)
+  EightChar::from_sixty_cycle(
+    self.get_year(),
+    self.get_month(),
+    self.get_day(),
+    self.hour,
+  )
 }
 
 ///|
-impl Culture for SixtyCycleHour with get_name(self : SixtyCycleHour) -> String {
+impl Culture for SixtyCycleHour with fn get_name(self : SixtyCycleHour) -> String {
   "\{self.hour.to_string()}时"
 }
 
 ///|
-impl Show for SixtyCycleHour with to_string(self : SixtyCycleHour) -> String {
+impl Show for SixtyCycleHour with fn to_string(self : SixtyCycleHour) -> String {
   self.day.to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for SixtyCycleHour with next(self : SixtyCycleHour, n : Int) -> SixtyCycleHour {
+impl Tyme for SixtyCycleHour with fn next(self : SixtyCycleHour, n : Int) -> SixtyCycleHour {
   SixtyCycleHour::from_solar_time(self.solar_time.next(n))
 }

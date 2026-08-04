@@ -1,10 +1,9 @@
 ///|
 // LunarSect2EightCharProvider Lunar流派2的八字计算（晚子时日柱算当天）
-pub struct LunarSect2EightCharProvider {
-}
+pub struct LunarSect2EightCharProvider {}
 
 ///|
-impl IEightCharProvider for LunarSect2EightCharProvider with get_eight_char(
+impl IEightCharProvider for LunarSect2EightCharProvider with fn get_eight_char(
   self : LunarSect2EightCharProvider,
   hour : LunarHour,
 ) -> EightChar {

@@ -1,7 +1,11 @@
 ///|
 // solar_term_names 节气名称
 pub fn solar_term_names() -> Array[String] {
-  ["冬至", "小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪"]
+  [
+    "冬至", "小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明",
+    "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋",
+    "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪",
+  ]
 }
 
 ///|
@@ -31,7 +35,10 @@ pub fn SolarTerm::from_index(year : Int, index : Int) -> SolarTerm {
 }
 
 ///|
-pub fn SolarTerm::from_name(year : Int, name : String) -> Result[SolarTerm, String] {
+pub fn SolarTerm::from_name(
+  year : Int,
+  name : String,
+) -> Result[SolarTerm, String] {
   match LoopTyme::from_name(solar_term_names(), name) {
     Ok(p) => {
       let cursory = init_by_year(year, p.get_index())
@@ -52,35 +59,46 @@ fn init_by_year(year : Int, offset : Int) -> Double {
 }
 
 ///|
-impl Culture for SolarTerm with get_name(self : SolarTerm) -> String {
+impl Culture for SolarTerm with fn get_name(self : SolarTerm) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for SolarTerm with to_string(self : SolarTerm) -> String {
+impl Show for SolarTerm with fn to_string(self : SolarTerm) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for SolarTerm with next(self : SolarTerm, n : Int) -> SolarTerm {
+impl Tyme for SolarTerm with fn next(self : SolarTerm, n : Int) -> SolarTerm {
   let size = self.loop_tyme.get_size()
   let i = self.loop_tyme.get_index() + n
-  SolarTerm::from_index((self.year * size + i) / size, self.loop_tyme.index_of(i))
+  SolarTerm::from_index(
+    (self.year * size + i) / size,
+    self.loop_tyme.index_of(i),
+  )
 }
 
 // is_jie 是否节令
+
+///|
 pub fn SolarTerm::is_jie(self : SolarTerm) -> Bool {
   self.loop_tyme.get_index() % 2 == 1
 }
 
 // is_qi 是否气令
+
+///|
 pub fn SolarTerm::is_qi(self : SolarTerm) -> Bool {
   self.loop_tyme.get_index() % 2 == 0
 }
 
 // get_julian_day 儒略日（精确到秒）
+
+///|
 pub fn SolarTerm::get_julian_day(self : SolarTerm) -> JulianDay {
-  JulianDay::from_julian_day(qi_accurate2(self.cursory_julian_day) + J2000.to_double())
+  JulianDay::from_julian_day(
+    qi_accurate2(self.cursory_julian_day) + J2000.to_double(),
+  )
 }
 
 ///|
@@ -92,11 +110,15 @@ pub fn SolarTerm::get_solar_day(self : SolarTerm) -> SolarDay {
 }
 
 // get_year 年
+
+///|
 pub fn SolarTerm::get_year(self : SolarTerm) -> Int {
   self.year
 }
 
 // get_cursory_julian_day 儒略日（用于日历，只精确到日中午12:00）
+
+///|
 pub fn SolarTerm::get_cursory_julian_day(self : SolarTerm) -> Double {
   self.cursory_julian_day
 }

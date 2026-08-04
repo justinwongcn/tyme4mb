@@ -8,7 +8,7 @@ pub struct AbstractCultureDay[C] {
 ///|
 pub fn[C] AbstractCultureDay::new(
   culture : C,
-  day_index : Int
+  day_index : Int,
 ) -> AbstractCultureDay[C] {
   { culture, day_index }
 }
@@ -16,28 +16,29 @@ pub fn[C] AbstractCultureDay::new(
 ///|
 // get_day_index 天索引
 pub fn[C] AbstractCultureDay::get_day_index(
-  self : AbstractCultureDay[C]
+  self : AbstractCultureDay[C],
 ) -> Int {
   self.day_index
 }
 
 ///|
-pub fn[C] AbstractCultureDay::get_culture(
-  self : AbstractCultureDay[C]
-) -> C {
+pub fn[C] AbstractCultureDay::get_culture(self : AbstractCultureDay[C]) -> C {
   self.culture
 }
 
 ///|
-impl[C : Culture] Culture for AbstractCultureDay[C] with get_name(
-  self : AbstractCultureDay[C]
+impl[C : Culture] Culture for AbstractCultureDay[C] with fn get_name(
+  self : AbstractCultureDay[C],
 ) -> String {
   Culture::get_name(self.culture)
 }
 
 ///|
-impl[C : Culture + Show] Show for AbstractCultureDay[C] with to_string(
-  self : AbstractCultureDay[C]
+impl[C : Culture] Show for AbstractCultureDay[C] with fn to_string(
+  self : AbstractCultureDay[C],
 ) -> String {
-  "\{self.culture}第\{self.day_index + 1}天"
+  Culture::get_name(self.culture) +
+  "第" +
+  (self.day_index + 1).to_string() +
+  "天"
 }

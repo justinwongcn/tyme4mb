@@ -86,8 +86,8 @@ pub fn ThreePillars::get_solar_days(
   let m = self.month.get_earth_branch().next(-2).get_index()
   // 月天干要一致
   if !HeavenStem::from_index(
-    (self.year.get_heaven_stem().get_index() + 1) * 2 + m,
-  ).equals(self.month.get_heaven_stem()) {
+      (self.year.get_heaven_stem().get_index() + 1) * 2 + m,
+    ).equals(self.month.get_heaven_stem()) {
     return l
   }
   // 1年的立春是辛酉，序号57
@@ -108,7 +108,9 @@ pub fn ThreePillars::get_solar_days(
     let mut solar_day = term.get_solar_day()
     if solar_day.get_year() >= start_year {
       // 日干支和节令干支的偏移值
-      let d = self.day.next(-solar_day.get_lunar_day().get_sixty_cycle().get_index()).get_index()
+      let d = self.day
+        .next(-solar_day.get_lunar_day().get_sixty_cycle().get_index())
+        .get_index()
       if d > 0 {
         // 从节令推移天数
         solar_day = solar_day.next(d)
@@ -124,11 +126,15 @@ pub fn ThreePillars::get_solar_days(
 }
 
 ///|
-impl Culture for ThreePillars with get_name(self : ThreePillars) -> String {
-  self.year.to_string() + " " + self.month.to_string() + " " + self.day.to_string()
+impl Culture for ThreePillars with fn get_name(self : ThreePillars) -> String {
+  self.year.to_string() +
+  " " +
+  self.month.to_string() +
+  " " +
+  self.day.to_string()
 }
 
 ///|
-impl Show for ThreePillars with to_string(self : ThreePillars) -> String {
+impl Show for ThreePillars with fn to_string(self : ThreePillars) -> String {
   self.get_name()
 }

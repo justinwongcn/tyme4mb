@@ -21,7 +21,9 @@ extend FetusEarthBranch with Tyme::{next}
 
 ///|
 pub fn FetusEarthBranch::new(index : Int) -> FetusEarthBranch {
-  FetusEarthBranch::{ loop_tyme: LoopTyme::from_index(fetus_earth_branch_names(), index) }
+  FetusEarthBranch::{
+    loop_tyme: LoopTyme::from_index(fetus_earth_branch_names(), index),
+  }
 }
 
 ///|
@@ -30,16 +32,16 @@ pub fn FetusEarthBranch::get_index(self : FetusEarthBranch) -> Int {
 }
 
 ///|
-impl Culture for FetusEarthBranch with get_name(self : FetusEarthBranch) -> String {
+impl Culture for FetusEarthBranch with fn get_name(self : FetusEarthBranch) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for FetusEarthBranch with to_string(self : FetusEarthBranch) -> String {
+impl Show for FetusEarthBranch with fn to_string(self : FetusEarthBranch) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for FetusEarthBranch with next(self : FetusEarthBranch, n : Int) -> FetusEarthBranch {
+impl Tyme for FetusEarthBranch with fn next(self : FetusEarthBranch, n : Int) -> FetusEarthBranch {
   FetusEarthBranch::new(self.loop_tyme.get_index() + n)
 }

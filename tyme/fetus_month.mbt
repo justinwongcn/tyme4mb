@@ -7,20 +7,21 @@ pub struct FetusMonth {
 ///|
 // fetus_month_names 逐月胎神名称
 pub fn fetus_month_names() -> Array[String] {
-  ["占房床", "占户窗", "占门堂", "占厨灶", "占房床", "占床仓", "占碓磨", "占厕户", "占门房", "占房床", "占灶炉", "占房床"]
+  [
+    "占房床", "占户窗", "占门堂", "占厨灶", "占房床", "占床仓",
+    "占碓磨", "占厕户", "占门房", "占房床", "占灶炉", "占房床",
+  ]
 }
 
 ///|
 // new 从索引构造
 pub fn FetusMonth::new(index : Int) -> FetusMonth {
-  FetusMonth::{
-    loop_tyme : LoopTyme::from_index(fetus_month_names(), index),
-  }
+  FetusMonth::{ loop_tyme: LoopTyme::from_index(fetus_month_names(), index) }
 }
 
 ///|
 // from_lunar_month 从农历月初始化
-pub fn FetusMonth::from_lunar_month(lunar_month : LunarMonth) -> Option[FetusMonth] {
+pub fn FetusMonth::from_lunar_month(lunar_month : LunarMonth) -> FetusMonth? {
   if lunar_month.is_leap() {
     return None
   }
@@ -46,19 +47,19 @@ pub fn FetusMonth::get_name(self : FetusMonth) -> String {
 }
 
 ///|
-impl Culture for FetusMonth with get_name(self : FetusMonth) -> String {
+impl Culture for FetusMonth with fn get_name(self : FetusMonth) -> String {
   self.get_name()
 }
 
 ///|
-impl Show for FetusMonth with to_string(self : FetusMonth) -> String {
+impl Show for FetusMonth with fn to_string(self : FetusMonth) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for FetusMonth with next(
-  self : FetusMonth,
-  n : Int,
-) -> FetusMonth {
+impl Tyme for FetusMonth with fn next(self : FetusMonth, n : Int) -> FetusMonth {
   self.next(n)
 }
+
+///|
+extend FetusMonth with Show::{to_string}

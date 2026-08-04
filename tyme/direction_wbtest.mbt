@@ -4,7 +4,12 @@
 test "direction_0" {
   let d = SolarDay::from_ymd(2021, 11, 13).unwrap()
   expect_eq(
-    d.get_lunar_day().get_sixty_cycle().get_heaven_stem().get_mascot_direction().get_name(),
+    d
+    .get_lunar_day()
+    .get_sixty_cycle()
+    .get_heaven_stem()
+    .get_mascot_direction()
+    .get_name(),
     "东南",
     "SolarDay(2021,11,13).GetLunarDay().GetSixtyCycle().GetHeavenStem().GetMascotDirection().GetName()",
   )
@@ -14,7 +19,12 @@ test "direction_0" {
 test "direction_1" {
   let d = SolarDay::from_ymd(2024, 1, 1).unwrap()
   expect_eq(
-    d.get_lunar_day().get_sixty_cycle().get_heaven_stem().get_mascot_direction().get_name(),
+    d
+    .get_lunar_day()
+    .get_sixty_cycle()
+    .get_heaven_stem()
+    .get_mascot_direction()
+    .get_name(),
     "东南",
     "SolarDay(2024,1,1).GetLunarDay().GetSixtyCycle().GetHeavenStem().GetMascotDirection().GetName()",
   )

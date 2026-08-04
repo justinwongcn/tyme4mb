@@ -38,16 +38,16 @@ pub fn PlumRain::get_index(self : PlumRain) -> Int {
 }
 
 ///|
-impl Culture for PlumRain with get_name(self : PlumRain) -> String {
+impl Culture for PlumRain with fn get_name(self : PlumRain) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for PlumRain with to_string(self : PlumRain) -> String {
+impl Show for PlumRain with fn to_string(self : PlumRain) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for PlumRain with next(self : PlumRain, n : Int) -> PlumRain {
+impl Tyme for PlumRain with fn next(self : PlumRain, n : Int) -> PlumRain {
   PlumRain::from_index(self.loop_tyme.get_index() + n)
 }

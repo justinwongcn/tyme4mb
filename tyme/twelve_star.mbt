@@ -1,7 +1,10 @@
 ///|
 // TwelveStarNames 黄道黑道十二神名称
 pub fn twelve_star_names() -> Array[String] {
-  ["青龙", "明堂", "天刑", "朱雀", "金匮", "天德", "白虎", "玉堂", "天牢", "玄武", "司命", "勾陈"]
+  [
+    "青龙", "明堂", "天刑", "朱雀", "金匮", "天德", "白虎", "玉堂",
+    "天牢", "玄武", "司命", "勾陈",
+  ]
 }
 
 ///|
@@ -45,16 +48,16 @@ pub fn TwelveStar::get_ecliptic(self : TwelveStar) -> Ecliptic {
 }
 
 ///|
-impl Culture for TwelveStar with get_name(self : TwelveStar) -> String {
+impl Culture for TwelveStar with fn get_name(self : TwelveStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for TwelveStar with to_string(self : TwelveStar) -> String {
+impl Show for TwelveStar with fn to_string(self : TwelveStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for TwelveStar with next(self : TwelveStar, n : Int) -> TwelveStar {
+impl Tyme for TwelveStar with fn next(self : TwelveStar, n : Int) -> TwelveStar {
   TwelveStar::from_index(self.loop_tyme.get_index() + n)
 }

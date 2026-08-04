@@ -8,16 +8,17 @@ pub struct KitchenGodSteed {
 ///|
 // numbers 数字
 pub fn numbers() -> Array[String] {
-  ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"]
+  [
+    "一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一",
+    "十二",
+  ]
 }
 
 ///|
 // new 从农历年构造
 pub fn KitchenGodSteed::new(lunar_year : Int) -> KitchenGodSteed {
   let lunar_day = LunarDay::from_ymd(lunar_year, 1, 1).unwrap()
-  KitchenGodSteed::{
-    first_day_sixty_cycle : lunar_day.get_sixty_cycle(),
-  }
+  KitchenGodSteed::{ first_day_sixty_cycle: lunar_day.get_sixty_cycle() }
 }
 
 ///|
@@ -123,11 +124,14 @@ pub fn KitchenGodSteed::get_people_hoes(self : KitchenGodSteed) -> String {
 }
 
 ///|
-impl Culture for KitchenGodSteed with get_name(_ : KitchenGodSteed) -> String {
+impl Culture for KitchenGodSteed with fn get_name(_ : KitchenGodSteed) -> String {
   "灶马头"
 }
 
 ///|
-impl Show for KitchenGodSteed with to_string(self : KitchenGodSteed) -> String {
-  self.get_name()
+impl Show for KitchenGodSteed with fn to_string(self : KitchenGodSteed) -> String {
+  Culture::get_name(self)
 }
+
+///|
+extend KitchenGodSteed with Culture::{get_name}

@@ -7,7 +7,10 @@ pub struct SolarFestival {
 ///|
 // solar_festival_names 公历现代节日名称
 pub fn solar_festival_names() -> Array[String] {
-  ["元旦", "妇女节", "植树节", "劳动节", "青年节", "儿童节", "建党节", "建军节", "教师节", "国庆节"]
+  [
+    "元旦", "妇女节", "植树节", "劳动节", "青年节", "儿童节", "建党节",
+    "建军节", "教师节", "国庆节",
+  ]
 }
 
 ///|
@@ -16,20 +19,25 @@ pub let solar_festival_data : String = "0VV__0Ux0Xc__0Ux0Xg__0_Q0ZV__0Ux0ZY__0Ux
 
 ///|
 // new 构造
-pub fn SolarFestival::new(index : Int, event : Event, day : SolarDay) -> SolarFestival {
-  SolarFestival::{
-    festival: AbstractFestival::new(index, event, day.day_unit),
-  }
+pub fn SolarFestival::new(
+  index : Int,
+  event : Event,
+  day : SolarDay,
+) -> SolarFestival {
+  SolarFestival::{ festival: AbstractFestival::new(index, event, day.day_unit) }
 }
 
 ///|
 // from_index 从索引构造
-pub fn SolarFestival::from_index(year : Int, index : Int) -> Option[SolarFestival] {
+pub fn SolarFestival::from_index(year : Int, index : Int) -> SolarFestival? {
   if index < 0 || index >= solar_festival_names().length() {
     return None
   }
   let start = index * 8
-  let e = Event::new(solar_festival_names()[index], "@" + (solar_festival_data[start:start + 8]).to_owned()).unwrap()
+  let e = Event::new(
+    solar_festival_names()[index],
+    "@" + solar_festival_data[start:start + 8].to_owned(),
+  ).unwrap()
   if year < e.get_start_year() {
     return None
   }
@@ -42,7 +50,11 @@ pub fn SolarFestival::from_index(year : Int, index : Int) -> Option[SolarFestiva
 
 ///|
 // from_ymd 从年月日构造
-pub fn SolarFestival::from_ymd(year : Int, month : Int, day : Int) -> Option[SolarFestival] {
+pub fn SolarFestival::from_ymd(
+  year : Int,
+  month : Int,
+  day : Int,
+) -> SolarFestival? {
   let d = match SolarDay::from_ymd(year, month, day) {
     Err(_) => return None
     Ok(v) => v
@@ -50,7 +62,10 @@ pub fn SolarFestival::from_ymd(year : Int, month : Int, day : Int) -> Option[Sol
   for i = 0; i < solar_festival_names().length(); i = i + 1 {
     let name = solar_festival_names()[i]
     let start = i * 8
-    let e = Event::new(name, "@" + (solar_festival_data[start:start + 8]).to_owned()).unwrap()
+    let e = Event::new(
+      name,
+      "@" + solar_festival_data[start:start + 8].to_owned(),
+    ).unwrap()
     if d.get_year() >= e.get_start_year() &&
       d.get_month() == e.get_value(2) &&
       d.get_day() == e.get_value(3) {
@@ -79,7 +94,7 @@ pub fn SolarFestival::get_start_year(self : SolarFestival) -> Int {
 
 ///|
 // next 推移
-pub fn SolarFestival::next(self : SolarFestival, n : Int) -> Option[SolarFestival] {
+pub fn SolarFestival::next(self : SolarFestival, n : Int) -> SolarFestival? {
   let size = solar_festival_names().length()
   let i = self.festival.index + n
   SolarFestival::from_index(
@@ -91,7 +106,7 @@ pub fn SolarFestival::next(self : SolarFestival, n : Int) -> Option[SolarFestiva
 ///|
 // get_name 名称
 pub fn SolarFestival::get_name(self : SolarFestival) -> String {
-  self.festival.get_name()
+  Culture::get_name(self.festival)
 }
 
 ///|
@@ -101,11 +116,14 @@ pub fn SolarFestival::get_index(self : SolarFestival) -> Int {
 }
 
 ///|
-impl Culture for SolarFestival with get_name(self : SolarFestival) -> String {
-  self.festival.get_name()
+impl Culture for SolarFestival with fn get_name(self : SolarFestival) -> String {
+  Culture::get_name(self.festival)
 }
 
 ///|
-impl Show for SolarFestival with to_string(self : SolarFestival) -> String {
+impl Show for SolarFestival with fn to_string(self : SolarFestival) -> String {
   self.get_day().to_string() + " " + self.get_name()
 }
+
+///|
+extend SolarFestival with Show::{to_string}

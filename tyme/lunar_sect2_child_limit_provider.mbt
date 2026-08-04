@@ -1,10 +1,9 @@
 ///|
 // LunarSect2ChildLimitProvider Lunar的流派2童限计算（按分钟数计算）
-pub struct LunarSect2ChildLimitProvider {
-}
+pub struct LunarSect2ChildLimitProvider {}
 
 ///|
-impl IChildLimitProvider for LunarSect2ChildLimitProvider with get_info(
+impl IChildLimitProvider for LunarSect2ChildLimitProvider with fn get_info(
   self : LunarSect2ChildLimitProvider,
   birth_time : SolarTime,
   term : SolarTerm,

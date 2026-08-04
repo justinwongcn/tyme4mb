@@ -22,7 +22,11 @@ pub fn FetusDay::new(sixty_cycle : SixtyCycle) -> FetusDay {
   let fetus_earth_branch = FetusEarthBranch::new(
     sixty_cycle.get_earth_branch().get_index() % 6,
   )
-  let index = [3, 3, 8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, -9, -9, -9, -9, -9, -5, -5, -1, -1, -1, -3, -7, -7, -7, -7, -5, 7, 7, 7, 7, 7, 7, 2, 2, 2, 2, 2, 3, 3, 3, 3][sixty_cycle.get_index()]
+  let index = [
+      3, 3, 8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 0,
+      0, 0, 0, 0, -9, -9, -9, -9, -9, -5, -5, -1, -1, -1, -3, -7, -7, -7, -7, -5,
+      7, 7, 7, 7, 7, 7, 2, 2, 2, 2, 2, 3, 3, 3, 3,
+    ][sixty_cycle.get_index()]
   let mut side = Out
   if index < 0 {
     side = In
@@ -70,15 +74,16 @@ pub fn FetusDay::get_fetus_earth_branch(self : FetusDay) -> FetusEarthBranch {
 }
 
 ///|
-impl Culture for FetusDay with get_name(self : FetusDay) -> String {
-  let mut s = self.fetus_heaven_stem.get_name() + self.fetus_earth_branch.get_name()
+impl Culture for FetusDay with fn get_name(self : FetusDay) -> String {
+  let mut s = self.fetus_heaven_stem.get_name() +
+    self.fetus_earth_branch.get_name()
   if "门门" == s {
     s = "占大门"
   } else if "碓磨碓" == s {
     s = "占碓磨"
   } else if "房床床" == s {
     s = "占房床"
-  } else if s.length() >= 1 && s.unsafe_charcode_at(0) == '门'.to_int() {
+  } else if s.length() >= 1 && s.unsafe_get(0).to_int() == '门'.to_int() {
     s = "占" + s
   }
   s = s + " "
@@ -107,7 +112,7 @@ fn str_contains(haystack : String, needle : String) -> Bool {
   for i = 0; i + nl <= hl; i = i + 1 {
     let mut ok = true
     for j = 0; j < nl; j = j + 1 {
-      if haystack.unsafe_charcode_at(i + j) != needle.unsafe_charcode_at(j) {
+      if haystack.unsafe_get(i + j).to_int() != needle.unsafe_get(j).to_int() {
         ok = false
         break
       }
@@ -120,7 +125,7 @@ fn str_contains(haystack : String, needle : String) -> Bool {
 }
 
 ///|
-impl Show for FetusDay with to_string(self : FetusDay) -> String {
+impl Show for FetusDay with fn to_string(self : FetusDay) -> String {
   self.get_name()
 }
 

@@ -38,16 +38,16 @@ pub fn Dog::get_index(self : Dog) -> Int {
 }
 
 ///|
-impl Culture for Dog with get_name(self : Dog) -> String {
+impl Culture for Dog with fn get_name(self : Dog) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Dog with to_string(self : Dog) -> String {
+impl Show for Dog with fn to_string(self : Dog) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Dog with next(self : Dog, n : Int) -> Dog {
+impl Tyme for Dog with fn next(self : Dog, n : Int) -> Dog {
   Dog::from_index(self.loop_tyme.get_index() + n)
 }

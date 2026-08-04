@@ -2,9 +2,10 @@
 // rab_byung_day_names 藏历日名称
 pub fn rab_byung_day_names() -> Array[String] {
   [
-    "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四",
-    "十五", "十六", "十七", "十八", "十九", "二十", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八",
-    "廿九", "三十",
+    "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八",
+    "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六",
+    "十七", "十八", "十九", "二十", "廿一", "廿二", "廿三", "廿四",
+    "廿五", "廿六", "廿七", "廿八", "廿九", "三十",
   ]
 }
 
@@ -30,7 +31,13 @@ pub fn RabByungDay::validate(
   day : Int,
 ) -> Result[Unit, String] {
   if day == 0 || day < -30 || day > 30 {
-    return Err("illegal day " + day.to_string() + " in %!s(int=" + month.to_string() + ")")
+    return Err(
+      "illegal day " +
+      day.to_string() +
+      " in %!s(int=" +
+      month.to_string() +
+      ")",
+    )
   }
   let m = match RabByungMonth::from_ym(year, month) {
     Ok(v) => v
@@ -47,10 +54,8 @@ pub fn RabByungDay::validate(
     if !arr_contains(leap_days, d) {
       return Err("illegal leap day " + d.to_string() + " in " + m.to_string())
     }
-  } else {
-    if arr_contains(miss_days, d) {
-      return Err("illegal day " + d.to_string() + " in " + m.to_string())
-    }
+  } else if arr_contains(miss_days, d) {
+    return Err("illegal day " + d.to_string() + " in " + m.to_string())
   }
   Ok(())
 }
@@ -70,12 +75,10 @@ pub fn RabByungDay::new(
   if d < 0 {
     d = -d
   }
-  Ok(
-    RabByungDay::{
-      day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), d),
-      leap: day < 0,
-    },
-  )
+  Ok(RabByungDay::{
+    day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), d),
+    leap: day < 0,
+  })
 }
 
 ///|
@@ -153,7 +156,10 @@ pub fn RabByungDay::get_rab_byung_month(self : RabByungDay) -> RabByungMonth {
     Ok(m) => m
     Err(_) =>
       RabByungMonth::{
-        month_unit: MonthUnit::new(YearUnit::new(self.get_year()), self.get_month()),
+        month_unit: MonthUnit::new(
+          YearUnit::new(self.get_year()),
+          self.get_month(),
+        ),
         leap: false,
       }
   }
@@ -227,7 +233,7 @@ pub fn RabByungDay::equals(self : RabByungDay, target : RabByungDay) -> Bool {
 }
 
 ///|
-impl Culture for RabByungDay with get_name(self : RabByungDay) -> String {
+impl Culture for RabByungDay with fn get_name(self : RabByungDay) -> String {
   let name = rab_byung_day_names()[self.get_day() - 1]
   if self.leap {
     return "闰" + name
@@ -236,6 +242,6 @@ impl Culture for RabByungDay with get_name(self : RabByungDay) -> String {
 }
 
 ///|
-impl Show for RabByungDay with to_string(self : RabByungDay) -> String {
+impl Show for RabByungDay with fn to_string(self : RabByungDay) -> String {
   self.get_rab_byung_month().to_string() + self.get_name()
 }

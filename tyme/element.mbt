@@ -74,16 +74,16 @@ pub fn Element::get_direction(self : Element) -> Direction {
 }
 
 ///|
-impl Culture for Element with get_name(self : Element) -> String {
+impl Culture for Element with fn get_name(self : Element) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Element with to_string(self : Element) -> String {
+impl Show for Element with fn to_string(self : Element) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Element with next(self : Element, n : Int) -> Element {
+impl Tyme for Element with fn next(self : Element, n : Int) -> Element {
   Element::from_index(self.loop_tyme.get_index() + n)
 }

@@ -4,10 +4,12 @@
 // 注意：MoonBit 跨包不可见 trait 方法（Show/Culture），
 // 因此使用 get_index + 名称数组的方式构建显示字符串。
 
+///|
 fn solar_day_str(d : @tyme.SolarDay) -> String {
   "\{d.get_year()}年\{d.get_month()}月\{d.get_day()}日"
 }
 
+///|
 fn sixty_cycle_str(sc : @tyme.SixtyCycle) -> String {
   let stemNames = @tyme.heaven_stem_names()
   let branchNames = @tyme.earth_branch_names()
@@ -16,41 +18,50 @@ fn sixty_cycle_str(sc : @tyme.SixtyCycle) -> String {
   stem + branch
 }
 
+///|
 fn zodiac_str(z : @tyme.Zodiac) -> String {
   @tyme.zodiac_names()[z.get_index()]
 }
 
+///|
 fn week_str(w : @tyme.Week) -> String {
   let names = ["日", "一", "二", "三", "四", "五", "六"]
   "星期" + names[w.get_index()]
 }
 
+///|
 fn constellation_str(c : @tyme.Constellation) -> String {
   @tyme.constellation_names()[c.get_index()]
 }
 
+///|
 fn solar_term_str(t : @tyme.SolarTerm) -> String {
   let sd = t.get_solar_day()
   "\{solar_day_str(sd)} (" + (if t.is_jie() { "节" } else { "气" }) + ")"
 }
 
+///|
 fn hijri_day_str(d : @tyme.HijriDay) -> String {
   "\{d.get_year()}年\{d.get_month()}月\{d.get_day()}日"
 }
 
+///|
 fn rab_byung_day_str(d : @tyme.RabByungDay) -> String {
   let leap = if d.is_leap() { "闰" } else { "" }
   "\{d.get_year()}年\{leap}\{d.get_month()}月\{d.get_day()}日"
 }
 
+///|
 fn god_str(g : @tyme.God) -> String {
   @tyme.god_names()[g.get_index()]
 }
 
+///|
 fn taboo_str(t : @tyme.Taboo) -> String {
   @tyme.taboo_names()[t.get_index()]
 }
 
+///|
 fn main {
   // ========== 1. 公历日 ==========
   println("========== 公历日 ==========")
@@ -88,7 +99,9 @@ fn main {
   let lunarHour = solarTime.get_lunar_hour()
   let eightChar = @tyme.eight_char_provider.get_eight_char(lunarHour)
   println("出生时间: 1990年5月15日 14:30")
-  println("八字: \{sixty_cycle_str(eightChar.get_year())} \{sixty_cycle_str(eightChar.get_month())} \{sixty_cycle_str(eightChar.get_day())} \{sixty_cycle_str(eightChar.get_hour())}")
+  println(
+    "八字: \{sixty_cycle_str(eightChar.get_year())} \{sixty_cycle_str(eightChar.get_month())} \{sixty_cycle_str(eightChar.get_day())} \{sixty_cycle_str(eightChar.get_hour())}",
+  )
 
   // ========== 6. 神煞宜忌 ==========
   println("\n========== 神煞宜忌 ==========")
@@ -169,17 +182,27 @@ fn main {
   println("\n========== 示例结束 ==========")
 }
 
+///|
 fn lunar_day_str(d : @tyme.LunarDay) -> String {
   let monthNames = @tyme.lunar_month_names()
   let dayNames = @tyme.lunar_day_names()
   let m = d.get_lunar_month()
   let monthIdx = m.get_month()
-  let monthName = if m.is_leap() { "闰" + monthNames[monthIdx] } else { monthNames[monthIdx] }
+  let monthName = if m.is_leap() {
+    "闰" + monthNames[monthIdx]
+  } else {
+    monthNames[monthIdx]
+  }
   "\{d.get_year()}年\{monthName}\{dayNames[d.get_day() - 1]}"
 }
 
+///|
 fn lunar_month_str(m : @tyme.LunarMonth) -> String {
   let monthNames = @tyme.lunar_month_names()
-  let monthName = if m.is_leap() { "闰" + monthNames[m.get_month()] } else { monthNames[m.get_month()] }
+  let monthName = if m.is_leap() {
+    "闰" + monthNames[m.get_month()]
+  } else {
+    monthNames[m.get_month()]
+  }
   "\{m.get_year()}年\{monthName}"
 }

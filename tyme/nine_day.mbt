@@ -28,11 +28,11 @@ pub fn NineDay::get_day_index(self : NineDay) -> Int {
 }
 
 ///|
-impl Culture for NineDay with get_name(self : NineDay) -> String {
-  self.abstract_culture_day.get_name()
+impl Culture for NineDay with fn get_name(self : NineDay) -> String {
+  Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for NineDay with to_string(self : NineDay) -> String {
-  self.abstract_culture_day.to_string()
+impl Show for NineDay with fn to_string(self : NineDay) -> String {
+  Show::to_string(self.abstract_culture_day)
 }

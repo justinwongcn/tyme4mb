@@ -24,7 +24,7 @@ extend WeekUnit with Show::{to_string}
 pub fn WeekUnit::new(
   month_unit : MonthUnit,
   index : Int,
-  start : Int
+  start : Int,
 ) -> WeekUnit {
   { month_unit, index, start }
 }
@@ -53,7 +53,7 @@ pub fn WeekUnit::validate(
   _year : Int,
   _month : Int,
   index : Int,
-  start : Int
+  start : Int,
 ) -> Result[Unit, String] {
   if index < 0 || index > 5 {
     return Err("illegal week index: " + index.to_string())
@@ -65,11 +65,11 @@ pub fn WeekUnit::validate(
 }
 
 ///|
-impl Culture for WeekUnit with get_name(self : WeekUnit) -> String {
+impl Culture for WeekUnit with fn get_name(self : WeekUnit) -> String {
   self.month_unit.get_name()
 }
 
 ///|
-impl Show for WeekUnit with to_string(self : WeekUnit) -> String {
+impl Show for WeekUnit with fn to_string(self : WeekUnit) -> String {
   self.get_name()
 }

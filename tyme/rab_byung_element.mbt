@@ -30,7 +30,7 @@ pub fn RabByungElement::from_index(index : Int) -> RabByungElement {
 
 ///|
 pub fn RabByungElement::from_name(
-  name : String
+  name : String,
 ) -> Result[RabByungElement, String] {
   match LoopTyme::from_name(rab_byung_element_names(), name) {
     Ok(p) => Ok(RabByungElement::{ element: Element::{ loop_tyme: p } })
@@ -52,23 +52,21 @@ pub fn RabByungElement::get_element(self : RabByungElement) -> Element {
 ///|
 // get_reinforce 我生者
 pub fn RabByungElement::get_reinforce(
-  self : RabByungElement
+  self : RabByungElement,
 ) -> RabByungElement {
   self.next(1)
 }
 
 ///|
 // get_restrain 我克者
-pub fn RabByungElement::get_restrain(
-  self : RabByungElement
-) -> RabByungElement {
+pub fn RabByungElement::get_restrain(self : RabByungElement) -> RabByungElement {
   self.next(2)
 }
 
 ///|
 // get_reinforced 生我者
 pub fn RabByungElement::get_reinforced(
-  self : RabByungElement
+  self : RabByungElement,
 ) -> RabByungElement {
   self.next(-1)
 }
@@ -76,29 +74,22 @@ pub fn RabByungElement::get_reinforced(
 ///|
 // get_restrained 克我者
 pub fn RabByungElement::get_restrained(
-  self : RabByungElement
+  self : RabByungElement,
 ) -> RabByungElement {
   self.next(-2)
 }
 
 ///|
-impl Culture for RabByungElement with get_name(
-  self : RabByungElement
-) -> String {
+impl Culture for RabByungElement with fn get_name(self : RabByungElement) -> String {
   self.element.get_name()
 }
 
 ///|
-impl Show for RabByungElement with to_string(
-  self : RabByungElement
-) -> String {
+impl Show for RabByungElement with fn to_string(self : RabByungElement) -> String {
   self.element.get_name()
 }
 
 ///|
-impl Tyme for RabByungElement with next(
-  self : RabByungElement,
-  n : Int
-) -> RabByungElement {
+impl Tyme for RabByungElement with fn next(self : RabByungElement, n : Int) -> RabByungElement {
   RabByungElement::from_index(self.element.get_index() + n)
 }

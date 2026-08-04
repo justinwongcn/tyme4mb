@@ -4,23 +4,27 @@
 
 ///|
 // 断言相等：T 需实现 Eq 与 Show
-fn expect_eq[T: Eq + Show](got: T, expected: T, msg: String) -> Unit {
+fn[T : Eq + Show] expect_eq(got : T, expected : T, msg : String) -> Unit {
   if got != expected {
-    abort("ASSERT EQ FAIL: \{msg}\n  got     = \{got}\n  expected = \{expected}")
+    abort(
+      "ASSERT EQ FAIL: \{msg}\n  got     = \{got}\n  expected = \{expected}",
+    )
   }
 }
 
 ///|
 // 断言不等
-fn expect_ne[T: Eq + Show](got: T, unexpected: T, msg: String) -> Unit {
+fn[T : Eq + Show] expect_ne(got : T, unexpected : T, msg : String) -> Unit {
   if got == unexpected {
-    abort("ASSERT NE FAIL: \{msg}\n  got        = \{got}\n  unexpected = \{unexpected}")
+    abort(
+      "ASSERT NE FAIL: \{msg}\n  got        = \{got}\n  unexpected = \{unexpected}",
+    )
   }
 }
 
 ///|
 // 断言为真
-fn expect_true(cond: Bool, msg: String) -> Unit {
+fn expect_true(cond : Bool, msg : String) -> Unit {
   if !cond {
     abort("ASSERT TRUE FAIL: \{msg}")
   }
@@ -28,7 +32,7 @@ fn expect_true(cond: Bool, msg: String) -> Unit {
 
 ///|
 // 断言为假
-fn expect_false(cond: Bool, msg: String) -> Unit {
+fn expect_false(cond : Bool, msg : String) -> Unit {
   if cond {
     abort("ASSERT FALSE FAIL: \{msg}")
   }
@@ -36,7 +40,7 @@ fn expect_false(cond: Bool, msg: String) -> Unit {
 
 ///|
 // 浮点近似断言（容许误差 eps）
-fn expect_near(a: Double, b: Double, eps: Double, msg: String) -> Unit {
+fn expect_near(a : Double, b : Double, eps : Double, msg : String) -> Unit {
   if (a - b).abs() > eps {
     abort("ASSERT NEAR FAIL: \{msg}\n  a=\{a} b=\{b} eps=\{eps}")
   }

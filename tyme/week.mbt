@@ -49,16 +49,16 @@ pub fn Week::equals(self : Week, target : Week) -> Bool {
 }
 
 ///|
-impl Culture for Week with get_name(self : Week) -> String {
+impl Culture for Week with fn get_name(self : Week) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Week with to_string(self : Week) -> String {
+impl Show for Week with fn to_string(self : Week) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Week with next(self : Week, n : Int) -> Week {
+impl Tyme for Week with fn next(self : Week, n : Int) -> Week {
   Week::from_index(self.loop_tyme.get_index() + n)
 }

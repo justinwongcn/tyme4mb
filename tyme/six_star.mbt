@@ -38,16 +38,16 @@ pub fn SixStar::get_index(self : SixStar) -> Int {
 }
 
 ///|
-impl Culture for SixStar with get_name(self : SixStar) -> String {
+impl Culture for SixStar with fn get_name(self : SixStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for SixStar with to_string(self : SixStar) -> String {
+impl Show for SixStar with fn to_string(self : SixStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for SixStar with next(self : SixStar, n : Int) -> SixStar {
+impl Tyme for SixStar with fn next(self : SixStar, n : Int) -> SixStar {
   SixStar::from_index(self.loop_tyme.get_index() + n)
 }

@@ -2,8 +2,9 @@
 // hijri_month_names 回历月名称
 pub fn hijri_month_names() -> Array[String] {
   [
-    "穆哈兰姆月", "色法尔月", "赖比尔·敖外鲁月", "赖比尔·阿色尼月", "主马达·敖外鲁月", "主马达·阿色尼月", "赖哲卜月", "舍尔邦月", "赖买丹月",
-    "闪瓦鲁月", "都尔喀尔德月", "都尔黑哲月",
+    "穆哈兰姆月", "色法尔月", "赖比尔·敖外鲁月", "赖比尔·阿色尼月",
+    "主马达·敖外鲁月", "主马达·阿色尼月", "赖哲卜月", "舍尔邦月",
+    "赖买丹月", "闪瓦鲁月", "都尔喀尔德月", "都尔黑哲月",
   ]
 }
 
@@ -56,9 +57,7 @@ pub fn HijriMonth::from_ym(
 ) -> Result[HijriMonth, String] {
   match HijriMonth::validate(year, month) {
     Ok(_) =>
-      Ok(
-        HijriMonth::{ month_unit: MonthUnit::new(YearUnit::new(year), month) },
-      )
+      Ok(HijriMonth::{ month_unit: MonthUnit::new(YearUnit::new(year), month) })
     Err(e) => Err(e)
   }
 }
@@ -121,17 +120,17 @@ pub fn HijriMonth::get_first_day(self : HijriMonth) -> HijriDay {
 }
 
 ///|
-impl Culture for HijriMonth with get_name(self : HijriMonth) -> String {
+impl Culture for HijriMonth with fn get_name(self : HijriMonth) -> String {
   hijri_month_names()[self.get_index_in_year()]
 }
 
 ///|
-impl Show for HijriMonth with to_string(self : HijriMonth) -> String {
+impl Show for HijriMonth with fn to_string(self : HijriMonth) -> String {
   self.get_hijri_year().to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for HijriMonth with next(self : HijriMonth, n : Int) -> HijriMonth {
+impl Tyme for HijriMonth with fn next(self : HijriMonth, n : Int) -> HijriMonth {
   let i = self.get_month() - 1 + n
   match
     HijriMonth::from_ym(

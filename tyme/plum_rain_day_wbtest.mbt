@@ -15,9 +15,5 @@ test "plum_rain_day_0" {
     "入梅",
     "PlumRainDay.GetPlumRain().GetName()",
   )
-  expect_eq(
-    d.to_string(),
-    "入梅第1天",
-    "PlumRainDay.String()",
-  )
+  expect_eq(d.to_string(), "入梅第1天", "PlumRainDay.String()")
 }

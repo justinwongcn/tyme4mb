@@ -1,7 +1,10 @@
 ///|
 // EarthBranchNames 地支名称
 pub fn earth_branch_names() -> Array[String] {
-  ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
+  [
+    "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌",
+    "亥",
+  ]
 }
 
 ///|
@@ -68,7 +71,9 @@ pub fn EarthBranch::get_hide_heaven_stem_main(self : EarthBranch) -> HeavenStem 
 
 ///|
 // get_hide_heaven_stem_middle 藏干之中气，无中气返回None
-pub fn EarthBranch::get_hide_heaven_stem_middle(self : EarthBranch) -> Option[HeavenStem] {
+pub fn EarthBranch::get_hide_heaven_stem_middle(
+  self : EarthBranch,
+) -> HeavenStem? {
   let a = [-1, 9, 2, -1, 1, 6, 5, 3, 8, -1, 7, 0]
   let n = a[self.loop_tyme.get_index()]
   if n == -1 {
@@ -80,7 +85,9 @@ pub fn EarthBranch::get_hide_heaven_stem_middle(self : EarthBranch) -> Option[He
 
 ///|
 // get_hide_heaven_stem_residual 藏干之余气，无余气返回None
-pub fn EarthBranch::get_hide_heaven_stem_residual(self : EarthBranch) -> Option[HeavenStem] {
+pub fn EarthBranch::get_hide_heaven_stem_residual(
+  self : EarthBranch,
+) -> HeavenStem? {
   let a = [-1, 7, 4, -1, 9, 4, -1, 1, 4, -1, 3, -1]
   let n = a[self.loop_tyme.get_index()]
   if n == -1 {
@@ -92,7 +99,9 @@ pub fn EarthBranch::get_hide_heaven_stem_residual(self : EarthBranch) -> Option[
 
 ///|
 // get_hide_heaven_stems 藏干列表
-pub fn EarthBranch::get_hide_heaven_stems(self : EarthBranch) -> Array[HideHeavenStem] {
+pub fn EarthBranch::get_hide_heaven_stems(
+  self : EarthBranch,
+) -> Array[HideHeavenStem] {
   let l : Array[HideHeavenStem] = []
   let main = self.get_hide_heaven_stem_main()
   l.push(HideHeavenStem::from_index(main.get_index(), Main))
@@ -129,7 +138,9 @@ pub fn EarthBranch::get_ominous(self : EarthBranch) -> Direction {
 
 ///|
 // get_peng_zu_earth_branch 地支彭祖百忌
-pub fn EarthBranch::get_peng_zu_earth_branch(self : EarthBranch) -> PengZuEarthBranch {
+pub fn EarthBranch::get_peng_zu_earth_branch(
+  self : EarthBranch,
+) -> PengZuEarthBranch {
   PengZuEarthBranch::from_index(self.loop_tyme.get_index())
 }
 
@@ -153,7 +164,10 @@ pub fn EarthBranch::get_harm(self : EarthBranch) -> EarthBranch {
 
 ///|
 // combine 合化（子丑合化土，寅亥合化木，卯戌合化火，辰酉合化金，巳申合化水，午未合化土），如果无法合化，返回None
-pub fn EarthBranch::combine(self : EarthBranch, target : EarthBranch) -> Option[Element] {
+pub fn EarthBranch::combine(
+  self : EarthBranch,
+  target : EarthBranch,
+) -> Element? {
   if self.get_combine().equals(target) {
     let a = [2, 2, 0, 1, 3, 4, 2, 2, 4, 3, 1, 0]
     Some(Element::from_index(a[self.loop_tyme.get_index()]))
@@ -163,16 +177,16 @@ pub fn EarthBranch::combine(self : EarthBranch, target : EarthBranch) -> Option[
 }
 
 ///|
-impl Culture for EarthBranch with get_name(self : EarthBranch) -> String {
+impl Culture for EarthBranch with fn get_name(self : EarthBranch) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for EarthBranch with to_string(self : EarthBranch) -> String {
+impl Show for EarthBranch with fn to_string(self : EarthBranch) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for EarthBranch with next(self : EarthBranch, n : Int) -> EarthBranch {
+impl Tyme for EarthBranch with fn next(self : EarthBranch, n : Int) -> EarthBranch {
   EarthBranch::from_index(self.loop_tyme.get_index() + n)
 }

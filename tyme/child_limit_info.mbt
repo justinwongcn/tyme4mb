@@ -19,8 +19,24 @@ pub struct ChildLimitInfo {
 
 ///|
 // New 童限信息
-pub fn ChildLimitInfo::new(start_time : SolarTime, end_time : SolarTime, year_count : Int, month_count : Int, day_count : Int, hour_count : Int, minute_count : Int) -> ChildLimitInfo {
-  { start_time, end_time, year_count, month_count, day_count, hour_count, minute_count }
+pub fn ChildLimitInfo::new(
+  start_time : SolarTime,
+  end_time : SolarTime,
+  year_count : Int,
+  month_count : Int,
+  day_count : Int,
+  hour_count : Int,
+  minute_count : Int,
+) -> ChildLimitInfo {
+  {
+    start_time,
+    end_time,
+    year_count,
+    month_count,
+    day_count,
+    hour_count,
+    minute_count,
+  }
 }
 
 ///|

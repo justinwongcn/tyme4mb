@@ -44,16 +44,16 @@ pub fn SevenStar::get_week(self : SevenStar) -> Week {
 }
 
 ///|
-impl Culture for SevenStar with get_name(self : SevenStar) -> String {
+impl Culture for SevenStar with fn get_name(self : SevenStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for SevenStar with to_string(self : SevenStar) -> String {
+impl Show for SevenStar with fn to_string(self : SevenStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for SevenStar with next(self : SevenStar, n : Int) -> SevenStar {
+impl Tyme for SevenStar with fn next(self : SevenStar, n : Int) -> SevenStar {
   SevenStar::from_index(self.loop_tyme.get_index() + n)
 }

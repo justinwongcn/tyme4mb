@@ -1,4 +1,5 @@
 // two_digits 两位补零
+
 ///|
 fn two_digits(n : Int) -> String {
   if n < 10 {
@@ -22,7 +23,7 @@ extend SolarTime with Show::{to_string}
 
 ///|
 pub fn SolarTime::new(second_unit : SecondUnit) -> SolarTime {
-  { second_unit }
+  { second_unit, }
 }
 
 ///|
@@ -106,7 +107,7 @@ pub fn SolarTime::validate(
   day : Int,
   hour : Int,
   minute : Int,
-  second : Int
+  second : Int,
 ) -> Result[Unit, String] {
   match SecondUnit::validate(year, month, day, hour, minute, second) {
     Ok(_) => SolarDay::validate(year, month, day)
@@ -122,7 +123,7 @@ pub fn SolarTime::from_ymdhms(
   day : Int,
   hour : Int,
   minute : Int,
-  second : Int
+  second : Int,
 ) -> Result[SolarTime, String] {
   match SolarTime::validate(year, month, day, hour, minute, second) {
     Ok(_) =>
@@ -151,29 +152,34 @@ pub fn SolarTime::get_solar_day(self : SolarTime) -> SolarDay {
 // next 偏移 n 秒
 pub fn SolarTime::next(self : SolarTime, n : Int) -> SolarTime {
   if n == 0 {
-    match SolarTime::from_ymdhms(
-      self.get_year(),
-      self.get_month(),
-      self.get_day(),
-      self.get_hour(),
-      self.get_minute(),
-      self.get_second(),
-    ) {
+    match
+      SolarTime::from_ymdhms(
+        self.get_year(),
+        self.get_month(),
+        self.get_day(),
+        self.get_hour(),
+        self.get_minute(),
+        self.get_second(),
+      ) {
       Ok(t) => t
       Err(_) => SolarTime::new(self.second_unit)
     }
   } else {
-    let ts = self.get_hour() * 3600 + self.get_minute() * 60 + self.get_second() + n
+    let ts = self.get_hour() * 3600 +
+      self.get_minute() * 60 +
+      self.get_second() +
+      n
     let s = AbstractCulture::index_of(ts, 86400)
     let d = self.get_solar_day().next(AbstractCulture::floor_div(ts, 86400))
-    match SolarTime::from_ymdhms(
-      d.get_year(),
-      d.get_month(),
-      d.get_day(),
-      s / 3600,
-      (s % 3600) / 60,
-      s % 60,
-    ) {
+    match
+      SolarTime::from_ymdhms(
+        d.get_year(),
+        d.get_month(),
+        d.get_day(),
+        s / 3600,
+        s % 3600 / 60,
+        s % 60,
+      ) {
       Ok(t) => t
       Err(_) => SolarTime::new(self.second_unit)
     }
@@ -213,7 +219,11 @@ pub fn SolarTime::get_phenology(self : SolarTime) -> Phenology {
 // get_phase 月相（先经农历时辰→农历日→农历月，取次月首朔推算）
 pub fn SolarTime::get_phase(self : SolarTime) -> Phase {
   let month = self.get_lunar_hour().get_lunar_day().get_lunar_month().next(1)
-  let mut p = Phase::from_index(month.get_year(), month.get_month_with_leap(), 0)
+  let mut p = Phase::from_index(
+    month.get_year(),
+    month.get_month_with_leap(),
+    0,
+  )
   while p.get_solar_time().is_after(self) {
     p = p.next(-1)
   }
@@ -241,12 +251,15 @@ pub fn SolarTime::get_sixty_cycle_hour(self : SolarTime) -> SixtyCycleHour {
 }
 
 ///|
-impl Culture for SolarTime with get_name(self : SolarTime) -> String {
-  two_digits(self.get_hour()) + ":" + two_digits(self.get_minute()) + ":" +
+impl Culture for SolarTime with fn get_name(self : SolarTime) -> String {
+  two_digits(self.get_hour()) +
+  ":" +
+  two_digits(self.get_minute()) +
+  ":" +
   two_digits(self.get_second())
 }
 
 ///|
-impl Show for SolarTime with to_string(self : SolarTime) -> String {
+impl Show for SolarTime with fn to_string(self : SolarTime) -> String {
   self.get_solar_day().to_string() + " " + self.get_name()
 }

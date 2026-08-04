@@ -14,7 +14,12 @@ extend SecondUnit with Culture::{get_name}
 extend SecondUnit with Show::{to_string}
 
 ///|
-pub fn SecondUnit::new(day_unit : DayUnit, hour : Int, minute : Int, second : Int) -> SecondUnit {
+pub fn SecondUnit::new(
+  day_unit : DayUnit,
+  hour : Int,
+  minute : Int,
+  second : Int,
+) -> SecondUnit {
   { day_unit, hour, minute, second }
 }
 
@@ -44,7 +49,7 @@ pub fn SecondUnit::validate(
   _day : Int,
   hour : Int,
   minute : Int,
-  second : Int
+  second : Int,
 ) -> Result[Unit, String] {
   if hour < 0 || hour > 23 {
     return Err("illegal hour: " + hour.to_string())
@@ -73,11 +78,11 @@ pub fn SecondUnit::get_compare_index(self : SecondUnit) -> Int64 {
 }
 
 ///|
-impl Culture for SecondUnit with get_name(self : SecondUnit) -> String {
+impl Culture for SecondUnit with fn get_name(self : SecondUnit) -> String {
   self.day_unit.get_name()
 }
 
 ///|
-impl Show for SecondUnit with to_string(self : SecondUnit) -> String {
+impl Show for SecondUnit with fn to_string(self : SecondUnit) -> String {
   self.get_name()
 }

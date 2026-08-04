@@ -2,8 +2,8 @@
 // HideHeavenStemType 藏干类型
 pub(all) enum HideHeavenStemType {
   Residual // 余气
-  Middle   // 中气
-  Main     // 本气
+  Middle // 中气
+  Main // 本气
 }
 
 ///|
@@ -34,6 +34,9 @@ pub fn HideHeavenStemType::get_name(self : HideHeavenStemType) -> String {
 }
 
 ///|
-impl Show for HideHeavenStemType with to_string(self : HideHeavenStemType) -> String {
+impl Show for HideHeavenStemType with fn to_string(self : HideHeavenStemType) -> String {
   self.get_name()
 }
+
+///|
+extend HideHeavenStemType with Show::{to_string}

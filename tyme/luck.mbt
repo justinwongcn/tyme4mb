@@ -38,16 +38,16 @@ pub fn Luck::get_index(self : Luck) -> Int {
 }
 
 ///|
-impl Culture for Luck with get_name(self : Luck) -> String {
+impl Culture for Luck with fn get_name(self : Luck) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Luck with to_string(self : Luck) -> String {
+impl Show for Luck with fn to_string(self : Luck) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Luck with next(self : Luck, n : Int) -> Luck {
+impl Tyme for Luck with fn next(self : Luck, n : Int) -> Luck {
   Luck::from_index(self.loop_tyme.get_index() + n)
 }

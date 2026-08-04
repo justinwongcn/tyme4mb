@@ -1,7 +1,13 @@
 // solar_day_names 公历日名称
+
 ///|
 pub fn solar_day_names() -> Array[String] {
-  ["1日", "2日", "3日", "4日", "5日", "6日", "7日", "8日", "9日", "10日", "11日", "12日", "13日", "14日", "15日", "16日", "17日", "18日", "19日", "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日", "29日", "30日", "31日"]
+  [
+    "1日", "2日", "3日", "4日", "5日", "6日", "7日", "8日", "9日", "10日",
+    "11日", "12日", "13日", "14日", "15日", "16日", "17日", "18日", "19日",
+    "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日",
+    "29日", "30日", "31日",
+  ]
 }
 
 ///|
@@ -18,7 +24,7 @@ extend SolarDay with Show::{to_string}
 
 ///|
 pub fn SolarDay::new(day_unit : DayUnit) -> SolarDay {
-  { day_unit }
+  { day_unit, }
 }
 
 ///|
@@ -26,10 +32,10 @@ pub fn SolarDay::new(day_unit : DayUnit) -> SolarDay {
 pub fn SolarDay::validate(
   year : Int,
   month : Int,
-  day : Int
+  day : Int,
 ) -> Result[Unit, String] {
   let mut illegal = day < 1
-  if not(illegal) {
+  if !illegal {
     if year == 1582 && month == 10 {
       illegal = (day > 4 && day < 15) || day > 31
     } else {
@@ -50,7 +56,7 @@ pub fn SolarDay::validate(
 pub fn SolarDay::from_ymd(
   year : Int,
   month : Int,
-  day : Int
+  day : Int,
 ) -> Result[SolarDay, String] {
   match SolarDay::validate(year, month, day) {
     Ok(_) =>
@@ -109,7 +115,14 @@ pub fn SolarDay::get_day(self : SolarDay) -> Int {
 ///|
 // get_julian_day 儒略日
 pub fn SolarDay::get_julian_day(self : SolarDay) -> JulianDay {
-  JulianDay::from_ymdhms(self.get_year(), self.get_month(), self.get_day(), 0, 0, 0)
+  JulianDay::from_ymdhms(
+    self.get_year(),
+    self.get_month(),
+    self.get_day(),
+    0,
+    0,
+    0,
+  )
 }
 
 ///|
@@ -204,7 +217,10 @@ pub fn SolarDay::get_phenology_day(self : SolarDay) -> PhenologyDay {
   }
   let term = d.get_solar_term()
   PhenologyDay::new(
-    Phenology::from_index(term.get_year(), term.loop_tyme.get_index() * 3 + index),
+    Phenology::from_index(
+      term.get_year(),
+      term.loop_tyme.get_index() * 3 + index,
+    ),
     day_index - index * 5,
   )
 }
@@ -217,7 +233,7 @@ pub fn SolarDay::get_phenology(self : SolarDay) -> Phenology {
 
 ///|
 // get_nine_day 数九天
-pub fn SolarDay::get_nine_day(self : SolarDay) -> Option[NineDay] {
+pub fn SolarDay::get_nine_day(self : SolarDay) -> NineDay? {
   let mut start = SolarTerm::from_index(self.get_year() + 1, 0).get_solar_day()
   if self.is_before(start) {
     start = SolarTerm::from_index(self.get_year(), 0).get_solar_day()
@@ -254,11 +270,11 @@ pub fn SolarDay::get_hide_heaven_stem_day(self : SolarDay) -> HideHeavenStemDay 
   let mut type_index = 0
   while type_index < 3 {
     let i = type_index * 2
-    let d = data.unsafe_charcode_at(start_index + i)
+    let d = data.unsafe_get(start_index + i).to_int()
     let mut count = 0
     if d != 'x'.to_int() {
       heaven_stem_index = d - zero
-      let day_count_index = data.unsafe_charcode_at(start_index + i + 1) - zero
+      let day_count_index = data.unsafe_get(start_index + i + 1).to_int() - zero
       count = day_counts[day_count_index]
       days = days + count
     }
@@ -303,7 +319,7 @@ pub fn SolarDay::get_sixty_cycle_day(self : SolarDay) -> SixtyCycleDay {
 
 ///|
 // get_festival 公历现代节日，如果当天不是公历现代节日，返回 None
-pub fn SolarDay::get_festival(self : SolarDay) -> Option[SolarFestival] {
+pub fn SolarDay::get_festival(self : SolarDay) -> SolarFestival? {
   SolarFestival::from_ymd(self.get_year(), self.get_month(), self.get_day())
 }
 
@@ -311,7 +327,11 @@ pub fn SolarDay::get_festival(self : SolarDay) -> Option[SolarFestival] {
 // get_phase_day 月相第几天
 pub fn SolarDay::get_phase_day(self : SolarDay) -> PhaseDay {
   let month = self.get_lunar_day().get_lunar_month().next(1)
-  let mut p = Phase::from_index(month.get_year(), month.get_month_with_leap(), 0)
+  let mut p = Phase::from_index(
+    month.get_year(),
+    month.get_month_with_leap(),
+    0,
+  )
   let mut d = p.get_solar_day()
   while d.is_after(self) {
     p = p.next(-1)
@@ -328,7 +348,7 @@ pub fn SolarDay::get_phase(self : SolarDay) -> Phase {
 
 ///|
 // get_dog_day 三伏天，如果当天不是三伏天，返回 None
-pub fn SolarDay::get_dog_day(self : SolarDay) -> Option[DogDay] {
+pub fn SolarDay::get_dog_day(self : SolarDay) -> DogDay? {
   // 初伏，夏至后第3个庚日
   let e = Event::builder().term_heaven_stem(12, 6, 20).build().unwrap()
   let d0 = match e.get_solar_day(self.get_year()) {
@@ -350,7 +370,7 @@ pub fn SolarDay::get_dog_day(self : SolarDay) -> Option[DogDay] {
   if self.is_before(d0) || self.is_after(d2.next(9)) {
     return None
   }
-  if not(self.is_before(d2)) {
+  if !self.is_before(d2) {
     return Some(DogDay::new(Dog::from_index(2), self.subtract(d2)))
   }
   if self.is_before(d1) {
@@ -361,7 +381,7 @@ pub fn SolarDay::get_dog_day(self : SolarDay) -> Option[DogDay] {
 
 ///|
 // get_plum_rain_day 梅雨天，如果当天不是梅雨天，返回 None
-pub fn SolarDay::get_plum_rain_day(self : SolarDay) -> Option[PlumRainDay] {
+pub fn SolarDay::get_plum_rain_day(self : SolarDay) -> PlumRainDay? {
   // 入梅，芒种后第1个丙日
   let e = Event::builder().term_heaven_stem(11, 2, 0).build().unwrap()
   let start = match e.get_solar_day(self.get_year()) {
@@ -413,15 +433,21 @@ pub fn SolarDay::get_nine_star(self : SolarDay) -> NineStar {
   let next_winter_solstice = SolarTerm::from_index(self.get_year() + 1, 0).get_solar_day()
   // 距冬至最近的甲子日
   let w = winter_solstice.next(
-    winter_solstice.get_lunar_day().get_sixty_cycle().loop_tyme.steps_close_to(0),
+    winter_solstice.get_lunar_day().get_sixty_cycle().loop_tyme.steps_close_to(
+      0,
+    ),
   )
   // 距夏至最近的甲子日
   let s = summer_solstice.next(
-    summer_solstice.get_lunar_day().get_sixty_cycle().loop_tyme.steps_close_to(0),
+    summer_solstice.get_lunar_day().get_sixty_cycle().loop_tyme.steps_close_to(
+      0,
+    ),
   )
   // 距下个冬至最近的甲子日
   let n = next_winter_solstice.next(
-    next_winter_solstice.get_lunar_day().get_sixty_cycle().loop_tyme.steps_close_to(0),
+    next_winter_solstice.get_lunar_day().get_sixty_cycle().loop_tyme.steps_close_to(
+      0,
+    ),
   )
   // 43210012345678876543210012345
   //      w        s        n
@@ -470,19 +496,20 @@ pub fn SolarDay::get_hijri_day(self : SolarDay) -> HijriDay {
 }
 
 ///|
-pub fn SolarDay::get_legal_holiday(self : SolarDay) -> Option[LegalHoliday] {
-  match LegalHoliday::from_ymd(self.get_year(), self.get_month(), self.get_day()) {
+pub fn SolarDay::get_legal_holiday(self : SolarDay) -> LegalHoliday? {
+  match
+    LegalHoliday::from_ymd(self.get_year(), self.get_month(), self.get_day()) {
     Ok(h) => Some(h)
     Err(_) => None
   }
 }
 
 ///|
-impl Culture for SolarDay with get_name(self : SolarDay) -> String {
+impl Culture for SolarDay with fn get_name(self : SolarDay) -> String {
   solar_day_names()[self.get_day() - 1]
 }
 
 ///|
-impl Show for SolarDay with to_string(self : SolarDay) -> String {
+impl Show for SolarDay with fn to_string(self : SolarDay) -> String {
   self.get_solar_month().to_string() + self.get_name()
 }
