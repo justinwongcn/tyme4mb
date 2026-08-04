@@ -30,9 +30,6 @@ pub fn Gender::get_name(self : Gender) -> String {
 }
 
 ///|
-impl Show for Gender with fn to_string(self : Gender) -> String {
+pub impl Show for Gender with fn to_string(self : Gender) -> String {
   self.get_name()
 }
-
-///|
-extend Gender with Show::{to_string}

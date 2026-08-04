@@ -11,23 +11,14 @@ pub struct Zone {
 }
 
 ///|
-extend Zone with Culture::{get_name}
-
-///|
-extend Zone with Show::{to_string}
-
-///|
-extend Zone with Tyme::{next}
-
-///|
 pub fn Zone::from_index(index : Int) -> Zone {
-  Zone::{ loop_tyme: LoopTyme::from_index(zone_names(), index) }
+  { loop_tyme: LoopTyme::from_index(zone_names(), index) }
 }
 
 ///|
 pub fn Zone::from_name(name : String) -> Result[Zone, String] {
   match LoopTyme::from_name(zone_names(), name) {
-    Ok(p) => Ok(Zone::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -53,16 +44,16 @@ pub fn Zone::get_beast(self : Zone) -> Beast {
 }
 
 ///|
-impl Culture for Zone with fn get_name(self : Zone) -> String {
+pub impl Culture for Zone with fn get_name(self : Zone) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Zone with fn to_string(self : Zone) -> String {
+pub impl Show for Zone with fn to_string(self : Zone) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Zone with fn next(self : Zone, n : Int) -> Zone {
+pub impl Tyme for Zone with fn next(self : Zone, n : Int) -> Zone {
   Zone::from_index(self.loop_tyme.get_index() + n)
 }

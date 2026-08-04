@@ -14,13 +14,7 @@ pub struct Land {
 }
 
 ///|
-extend Land with Culture::{get_name}
-
-///|
 extend Land with Show::{to_string}
-
-///|
-extend Land with Tyme::{next}
 
 ///|
 pub fn Land::get_index(self : Land) -> Int {
@@ -29,13 +23,13 @@ pub fn Land::get_index(self : Land) -> Int {
 
 ///|
 pub fn Land::from_index(index : Int) -> Land {
-  Land::{ loop_tyme: LoopTyme::from_index(land_names(), index) }
+  { loop_tyme: LoopTyme::from_index(land_names(), index) }
 }
 
 ///|
 pub fn Land::from_name(name : String) -> Result[Land, String] {
   match LoopTyme::from_name(land_names(), name) {
-    Ok(p) => Ok(Land::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -52,16 +46,16 @@ pub fn Land::get_direction(self : Land) -> Direction {
 }
 
 ///|
-impl Culture for Land with fn get_name(self : Land) -> String {
+pub impl Culture for Land with fn get_name(self : Land) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Land with fn to_string(self : Land) -> String {
+pub impl Show for Land with fn to_string(self : Land) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Land with fn next(self : Land, n : Int) -> Land {
+pub impl Tyme for Land with fn next(self : Land, n : Int) -> Land {
   Land::from_index(self.loop_tyme.get_index() + n)
 }

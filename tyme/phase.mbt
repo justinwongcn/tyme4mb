@@ -24,7 +24,7 @@ pub fn Phase::from_index(
 ) -> Phase {
   let m = LunarMonth::from_ym(lunar_year, lunar_month).unwrap()
   let month = m.next(index / phase_names().length())
-  Phase::{
+  {
     loop_tyme: LoopTyme::from_index(phase_names(), index),
     lunar_year: month.get_year(),
     lunar_month: month.get_month_with_leap(),
@@ -42,7 +42,7 @@ pub fn Phase::from_name(
     Err(e) => return Err(e)
     Ok(v) => v
   }
-  Ok(Phase::{ loop_tyme: p, lunar_year, lunar_month })
+  Ok({ loop_tyme: p, lunar_year, lunar_month })
 }
 
 ///|
@@ -141,19 +141,16 @@ pub fn Phase::get_lunar_month(self : Phase) -> Int {
 }
 
 ///|
-impl Culture for Phase with fn get_name(self : Phase) -> String {
+pub impl Culture for Phase with fn get_name(self : Phase) -> String {
   self.get_name()
 }
 
 ///|
-impl Show for Phase with fn to_string(self : Phase) -> String {
+pub impl Show for Phase with fn to_string(self : Phase) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for Phase with fn next(self : Phase, n : Int) -> Phase {
+pub impl Tyme for Phase with fn next(self : Phase, n : Int) -> Phase {
   self.next(n)
 }
-
-///|
-extend Phase with Show::{to_string}

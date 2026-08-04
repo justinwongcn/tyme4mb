@@ -9,11 +9,8 @@ pub struct YearUnit {
 extend YearUnit with Culture::{get_name}
 
 ///|
-extend YearUnit with Show::{to_string}
-
-///|
 pub fn YearUnit::new(year : Int) -> YearUnit {
-  { abstract_tyme: AbstractTyme::{  }, year }
+  { abstract_tyme: AbstractTyme::new(), year }
 }
 
 ///|
@@ -29,11 +26,11 @@ pub fn YearUnit::get_compare_index(self : YearUnit) -> Int {
 }
 
 ///|
-impl Culture for YearUnit with fn get_name(self : YearUnit) -> String {
+pub impl Culture for YearUnit with fn get_name(self : YearUnit) -> String {
   self.abstract_tyme.get_name()
 }
 
 ///|
-impl Show for YearUnit with fn to_string(self : YearUnit) -> String {
+pub impl Show for YearUnit with fn to_string(self : YearUnit) -> String {
   self.get_name()
 }

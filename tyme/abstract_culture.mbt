@@ -1,5 +1,6 @@
 ///|
 // AbstractCulture 传统文化抽象
+#warnings("-struct_never_constructed")
 pub struct AbstractCulture {}
 
 ///|
@@ -31,12 +32,12 @@ pub fn AbstractCulture::floor_div(x : Int, y : Int) -> Int {
 }
 
 ///|
-impl Culture for AbstractCulture with fn get_name(_ : AbstractCulture) -> String {
+pub impl Culture for AbstractCulture with fn get_name(_ : AbstractCulture) -> String {
   ""
 }
 
 ///|
-impl Show for AbstractCulture with fn to_string(self : AbstractCulture) -> String {
+pub impl Show for AbstractCulture with fn to_string(self : AbstractCulture) -> String {
   self.get_name()
 }
 

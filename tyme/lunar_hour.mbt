@@ -5,13 +5,7 @@ pub struct LunarHour {
 }
 
 ///|
-extend LunarHour with Culture::{get_name}
-
-///|
 extend LunarHour with Show::{to_string}
-
-///|
-extend LunarHour with Tyme::{next}
 
 ///|
 // validate 校验
@@ -44,7 +38,7 @@ pub fn LunarHour::from_ymd_hms(
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok(LunarHour::{
+  Ok({
     second_unit: SecondUnit::new(
       DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
       hour,
@@ -96,7 +90,7 @@ pub fn LunarHour::get_lunar_day(self : LunarHour) -> LunarDay {
   match LunarDay::from_ymd(self.get_year(), self.get_month(), self.get_day()) {
     Ok(d) => d
     Err(_) =>
-      LunarDay::{
+      {
         day_unit: DayUnit::new(
           MonthUnit::new(YearUnit::new(self.get_year()), self.get_month()),
           self.get_day(),
@@ -246,17 +240,17 @@ pub fn LunarHour::get_eight_char(self : LunarHour) -> EightChar {
 }
 
 ///|
-impl Culture for LunarHour with fn get_name(self : LunarHour) -> String {
+pub impl Culture for LunarHour with fn get_name(self : LunarHour) -> String {
   "\{EarthBranch::from_index(self.get_index_in_day()).get_name()}时"
 }
 
 ///|
-impl Show for LunarHour with fn to_string(self : LunarHour) -> String {
+pub impl Show for LunarHour with fn to_string(self : LunarHour) -> String {
   self.get_lunar_day().to_string() + self.get_sixty_cycle().get_name() + "时"
 }
 
 ///|
-impl Tyme for LunarHour with fn next(self : LunarHour, n : Int) -> LunarHour {
+pub impl Tyme for LunarHour with fn next(self : LunarHour, n : Int) -> LunarHour {
   if n == 0 {
     return LunarHour::from_ymd_hms(
       self.get_year(),

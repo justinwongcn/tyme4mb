@@ -16,7 +16,7 @@ pub fn fetus_month_names() -> Array[String] {
 ///|
 // new 从索引构造
 pub fn FetusMonth::new(index : Int) -> FetusMonth {
-  FetusMonth::{ loop_tyme: LoopTyme::from_index(fetus_month_names(), index) }
+  { loop_tyme: LoopTyme::from_index(fetus_month_names(), index) }
 }
 
 ///|
@@ -47,19 +47,16 @@ pub fn FetusMonth::get_name(self : FetusMonth) -> String {
 }
 
 ///|
-impl Culture for FetusMonth with fn get_name(self : FetusMonth) -> String {
+pub impl Culture for FetusMonth with fn get_name(self : FetusMonth) -> String {
   self.get_name()
 }
 
 ///|
-impl Show for FetusMonth with fn to_string(self : FetusMonth) -> String {
+pub impl Show for FetusMonth with fn to_string(self : FetusMonth) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for FetusMonth with fn next(self : FetusMonth, n : Int) -> FetusMonth {
+pub impl Tyme for FetusMonth with fn next(self : FetusMonth, n : Int) -> FetusMonth {
   self.next(n)
 }
-
-///|
-extend FetusMonth with Show::{to_string}

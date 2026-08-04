@@ -7,7 +7,7 @@ pub struct PhaseDay {
 ///|
 // new 构造
 pub fn PhaseDay::new(o : Phase, index : Int) -> PhaseDay {
-  PhaseDay::{ day: AbstractCultureDay::new(o, index) }
+  { day: AbstractCultureDay::new(o, index) }
 }
 
 ///|
@@ -23,17 +23,11 @@ pub fn PhaseDay::get_day_index(self : PhaseDay) -> Int {
 }
 
 ///|
-impl Culture for PhaseDay with fn get_name(self : PhaseDay) -> String {
+pub impl Culture for PhaseDay with fn get_name(self : PhaseDay) -> String {
   Culture::get_name(self.day.get_culture())
 }
 
 ///|
-impl Show for PhaseDay with fn to_string(self : PhaseDay) -> String {
+pub impl Show for PhaseDay with fn to_string(self : PhaseDay) -> String {
   Show::to_string(self.day)
 }
-
-///|
-extend PhaseDay with Show::{to_string}
-
-///|
-extend PhaseDay with Culture::{get_name}

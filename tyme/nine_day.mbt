@@ -5,12 +5,6 @@ pub struct NineDay {
 }
 
 ///|
-extend NineDay with Culture::{get_name}
-
-///|
-extend NineDay with Show::{to_string}
-
-///|
 pub fn NineDay::new(o : Nine, index : Int) -> NineDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index) }
 }
@@ -28,11 +22,11 @@ pub fn NineDay::get_day_index(self : NineDay) -> Int {
 }
 
 ///|
-impl Culture for NineDay with fn get_name(self : NineDay) -> String {
+pub impl Culture for NineDay with fn get_name(self : NineDay) -> String {
   Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for NineDay with fn to_string(self : NineDay) -> String {
+pub impl Show for NineDay with fn to_string(self : NineDay) -> String {
   Show::to_string(self.abstract_culture_day)
 }

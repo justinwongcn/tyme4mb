@@ -253,11 +253,11 @@ fn Event::get_solar_day_by_term_earth_branch(
 }
 
 ///|
-impl Culture for Event with fn get_name(self : Event) -> String {
+pub impl Culture for Event with fn get_name(self : Event) -> String {
   self.name
 }
 
 ///|
-impl Show for Event with fn to_string(self : Event) -> String {
+pub impl Show for Event with fn to_string(self : Event) -> String {
   self.name
 }

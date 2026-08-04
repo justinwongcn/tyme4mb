@@ -11,23 +11,17 @@ pub struct Week {
 }
 
 ///|
-extend Week with Culture::{get_name}
-
-///|
-extend Week with Show::{to_string}
-
-///|
 extend Week with Tyme::{next}
 
 ///|
 pub fn Week::from_index(index : Int) -> Week {
-  Week::{ loop_tyme: LoopTyme::from_index(week_names(), index) }
+  { loop_tyme: LoopTyme::from_index(week_names(), index) }
 }
 
 ///|
 pub fn Week::from_name(name : String) -> Result[Week, String] {
   match LoopTyme::from_name(week_names(), name) {
-    Ok(p) => Ok(Week::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -49,16 +43,16 @@ pub fn Week::equals(self : Week, target : Week) -> Bool {
 }
 
 ///|
-impl Culture for Week with fn get_name(self : Week) -> String {
+pub impl Culture for Week with fn get_name(self : Week) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Week with fn to_string(self : Week) -> String {
+pub impl Show for Week with fn to_string(self : Week) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Week with fn next(self : Week, n : Int) -> Week {
+pub impl Tyme for Week with fn next(self : Week, n : Int) -> Week {
   Week::from_index(self.loop_tyme.get_index() + n)
 }

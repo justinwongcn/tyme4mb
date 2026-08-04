@@ -35,13 +35,13 @@ pub fn SixtyCycle::get_index(self : SixtyCycle) -> Int {
 
 ///|
 pub fn SixtyCycle::from_index(index : Int) -> SixtyCycle {
-  SixtyCycle::{ loop_tyme: LoopTyme::from_index(sixty_cycle_names(), index) }
+  { loop_tyme: LoopTyme::from_index(sixty_cycle_names(), index) }
 }
 
 ///|
 pub fn SixtyCycle::from_name(name : String) -> Result[SixtyCycle, String] {
   match LoopTyme::from_name(sixty_cycle_names(), name) {
-    Ok(p) => Ok(SixtyCycle::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -101,16 +101,16 @@ pub fn SixtyCycle::get_extra_earth_branches(
 }
 
 ///|
-impl Culture for SixtyCycle with fn get_name(self : SixtyCycle) -> String {
+pub impl Culture for SixtyCycle with fn get_name(self : SixtyCycle) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for SixtyCycle with fn to_string(self : SixtyCycle) -> String {
+pub impl Show for SixtyCycle with fn to_string(self : SixtyCycle) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for SixtyCycle with fn next(self : SixtyCycle, n : Int) -> SixtyCycle {
+pub impl Tyme for SixtyCycle with fn next(self : SixtyCycle, n : Int) -> SixtyCycle {
   SixtyCycle::from_index(self.loop_tyme.get_index() + n)
 }

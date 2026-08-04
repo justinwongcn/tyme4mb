@@ -14,23 +14,17 @@ pub struct TwelveStar {
 }
 
 ///|
-extend TwelveStar with Culture::{get_name}
-
-///|
 extend TwelveStar with Show::{to_string}
 
 ///|
-extend TwelveStar with Tyme::{next}
-
-///|
 pub fn TwelveStar::from_index(index : Int) -> TwelveStar {
-  TwelveStar::{ loop_tyme: LoopTyme::from_index(twelve_star_names(), index) }
+  { loop_tyme: LoopTyme::from_index(twelve_star_names(), index) }
 }
 
 ///|
 pub fn TwelveStar::from_name(name : String) -> Result[TwelveStar, String] {
   match LoopTyme::from_name(twelve_star_names(), name) {
-    Ok(p) => Ok(TwelveStar::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -48,16 +42,16 @@ pub fn TwelveStar::get_ecliptic(self : TwelveStar) -> Ecliptic {
 }
 
 ///|
-impl Culture for TwelveStar with fn get_name(self : TwelveStar) -> String {
+pub impl Culture for TwelveStar with fn get_name(self : TwelveStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for TwelveStar with fn to_string(self : TwelveStar) -> String {
+pub impl Show for TwelveStar with fn to_string(self : TwelveStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for TwelveStar with fn next(self : TwelveStar, n : Int) -> TwelveStar {
+pub impl Tyme for TwelveStar with fn next(self : TwelveStar, n : Int) -> TwelveStar {
   TwelveStar::from_index(self.loop_tyme.get_index() + n)
 }

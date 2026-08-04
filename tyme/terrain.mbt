@@ -14,23 +14,14 @@ pub struct Terrain {
 }
 
 ///|
-extend Terrain with Culture::{get_name}
-
-///|
-extend Terrain with Show::{to_string}
-
-///|
-extend Terrain with Tyme::{next}
-
-///|
 pub fn Terrain::from_index(index : Int) -> Terrain {
-  Terrain::{ loop_tyme: LoopTyme::from_index(terrain_names(), index) }
+  { loop_tyme: LoopTyme::from_index(terrain_names(), index) }
 }
 
 ///|
 pub fn Terrain::from_name(name : String) -> Result[Terrain, String] {
   match LoopTyme::from_name(terrain_names(), name) {
-    Ok(p) => Ok(Terrain::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -41,16 +32,16 @@ pub fn Terrain::get_index(self : Terrain) -> Int {
 }
 
 ///|
-impl Culture for Terrain with fn get_name(self : Terrain) -> String {
+pub impl Culture for Terrain with fn get_name(self : Terrain) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Terrain with fn to_string(self : Terrain) -> String {
+pub impl Show for Terrain with fn to_string(self : Terrain) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Terrain with fn next(self : Terrain, n : Int) -> Terrain {
+pub impl Tyme for Terrain with fn next(self : Terrain, n : Int) -> Terrain {
   Terrain::from_index(self.loop_tyme.get_index() + n)
 }

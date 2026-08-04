@@ -26,13 +26,13 @@ pub fn HeavenStem::get_index(self : HeavenStem) -> Int {
 
 ///|
 pub fn HeavenStem::from_index(index : Int) -> HeavenStem {
-  HeavenStem::{ loop_tyme: LoopTyme::from_index(heaven_stem_names(), index) }
+  { loop_tyme: LoopTyme::from_index(heaven_stem_names(), index) }
 }
 
 ///|
 pub fn HeavenStem::from_name(name : String) -> Result[HeavenStem, String] {
   match LoopTyme::from_name(heaven_stem_names(), name) {
-    Ok(p) => Ok(HeavenStem::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -153,16 +153,16 @@ pub fn HeavenStem::combine(self : HeavenStem, target : HeavenStem) -> Element? {
 }
 
 ///|
-impl Culture for HeavenStem with fn get_name(self : HeavenStem) -> String {
+pub impl Culture for HeavenStem with fn get_name(self : HeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for HeavenStem with fn to_string(self : HeavenStem) -> String {
+pub impl Show for HeavenStem with fn to_string(self : HeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for HeavenStem with fn next(self : HeavenStem, n : Int) -> HeavenStem {
+pub impl Tyme for HeavenStem with fn next(self : HeavenStem, n : Int) -> HeavenStem {
   HeavenStem::from_index(self.loop_tyme.get_index() + n)
 }

@@ -55,9 +55,7 @@ pub fn LunarDay::from_ymd(
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok(LunarDay::{
-    day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
-  })
+  Ok({ day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day) })
 }
 
 ///|
@@ -84,7 +82,7 @@ pub fn LunarDay::get_lunar_month(self : LunarDay) -> LunarMonth {
   match LunarMonth::from_ym(self.get_year(), self.get_month()) {
     Ok(m) => m
     Err(_) =>
-      LunarMonth::{
+      {
         month_unit: MonthUnit::new(
           YearUnit::new(self.get_year()),
           self.get_month(),
@@ -299,16 +297,16 @@ pub fn LunarDay::get_three_pillars(self : LunarDay) -> ThreePillars {
 }
 
 ///|
-impl Culture for LunarDay with fn get_name(self : LunarDay) -> String {
+pub impl Culture for LunarDay with fn get_name(self : LunarDay) -> String {
   lunar_day_names()[self.get_day() - 1]
 }
 
 ///|
-impl Show for LunarDay with fn to_string(self : LunarDay) -> String {
+pub impl Show for LunarDay with fn to_string(self : LunarDay) -> String {
   self.get_lunar_month().to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for LunarDay with fn next(self : LunarDay, n : Int) -> LunarDay {
+pub impl Tyme for LunarDay with fn next(self : LunarDay, n : Int) -> LunarDay {
   self.get_solar_day().next(n).get_lunar_day()
 }

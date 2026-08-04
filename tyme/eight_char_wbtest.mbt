@@ -79,13 +79,12 @@ test "eight_char_4" {
   if forward {
     term = term.next(2)
   }
-  let info = LunarSect1ChildLimitProvider::{  }.get_info(birth_time, term)
-  let child_limit = ChildLimit::{
-    eight_char,
-    gender: Gender::Man,
-    forward,
-    info,
-  }
+  let info = IChildLimitProvider::get_info(
+    LunarSect1ChildLimitProvider::{  },
+    birth_time,
+    term,
+  )
+  let child_limit = ChildLimit::{ eight_char, gender: Man, forward, info }
   expect_eq(
     child_limit.get_end_time().to_string(),
     "2002年1月27日 01:00:00",

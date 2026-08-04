@@ -75,7 +75,7 @@ pub fn RabByungDay::new(
   if d < 0 {
     d = -d
   }
-  Ok(RabByungDay::{
+  Ok({
     day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), d),
     leap: day < 0,
   })
@@ -155,7 +155,7 @@ pub fn RabByungDay::get_rab_byung_month(self : RabByungDay) -> RabByungMonth {
   match RabByungMonth::from_ym(self.get_year(), self.get_month()) {
     Ok(m) => m
     Err(_) =>
-      RabByungMonth::{
+      {
         month_unit: MonthUnit::new(
           YearUnit::new(self.get_year()),
           self.get_month(),
@@ -233,7 +233,7 @@ pub fn RabByungDay::equals(self : RabByungDay, target : RabByungDay) -> Bool {
 }
 
 ///|
-impl Culture for RabByungDay with fn get_name(self : RabByungDay) -> String {
+pub impl Culture for RabByungDay with fn get_name(self : RabByungDay) -> String {
   let name = rab_byung_day_names()[self.get_day() - 1]
   if self.leap {
     return "闰" + name
@@ -242,6 +242,6 @@ impl Culture for RabByungDay with fn get_name(self : RabByungDay) -> String {
 }
 
 ///|
-impl Show for RabByungDay with fn to_string(self : RabByungDay) -> String {
+pub impl Show for RabByungDay with fn to_string(self : RabByungDay) -> String {
   self.get_rab_byung_month().to_string() + self.get_name()
 }

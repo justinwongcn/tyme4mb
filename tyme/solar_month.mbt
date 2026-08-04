@@ -67,8 +67,7 @@ pub fn SolarMonth::from_ym(
   month : Int,
 ) -> Result[SolarMonth, String] {
   match SolarMonth::validate(year, month) {
-    Ok(_) =>
-      Ok(SolarMonth::{ month_unit: MonthUnit::new(YearUnit::new(year), month) })
+    Ok(_) => Ok({ month_unit: MonthUnit::new(YearUnit::new(year), month) })
     Err(e) => Err(e)
   }
 }
@@ -169,17 +168,17 @@ pub fn SolarMonth::get_weeks(
 //   get_week_count / get_days / get_first_day 此前已随 SolarDay.from_ymd 译出。
 
 ///|
-impl Culture for SolarMonth with fn get_name(self : SolarMonth) -> String {
+pub impl Culture for SolarMonth with fn get_name(self : SolarMonth) -> String {
   solar_month_names()[self.get_index_in_year()]
 }
 
 ///|
-impl Show for SolarMonth with fn to_string(self : SolarMonth) -> String {
+pub impl Show for SolarMonth with fn to_string(self : SolarMonth) -> String {
   self.get_solar_year().to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for SolarMonth with fn next(self : SolarMonth, n : Int) -> SolarMonth {
+pub impl Tyme for SolarMonth with fn next(self : SolarMonth, n : Int) -> SolarMonth {
   let i = self.get_month() - 1 + n
   match
     SolarMonth::from_ym(

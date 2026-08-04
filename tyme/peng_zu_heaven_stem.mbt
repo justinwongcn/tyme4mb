@@ -16,19 +16,11 @@ pub struct PengZuHeavenStem {
 }
 
 ///|
-extend PengZuHeavenStem with Culture::{get_name}
-
-///|
 extend PengZuHeavenStem with Show::{to_string}
 
 ///|
-extend PengZuHeavenStem with Tyme::{next}
-
-///|
 pub fn PengZuHeavenStem::from_index(index : Int) -> PengZuHeavenStem {
-  PengZuHeavenStem::{
-    loop_tyme: LoopTyme::from_index(peng_zu_heaven_stem_names(), index),
-  }
+  { loop_tyme: LoopTyme::from_index(peng_zu_heaven_stem_names(), index) }
 }
 
 ///|
@@ -36,7 +28,7 @@ pub fn PengZuHeavenStem::from_name(
   name : String,
 ) -> Result[PengZuHeavenStem, String] {
   match LoopTyme::from_name(peng_zu_heaven_stem_names(), name) {
-    Ok(p) => Ok(PengZuHeavenStem::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -47,16 +39,19 @@ pub fn PengZuHeavenStem::get_index(self : PengZuHeavenStem) -> Int {
 }
 
 ///|
-impl Culture for PengZuHeavenStem with fn get_name(self : PengZuHeavenStem) -> String {
+pub impl Culture for PengZuHeavenStem with fn get_name(self : PengZuHeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for PengZuHeavenStem with fn to_string(self : PengZuHeavenStem) -> String {
+pub impl Show for PengZuHeavenStem with fn to_string(self : PengZuHeavenStem) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for PengZuHeavenStem with fn next(self : PengZuHeavenStem, n : Int) -> PengZuHeavenStem {
+pub impl Tyme for PengZuHeavenStem with fn next(
+  self : PengZuHeavenStem,
+  n : Int,
+) -> PengZuHeavenStem {
   PengZuHeavenStem::from_index(self.loop_tyme.get_index() + n)
 }

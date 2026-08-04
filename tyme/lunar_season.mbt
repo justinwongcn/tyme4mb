@@ -14,23 +14,14 @@ pub struct LunarSeason {
 }
 
 ///|
-extend LunarSeason with Culture::{get_name}
-
-///|
-extend LunarSeason with Show::{to_string}
-
-///|
-extend LunarSeason with Tyme::{next}
-
-///|
 pub fn LunarSeason::from_index(index : Int) -> LunarSeason {
-  LunarSeason::{ loop_tyme: LoopTyme::from_index(lunar_season_names(), index) }
+  { loop_tyme: LoopTyme::from_index(lunar_season_names(), index) }
 }
 
 ///|
 pub fn LunarSeason::from_name(name : String) -> Result[LunarSeason, String] {
   match LoopTyme::from_name(lunar_season_names(), name) {
-    Ok(p) => Ok(LunarSeason::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -41,16 +32,16 @@ pub fn LunarSeason::get_index(self : LunarSeason) -> Int {
 }
 
 ///|
-impl Culture for LunarSeason with fn get_name(self : LunarSeason) -> String {
+pub impl Culture for LunarSeason with fn get_name(self : LunarSeason) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for LunarSeason with fn to_string(self : LunarSeason) -> String {
+pub impl Show for LunarSeason with fn to_string(self : LunarSeason) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for LunarSeason with fn next(self : LunarSeason, n : Int) -> LunarSeason {
+pub impl Tyme for LunarSeason with fn next(self : LunarSeason, n : Int) -> LunarSeason {
   LunarSeason::from_index(self.loop_tyme.get_index() + n)
 }

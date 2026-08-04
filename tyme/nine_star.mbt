@@ -20,20 +20,14 @@ pub struct NineStar {
 extend NineStar with Culture::{get_name}
 
 ///|
-extend NineStar with Show::{to_string}
-
-///|
-extend NineStar with Tyme::{next}
-
-///|
 pub fn NineStar::from_index(index : Int) -> NineStar {
-  NineStar::{ loop_tyme: LoopTyme::from_index(nine_star_names(), index) }
+  { loop_tyme: LoopTyme::from_index(nine_star_names(), index) }
 }
 
 ///|
 pub fn NineStar::from_name(name : String) -> Result[NineStar, String] {
   match LoopTyme::from_name(nine_star_names(), name) {
-    Ok(p) => Ok(NineStar::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -68,16 +62,16 @@ pub fn NineStar::get_direction(self : NineStar) -> Direction {
 }
 
 ///|
-impl Culture for NineStar with fn get_name(self : NineStar) -> String {
+pub impl Culture for NineStar with fn get_name(self : NineStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for NineStar with fn to_string(self : NineStar) -> String {
+pub impl Show for NineStar with fn to_string(self : NineStar) -> String {
   "\{self.get_name()}\{self.get_color()}\{self.get_element()}"
 }
 
 ///|
-impl Tyme for NineStar with fn next(self : NineStar, n : Int) -> NineStar {
+pub impl Tyme for NineStar with fn next(self : NineStar, n : Int) -> NineStar {
   NineStar::from_index(self.loop_tyme.get_index() + n)
 }

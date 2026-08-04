@@ -74,7 +74,7 @@ pub fn FetusDay::get_fetus_earth_branch(self : FetusDay) -> FetusEarthBranch {
 }
 
 ///|
-impl Culture for FetusDay with fn get_name(self : FetusDay) -> String {
+pub impl Culture for FetusDay with fn get_name(self : FetusDay) -> String {
   let mut s = self.fetus_heaven_stem.get_name() +
     self.fetus_earth_branch.get_name()
   if "门门" == s {
@@ -125,7 +125,7 @@ fn str_contains(haystack : String, needle : String) -> Bool {
 }
 
 ///|
-impl Show for FetusDay with fn to_string(self : FetusDay) -> String {
+pub impl Show for FetusDay with fn to_string(self : FetusDay) -> String {
   self.get_name()
 }
 

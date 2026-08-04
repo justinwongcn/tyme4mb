@@ -29,13 +29,13 @@ pub fn EarthBranch::get_index(self : EarthBranch) -> Int {
 
 ///|
 pub fn EarthBranch::from_index(index : Int) -> EarthBranch {
-  EarthBranch::{ loop_tyme: LoopTyme::from_index(earth_branch_names(), index) }
+  { loop_tyme: LoopTyme::from_index(earth_branch_names(), index) }
 }
 
 ///|
 pub fn EarthBranch::from_name(name : String) -> Result[EarthBranch, String] {
   match LoopTyme::from_name(earth_branch_names(), name) {
-    Ok(p) => Ok(EarthBranch::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -177,16 +177,16 @@ pub fn EarthBranch::combine(
 }
 
 ///|
-impl Culture for EarthBranch with fn get_name(self : EarthBranch) -> String {
+pub impl Culture for EarthBranch with fn get_name(self : EarthBranch) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for EarthBranch with fn to_string(self : EarthBranch) -> String {
+pub impl Show for EarthBranch with fn to_string(self : EarthBranch) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for EarthBranch with fn next(self : EarthBranch, n : Int) -> EarthBranch {
+pub impl Tyme for EarthBranch with fn next(self : EarthBranch, n : Int) -> EarthBranch {
   EarthBranch::from_index(self.loop_tyme.get_index() + n)
 }

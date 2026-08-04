@@ -30,9 +30,6 @@ pub fn YinYang::get_name(self : YinYang) -> String {
 }
 
 ///|
-impl Show for YinYang with fn to_string(self : YinYang) -> String {
+pub impl Show for YinYang with fn to_string(self : YinYang) -> String {
   self.get_name()
 }
-
-///|
-extend YinYang with Show::{to_string}

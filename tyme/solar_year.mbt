@@ -11,9 +11,6 @@ extend SolarYear with Culture::{get_name}
 extend SolarYear with Show::{to_string}
 
 ///|
-extend SolarYear with Tyme::{next}
-
-///|
 pub fn SolarYear::new(year_unit : YearUnit) -> SolarYear {
   { year_unit, }
 }
@@ -43,7 +40,7 @@ pub fn SolarYear::validate(year : Int) -> Result[Unit, String] {
 // from_year 从年构造
 pub fn SolarYear::from_year(year : Int) -> Result[SolarYear, String] {
   match SolarYear::validate(year) {
-    Ok(_) => Ok(SolarYear::{ year_unit: YearUnit::new(year) })
+    Ok(_) => Ok({ year_unit: YearUnit::new(year) })
     Err(e) => Err(e)
   }
 }
@@ -118,17 +115,17 @@ pub fn SolarYear::get_rab_byung_year(
 //   2026-08-03 随 RabByungYear 译出回填）
 
 ///|
-impl Culture for SolarYear with fn get_name(self : SolarYear) -> String {
+pub impl Culture for SolarYear with fn get_name(self : SolarYear) -> String {
   self.get_year().to_string() + "年"
 }
 
 ///|
-impl Show for SolarYear with fn to_string(self : SolarYear) -> String {
+pub impl Show for SolarYear with fn to_string(self : SolarYear) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for SolarYear with fn next(self : SolarYear, n : Int) -> SolarYear {
+pub impl Tyme for SolarYear with fn next(self : SolarYear, n : Int) -> SolarYear {
   match SolarYear::from_year(self.get_year() + n) {
     Ok(y) => y
     Err(_) => self

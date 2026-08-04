@@ -43,7 +43,7 @@ pub fn SixtyCycleDay::from_solar_day(solar_day : SolarDay) -> SixtyCycleDay {
   }
   let y = SixtyCycleYear::from_year(term.get_year()).unwrap()
   let d = SolarDay::from_ymd(2000, 1, 7).unwrap()
-  SixtyCycleDay::{
+  {
     solar_day,
     month: y.get_first_month().next(offset),
     day: SixtyCycle::from_index(solar_day.subtract(d)),
@@ -160,7 +160,7 @@ pub fn SixtyCycleDay::get_avoids(
 ///|
 // get_three_pillars 三柱
 pub fn SixtyCycleDay::get_three_pillars(self : SixtyCycleDay) -> ThreePillars {
-  ThreePillars::{
+  {
     year: self.get_year(),
     month: self.get_month(),
     day: self.get_sixty_cycle(),
@@ -191,7 +191,7 @@ pub fn SixtyCycleDay::get_hours(self : SixtyCycleDay) -> Array[SixtyCycleHour] {
 
 ///|
 // next 推移
-impl Tyme for SixtyCycleDay with fn next(self : SixtyCycleDay, n : Int) -> SixtyCycleDay {
+pub impl Tyme for SixtyCycleDay with fn next(self : SixtyCycleDay, n : Int) -> SixtyCycleDay {
   SixtyCycleDay::from_solar_day(self.solar_day.next(n))
 }
 
@@ -205,11 +205,11 @@ pub fn SixtyCycleDay::equals(
 }
 
 ///|
-impl Culture for SixtyCycleDay with fn get_name(self : SixtyCycleDay) -> String {
+pub impl Culture for SixtyCycleDay with fn get_name(self : SixtyCycleDay) -> String {
   self.day.to_string() + "日"
 }
 
 ///|
-impl Show for SixtyCycleDay with fn to_string(self : SixtyCycleDay) -> String {
+pub impl Show for SixtyCycleDay with fn to_string(self : SixtyCycleDay) -> String {
   self.month.to_string() + self.get_name()
 }

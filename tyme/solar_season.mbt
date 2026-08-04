@@ -17,12 +17,6 @@ pub struct SolarSeason {
 extend SolarSeason with Culture::{get_name}
 
 ///|
-extend SolarSeason with Show::{to_string}
-
-///|
-extend SolarSeason with Tyme::{next}
-
-///|
 // from_index 从年与索引构造
 pub fn SolarSeason::from_index(
   year : Int,
@@ -33,7 +27,7 @@ pub fn SolarSeason::from_index(
   }
   match SolarYear::from_year(year) {
     Err(e) => Err(e)
-    Ok(y) => Ok(SolarSeason::{ year: y, index })
+    Ok(y) => Ok({ year: y, index })
   }
 }
 
@@ -67,17 +61,17 @@ pub fn SolarSeason::get_months(self : SolarSeason) -> Array[SolarMonth] {
 }
 
 ///|
-impl Culture for SolarSeason with fn get_name(self : SolarSeason) -> String {
+pub impl Culture for SolarSeason with fn get_name(self : SolarSeason) -> String {
   solar_season_names()[self.index]
 }
 
 ///|
-impl Show for SolarSeason with fn to_string(self : SolarSeason) -> String {
+pub impl Show for SolarSeason with fn to_string(self : SolarSeason) -> String {
   self.year.to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for SolarSeason with fn next(self : SolarSeason, n : Int) -> SolarSeason {
+pub impl Tyme for SolarSeason with fn next(self : SolarSeason, n : Int) -> SolarSeason {
   let i = self.index + n
   SolarSeason::from_index(
     (self.get_year() * 4 + i) / 4,

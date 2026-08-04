@@ -4,7 +4,7 @@ pub struct DefaultEightCharProvider {}
 
 ///|
 impl IEightCharProvider for DefaultEightCharProvider with fn get_eight_char(
-  self : DefaultEightCharProvider,
+  _ : DefaultEightCharProvider,
   hour : LunarHour,
 ) -> EightChar {
   hour.get_sixty_cycle_hour().get_eight_char()

@@ -46,9 +46,6 @@ pub fn EventType::get_name(self : EventType) -> String {
 }
 
 ///|
-impl Show for EventType with fn to_string(self : EventType) -> String {
+pub impl Show for EventType with fn to_string(self : EventType) -> String {
   self.get_name()
 }
-
-///|
-extend EventType with Show::{to_string}

@@ -5,12 +5,6 @@ pub struct SolarTermDay {
 }
 
 ///|
-extend SolarTermDay with Culture::{get_name}
-
-///|
-extend SolarTermDay with Show::{to_string}
-
-///|
 pub fn SolarTermDay::new(o : SolarTerm, index : Int) -> SolarTermDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index) }
 }
@@ -28,11 +22,11 @@ pub fn SolarTermDay::get_day_index(self : SolarTermDay) -> Int {
 }
 
 ///|
-impl Culture for SolarTermDay with fn get_name(self : SolarTermDay) -> String {
+pub impl Culture for SolarTermDay with fn get_name(self : SolarTermDay) -> String {
   Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for SolarTermDay with fn to_string(self : SolarTermDay) -> String {
+pub impl Show for SolarTermDay with fn to_string(self : SolarTermDay) -> String {
   Show::to_string(self.abstract_culture_day)
 }

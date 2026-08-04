@@ -4,7 +4,7 @@ pub struct DefaultChildLimitProvider {}
 
 ///|
 impl IChildLimitProvider for DefaultChildLimitProvider with fn get_info(
-  self : DefaultChildLimitProvider,
+  _ : DefaultChildLimitProvider,
   birth_time : SolarTime,
   term : SolarTerm,
 ) -> ChildLimitInfo {

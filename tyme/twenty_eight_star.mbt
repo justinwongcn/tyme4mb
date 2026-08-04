@@ -15,19 +15,11 @@ pub struct TwentyEightStar {
 }
 
 ///|
-extend TwentyEightStar with Culture::{get_name}
-
-///|
-extend TwentyEightStar with Show::{to_string}
-
-///|
 extend TwentyEightStar with Tyme::{next}
 
 ///|
 pub fn TwentyEightStar::from_index(index : Int) -> TwentyEightStar {
-  TwentyEightStar::{
-    loop_tyme: LoopTyme::from_index(twenty_eight_star_names(), index),
-  }
+  { loop_tyme: LoopTyme::from_index(twenty_eight_star_names(), index) }
 }
 
 ///|
@@ -35,7 +27,7 @@ pub fn TwentyEightStar::from_name(
   name : String,
 ) -> Result[TwentyEightStar, String] {
   match LoopTyme::from_name(twenty_eight_star_names(), name) {
-    Ok(p) => Ok(TwentyEightStar::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -86,16 +78,16 @@ pub fn TwentyEightStar::get_luck(self : TwentyEightStar) -> Luck {
 }
 
 ///|
-impl Culture for TwentyEightStar with fn get_name(self : TwentyEightStar) -> String {
+pub impl Culture for TwentyEightStar with fn get_name(self : TwentyEightStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for TwentyEightStar with fn to_string(self : TwentyEightStar) -> String {
+pub impl Show for TwentyEightStar with fn to_string(self : TwentyEightStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for TwentyEightStar with fn next(self : TwentyEightStar, n : Int) -> TwentyEightStar {
+pub impl Tyme for TwentyEightStar with fn next(self : TwentyEightStar, n : Int) -> TwentyEightStar {
   TwentyEightStar::from_index(self.loop_tyme.get_index() + n)
 }

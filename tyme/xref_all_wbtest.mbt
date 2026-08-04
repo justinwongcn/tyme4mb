@@ -649,7 +649,7 @@ test "xref_solar_day_ymd" {
     (2100, 12, 0),
   ]
   for c in mcases {
-    let (y0, m0, d0) = c
+    let (y0, m0, _d0) = c
     match SolarMonth::from_ym(y0, m0) {
       Err(_) => println("SMW \{y0} \{m0} ERR")
       Ok(m) => {
@@ -1759,7 +1759,7 @@ test "xref_eight_char" {
       (1988, 6, 15, 23, 30),
       (2023, 12, 31, 6, 0),
     ] {
-    for g in [Gender::Man, Gender::Woman] {
+    for g in [Man, Woman] {
       let (y0, m0, d0, h0, mi0) = hms
       match SolarTime::from_ymdhms(y0, m0, d0, h0, mi0, 0) {
         Err(_) =>
@@ -1775,7 +1775,7 @@ test "xref_eight_char" {
   }
   // FOR 小运
   let st0 = SolarTime::from_ymdhms(2024, 2, 10, 12, 0, 0).unwrap()
-  let cl0 = ChildLimit::from_solar_time(st0, Gender::Man)
+  let cl0 = ChildLimit::from_solar_time(st0, Man)
   let sf = cl0.get_start_fortune()
   for n = 0; n <= 3; n = n + 1 {
     let f = sf.next(n)

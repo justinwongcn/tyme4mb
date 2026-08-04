@@ -43,7 +43,7 @@ pub fn LegalHoliday::new(
   let name_idx = data.unsafe_get(9).to_int() - '0'.to_int()
   let name = legal_holiday_names()[name_idx]
   let work = work_char.to_int() == '0'.to_int()
-  Ok(LegalHoliday::{ day: d, name, work })
+  Ok({ day: d, name, work })
 }
 
 ///|
@@ -83,7 +83,7 @@ pub fn LegalHoliday::is_work(self : LegalHoliday) -> Bool {
 }
 
 ///|
-impl Culture for LegalHoliday with fn get_name(self : LegalHoliday) -> String {
+pub impl Culture for LegalHoliday with fn get_name(self : LegalHoliday) -> String {
   self.name
 }
 
@@ -143,7 +143,7 @@ pub fn LegalHoliday::next(self : LegalHoliday, n : Int) -> LegalHoliday? {
 }
 
 ///|
-impl Show for LegalHoliday with fn to_string(self : LegalHoliday) -> String {
+pub impl Show for LegalHoliday with fn to_string(self : LegalHoliday) -> String {
   let s = if self.work { "班" } else { "休" }
   self.day.to_string() + " " + self.name + "(" + s + ")"
 }
@@ -187,6 +187,3 @@ fn records_for_year(y : Int) -> Array[String] {
   }
   res
 }
-
-///|
-extend LegalHoliday with Show::{to_string}

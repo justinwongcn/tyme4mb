@@ -14,25 +14,14 @@ pub struct Constellation {
 }
 
 ///|
-extend Constellation with Culture::{get_name}
-
-///|
-extend Constellation with Show::{to_string}
-
-///|
-extend Constellation with Tyme::{next}
-
-///|
 pub fn Constellation::from_index(index : Int) -> Constellation {
-  Constellation::{
-    loop_tyme: LoopTyme::from_index(constellation_names(), index),
-  }
+  { loop_tyme: LoopTyme::from_index(constellation_names(), index) }
 }
 
 ///|
 pub fn Constellation::from_name(name : String) -> Result[Constellation, String] {
   match LoopTyme::from_name(constellation_names(), name) {
-    Ok(p) => Ok(Constellation::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -43,16 +32,16 @@ pub fn Constellation::get_index(self : Constellation) -> Int {
 }
 
 ///|
-impl Culture for Constellation with fn get_name(self : Constellation) -> String {
+pub impl Culture for Constellation with fn get_name(self : Constellation) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Constellation with fn to_string(self : Constellation) -> String {
+pub impl Show for Constellation with fn to_string(self : Constellation) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Constellation with fn next(self : Constellation, n : Int) -> Constellation {
+pub impl Tyme for Constellation with fn next(self : Constellation, n : Int) -> Constellation {
   Constellation::from_index(self.loop_tyme.get_index() + n)
 }

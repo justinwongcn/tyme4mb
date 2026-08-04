@@ -5,12 +5,6 @@ pub struct PhenologyDay {
 }
 
 ///|
-extend PhenologyDay with Culture::{get_name}
-
-///|
-extend PhenologyDay with Show::{to_string}
-
-///|
 pub fn PhenologyDay::new(o : Phenology, index : Int) -> PhenologyDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index) }
 }
@@ -28,11 +22,11 @@ pub fn PhenologyDay::get_day_index(self : PhenologyDay) -> Int {
 }
 
 ///|
-impl Culture for PhenologyDay with fn get_name(self : PhenologyDay) -> String {
+pub impl Culture for PhenologyDay with fn get_name(self : PhenologyDay) -> String {
   Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for PhenologyDay with fn to_string(self : PhenologyDay) -> String {
+pub impl Show for PhenologyDay with fn to_string(self : PhenologyDay) -> String {
   Show::to_string(self.abstract_culture_day)
 }

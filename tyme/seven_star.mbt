@@ -11,23 +11,14 @@ pub struct SevenStar {
 }
 
 ///|
-extend SevenStar with Culture::{get_name}
-
-///|
-extend SevenStar with Show::{to_string}
-
-///|
-extend SevenStar with Tyme::{next}
-
-///|
 pub fn SevenStar::from_index(index : Int) -> SevenStar {
-  SevenStar::{ loop_tyme: LoopTyme::from_index(seven_star_names(), index) }
+  { loop_tyme: LoopTyme::from_index(seven_star_names(), index) }
 }
 
 ///|
 pub fn SevenStar::from_name(name : String) -> Result[SevenStar, String] {
   match LoopTyme::from_name(seven_star_names(), name) {
-    Ok(p) => Ok(SevenStar::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -44,16 +35,16 @@ pub fn SevenStar::get_week(self : SevenStar) -> Week {
 }
 
 ///|
-impl Culture for SevenStar with fn get_name(self : SevenStar) -> String {
+pub impl Culture for SevenStar with fn get_name(self : SevenStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for SevenStar with fn to_string(self : SevenStar) -> String {
+pub impl Show for SevenStar with fn to_string(self : SevenStar) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for SevenStar with fn next(self : SevenStar, n : Int) -> SevenStar {
+pub impl Tyme for SevenStar with fn next(self : SevenStar, n : Int) -> SevenStar {
   SevenStar::from_index(self.loop_tyme.get_index() + n)
 }

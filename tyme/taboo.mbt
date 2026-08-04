@@ -69,23 +69,14 @@ pub struct Taboo {
 }
 
 ///|
-extend Taboo with Culture::{get_name}
-
-///|
-extend Taboo with Show::{to_string}
-
-///|
-extend Taboo with Tyme::{next}
-
-///|
 pub fn Taboo::from_index(index : Int) -> Taboo {
-  Taboo::{ loop_tyme: LoopTyme::from_index(taboo_names(), index) }
+  { loop_tyme: LoopTyme::from_index(taboo_names(), index) }
 }
 
 ///|
 pub fn Taboo::from_name(name : String) -> Result[Taboo, String] {
   match LoopTyme::from_name(taboo_names(), name) {
-    Ok(p) => Ok(Taboo::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -197,16 +188,16 @@ pub fn Taboo::get_hour_avoids(
 }
 
 ///|
-impl Culture for Taboo with fn get_name(self : Taboo) -> String {
+pub impl Culture for Taboo with fn get_name(self : Taboo) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Taboo with fn to_string(self : Taboo) -> String {
+pub impl Show for Taboo with fn to_string(self : Taboo) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Taboo with fn next(self : Taboo, n : Int) -> Taboo {
+pub impl Tyme for Taboo with fn next(self : Taboo, n : Int) -> Taboo {
   Taboo::from_index(self.loop_tyme.get_index() + n)
 }

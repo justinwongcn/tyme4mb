@@ -8,6 +8,7 @@
 // FromSolarDay/All 断言，统一以显式 EventManager 实例调用（mgr.update / mgr.from_name…）。
 
 // 按名查询，未找到即失败（对应 Go `if e == nil { t.Fatal }`）
+
 ///|
 fn must_from_name(mgr : EventManager, name : String) -> Event {
   match mgr.from_name(name) {

@@ -34,9 +34,8 @@ pub fn HideHeavenStemType::get_name(self : HideHeavenStemType) -> String {
 }
 
 ///|
-impl Show for HideHeavenStemType with fn to_string(self : HideHeavenStemType) -> String {
+pub impl Show for HideHeavenStemType with fn to_string(
+  self : HideHeavenStemType,
+) -> String {
   self.get_name()
 }
-
-///|
-extend HideHeavenStemType with Show::{to_string}

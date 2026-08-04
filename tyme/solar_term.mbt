@@ -17,12 +17,6 @@ pub struct SolarTerm {
 }
 
 ///|
-extend SolarTerm with Culture::{get_name}
-
-///|
-extend SolarTerm with Show::{to_string}
-
-///|
 extend SolarTerm with Tyme::{next}
 
 ///|
@@ -31,7 +25,7 @@ pub fn SolarTerm::from_index(year : Int, index : Int) -> SolarTerm {
   let size = parent.get_size()
   let y = (year * size + index) / size
   let cursory = init_by_year(y, parent.get_index())
-  SolarTerm::{ loop_tyme: parent, year: y, cursory_julian_day: cursory }
+  { loop_tyme: parent, year: y, cursory_julian_day: cursory }
 }
 
 ///|
@@ -42,7 +36,7 @@ pub fn SolarTerm::from_name(
   match LoopTyme::from_name(solar_term_names(), name) {
     Ok(p) => {
       let cursory = init_by_year(year, p.get_index())
-      Ok(SolarTerm::{ loop_tyme: p, year, cursory_julian_day: cursory })
+      Ok({ loop_tyme: p, year, cursory_julian_day: cursory })
     }
     Err(e) => Err(e)
   }
@@ -59,17 +53,17 @@ fn init_by_year(year : Int, offset : Int) -> Double {
 }
 
 ///|
-impl Culture for SolarTerm with fn get_name(self : SolarTerm) -> String {
+pub impl Culture for SolarTerm with fn get_name(self : SolarTerm) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for SolarTerm with fn to_string(self : SolarTerm) -> String {
+pub impl Show for SolarTerm with fn to_string(self : SolarTerm) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for SolarTerm with fn next(self : SolarTerm, n : Int) -> SolarTerm {
+pub impl Tyme for SolarTerm with fn next(self : SolarTerm, n : Int) -> SolarTerm {
   let size = self.loop_tyme.get_size()
   let i = self.loop_tyme.get_index() + n
   SolarTerm::from_index(

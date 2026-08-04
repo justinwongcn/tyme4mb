@@ -24,7 +24,7 @@ pub fn LunarFestival::new(
   event : Event,
   day : LunarDay,
 ) -> LunarFestival {
-  LunarFestival::{ festival: AbstractFestival::new(index, event, day.day_unit) }
+  { festival: AbstractFestival::new(index, event, day.day_unit) }
 }
 
 ///|
@@ -155,14 +155,11 @@ pub fn LunarFestival::get_index(self : LunarFestival) -> Int {
 }
 
 ///|
-impl Culture for LunarFestival with fn get_name(self : LunarFestival) -> String {
+pub impl Culture for LunarFestival with fn get_name(self : LunarFestival) -> String {
   Culture::get_name(self.festival)
 }
 
 ///|
-impl Show for LunarFestival with fn to_string(self : LunarFestival) -> String {
+pub impl Show for LunarFestival with fn to_string(self : LunarFestival) -> String {
   self.get_day().to_string() + " " + self.get_name()
 }
-
-///|
-extend LunarFestival with Show::{to_string}

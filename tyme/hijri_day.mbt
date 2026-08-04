@@ -22,9 +22,6 @@ extend HijriDay with Culture::{get_name}
 extend HijriDay with Show::{to_string}
 
 ///|
-extend HijriDay with Tyme::{next}
-
-///|
 pub fn HijriDay::new(day_unit : DayUnit) -> HijriDay {
   { day_unit, }
 }
@@ -73,7 +70,7 @@ pub fn HijriDay::from_ymd(
 ) -> Result[HijriDay, String] {
   match HijriDay::validate(year, month, day) {
     Ok(_) =>
-      Ok(HijriDay::{
+      Ok({
         day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
       })
     Err(e) => Err(e)
@@ -153,16 +150,16 @@ pub fn HijriDay::equals(self : HijriDay, target : HijriDay) -> Bool {
 }
 
 ///|
-impl Culture for HijriDay with fn get_name(self : HijriDay) -> String {
+pub impl Culture for HijriDay with fn get_name(self : HijriDay) -> String {
   hijri_day_names()[self.get_day() - 1]
 }
 
 ///|
-impl Show for HijriDay with fn to_string(self : HijriDay) -> String {
+pub impl Show for HijriDay with fn to_string(self : HijriDay) -> String {
   self.get_hijri_month().to_string() + self.get_name()
 }
 
 ///|
-impl Tyme for HijriDay with fn next(self : HijriDay, n : Int) -> HijriDay {
+pub impl Tyme for HijriDay with fn next(self : HijriDay, n : Int) -> HijriDay {
   self.get_solar_day().next(n).get_hijri_day()
 }

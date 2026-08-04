@@ -8,9 +8,6 @@ pub struct LunarWeek {
 extend LunarWeek with Culture::{get_name}
 
 ///|
-extend LunarWeek with Show::{to_string}
-
-///|
 // validate 校验
 pub fn LunarWeek::validate(
   year : Int,
@@ -49,7 +46,7 @@ pub fn LunarWeek::from_ym(
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok(LunarWeek::{
+  Ok({
     week_unit: WeekUnit::new(
       MonthUnit::new(YearUnit::new(year), month),
       index,
@@ -89,12 +86,12 @@ pub fn LunarWeek::get_lunar_month(self : LunarWeek) -> LunarMonth {
 }
 
 ///|
-impl Culture for LunarWeek with fn get_name(self : LunarWeek) -> String {
+pub impl Culture for LunarWeek with fn get_name(self : LunarWeek) -> String {
   week_unit_names()[self.week_unit.index]
 }
 
 ///|
-impl Show for LunarWeek with fn to_string(self : LunarWeek) -> String {
+pub impl Show for LunarWeek with fn to_string(self : LunarWeek) -> String {
   self.get_lunar_month().to_string() + self.get_name()
 }
 

@@ -93,10 +93,7 @@ pub fn RabByungMonth::new(
   if m < 0 {
     m = -m
   }
-  Ok(RabByungMonth::{
-    month_unit: MonthUnit::new(YearUnit::new(year), m),
-    leap: month < 0,
-  })
+  Ok({ month_unit: MonthUnit::new(YearUnit::new(year), m), leap: month < 0 })
 }
 
 ///|
@@ -125,8 +122,7 @@ pub fn RabByungMonth::get_month(self : RabByungMonth) -> Int {
 pub fn RabByungMonth::get_rab_byung_year(self : RabByungMonth) -> RabByungYear {
   match RabByungYear::from_year(self.get_year()) {
     Ok(y) => y
-    Err(_) =>
-      RabByungYear::{ rab_byung_index: 0, element_index: 0, zodiac_index: 0 }
+    Err(_) => { rab_byung_index: 0, element_index: 0, zodiac_index: 0 }
   }
 }
 
@@ -222,7 +218,7 @@ pub fn RabByungMonth::get_first_day(self : RabByungMonth) -> RabByungDay {
   match RabByungDay::new(self.get_year(), self.get_month_with_leap(), 1) {
     Ok(d) => d
     Err(_) =>
-      RabByungDay::{
+      {
         day_unit: DayUnit::new(
           MonthUnit::new(YearUnit::new(self.get_year()), self.get_month()),
           1,
@@ -324,7 +320,7 @@ fn arr_contains(arr : Array[Int], v : Int) -> Bool {
 }
 
 ///|
-impl Culture for RabByungMonth with fn get_name(self : RabByungMonth) -> String {
+pub impl Culture for RabByungMonth with fn get_name(self : RabByungMonth) -> String {
   let name = lunar_month_names()[self.get_month() - 1]
   if self.leap {
     return "闰" + name
@@ -333,6 +329,6 @@ impl Culture for RabByungMonth with fn get_name(self : RabByungMonth) -> String 
 }
 
 ///|
-impl Show for RabByungMonth with fn to_string(self : RabByungMonth) -> String {
+pub impl Show for RabByungMonth with fn to_string(self : RabByungMonth) -> String {
   self.get_rab_byung_year().get_name() + self.get_name()
 }

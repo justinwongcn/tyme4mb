@@ -93,12 +93,12 @@ pub fn LoopTyme::from_name(
 }
 
 ///|
-impl Culture for LoopTyme with fn get_name(self : LoopTyme) -> String {
+pub impl Culture for LoopTyme with fn get_name(self : LoopTyme) -> String {
   self.names[self.index]
 }
 
 ///|
-impl Show for LoopTyme with fn to_string(self : LoopTyme) -> String {
+pub impl Show for LoopTyme with fn to_string(self : LoopTyme) -> String {
   self.get_name()
 }
 

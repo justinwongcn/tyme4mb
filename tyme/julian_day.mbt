@@ -14,15 +14,12 @@ pub struct JulianDay {
 extend JulianDay with Culture::{get_name}
 
 ///|
-extend JulianDay with Show::{to_string}
-
-///|
 extend JulianDay with Tyme::{next}
 
 ///|
 // from_julian_day 从儒略日构造
 pub fn JulianDay::from_julian_day(day : Double) -> JulianDay {
-  { abstract_tyme: AbstractTyme::{  }, day }
+  { abstract_tyme: AbstractTyme::new(), day }
 }
 
 ///|
@@ -144,16 +141,16 @@ pub fn JulianDay::get_solar_day(self : JulianDay) -> SolarDay {
 // 二者与 SolarTime.get_solar_day / SolarDay.next 同回合译出。
 
 ///|
-impl Culture for JulianDay with fn get_name(self : JulianDay) -> String {
+pub impl Culture for JulianDay with fn get_name(self : JulianDay) -> String {
   "\{self.day}"
 }
 
 ///|
-impl Show for JulianDay with fn to_string(self : JulianDay) -> String {
+pub impl Show for JulianDay with fn to_string(self : JulianDay) -> String {
   self.get_name()
 }
 
 ///|
-impl Tyme for JulianDay with fn next(self : JulianDay, n : Int) -> JulianDay {
+pub impl Tyme for JulianDay with fn next(self : JulianDay, n : Int) -> JulianDay {
   JulianDay::from_julian_day(self.day + n.to_double())
 }

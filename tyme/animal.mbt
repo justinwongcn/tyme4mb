@@ -15,23 +15,14 @@ pub struct Animal {
 }
 
 ///|
-extend Animal with Culture::{get_name}
-
-///|
-extend Animal with Show::{to_string}
-
-///|
-extend Animal with Tyme::{next}
-
-///|
 pub fn Animal::from_index(index : Int) -> Animal {
-  Animal::{ loop_tyme: LoopTyme::from_index(animal_names(), index) }
+  { loop_tyme: LoopTyme::from_index(animal_names(), index) }
 }
 
 ///|
 pub fn Animal::from_name(name : String) -> Result[Animal, String] {
   match LoopTyme::from_name(animal_names(), name) {
-    Ok(p) => Ok(Animal::{ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p })
     Err(e) => Err(e)
   }
 }
@@ -42,16 +33,16 @@ pub fn Animal::get_index(self : Animal) -> Int {
 }
 
 ///|
-impl Culture for Animal with fn get_name(self : Animal) -> String {
+pub impl Culture for Animal with fn get_name(self : Animal) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Show for Animal with fn to_string(self : Animal) -> String {
+pub impl Show for Animal with fn to_string(self : Animal) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
-impl Tyme for Animal with fn next(self : Animal, n : Int) -> Animal {
+pub impl Tyme for Animal with fn next(self : Animal, n : Int) -> Animal {
   Animal::from_index(self.loop_tyme.get_index() + n)
 }

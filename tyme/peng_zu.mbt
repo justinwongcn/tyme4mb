@@ -9,11 +9,8 @@ pub struct PengZu {
 extend PengZu with Culture::{get_name}
 
 ///|
-extend PengZu with Show::{to_string}
-
-///|
 pub fn PengZu::from_sixty_cycle(sixty_cycle : SixtyCycle) -> PengZu {
-  PengZu::{
+  {
     peng_zu_heaven_stem: PengZuHeavenStem::from_index(
       sixty_cycle.get_heaven_stem().get_index(),
     ),
@@ -24,14 +21,14 @@ pub fn PengZu::from_sixty_cycle(sixty_cycle : SixtyCycle) -> PengZu {
 }
 
 ///|
-impl Culture for PengZu with fn get_name(self : PengZu) -> String {
+pub impl Culture for PengZu with fn get_name(self : PengZu) -> String {
   self.peng_zu_heaven_stem.to_string() +
   " " +
   self.peng_zu_earth_branch.to_string()
 }
 
 ///|
-impl Show for PengZu with fn to_string(self : PengZu) -> String {
+pub impl Show for PengZu with fn to_string(self : PengZu) -> String {
   self.get_name()
 }
 

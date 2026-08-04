@@ -5,12 +5,6 @@ pub struct DogDay {
 }
 
 ///|
-extend DogDay with Culture::{get_name}
-
-///|
-extend DogDay with Show::{to_string}
-
-///|
 pub fn DogDay::new(o : Dog, index : Int) -> DogDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index) }
 }
@@ -28,11 +22,11 @@ pub fn DogDay::get_day_index(self : DogDay) -> Int {
 }
 
 ///|
-impl Culture for DogDay with fn get_name(self : DogDay) -> String {
+pub impl Culture for DogDay with fn get_name(self : DogDay) -> String {
   Culture::get_name(self.abstract_culture_day)
 }
 
 ///|
-impl Show for DogDay with fn to_string(self : DogDay) -> String {
+pub impl Show for DogDay with fn to_string(self : DogDay) -> String {
   Show::to_string(self.abstract_culture_day)
 }
