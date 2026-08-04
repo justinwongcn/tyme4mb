@@ -1,4 +1,11 @@
 ---
+type: "参考"
+title: "领域概念 — 时间体系"
+openwiki_generated: true
+---
+
+```markdown
+---
 title: 领域概念
 type: page
 description: 公历、农历、回历、干支、八字、神煞宜忌等核心概念详解
@@ -168,3 +175,4 @@ pub struct SecondUnit { day_unit: DayUnit, hour: Int, minute: Int, second: Int }
 ```
 
 所有日期类型都嵌套这些单位，通过 accessor 方法逐级访问。
+```
