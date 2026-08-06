@@ -47,7 +47,7 @@ fn main {
   println("\n========== 八字排盘 ==========")
   let solarTime = @tyme.SolarTime::from_ymdhms(1990, 5, 15, 14, 30, 0).unwrap()
   let lunarHour = solarTime.get_lunar_hour()
-  let eightChar = @tyme.eight_char_provider.get_eight_char(lunarHour)
+  let eightChar = lunarHour.get_eight_char()
   println("出生时间: 1990年5月15日 14:30")
   println(
     "八字: \{eightChar.get_year()} \{eightChar.get_month()} \{eightChar.get_day()} \{eightChar.get_hour()}",
@@ -117,10 +117,9 @@ fn main {
 
   // ========== 11. 事件管理 ==========
   println("\n========== 事件管理 ==========")
-  let mgr = @tyme.EventManager::new()
   let chunjie = @tyme.Event::builder().lunar_day(1, 1, 0).build().unwrap()
-  let mgr2 = mgr.update("春节", chunjie)
-  match mgr2.from_name("春节") {
+  @tyme.EventManager::update("春节", chunjie).unwrap()
+  match @tyme.Event::from_name("春节") {
     Some(e) =>
       match e.get_solar_day(2026) {
         Some(d) => println("2026年春节: \{d}")
