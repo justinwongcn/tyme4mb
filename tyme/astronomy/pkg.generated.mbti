@@ -1,0 +1,49 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "justinwongcn/tyme4mb/tyme/astronomy"
+
+// Values
+pub const OneThird : Double = 0.333333333333
+
+pub const Pi2 : Double = 6.28318530718
+
+pub const SecondPerDay : Double = 86400.0
+
+pub const SecondPerRad : Double = 206264.806247
+
+pub fn calc_qi(Double) -> Double
+
+pub fn calc_shuo(Double) -> Double
+
+pub let dt_at : Array[Double]
+
+pub fn dt_t(Double) -> Double
+
+pub fn msa_lon_t(Double) -> Double
+
+pub let nut_b : Array[Double]
+
+pub let qb : String
+
+pub fn qi_accurate(Double) -> Double
+
+pub fn qi_accurate2(Double) -> Double
+
+pub let qi_kb : Array[Double]
+
+pub fn sa_lon_t(Double) -> Double
+
+pub let sb : String
+
+pub let shuo_kb : Array[Double]
+
+pub let xl0 : Array[Double]
+
+pub let xl1 : Array[Array[Double]]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

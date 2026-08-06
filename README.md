@@ -76,37 +76,34 @@ moon run examples
 
 ```
 tyme4mb/
-├── tyme/                  # 主库源码
-│   ├── moon.pkg           # 包声明
-│   ├── solar_*.mbt        # 公历相关
-│   ├── lunar_*.mbt        # 农历相关
-│   ├── hijri_*.mbt        # 回历
-│   ├── rab_byung_*.mbt    # 藏历（饶迥历）
-│   ├── sixty_cycle*.mbt   # 六十甲子
-│   ├── eight_char.mbt     # 八字
-│   ├── god.mbt            # 神煞
-│   ├── taboo.mbt          # 宜忌
-│   ├── child_limit*.mbt   # 童限
-│   ├── event*.mbt         # 事件管理
-│   ├── *_wbtest.mbt       # 单元测试
-│   └── ...
+├── tyme/                  # 稳定的 @tyme 兼容入口
+│   ├── moon.pkg           # facade 包声明
+│   ├── reexports.mbt      # 保持原公开类型、函数和 trait 名称
+│   ├── core/              # 领域实现（sealed trait 与历法类型）
+│   │   ├── moon.pkg
+│   │   ├── solar_*.mbt    # 公历相关
+│   │   ├── lunar_*.mbt    # 农历相关
+│   │   ├── hijri_*.mbt    # 回历
+│   │   ├── rab_byung_*.mbt # 藏历（饶迥历）
+│   │   ├── sixty_cycle*.mbt # 六十甲子
+│   │   └── *_wbtest.mbt   # 包内单元测试
+│   └── astronomy/         # 无领域类型依赖的纯天文算法
+│       ├── moon.pkg
+│       └── shou_xing_util.mbt
 ├── examples/              # 示例工程
 ├── openwiki/              # 自动生成的文档
 ├── .github/workflows/     # CI/CD
 ├── moon.mod               # 模块声明
-├── LICENSE                # MIT 许可证
-├── PORTING.md             # 移植说明
-├── CHANGELOG.md           # 更新日志
-└── PROPOSAL.md            # 项目申报书
+└── LICENSE                # MIT 许可证
 ```
 
 ## 测试
 
 项目包含 43 个测试文件，约 3,200 行测试代码，涵盖：
 
-- 各模块的单元测试（对应 Go 版本的一比一翻译）
-- 全量交叉引用测试（`xref_all_wbtest.mbt`，~2100行）
-- 神煞/宜忌差分测试（`xref_gt_wbtest.mbt`）
+- 各模块的单元测试
+- 全量交叉引用测试
+- 神煞/宜忌差分测试
 - 八字真太阳时测试
 - 事件管理器完整测试
 
