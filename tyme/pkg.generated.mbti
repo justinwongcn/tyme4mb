@@ -49,6 +49,8 @@ pub let eight_char_provider : @ref.Ref[&@core.IEightCharProvider]
 
 pub fn element_names() -> Array[String]
 
+pub fn equation_of_time(Double) -> Double
+
 pub fn event_manager_chars() -> String
 
 pub let event_manager_data : @ref.Ref[Map[String, String]]
@@ -123,6 +125,8 @@ pub fn rab_byung_month_aliases() -> Array[String]
 
 pub let rab_byung_month_data : String
 
+pub fn sa_lon(Double, Int) -> Double
+
 pub fn sa_lon_t(Double) -> Double
 
 pub let sb : String
@@ -154,6 +158,8 @@ pub fn solar_season_names() -> Array[String]
 pub fn solar_term_names() -> Array[String]
 
 pub fn sound_names() -> Array[String]
+
+pub fn sun_apparent_ra(Double) -> Double
 
 pub fn taboo_names() -> Array[String]
 

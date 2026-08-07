@@ -251,6 +251,32 @@ pub fn SolarTime::get_sixty_cycle_hour(self : SolarTime) -> SixtyCycleHour {
 }
 
 ///|
+// to_true_solar_time 真太阳时
+// 根据出生地经度将钟表时间（北京时间 UTC+8）转换为真太阳时
+// longitude: 经度（东正西负，如北京 116.39）
+// 真太阳时 = 钟表时间 + (经度 - 120°) × 4分钟/度 + 均时差
+pub fn SolarTime::to_true_solar_time(
+  self : SolarTime,
+  longitude : Double,
+) -> SolarTime {
+  // 1. 计算均时差（需要力学时 TD）
+  let jd = self.get_julian_day().get_day() // 北京时间儒略日
+  let jd_ut = jd - OneThird // → UT（减 8h）
+  let t_ut = jd_ut - J2000.to_double() // J2000 起 UT 天数
+  let dt = dt_t(t_ut) // ΔT（天）
+  let t_td = (t_ut + dt) / 36525.0 // J2000 起 TD 世纪数
+  let eot_hours = equation_of_time(t_td) // 均时差（小时）
+
+  // 2. 经度修正 + 均时差 → 总修正秒数
+  let lon_corr = (longitude - 120.0) * 240.0 // (经度-标准经度)×4min/度 → 秒
+  let eot_corr = eot_hours * 3600.0 // 均时差 → 秒
+  let total = @math.round(lon_corr + eot_corr).to_int()
+
+  // 3. 偏移并返回新的 SolarTime
+  self.next(total)
+}
+
+///|
 pub impl Culture for SolarTime with fn get_name(self : SolarTime) -> String {
   two_digits(self.get_hour()) +
   ":" +

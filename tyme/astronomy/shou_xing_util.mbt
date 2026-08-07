@@ -823,7 +823,7 @@ fn ev(t : Double) -> Double {
 }
 
 ///|
-fn sa_lon(t : Double, n : Int) -> Double {
+pub fn sa_lon(t : Double, n : Int) -> Double {
   e_lon(t, n) + nutation_lon2(t) + gxc_sun_lon(t) + @math.PI
 }
 

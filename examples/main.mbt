@@ -128,5 +128,19 @@ fn main {
     None => println("事件未找到")
   }
 
+  // ========== 12. 真太阳时 ==========
+  println("\n========== 真太阳时 ==========")
+  let birthTime = @tyme.SolarTime::from_ymdhms(1990, 5, 15, 14, 30, 0).unwrap()
+  // 北京约 116.39°E
+  let trueSolarTime = birthTime.to_true_solar_time(116.39)
+  println("出生钟表时间: \{birthTime}")
+  println("北京真太阳时: \{trueSolarTime}")
+  // 上海约 121.47°E
+  let shanghaiTST = birthTime.to_true_solar_time(121.47)
+  println("上海真太阳时: \{shanghaiTST}")
+  // 乌鲁木齐约 87.62°E
+  let urumqiTST = birthTime.to_true_solar_time(87.62)
+  println("乌鲁木齐真太阳时: \{urumqiTST}")
+
   println("\n========== 示例结束 ==========")
 }

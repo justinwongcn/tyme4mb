@@ -18,9 +18,17 @@ pub let dt_at : Array[Double]
 
 pub fn dt_t(Double) -> Double
 
+pub fn equation_of_time(Double) -> Double
+
+pub fn lo_to_ra(Double, Double, Double) -> Double
+
+pub fn mean_obliquity(Double) -> Double
+
 pub fn msa_lon_t(Double) -> Double
 
 pub let nut_b : Array[Double]
+
+pub fn nutation_obliquity(Double) -> Double
 
 pub let qb : String
 
@@ -30,11 +38,17 @@ pub fn qi_accurate2(Double) -> Double
 
 pub let qi_kb : Array[Double]
 
+pub fn sa_lon(Double, Int) -> Double
+
 pub fn sa_lon_t(Double) -> Double
 
 pub let sb : String
 
 pub let shuo_kb : Array[Double]
+
+pub fn sun_apparent_ra(Double) -> Double
+
+pub fn true_obliquity(Double) -> Double
 
 pub let xl0 : Array[Double]
 
