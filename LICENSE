@@ -1,8 +1,21 @@
 MIT License
 
-Copyright (c) 2024 6tail
+Copyright (c) 2024 6tail (tyme4go)
+Copyright (c) 2016 emu (zangli)
+Copyright starainrt (astro, Apache-2.0)
+Portions Copyright (c) 2026 justinwongcn (tyme4mb)
 
-Portions Copyright (c) 2026 justinwongcn
+This project incorporates code or data from the following third-party projects.
+For complete license texts and attribution notices, see THIRD_PARTY_LICENSES.md.
+
+- tyme4go: MIT License, Copyright (c) 2024 6tail
+  https://github.com/6tail/tyme4go
+- sxwnl (寿星天文历): Custom open-source license, 许剑伟
+  https://github.com/sxwnl/sxwnl
+- astro: Apache License 2.0, Copyright starainrt
+  https://github.com/starainrt/astro
+- zangli: MIT License, Copyright (c) 2016 emu
+  https://github.com/stonelf/zangli
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

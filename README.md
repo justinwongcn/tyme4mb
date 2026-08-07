@@ -94,7 +94,8 @@ tyme4mb/
 ├── openwiki/              # 自动生成的文档
 ├── .github/workflows/     # CI/CD
 ├── moon.mod               # 模块声明
-└── LICENSE                # MIT 许可证
+├── LICENSE                # MIT 许可证
+└── THIRD_PARTY_LICENSES.md # 第三方许可证与归属说明
 ```
 
 ## 测试
@@ -118,9 +119,10 @@ moon test
 
 ## 致谢
 
-1. 感谢 [6tail](https://github.com/6tail) 创建并开源了 tyme4go 项目，本项目移植自该仓库
-2. 感谢许剑伟老师分享的寿星天文历，节气算法引自 [sxwnl/sxwnl](https://github.com/sxwnl/sxwnl)
-3. 感谢 [stonelf](https://github.com/stonelf)，藏历数据引自 [stonelf/zangli](https://github.com/stonelf/zangli)
+1. 感谢 [6tail](https://github.com/6tail) 创建并开源了 [tyme4go](https://github.com/6tail/tyme4go)（MIT License, Copyright (c) 2024 6tail），本项目移植自该仓库
+2. 感谢许剑伟老师分享的 [寿星天文历](https://github.com/sxwnl/sxwnl)（自定义开源许可），节气算法引自该项目
+3. 感谢 [starainrt](https://github.com/starainrt) 开源的 [astro](https://github.com/starainrt/astro)（Apache License 2.0），真太阳时算法引自该项目
+4. 感谢 [stonelf](https://github.com/stonelf) 开源的 [zangli](https://github.com/stonelf/zangli)（MIT License, Copyright (c) 2016 emu），藏历数据引自该项目
 
 ## 文档
 
@@ -128,4 +130,13 @@ moon test
 
 ## 许可证
 
-[MIT](./LICENSE)
+本项目采用 [MIT](./LICENSE) 许可证。
+
+本项目移植并使用了以下第三方项目的代码或数据，完整的第三方许可证文本与归属说明请参阅 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md)：
+
+| 项目 | 许可证 | 用途 |
+|------|--------|------|
+| [tyme4go](https://github.com/6tail/tyme4go) | MIT License, Copyright (c) 2024 6tail | 整体移植来源 |
+| [sxwnl/sxwnl](https://github.com/sxwnl/sxwnl) | 自定义开源许可, 许剑伟 | 节气天文算法 |
+| [starainrt/astro](https://github.com/starainrt/astro) | Apache License 2.0, Copyright starainrt | 真太阳时算法 |
+| [stonelf/zangli](https://github.com/stonelf/zangli) | MIT License, Copyright (c) 2016 emu | 藏历数据 |

@@ -48,6 +48,8 @@ pub let eight_char_provider : @ref.Ref[&IEightCharProvider]
 
 pub fn element_names() -> Array[String]
 
+pub fn equation_of_time(Double) -> Double
+
 pub fn event_manager_chars() -> String
 
 pub let event_manager_data : @ref.Ref[Map[String, String]]
@@ -124,6 +126,8 @@ pub fn rab_byung_month_aliases() -> Array[String]
 
 pub let rab_byung_month_data : String
 
+pub fn sa_lon(Double, Int) -> Double
+
 pub fn sa_lon_t(Double) -> Double
 
 pub let sb : String
@@ -155,6 +159,8 @@ pub fn solar_season_names() -> Array[String]
 pub fn solar_term_names() -> Array[String]
 
 pub fn sound_names() -> Array[String]
+
+pub fn sun_apparent_ra(Double) -> Double
 
 pub fn taboo_names() -> Array[String]
 
@@ -1535,6 +1541,7 @@ pub fn SolarTime::is_before(Self, Self) -> Bool
 pub fn SolarTime::new(SecondUnit) -> Self
 pub fn SolarTime::next(Self, Int) -> Self
 pub fn SolarTime::subtract(Self, Self) -> Int64
+pub fn SolarTime::to_true_solar_time(Self, Double) -> Self
 pub fn SolarTime::validate(Int, Int, Int, Int, Int, Int) -> Result[Unit, String]
 pub impl Culture for SolarTime
 pub impl Show for SolarTime
