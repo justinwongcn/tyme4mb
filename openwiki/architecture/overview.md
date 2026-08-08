@@ -157,6 +157,7 @@ pub struct SixtyCycle {
 | 小运/大运 | `fortune.mbt`, `decade_fortune.mbt` | 基于童限推演各年龄段运势 |
 | 回历 | `hijri_*.mbt` | 伊斯兰历法转换 |
 | 巴厘岛历 | `rab_byung_*.mbt` | 印尼巴厘岛历法 |
+| 藏历五行 | `rab_byung_element.mbt` | 藏历五行（木火土铁水） |
 | 斗宿 | `shou_xing_util.mbt` | 北斗九星相关计算（最大单体文件，~718行） |
 | 事件 | `event*.mbt` | 自定义事件（节日、节假日等）构建与管理 |
 | 灶马头 | `kitchen_god_steed.mbt` | 根据正月初一干支推算农历年运势（几龙治水等） |
@@ -168,7 +169,7 @@ pub struct SixtyCycle {
 | 法定假日 | `legal_holiday.mbt` | 中国法定节假日及调休安排（2001年至今） |
 | 宫 | `zone.mbt` | 四方（东/南/西/北）及对应神兽 |
 | 十神 | `ten_star.mbt` | 天干生克关系（比肩/劫财/食神等） |
-| 星期 | `week.mbt` | 周日到周六，可关联七曜 |
+| 星期 | `week.mbt` | 周日到周六 |
 | 三候 | `three_phenology.mbt` | 每节气三候（初候/二候/三候） |
 | 节气日 | `solar_term_day.mbt` | 节气第几天索引 |
 
