@@ -14,7 +14,7 @@ description: 完整的文件索引、模块依赖关系和代码统计
 
 ## 文件索引
 
-### 基础类型（20个文件）
+### 基础类型（23个文件）
 
 | 文件 | 行数 | 说明 |
 |------|------|------|
@@ -39,6 +39,8 @@ description: 完整的文件索引、模块依赖关系和代码统计
 | `second_unit.mbt` | 83 | 秒单位（含整数比较索引） |
 | `sixty.mbt` | 103 | 三元（上元/中元/下元） |
 | `six_star.mbt` | 30 | 六曜（孔明六曜星） |
+| `week.mbt` | 50 | 星期（周日到周六） |
+| `ten_star.mbt` | 47 | 十神（天干生克关系） |
 
 ### 公历系统（17个文件）
 
@@ -164,6 +166,7 @@ description: 完整的文件索引、模块依赖关系和代码统计
 | `rab_byung_day.mbt` | 241 | 巴厘岛历日 |
 | `rab_byung_month.mbt` | 344 | 巴厘岛历月 |
 | `rab_byung_year.mbt` | 232 | 巴厘岛历年 |
+| `rab_byung_element.mbt` | 60+ | 藏历五行（木火土铁水） |
 
 ### 辅助工具（3个文件）
 
@@ -173,7 +176,7 @@ description: 完整的文件索引、模块依赖关系和代码统计
 | `legal_holiday.mbt` | 174 | 法定节假日（含调休） |
 | `loop_tyme.mbt` | 35 | 循环时间工具 |
 
-### 测试文件（4个文件）
+### 测试文件（11个文件）
 
 | 文件 | 行数 | 说明 |
 |------|------|------|
@@ -181,6 +184,13 @@ description: 完整的文件索引、模块依赖关系和代码统计
 | `xref_gt_wbtest.mbt` | 56 | 子集测试（公历） |
 | `xref_sx_wbtest.mbt` | 78 | 子集测试（特殊） |
 | `eight_char_true_solar_wbtest.mbt` | 100 | 真太阳时测试 |
+| `api_test/test_calendar.mbt` | - | 日历API测试 |
+| `api_test/test_culture.mbt` | - | 文化API测试 |
+| `api_test/test_festival.mbt` | - | 节日API测试 |
+| `api_test/test_fortune.mbt` | - | 运势API测试 |
+| `api_test/test_lunar.mbt` | - | 农历API测试 |
+| `api_test/test_sixty_cycle.mbt` | - | 干支API测试 |
+| `api_test/test_solar.mbt` | - | 公历API测试 |
 
 ## 文件大小排行（Top 15）
 
@@ -232,12 +242,6 @@ description: 完整的文件索引、模块依赖关系和代码统计
 ├── god.mbt → lunar_day, sixty_cycle
 ├── taboo.mbt → lunar_day, sixty_cycle
 ├── event*.mbt → 独立
-└── kitchen_god_steed.mbt → 农历年初一
-
-工具层
-├── shou_xing_util.mbt → 所有时间类型
-└── legal_holiday.mbt → solar_day
-```├── event*.mbt → 独立
 └── kitchen_god_steed.mbt → 农历年初一
 
 工具层
