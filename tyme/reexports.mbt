@@ -117,6 +117,7 @@ pub using @core {
   type Duty,
   type EarthBranch,
   type Ecliptic,
+  type EclipticHideHeavenStemDay,
   type EightChar,
   type Element,
   type Event,
