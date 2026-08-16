@@ -46,6 +46,8 @@ pub let sb : String
 
 pub let shuo_kb : Array[Double]
 
+pub fn solar_declination(Double) -> Double
+
 pub fn sun_apparent_ra(Double) -> Double
 
 pub fn true_obliquity(Double) -> Double

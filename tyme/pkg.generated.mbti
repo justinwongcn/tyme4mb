@@ -143,6 +143,8 @@ pub fn sixty_names() -> Array[String]
 
 pub fn solar_day_names() -> Array[String]
 
+pub fn solar_declination(Double) -> Double
+
 pub let solar_festival_data : @ref.Ref[String]
 
 pub fn solar_festival_names() -> Array[String]

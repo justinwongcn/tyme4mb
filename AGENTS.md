@@ -53,7 +53,7 @@ tyme4mb/
 │   └── pkg.generated.mbti
 ├── tyme/astronomy/        # 纯天文算法包（寿星天文历，无领域类型依赖）
 │   ├── moon.pkg           # import: moonbitlang/core/math
-│   └── pkg.generated.mbti # 含真太阳时天文函数：sa_lon, mean_obliquity, nutation_obliquity, true_obliquity, lo_to_ra, sun_apparent_ra, equation_of_time
+│   └── pkg.generated.mbti # 含真太阳时天文函数：sa_lon, mean_obliquity, nutation_obliquity, true_obliquity, lo_to_ra, sun_apparent_ra, equation_of_time, solar_declination
 ├── api_test/              # 黑盒 API 测试（import: tyme）
 ├── examples/              # 示例可执行包（import: tyme, is-main: true）
 └── moon.mod               # 模块声明

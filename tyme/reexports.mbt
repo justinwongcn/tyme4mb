@@ -75,6 +75,7 @@ pub using @core {
   sixty_cycle_names,
   sixty_names,
   solar_day_names,
+  solar_declination,
   solar_festival_names,
   solar_half_year_names,
   solar_month_days,
