@@ -22,6 +22,7 @@ pub using @astronomy {
   SecondPerDay,
   SecondPerRad,
   shuo_kb,
+  solar_declination,
   sun_apparent_ra,
   xl0,
   xl1,

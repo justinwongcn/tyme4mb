@@ -144,6 +144,8 @@ pub fn sixty_names() -> Array[String]
 
 pub fn solar_day_names() -> Array[String]
 
+pub fn solar_declination(Double) -> Double
+
 pub let solar_festival_data : @ref.Ref[String]
 
 pub fn solar_festival_names() -> Array[String]
@@ -263,6 +265,7 @@ pub struct ChildLimit {
   info : ChildLimitInfo
 }
 pub fn ChildLimit::from_solar_time(SolarTime, Gender) -> Self
+pub fn ChildLimit::from_true_solar_time(SolarTime, Gender, Double) -> Self
 pub fn ChildLimit::get_day_count(Self) -> Int
 pub fn ChildLimit::get_decade_fortune(Self) -> DecadeFortune
 pub fn ChildLimit::get_eight_char(Self) -> EightChar
@@ -1551,6 +1554,9 @@ pub fn SolarTime::get_phenology(Self) -> Phenology
 pub fn SolarTime::get_second(Self) -> Int
 pub fn SolarTime::get_sixty_cycle_hour(Self) -> SixtyCycleHour
 pub fn SolarTime::get_solar_day(Self) -> SolarDay
+pub fn SolarTime::get_solar_noon(Self, Double) -> Self
+pub fn SolarTime::get_sunrise(Self, Double, Double) -> Self?
+pub fn SolarTime::get_sunset(Self, Double, Double) -> Self?
 pub fn SolarTime::get_term(Self) -> SolarTerm
 pub fn SolarTime::get_year(Self) -> Int
 pub fn SolarTime::is_after(Self, Self) -> Bool

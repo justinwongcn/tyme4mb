@@ -251,6 +251,22 @@ pub fn SolarTime::get_sixty_cycle_hour(self : SolarTime) -> SixtyCycleHour {
 }
 
 ///|
+// td_centuries_at 时刻对应的 J2000 起力学时世纪数（北京时间儒略日 → UT → ΔT → TD）
+fn SolarTime::td_centuries_at(self : SolarTime) -> Double {
+  let jd = self.get_julian_day().get_day() // 北京时间儒略日
+  let jd_ut = jd - OneThird // → UT（减 8h）
+  let t_ut = jd_ut - J2000.to_double() // J2000 起 UT 天数
+  let dt = dt_t(t_ut) // ΔT（天）
+  (t_ut + dt) / 36525.0 // J2000 起 TD 世纪数
+}
+
+///|
+// eot_seconds_at 均时差（秒，未取整）
+fn SolarTime::eot_seconds_at(self : SolarTime) -> Double {
+  equation_of_time(self.td_centuries_at()) * 3600.0
+}
+
+///|
 // to_true_solar_time 真太阳时
 // 根据出生地经度将钟表时间（北京时间 UTC+8）转换为真太阳时
 // longitude: 经度（东正西负，如北京 116.39）
@@ -259,21 +275,96 @@ pub fn SolarTime::to_true_solar_time(
   self : SolarTime,
   longitude : Double,
 ) -> SolarTime {
-  // 1. 计算均时差（需要力学时 TD）
-  let jd = self.get_julian_day().get_day() // 北京时间儒略日
-  let jd_ut = jd - OneThird // → UT（减 8h）
-  let t_ut = jd_ut - J2000.to_double() // J2000 起 UT 天数
-  let dt = dt_t(t_ut) // ΔT（天）
-  let t_td = (t_ut + dt) / 36525.0 // J2000 起 TD 世纪数
-  let eot_hours = equation_of_time(t_td) // 均时差（小时）
-
-  // 2. 经度修正 + 均时差 → 总修正秒数
+  // 经度修正 + 均时差 → 总修正秒数
   let lon_corr = (longitude - 120.0) * 240.0 // (经度-标准经度)×4min/度 → 秒
-  let eot_corr = eot_hours * 3600.0 // 均时差 → 秒
+  let eot_corr = self.eot_seconds_at() // 均时差 → 秒
   let total = @math.round(lon_corr + eot_corr).to_int()
 
-  // 3. 偏移并返回新的 SolarTime
+  // 偏移并返回新的 SolarTime
   self.next(total)
+}
+
+///|
+// get_solar_noon 太阳正午（真太阳时 12:00）对应的钟表时刻，为 to_true_solar_time 的逆运算
+// 正午 = 12:00 − 经度修正 − 均时差；均时差取当日 12:00 处的值
+//（均时差随日期缓慢变化，在正午偏移窗口内（西部最大约 2 小时）的漂移约 1 秒量级，不影响分钟级精度）
+// longitude: 经度（东正西负）；极端经度差下返回值可能落在相邻日期
+pub fn SolarTime::get_solar_noon(
+  self : SolarTime,
+  longitude : Double,
+) -> SolarTime {
+  let noon0 = SolarTime::from_ymdhms(
+    self.get_year(),
+    self.get_month(),
+    self.get_day(),
+    12,
+    0,
+    0,
+  ).unwrap()
+  let lon_corr = (longitude - 120.0) * 240.0
+  let offset = @math.round(lon_corr + noon0.eot_seconds_at()).to_int()
+  noon0.next(-offset)
+}
+
+///|
+// sun_half_day_seconds 半昼长（秒）
+// cos H = (cos(90° + 0.833°) − sinφ·sinδ) / (cosφ·cosδ)
+// 0.833° = 大气折射 34′ + 太阳视半径 16′；δ 取当日 12:00 时的值
+// 极昼（太阳终日在地平线上）或极夜（终日在地平线下）返回 None
+fn SolarTime::sun_half_day_seconds(
+  self : SolarTime,
+  latitude : Double,
+) -> Double? {
+  let noon0 = SolarTime::from_ymdhms(
+    self.get_year(),
+    self.get_month(),
+    self.get_day(),
+    12,
+    0,
+    0,
+  ).unwrap()
+  let rad = @math.PI / 180.0
+  let decl = solar_declination(noon0.td_centuries_at())
+  let cos_h = (@math.cos(90.833 * rad) -
+    @math.sin(latitude * rad) * @math.sin(decl)) /
+    (@math.cos(latitude * rad) * @math.cos(decl))
+  if cos_h < -1.0 || cos_h > 1.0 {
+    return None
+  }
+  // 时角弧度 → 小时（π = 12 小时）→ 秒
+  Some(@math.acos(cos_h) * 12.0 / @math.PI * 3600.0)
+}
+
+///|
+// get_sunrise 日出钟表时刻（太阳视半径 16′ + 大气折射 34′，精度约 ±1 分钟）
+// 极昼或极夜返回 None（可用 get_solar_noon 时刻太阳在地平线上/下区分二者）
+// latitude: 纬度（北正南负）；longitude: 经度（东正西负）
+pub fn SolarTime::get_sunrise(
+  self : SolarTime,
+  latitude : Double,
+  longitude : Double,
+) -> SolarTime? {
+  match self.sun_half_day_seconds(latitude) {
+    None => None
+    Some(h) =>
+      Some(self.get_solar_noon(longitude).next(-@math.round(h).to_int()))
+  }
+}
+
+///|
+// get_sunset 日落钟表时刻（太阳视半径 16′ + 大气折射 34′，精度约 ±1 分钟）
+// 极昼或极夜返回 None
+// latitude: 纬度（北正南负）；longitude: 经度（东正西负）
+pub fn SolarTime::get_sunset(
+  self : SolarTime,
+  latitude : Double,
+  longitude : Double,
+) -> SolarTime? {
+  match self.sun_half_day_seconds(latitude) {
+    None => None
+    Some(h) =>
+      Some(self.get_solar_noon(longitude).next(@math.round(h).to_int()))
+  }
 }
 
 ///|

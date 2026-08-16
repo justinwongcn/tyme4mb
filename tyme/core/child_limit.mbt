@@ -18,12 +18,12 @@ pub struct ChildLimit {
 }
 
 ///|
-// from_solar_time 从出生公历时刻与性别构造
-pub fn ChildLimit::from_solar_time(
+// child_limit_of 共享构造：四柱已给定，节令与童限差值一律按钟表绝对时刻计算
+fn child_limit_of(
+  eight_char : EightChar,
   birth_time : SolarTime,
   gender : Gender,
 ) -> ChildLimit {
-  let eight_char = birth_time.get_lunar_hour().get_eight_char()
   // 阳男阴女顺推，阴男阳女逆推
   let yang = eight_char.get_year().get_heaven_stem().get_yin_yang().get_code() ==
     1
@@ -38,6 +38,29 @@ pub fn ChildLimit::from_solar_time(
   }
   let info = child_limit_provider.val.get_info(birth_time, term)
   { eight_char, gender, forward, info }
+}
+
+///|
+// from_solar_time 从出生公历时刻与性别构造
+pub fn ChildLimit::from_solar_time(
+  birth_time : SolarTime,
+  gender : Gender,
+) -> ChildLimit {
+  child_limit_of(birth_time.get_lunar_hour().get_eight_char(), birth_time, gender)
+}
+
+///|
+// from_true_solar_time 从出生钟表时刻（北京时间）、性别与出生地经度构造（真太阳时版）
+// 四柱按真太阳时读数计算；节令判断与起运时间差仍按钟表绝对时刻，
+// 避免真太阳时读数与钟表系节气时刻混用导致的时间差扭曲（西部经度差可达 2 小时）。
+// longitude: 出生地经度（东正西负，如北京 116.39、乌鲁木齐 87.62）
+pub fn ChildLimit::from_true_solar_time(
+  birth_time : SolarTime,
+  gender : Gender,
+  longitude : Double,
+) -> ChildLimit {
+  let tst = birth_time.to_true_solar_time(longitude)
+  child_limit_of(tst.get_lunar_hour().get_eight_char(), birth_time, gender)
 }
 
 ///|

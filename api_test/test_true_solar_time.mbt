@@ -103,3 +103,43 @@ test "api_equation_of_time_seasonal_variation" {
   assert_true((eot_jan - eot_jun).abs() > 0.01,
     "EoT seasonal variation > 0.01h")
 }
+
+///|
+test "api_child_limit_true_solar_time" {
+  let st = @tyme.SolarTime::from_ymdhms(1990, 5, 15, 14, 30, 0).unwrap()
+  let cl = @tyme.ChildLimit::from_true_solar_time(
+    st,
+    @tyme.Gender::Man,
+    87.62,
+  )
+  // 时柱按真太阳时 → 午
+  assert_true(
+    cl.get_eight_char().get_hour().get_earth_branch().get_name() == "午",
+    "TST child limit hour branch",
+  )
+  // 起运计数与钟表版一致
+  let clock = @tyme.ChildLimit::from_solar_time(st, @tyme.Gender::Man)
+  assert_true(
+    cl.get_year_count() == clock.get_year_count() &&
+    cl.get_month_count() == clock.get_month_count() &&
+    cl.get_day_count() == clock.get_day_count() &&
+    cl.get_hour_count() == clock.get_hour_count() &&
+    cl.get_minute_count() == clock.get_minute_count(),
+    "TST child limit counts match clock",
+  )
+}
+
+///|
+test "api_solar_noon_sunrise_sunset" {
+  let st = @tyme.SolarTime::from_ymdhms(2025, 6, 21, 12, 0, 0).unwrap()
+  let noon = st.get_solar_noon(116.39)
+  assert_true(noon.get_hour() == 12, "Beijing noon hour")
+  match st.get_sunrise(39.90, 116.39) {
+    Some(t) => assert_true(t.get_hour() == 4, "Beijing sunrise hour")
+    None => abort("ASSERT FAIL: sunrise is None")
+  }
+  match st.get_sunset(39.90, 116.39) {
+    Some(t) => assert_true(t.get_hour() == 19, "Beijing sunset hour")
+    None => abort("ASSERT FAIL: sunset is None")
+  }
+}
