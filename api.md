@@ -3047,6 +3047,88 @@ get_hide_heaven_stem()返回为藏干 HideHeavenStem。
         // 壬
         let hide_heaven_stem = hide_heaven_stem_day.get_hide_heaven_stem()
       
+2. 天索引（节气后第几天）
+get_day_index()返回为当令天干在节气后的第几天（0 起，节气当天为 0）。上例"壬水第16天"即 day_index = 15。
+
+        // 15
+        let day_index = hide_heaven_stem_day.get_day_index()
+      
+## 真黄经人元司令分野 EclipticHideHeavenStemDay
+
+‌‌真黄经人元司令分野与按日划分的人元司令分野（HideHeavenStemDay）对应：不按"节气后第几天"计数，而是直接以太阳视黄经（真黄经 + 黄经章动 + 光行差修正，含章动与光行差）的度数划分司令分野。每个节令起黄经 315°（立春）每 30° 为一令，令内按司令段（第1/2/3段）划分，每段占据固定度数。
+
+月令黄经起点与司令段划分：
+
+| 月令 | 黄经起点 | 第1段 | 第2段 | 第3段 |
+|------|---------|-------|-------|-------|
+| 寅（立春） | 315° | 戊 7° | 丙 7° | 甲 16° |
+| 卯（惊蛰） | 345° | 甲 10° | — | 乙 20° |
+| 辰（清明） | 15° | 乙 9° | 癸 3° | 戊 18° |
+| 巳（立夏） | 45° | 戊 5° | 庚 9° | 丙 16° |
+| 午（芒种） | 75° | 丙 10° | 己 9° | 丁 11° |
+| 未（小暑） | 105° | 丁 9° | 乙 3° | 己 18° |
+| 申（立秋） | 135° | 戊 10° | 壬 3° | 庚 17° |
+| 酉（白露） | 165° | 庚 10° | — | 辛 20° |
+| 戌（寒露） | 195° | 辛 9° | 丁 3° | 戊 18° |
+| 亥（立冬） | 225° | 戊 7° | 甲 5° | 壬 18° |
+| 子（大雪） | 255° | 壬 10° | — | 癸 20° |
+| 丑（小寒） | 285° | 癸 9° | 辛 3° | 己 18° |
+
+### 与按日版（HideHeavenStemDay）的差异
+
+两版共用同一张司令分野表（各令度数合计 30°，见上表），但定位方式不同，在节气边界处存在系统性差异：
+
+| 差异点 | 按日版 HideHeavenStemDay | 按黄经版 EclipticHideHeavenStemDay |
+|--------|--------------------------|-----------------------------------|
+| 定位依据 | 节气所在公历日（当天 0:00 即切换） | 太阳视黄经精确度数（到 315° 才切换） |
+| 节气当天 | 0:00 起即报新令首位（如立春当天报戊土·第1段） | 节气时刻前仍报旧令末段（如立春 16:27 前报己土·第3段） |
+| 首段天数 | 首段计数含节气当天 | 按度数折算（7° ≈ 7.1 日） |
+| 末段 | 开放到下一节令（日版末段不设固定宽度，从第 (前两段) 天起覆盖至下一节令） | 剩余度数（如寅月甲木 16°、丑月己土 18°） |
+| 精确度 | 日级 | 秒级（随视黄经连续变化） |
+
+示例：2024 年立春为 2 月 4 日 16:27。当天 00:00 起，按日版已报戊土·第1段（立春当日第 1 天）；按黄经版在 16:27 前仍报己土·第3段（视黄经未到 315°），16:27 后才切为戊土·第1段。两版在节气时刻之后一致（均为戊土·第1段）。注意立春时刻逐年漂移（如 2025 年为 2 月 3 日 22:10），不能以固定钟点断言差异。
+
+两种实现各自独立、均可单独使用；需要与 Go 版 tyme4go 行为一致时用按日版，需要黄经精确划分时用本接口。
+
+### 如何得到真黄经人元司令分野？
+
+1. 从公历时刻 SolarTime得到真黄经人元司令分野
+        // 壬水
+        let ecliptic_hide_heaven_stem_day = SolarTime::from_ymdhms(2024, 12, 4, 12, 0, 0).unwrap().get_hide_heaven_stem_by_ecliptic()
+      
+### 从真黄经人元司令分野可以得到些什么？
+
+1. 当令天干
+get_hide_heaven_stem()返回为藏干 HideHeavenStem（其藏干类型恒为本气 Main，无分类意义；当令的是哪一段请看 get_sector_index）。
+
+        let ecliptic_hide_heaven_stem_day = SolarTime::from_ymdhms(2024, 12, 4, 12, 0, 0).unwrap().get_hide_heaven_stem_by_ecliptic()
+         
+        // 壬
+        let hide_heaven_stem = ecliptic_hide_heaven_stem_day.get_hide_heaven_stem()
+      
+2. 司令段序
+get_sector_index()返回为当前当令的是第几段（0/1/2 = 第1/2/3段，与藏干分类无关）。
+
+        // 2（第3段）
+        let sector_index = ecliptic_hide_heaven_stem_day.get_sector_index()
+      
+3. 太阳黄经在月令内的度数
+get_month_lon()返回为太阳黄经在月令内的度数，范围 [0, 30)。
+
+        // 27.49...（度）
+        let month_lon = ecliptic_hide_heaven_stem_day.get_month_lon()
+      
+4. 司令段起点度数
+get_lon_offset()返回为当前司令段起点在月令内的黄经度数（如立春月戊土段 0、丙火段 7、甲木段 14）。
+
+        // 12.0
+        let lon_offset = ecliptic_hide_heaven_stem_day.get_lon_offset()
+      
+5. 段内度数
+get_angle_in_sector()返回为太阳黄经在当前司令段内的度数（month_lon - lon_offset）。
+
+        let angle_in_sector = ecliptic_hide_heaven_stem_day.get_angle_in_sector()
+      
 ## 纳音 Sound轮回
 
 纳音依次为：海中金、炉中火、大林木、路旁土、剑锋金、山头火、涧下水、城头土、白蜡金、杨柳木、泉中水、屋上土、霹雳火、松柏木、长流水、沙中金、山下火、平地木、壁上土、金箔金、覆灯火、天河水、大驿土、钗钏金、桑柘木、大溪水、沙中土、天上火、石榴木、大海水。

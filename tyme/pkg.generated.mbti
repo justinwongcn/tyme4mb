@@ -238,6 +238,8 @@ pub using @core {type EarthBranch}
 
 pub using @core {type Ecliptic}
 
+pub using @core {type EclipticHideHeavenStemDay}
+
 pub using @core {type EightChar}
 
 pub using @core {type Element}

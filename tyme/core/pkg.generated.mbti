@@ -441,6 +441,22 @@ pub impl Culture for Ecliptic
 pub impl Tyme for Ecliptic
 pub impl Show for Ecliptic
 
+pub struct EclipticHideHeavenStemDay {
+  hide_heaven_stem : HideHeavenStem
+  month_lon : Double
+  lon_offset : Double
+  angle_in_sector : Double
+  sector_index : Int
+}
+pub fn EclipticHideHeavenStemDay::get_angle_in_sector(Self) -> Double
+pub fn EclipticHideHeavenStemDay::get_hide_heaven_stem(Self) -> HideHeavenStem
+pub fn EclipticHideHeavenStemDay::get_lon_offset(Self) -> Double
+pub fn EclipticHideHeavenStemDay::get_month_lon(Self) -> Double
+pub fn EclipticHideHeavenStemDay::get_sector_index(Self) -> Int
+pub fn EclipticHideHeavenStemDay::new(HideHeavenStem, Double, Double, Double, Int) -> Self
+pub impl Culture for EclipticHideHeavenStemDay
+pub impl Show for EclipticHideHeavenStemDay
+
 pub struct EightChar {
   three_pillars : ThreePillars
   hour : SixtyCycle
@@ -1524,6 +1540,7 @@ pub fn SolarTime::equals(Self, Self) -> Bool
 pub fn SolarTime::from_ymdhms(Int, Int, Int, Int, Int, Int) -> Result[Self, String]
 pub fn SolarTime::get_compare_index(Self) -> Int64
 pub fn SolarTime::get_day(Self) -> Int
+pub fn SolarTime::get_hide_heaven_stem_by_ecliptic(Self) -> EclipticHideHeavenStemDay
 pub fn SolarTime::get_hour(Self) -> Int
 pub fn SolarTime::get_julian_day(Self) -> JulianDay
 pub fn SolarTime::get_lunar_hour(Self) -> LunarHour
