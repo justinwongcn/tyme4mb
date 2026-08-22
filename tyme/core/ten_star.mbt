@@ -45,3 +45,12 @@ pub impl Show for TenStar with fn to_string(self : TenStar) -> String {
 pub impl Tyme for TenStar with fn next(self : TenStar, n : Int) -> TenStar {
   TenStar::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend TenStar with Culture::{get_name}
+
+///|
+pub extend TenStar with Show::{to_string}
+
+///|
+pub extend TenStar with Tyme::{next}

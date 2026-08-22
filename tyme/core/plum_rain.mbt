@@ -11,7 +11,7 @@ pub struct PlumRain {
 }
 
 ///|
-extend PlumRain with Culture::{get_name}
+pub extend PlumRain with Culture::{get_name}
 
 ///|
 pub fn PlumRain::from_index(index : Int) -> PlumRain {
@@ -45,3 +45,9 @@ pub impl Show for PlumRain with fn to_string(self : PlumRain) -> String {
 pub impl Tyme for PlumRain with fn next(self : PlumRain, n : Int) -> PlumRain {
   PlumRain::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend PlumRain with Show::{to_string}
+
+///|
+pub extend PlumRain with Tyme::{next}

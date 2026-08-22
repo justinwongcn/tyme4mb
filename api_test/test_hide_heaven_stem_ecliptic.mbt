@@ -1,8 +1,9 @@
 // 测试套件：EclipticHideHeavenStemDay 真黄经人元司令分野（黑盒，经 @tyme 门面）
 
 // 断言相等（api_test 黑盒包无共享 helper，此处按 core/test_helper_wbtest.mbt 写法自建）
+
 ///|
-fn[ T : Eq + Show ] expect_eq(got : T, expected : T, msg : String) -> Unit {
+fn[T : Eq + Show] expect_eq(got : T, expected : T, msg : String) -> Unit {
   if got != expected {
     abort(
       "ASSERT EQ FAIL: \{msg}\n  got     = \{got}\n  expected = \{expected}",
@@ -11,8 +12,14 @@ fn[ T : Eq + Show ] expect_eq(got : T, expected : T, msg : String) -> Unit {
 }
 
 // 近似相等（Double 用容差，照 core/test_helper_wbtest.mbt 的 expect_near）
+
 ///|
-fn expect_near(got : Double, expected : Double, eps : Double, msg : String) -> Unit {
+fn expect_near(
+  got : Double,
+  expected : Double,
+  eps : Double,
+  msg : String,
+) -> Unit {
   let diff = got - expected
   // NaN 防护：NaN 与任何值比较均为 false，显式用自不等捕获
   if diff != diff || diff < -eps || diff > eps {
@@ -39,7 +46,7 @@ test "EclipticHideHeavenStemDay_month_boundaries" {
   )
   expect_eq(
     db.get_sector_index(),
-     2,
+    2,
     "EclipticHideHeavenStemDay.GetSectorIndex() before 立春",
   )
   // 立春后 2 小时：视黄经 ≈ 315.08° > 315°，寅月戊土·第1段（[0,7)°）
@@ -52,7 +59,7 @@ test "EclipticHideHeavenStemDay_month_boundaries" {
   )
   expect_eq(
     da.get_sector_index(),
-     0,
+    0,
     "EclipticHideHeavenStemDay.GetSectorIndex() after 立春",
   )
 }
@@ -68,11 +75,7 @@ test "EclipticHideHeavenStemDay_sector_angle" {
     "戊",
     "立春+1天 天干",
   )
-  expect_eq(
-    d1.get_sector_index(),
-     0,
-    "立春+1天 段序",
-  )
+  expect_eq(d1.get_sector_index(), 0, "立春+1天 段序")
   // 立春后 8 天 ≈ 7.9° → 丙火·第2段（[7,14)°）
   let d8 = t0.next(8 * 86400).get_hide_heaven_stem_by_ecliptic()
   expect_eq(
@@ -80,11 +83,7 @@ test "EclipticHideHeavenStemDay_sector_angle" {
     "丙",
     "立春+8天 天干",
   )
-  expect_eq(
-    d8.get_sector_index(),
-     1,
-    "立春+8天 段序",
-  )
+  expect_eq(d8.get_sector_index(), 1, "立春+8天 段序")
   // 立春后 16 天 ≈ 15.8° → 甲木·第3段（[14,30)°）
   let d16 = t0.next(16 * 86400).get_hide_heaven_stem_by_ecliptic()
   expect_eq(
@@ -92,11 +91,7 @@ test "EclipticHideHeavenStemDay_sector_angle" {
     "甲",
     "立春+16天 天干",
   )
-  expect_eq(
-    d16.get_sector_index(),
-     2,
-    "立春+16天 段序",
-  )
+  expect_eq(d16.get_sector_index(), 2, "立春+16天 段序")
   // 段起点度数：戊段 0°、丙段 7°、甲段 14°
   expect_near(d1.get_lon_offset(), 0.0, 1.0e-9, "戊段起点 0°")
   expect_near(d8.get_lon_offset(), 7.0, 1.0e-9, "丙段起点 7°")
@@ -123,11 +118,7 @@ test "EclipticHideHeavenStemDay_no_middle_sector" {
     "甲",
     "惊蛰+5天 天干",
   )
-  expect_eq(
-    m5.get_sector_index(),
-     0,
-    "惊蛰+5天 段序",
-  )
+  expect_eq(m5.get_sector_index(), 0, "惊蛰+5天 段序")
   // 惊蛰 +11 天 ≈ 月令内黄经 10.8° → 乙木·第3段（[10,30)°），直接跳过第2段
   let m11 = j0.next(11 * 86400).get_hide_heaven_stem_by_ecliptic()
   expect_eq(
@@ -135,13 +126,14 @@ test "EclipticHideHeavenStemDay_no_middle_sector" {
     "乙",
     "惊蛰+11天 天干",
   )
-  expect_eq(
-    m11.get_sector_index(),
-     2,
-    "惊蛰+11天 段序",
-  )
+  expect_eq(m11.get_sector_index(), 2, "惊蛰+11天 段序")
   // 固化两段制月令的段起点：第1段甲10 后直接到第3段，offset = 10°
-  expect_near(m11.get_lon_offset(), 10.0, 1.0e-9, "惊蛰+11天 第3段起点 10°")
+  expect_near(
+    m11.get_lon_offset(),
+    10.0,
+    1.0e-9,
+    "惊蛰+11天 第3段起点 10°",
+  )
   // 酉月（白露 165°）：+5 天 ≈ 4.9° 庚金·第1段，+15 天 ≈ 14.8° 辛金·第3段
   let bailu = @tyme.SolarTerm::from_index(2024, 17)
   let b0 = bailu.get_julian_day().get_solar_time().unwrap()
@@ -151,24 +143,26 @@ test "EclipticHideHeavenStemDay_no_middle_sector" {
     "庚",
     "白露+5天 天干",
   )
-  expect_eq(
-    b5.get_sector_index(),
-     0,
-    "白露+5天 段序",
-  )
+  expect_eq(b5.get_sector_index(), 0, "白露+5天 段序")
   let b15 = b0.next(15 * 86400).get_hide_heaven_stem_by_ecliptic()
   expect_eq(
     b15.get_hide_heaven_stem().get_heaven_stem().get_name(),
     "辛",
     "白露+15天 天干",
   )
-  expect_eq(
-    b15.get_sector_index(),
-     2,
-    "白露+15天 段序",
+  expect_eq(b15.get_sector_index(), 2, "白露+15天 段序")
+  expect_near(
+    b15.get_lon_offset(),
+    10.0,
+    1.0e-9,
+    "白露+15天 第3段起点 10°",
   )
-  expect_near(b15.get_lon_offset(), 10.0, 1.0e-9, "白露+15天 第3段起点 10°")
-  expect_near(b15.get_lon_offset(), 10.0, 1.0e-9, "白露+15天 第3段起点 10°")
+  expect_near(
+    b15.get_lon_offset(),
+    10.0,
+    1.0e-9,
+    "白露+15天 第3段起点 10°",
+  )
   // 子月（大雪 255°）：+5 天 ≈ 4.9° 壬水·第1段，+15 天 ≈ 14.8° 癸水·第3段
   let daxue = @tyme.SolarTerm::from_index(2024, 23)
   let d0 = daxue.get_julian_day().get_solar_time().unwrap()
@@ -178,23 +172,20 @@ test "EclipticHideHeavenStemDay_no_middle_sector" {
     "壬",
     "大雪+5天 天干",
   )
-  expect_eq(
-    d5.get_sector_index(),
-     0,
-    "大雪+5天 段序",
-  )
+  expect_eq(d5.get_sector_index(), 0, "大雪+5天 段序")
   let d15 = d0.next(15 * 86400).get_hide_heaven_stem_by_ecliptic()
   expect_eq(
     d15.get_hide_heaven_stem().get_heaven_stem().get_name(),
     "癸",
     "大雪+15天 天干",
   )
-  expect_eq(
-    d15.get_sector_index(),
-     2,
-    "大雪+15天 段序",
+  expect_eq(d15.get_sector_index(), 2, "大雪+15天 段序")
+  expect_near(
+    d15.get_lon_offset(),
+    10.0,
+    1.0e-9,
+    "大雪+15天 第3段起点 10°",
   )
-  expect_near(d15.get_lon_offset(), 10.0, 1.0e-9, "大雪+15天 第3段起点 10°")
 }
 
 ///|
@@ -221,11 +212,7 @@ test "EclipticHideHeavenStemDay_diff_from_day_version" {
     "己",
     "立春-2h 度版 天干(丑月己土)",
   )
-  expect_eq(
-    be.get_sector_index(),
-     2,
-    "立春-2h 度版 段序",
-  )
+  expect_eq(be.get_sector_index(), 2, "立春-2h 度版 段序")
   // 度版在节气时刻之后切寅月：取时刻后 2 小时，与日版一致（戊土余气）
   let after = t0.next(7200)
   let ae = after.get_hide_heaven_stem_by_ecliptic()
@@ -234,11 +221,7 @@ test "EclipticHideHeavenStemDay_diff_from_day_version" {
     "戊",
     "立春+2h 度版 天干",
   )
-  expect_eq(
-    ae.get_sector_index(),
-     0,
-    "立春+2h 度版 段序",
-  )
+  expect_eq(ae.get_sector_index(), 0, "立春+2h 度版 段序")
   // 日版在立春之后仍是戊土余气（同一天的延续）
   let ad = after.get_solar_day().get_hide_heaven_stem_day()
   expect_eq(
@@ -264,11 +247,7 @@ test "EclipticHideHeavenStemDay_coexist_with_day_version" {
     "壬",
     "2024-12-04 天干",
   )
-  expect_eq(
-    e.get_sector_index(),
-     2,
-    "2024-12-04 段序",
-  )
+  expect_eq(e.get_sector_index(), 2, "2024-12-04 段序")
 }
 
 ///|
@@ -295,11 +274,7 @@ test "EclipticHideHeavenStemDay_year_wrap" {
     "乙",
     "惊蛰+20天跨0° 天干",
   )
-  expect_eq(
-    d.get_sector_index(),
-     2,
-    "惊蛰+20天跨0° 段序",
-  )
+  expect_eq(d.get_sector_index(), 2, "惊蛰+20天跨0° 段序")
   // 大雪（255°）后跨年：大雪 2024-12-06 + 26 天 ≈ 2025-01-01，
   // 黄经 ≈ 280.6° → month_lon ≈ 25.6° → 癸水·第3段（[10,30)°）
   let daxue = @tyme.SolarTerm::from_index(2024, 23)
@@ -310,11 +285,7 @@ test "EclipticHideHeavenStemDay_year_wrap" {
     "癸",
     "大雪+26天跨年 天干",
   )
-  expect_eq(
-    ny.get_sector_index(),
-     2,
-    "大雪+26天跨年 段序",
-  )
+  expect_eq(ny.get_sector_index(), 2, "大雪+26天跨年 段序")
 }
 
 ///|
@@ -322,7 +293,13 @@ test "EclipticHideHeavenStemDay_all_months_sampling" {
   // 12 月令中覆盖剩余 6 令（清明/立夏/芒种/小暑/立秋/寒露）的段位采样。
   // 每令取第1/2/3段 3 个中点日（约等于月令内 4~10/12~13/18~23°），
   // 断言天干 + 段序 + 段起点，数据来自 2024 年实测算例。
-  fn probe(term_idx : Int, days : Int, stem : String, sector : Int, offset : Double) -> Unit {
+  fn probe(
+    term_idx : Int,
+    days : Int,
+    stem : String,
+    sector : Int,
+    offset : Double,
+  ) -> Unit {
     let term = @tyme.SolarTerm::from_index(2024, term_idx)
     let t0 = term.get_julian_day().get_solar_time().unwrap()
     let d = t0.next(days * 86400).get_hide_heaven_stem_by_ecliptic()
@@ -336,8 +313,17 @@ test "EclipticHideHeavenStemDay_all_months_sampling" {
       sector,
       "\{term.get_name()}+\{days}天 段序",
     )
-    expect_near(d.get_lon_offset(), offset, 1.0e-6, "\{term.get_name()}+\{days}天 段起点")
-    expect_eq(d.get_angle_in_sector() >= 0.0, true, "\{term.get_name()}+\{days}天 angle>=0")
+    expect_near(
+      d.get_lon_offset(),
+      offset,
+      1.0e-6,
+      "\{term.get_name()}+\{days}天 段起点",
+    )
+    expect_eq(
+      d.get_angle_in_sector() >= 0.0,
+      true,
+      "\{term.get_name()}+\{days}天 angle>=0",
+    )
   }
   // 清明(15°): 乙9 癸3 戊18
   probe(7, 4, "乙", 0, 0.0)

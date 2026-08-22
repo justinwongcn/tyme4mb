@@ -6,7 +6,7 @@ pub struct PengZu {
 }
 
 ///|
-extend PengZu with Culture::{get_name}
+pub extend PengZu with Culture::{get_name}
 
 ///|
 pub fn PengZu::from_sixty_cycle(sixty_cycle : SixtyCycle) -> PengZu {
@@ -43,3 +43,6 @@ pub fn PengZu::get_peng_zu_heaven_stem(self : PengZu) -> PengZuHeavenStem {
 pub fn PengZu::get_peng_zu_earth_branch(self : PengZu) -> PengZuEarthBranch {
   self.peng_zu_earth_branch
 }
+
+///|
+pub extend PengZu with Show::{to_string}

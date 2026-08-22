@@ -11,7 +11,7 @@ pub struct Week {
 }
 
 ///|
-extend Week with Tyme::{next}
+pub extend Week with Tyme::{next}
 
 ///|
 pub fn Week::from_index(index : Int) -> Week {
@@ -76,3 +76,9 @@ pub impl Show for Week with fn to_string(self : Week) -> String {
 pub impl Tyme for Week with fn next(self : Week, n : Int) -> Week {
   Week::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Week with Culture::{get_name}
+
+///|
+pub extend Week with Show::{to_string}

@@ -14,7 +14,7 @@ pub struct SolarHalfYear {
 }
 
 ///|
-extend SolarHalfYear with Culture::{get_name}
+pub extend SolarHalfYear with Culture::{get_name}
 
 ///|
 // from_index 从年与索引构造
@@ -89,3 +89,9 @@ pub impl Tyme for SolarHalfYear with fn next(self : SolarHalfYear, n : Int) -> S
     AbstractCulture::index_of(i, 2),
   ).unwrap()
 }
+
+///|
+pub extend SolarHalfYear with Show::{to_string}
+
+///|
+pub extend SolarHalfYear with Tyme::{next}

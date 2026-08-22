@@ -27,3 +27,33 @@ pub using @astronomy {
   xl0,
   xl1,
 }
+
+///|
+pub using @base {
+  type AbstractCulture,
+  type AbstractCultureDay,
+  type AbstractTyme,
+  trait Culture,
+  type DayUnit,
+  type LoopTyme,
+  type Luck,
+  type MonthUnit,
+  type Nine,
+  type SecondUnit,
+  type Side,
+  type Sixty,
+  type SixStar,
+  type Sound,
+  type Ten,
+  type Twenty,
+  trait Tyme,
+  type YearUnit,
+  type YinYang,
+  luck_names,
+  nine_names,
+  sixty_names,
+  six_star_names,
+  sound_names,
+  ten_names,
+  twenty_names,
+}

@@ -143,11 +143,17 @@ fn main {
   println("乌鲁木齐真太阳时: \{urumqiTST}")
   // 时辰级功能按真太阳时读取：乌鲁木齐钟表 14:30 → 真太阳时 12:24，午时
   let tstHour = urumqiTST.get_lunar_hour()
-  println("乌鲁木齐真太阳时时柱: \{tstHour.get_sixty_cycle().get_name()}")
-  println("乌鲁木齐真太阳时黄黑道: \{tstHour.get_twelve_star().get_name()}")
+  println(
+    "乌鲁木齐真太阳时时柱: \{tstHour.get_sixty_cycle().get_name()}",
+  )
+  println(
+    "乌鲁木齐真太阳时黄黑道: \{tstHour.get_twelve_star().get_name()}",
+  )
   let tstEightChar = tstHour.get_eight_char()
   println("乌鲁木齐真太阳时八字: \{tstEightChar.to_string()}")
-  println("乌鲁木齐真太阳时命宫: \{tstEightChar.get_own_sign().get_name()}")
+  println(
+    "乌鲁木齐真太阳时命宫: \{tstEightChar.get_own_sign().get_name()}",
+  )
   // 童限真太阳时版：四柱按真太阳时，起运差值不受经度/均时差扭曲
   let tstChildLimit = @tyme.ChildLimit::from_true_solar_time(
     birthTime,

@@ -14,7 +14,7 @@ pub struct Land {
 }
 
 ///|
-extend Land with Show::{to_string}
+pub extend Land with Show::{to_string}
 
 ///|
 pub fn Land::get_index(self : Land) -> Int {
@@ -59,3 +59,6 @@ pub impl Show for Land with fn to_string(self : Land) -> String {
 pub impl Tyme for Land with fn next(self : Land, n : Int) -> Land {
   Land::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Land with Culture::{get_name}

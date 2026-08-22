@@ -5,7 +5,11 @@ test "child_limit_from_solar_time_reference" {
   // 钟表时刻直接构造（回归基准，锁定既有行为）
   let st = SolarTime::from_ymdhms(1990, 5, 15, 14, 30, 0).unwrap()
   let cl = ChildLimit::from_solar_time(st, Man)
-  expect_eq(cl.get_eight_char().to_string(), "庚午 辛巳 庚辰 癸未", "clock eight char")
+  expect_eq(
+    cl.get_eight_char().to_string(),
+    "庚午 辛巳 庚辰 癸未",
+    "clock eight char",
+  )
   expect_eq(cl.get_year_count(), 7, "clock year count")
   expect_eq(cl.get_month_count(), 2, "clock month count")
   expect_eq(cl.get_day_count(), 21, "clock day count")
@@ -20,7 +24,11 @@ test "child_limit_from_true_solar_time" {
   // 乌鲁木齐 87.62°E：真太阳时 1990-05-15 12:24:12 → 午时
   let cl = ChildLimit::from_true_solar_time(st, Man, 87.62)
   // 四柱按真太阳时：时柱由未时改为午时
-  expect_eq(cl.get_eight_char().to_string(), "庚午 辛巳 庚辰 壬午", "TST eight char")
+  expect_eq(
+    cl.get_eight_char().to_string(),
+    "庚午 辛巳 庚辰 壬午",
+    "TST eight char",
+  )
   // 起运差值按钟表绝对时刻：计数与钟表版完全一致（核心断言）
   expect_eq(cl.get_year_count(), 7, "TST year count")
   expect_eq(cl.get_month_count(), 2, "TST month count")
@@ -29,7 +37,11 @@ test "child_limit_from_true_solar_time" {
   expect_eq(cl.get_minute_count(), 36, "TST minute count")
   assert_true(cl.is_forward(), msg="TST forward")
   // 童限开始时刻保持钟表出生时刻
-  expect_eq(cl.get_start_time().to_string(), "1990年5月15日 14:30:00", "TST start time")
+  expect_eq(
+    cl.get_start_time().to_string(),
+    "1990年5月15日 14:30:00",
+    "TST start time",
+  )
 }
 
 ///|

@@ -30,3 +30,9 @@ pub impl Culture for NineDay with fn get_name(self : NineDay) -> String {
 pub impl Show for NineDay with fn to_string(self : NineDay) -> String {
   Show::to_string(self.abstract_culture_day)
 }
+
+///|
+pub extend NineDay with Culture::{get_name}
+
+///|
+pub extend NineDay with Show::{to_string}

@@ -27,9 +27,9 @@ pub fn FetusDay::new(sixty_cycle : SixtyCycle) -> FetusDay {
       0, 0, 0, 0, -9, -9, -9, -9, -9, -5, -5, -1, -1, -1, -3, -7, -7, -7, -7, -5,
       7, 7, 7, 7, 7, 7, 2, 2, 2, 2, 2, 3, 3, 3, 3,
     ][sixty_cycle.get_index()]
-  let mut side = Out
+  let mut side = @base.Out
   if index < 0 {
-    side = In
+    side = @base.In
   }
   let direction = Direction::from_index(index)
   { fetus_heaven_stem, fetus_earth_branch, side, direction }

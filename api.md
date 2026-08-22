@@ -3466,6 +3466,45 @@ get_zone()返回为宫 Zone。
           }
         }
       
+## 八字神煞 ShenSha
+
+八字命理神煞（V2），共 55 个神煞（天乙贵人、驿马、华盖、桃花、空亡等），求法依据《问真神煞大全》数据（shensha.json），与黄历日神煞 God（吉神宜趋/凶神宜忌）相互独立。
+
+### 如何得到八字神煞？
+
+从八字 EightChar（配合性别 Gender，勾绞煞/元辰等神煞与阴阳性别相关）得到。
+
+        // 构造八字：甲子年 丙寅月 甲子日 乙丑时
+        let eight_char = EightChar::from_sixty_cycle(
+          SixtyCycle::from_name("甲子").unwrap(),
+          SixtyCycle::from_name("丙寅").unwrap(),
+          SixtyCycle::from_name("甲子").unwrap(),
+          SixtyCycle::from_name("乙丑").unwrap(),
+        )
+         
+        // 获得命中所带神煞列表（按 id 升序，id 与 shensha.json 对应）
+        let shen_shas = ShenSha::get_from_eight_char(eight_char, Gender::Man)
+         
+        // 遍历
+        for shen_sha in shen_shas {
+          let id = shen_sha.get_id()
+          let name = shen_sha.get_name()
+        }
+      
+### 从神煞可以得到些什么？
+
+1. 神煞编号与名称
+        let s = ShenSha::from_index(0)
+        // id = 1
+        let id = s.get_id()
+        // 天乙贵人
+        let name = s.get_name()
+
+2. 按名称查询
+        let s = ShenSha::from_name("驿马").unwrap()
+        // id = 8
+        let id = s.get_id()
+      
 ## 童限 ChildLimit
 
 出生童限起运大运十年

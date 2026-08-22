@@ -5,7 +5,7 @@ pub struct LunarWeek {
 }
 
 ///|
-extend LunarWeek with Culture::{get_name}
+pub extend LunarWeek with Culture::{get_name}
 
 ///|
 // validate 校验
@@ -157,3 +157,6 @@ pub fn LunarWeek::get_days(self : LunarWeek) -> Array[LunarDay] {
 pub fn LunarWeek::equals(self : LunarWeek, target : LunarWeek) -> Bool {
   self.get_first_day().equals(target.get_first_day())
 }
+
+///|
+pub extend LunarWeek with Show::{to_string}

@@ -44,3 +44,12 @@ pub impl Show for ThreePhenology with fn to_string(self : ThreePhenology) -> Str
 pub impl Tyme for ThreePhenology with fn next(self : ThreePhenology, n : Int) -> ThreePhenology {
   ThreePhenology::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend ThreePhenology with Culture::{get_name}
+
+///|
+pub extend ThreePhenology with Show::{to_string}
+
+///|
+pub extend ThreePhenology with Tyme::{next}

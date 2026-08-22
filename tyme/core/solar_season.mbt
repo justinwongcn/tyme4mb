@@ -14,7 +14,7 @@ pub struct SolarSeason {
 }
 
 ///|
-extend SolarSeason with Culture::{get_name}
+pub extend SolarSeason with Culture::{get_name}
 
 ///|
 // from_index 从年与索引构造
@@ -78,3 +78,9 @@ pub impl Tyme for SolarSeason with fn next(self : SolarSeason, n : Int) -> Solar
     AbstractCulture::index_of(i, 4),
   ).unwrap()
 }
+
+///|
+pub extend SolarSeason with Show::{to_string}
+
+///|
+pub extend SolarSeason with Tyme::{next}

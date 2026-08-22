@@ -82,9 +82,9 @@ pub fn EarthBranch::get_element(self : EarthBranch) -> Element {
 // get_yin_yang 阴阳
 pub fn EarthBranch::get_yin_yang(self : EarthBranch) -> YinYang {
   if self.loop_tyme.get_index() % 2 == 0 {
-    Yang
+    @base.Yang
   } else {
-    Yin
+    @base.Yin
   }
 }
 

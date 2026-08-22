@@ -5,10 +5,10 @@ pub struct HijriYear {
 }
 
 ///|
-extend HijriYear with Culture::{get_name}
+pub extend HijriYear with Culture::{get_name}
 
 ///|
-extend HijriYear with Show::{to_string}
+pub extend HijriYear with Show::{to_string}
 
 ///|
 pub fn HijriYear::new(year_unit : YearUnit) -> HijriYear {
@@ -104,3 +104,6 @@ pub impl Tyme for HijriYear with fn next(self : HijriYear, n : Int) -> HijriYear
     Err(_) => self
   }
 }
+
+///|
+pub extend HijriYear with Tyme::{next}

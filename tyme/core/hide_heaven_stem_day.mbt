@@ -5,7 +5,7 @@ pub struct HideHeavenStemDay {
 }
 
 ///|
-extend HideHeavenStemDay with Culture::{get_name}
+pub extend HideHeavenStemDay with Culture::{get_name}
 
 ///|
 pub fn HideHeavenStemDay::new(
@@ -41,3 +41,6 @@ pub impl Culture for HideHeavenStemDay with fn get_name(
 pub impl Show for HideHeavenStemDay with fn to_string(self : HideHeavenStemDay) -> String {
   "\{self.get_name()}第\{self.abstract_culture_day.get_day_index() + 1}天"
 }
+
+///|
+pub extend HideHeavenStemDay with Show::{to_string}

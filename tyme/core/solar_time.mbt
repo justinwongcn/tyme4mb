@@ -325,8 +325,9 @@ fn SolarTime::sun_half_day_seconds(
   ).unwrap()
   let rad = @math.PI / 180.0
   let decl = solar_declination(noon0.td_centuries_at())
-  let cos_h = (@math.cos(90.833 * rad) -
-    @math.sin(latitude * rad) * @math.sin(decl)) /
+  let cos_h = (
+      @math.cos(90.833 * rad) - @math.sin(latitude * rad) * @math.sin(decl)
+    ) /
     (@math.cos(latitude * rad) * @math.cos(decl))
   if cos_h < -1.0 || cos_h > 1.0 {
     return None

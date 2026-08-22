@@ -48,16 +48,25 @@ test "xref_gt" {
     }
   }
   for m = 0; m < 60; m = m + 1 {
-    let mo = SixtyCycle::from_index(m)
+    // 用 SixtyCycleMonth::new 构造任意月柱（覆盖全部 60 个月干支）
+    let mo = SixtyCycleMonth::new(
+      SixtyCycleYear::from_year(2024).unwrap(),
+      SixtyCycle::from_index(m),
+    )
     for d = 0; d < 60; d = d + 1 {
-      let da = SixtyCycle::from_index(d)
+      // 用 SixtyCycleDay::new 构造任意日柱（覆盖全部 60 个日干支）
+      let sd = SolarDay::from_ymd(2024, 1, 1).unwrap()
+      let da = SixtyCycleDay::new(sd, mo, SixtyCycle::from_index(d))
+      let sch = da.get_hours()[0]
       println("GG \{m} \{d} \{join_gods(God::get_day_gods(mo, da))}")
       println("TDR \{m} \{d} \{join_taboos(Taboo::get_day_recommends(mo, da))}")
       println("TDA \{m} \{d} \{join_taboos(Taboo::get_day_avoids(mo, da))}")
       println(
-        "THR \{m} \{d} \{join_taboos(Taboo::get_hour_recommends(mo, da))}",
+        "THR \{m} \{d} \{join_taboos(Taboo::get_hour_recommends(sch.get_day(), sch.get_sixty_cycle()))}",
       )
-      println("THA \{m} \{d} \{join_taboos(Taboo::get_hour_avoids(mo, da))}")
+      println(
+        "THA \{m} \{d} \{join_taboos(Taboo::get_hour_avoids(sch.get_day(), sch.get_sixty_cycle()))}",
+      )
     }
   }
 }

@@ -17,7 +17,7 @@ pub struct SolarTerm {
 }
 
 ///|
-extend SolarTerm with Tyme::{next}
+pub extend SolarTerm with Tyme::{next}
 
 ///|
 pub fn SolarTerm::from_index(year : Int, index : Int) -> SolarTerm {
@@ -116,3 +116,9 @@ pub fn SolarTerm::get_year(self : SolarTerm) -> Int {
 pub fn SolarTerm::get_cursory_julian_day(self : SolarTerm) -> Double {
   self.cursory_julian_day
 }
+
+///|
+pub extend SolarTerm with Culture::{get_name}
+
+///|
+pub extend SolarTerm with Show::{to_string}

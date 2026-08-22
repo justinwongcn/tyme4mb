@@ -171,3 +171,6 @@ pub impl Culture for LunarFestival with fn get_name(self : LunarFestival) -> Str
 pub impl Show for LunarFestival with fn to_string(self : LunarFestival) -> String {
   self.get_day().to_string() + " " + self.get_name()
 }
+
+///|
+pub extend LunarFestival with Show::{to_string}

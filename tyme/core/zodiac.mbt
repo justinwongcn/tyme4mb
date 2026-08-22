@@ -14,10 +14,10 @@ pub struct Zodiac {
 }
 
 ///|
-extend Zodiac with Culture::{get_name}
+pub extend Zodiac with Culture::{get_name}
 
 ///|
-extend Zodiac with Show::{to_string}
+pub extend Zodiac with Show::{to_string}
 
 ///|
 pub fn Zodiac::from_index(index : Int) -> Zodiac {
@@ -56,3 +56,6 @@ pub impl Show for Zodiac with fn to_string(self : Zodiac) -> String {
 pub impl Tyme for Zodiac with fn next(self : Zodiac, n : Int) -> Zodiac {
   Zodiac::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Zodiac with Tyme::{next}

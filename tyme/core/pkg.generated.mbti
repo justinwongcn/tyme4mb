@@ -2,6 +2,7 @@
 package "justinwongcn/tyme4mb/tyme/core"
 
 import {
+  "justinwongcn/tyme4mb/tyme/base",
   "moonbitlang/core/ref",
 }
 
@@ -134,6 +135,8 @@ pub let sb : String
 
 pub fn seven_star_names() -> Array[String]
 
+pub fn shensha_names() -> Array[String]
+
 pub let shuo_kb : Array[Double]
 
 pub fn six_star_names() -> Array[String]
@@ -199,63 +202,46 @@ pub struct AbstractChildLimitProvider {
 }
 pub fn AbstractChildLimitProvider::next(SolarTime, Int, Int, Int, Int, Int, Int) -> ChildLimitInfo
 
-pub struct AbstractCulture {
-}
-pub fn AbstractCulture::equals(Self, Self) -> Bool
-pub fn AbstractCulture::floor_div(Int, Int) -> Int
-pub fn AbstractCulture::index_of(Int, Int) -> Int
-pub impl Culture for AbstractCulture
-pub impl Show for AbstractCulture
-
-pub struct AbstractCultureDay[C] {
-  culture : C
-  day_index : Int
-}
-pub fn[C] AbstractCultureDay::get_culture(Self[C]) -> C
-pub fn[C] AbstractCultureDay::get_day_index(Self[C]) -> Int
-pub fn[C] AbstractCultureDay::new(C, Int) -> Self[C]
-
 pub struct AbstractFestival {
   index : Int
-  day : DayUnit
+  day : @base.DayUnit
   event : Event
 }
-pub fn AbstractFestival::get_day(Self) -> DayUnit
+pub fn AbstractFestival::get_day(Self) -> @base.DayUnit
 pub fn AbstractFestival::get_index(Self) -> Int
-pub fn AbstractFestival::new(Int, Event, DayUnit) -> Self
-pub impl Culture for AbstractFestival
+pub fn AbstractFestival::new(Int, Event, @base.DayUnit) -> Self
+pub impl @base.Culture for AbstractFestival
 pub impl Show for AbstractFestival
 
-pub struct AbstractTyme {
-}
-pub fn AbstractTyme::new() -> Self
-pub impl Culture for AbstractTyme
-pub impl Show for AbstractTyme
-
 pub struct Animal {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Animal::equals(Self, Self) -> Bool
 pub fn Animal::from_index(Int) -> Self
 pub fn Animal::from_name(String) -> Result[Self, String]
 pub fn Animal::get_index(Self) -> Int
+pub fn Animal::get_name(Self) -> String
 pub fn Animal::get_size(Self) -> Int
+pub fn Animal::next(Self, Int) -> Self
 pub fn Animal::steps_back_to(Self, Int) -> Int
 pub fn Animal::steps_close_to(Self, Int) -> Int
 pub fn Animal::steps_to(Self, Int) -> Int
-pub impl Culture for Animal
-pub impl Tyme for Animal
+pub fn Animal::to_string(Self) -> String
+pub impl @base.Culture for Animal
+pub impl @base.Tyme for Animal
 pub impl Show for Animal
 
 pub struct Beast {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Beast::from_index(Int) -> Self
 pub fn Beast::from_name(String) -> Result[Self, String]
 pub fn Beast::get_index(Self) -> Int
+pub fn Beast::get_name(Self) -> String
 pub fn Beast::get_zone(Self) -> Zone
-pub impl Culture for Beast
-pub impl Tyme for Beast
+pub fn Beast::to_string(Self) -> String
+pub impl @base.Culture for Beast
+pub impl @base.Tyme for Beast
 pub impl Show for Beast
 
 pub struct ChildLimit {
@@ -304,30 +290,24 @@ pub fn ChildLimitInfo::get_month_count(Self) -> Int
 pub fn ChildLimitInfo::get_start_time(Self) -> SolarTime
 pub fn ChildLimitInfo::get_year_count(Self) -> Int
 pub fn ChildLimitInfo::new(SolarTime, SolarTime, Int, Int, Int, Int, Int) -> Self
+pub fn ChildLimitInfo::to_string(Self) -> String
 pub impl Show for ChildLimitInfo
 
 pub struct China95ChildLimitProvider {
 }
 
 pub struct Constellation {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Constellation::from_index(Int) -> Self
 pub fn Constellation::from_name(String) -> Result[Self, String]
 pub fn Constellation::get_index(Self) -> Int
-pub impl Culture for Constellation
-pub impl Tyme for Constellation
+pub fn Constellation::get_name(Self) -> String
+pub fn Constellation::next(Self, Int) -> Self
+pub fn Constellation::to_string(Self) -> String
+pub impl @base.Culture for Constellation
+pub impl @base.Tyme for Constellation
 pub impl Show for Constellation
-
-pub struct DayUnit {
-  month_unit : MonthUnit
-  day : Int
-}
-pub fn DayUnit::get_compare_index(Self) -> Int
-pub fn DayUnit::get_day(Self) -> Int
-pub fn DayUnit::new(MonthUnit, Int) -> Self
-pub impl Culture for DayUnit
-pub impl Show for DayUnit
 
 pub struct DecadeFortune {
   child_limit : ChildLimit
@@ -337,13 +317,16 @@ pub fn DecadeFortune::from_child_limit(ChildLimit, Int) -> Self
 pub fn DecadeFortune::get_end_age(Self) -> Int
 pub fn DecadeFortune::get_end_lunar_year(Self) -> LunarYear
 pub fn DecadeFortune::get_end_sixty_cycle_year(Self) -> SixtyCycleYear
+pub fn DecadeFortune::get_name(Self) -> String
 pub fn DecadeFortune::get_sixty_cycle(Self) -> SixtyCycle
 pub fn DecadeFortune::get_start_age(Self) -> Int
 pub fn DecadeFortune::get_start_fortune(Self) -> Fortune
 pub fn DecadeFortune::get_start_lunar_year(Self) -> LunarYear
 pub fn DecadeFortune::get_start_sixty_cycle_year(Self) -> SixtyCycleYear
-pub impl Culture for DecadeFortune
-pub impl Tyme for DecadeFortune
+pub fn DecadeFortune::next(Self, Int) -> Self
+pub fn DecadeFortune::to_string(Self) -> String
+pub impl @base.Culture for DecadeFortune
+pub impl @base.Tyme for DecadeFortune
 pub impl Show for DecadeFortune
 
 pub struct DefaultChildLimitProvider {
@@ -353,17 +336,20 @@ pub struct DefaultEightCharProvider {
 }
 
 pub struct Dipper {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Dipper::from_index(Int) -> Self
 pub fn Dipper::from_name(String) -> Result[Self, String]
 pub fn Dipper::get_index(Self) -> Int
-pub impl Culture for Dipper
-pub impl Tyme for Dipper
+pub fn Dipper::get_name(Self) -> String
+pub fn Dipper::next(Self, Int) -> Self
+pub fn Dipper::to_string(Self) -> String
+pub impl @base.Culture for Dipper
+pub impl @base.Tyme for Dipper
 pub impl Show for Dipper
 
 pub struct Direction {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Direction::equals(Self, Self) -> Bool
 pub fn Direction::from_index(Int) -> Self
@@ -371,41 +357,49 @@ pub fn Direction::from_name(String) -> Result[Self, String]
 pub fn Direction::get_element(Self) -> Element
 pub fn Direction::get_index(Self) -> Int
 pub fn Direction::get_land(Self) -> Land
-pub impl Culture for Direction
-pub impl Tyme for Direction
+pub impl @base.Culture for Direction
+pub impl @base.Tyme for Direction
 pub impl Show for Direction
 
 pub struct Dog {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Dog::from_index(Int) -> Self
 pub fn Dog::from_name(String) -> Result[Self, String]
 pub fn Dog::get_index(Self) -> Int
-pub impl Culture for Dog
-pub impl Tyme for Dog
+pub fn Dog::get_name(Self) -> String
+pub fn Dog::next(Self, Int) -> Self
+pub fn Dog::to_string(Self) -> String
+pub impl @base.Culture for Dog
+pub impl @base.Tyme for Dog
 pub impl Show for Dog
 
 pub struct DogDay {
-  abstract_culture_day : AbstractCultureDay[Dog]
+  abstract_culture_day : @base.AbstractCultureDay[Dog]
 }
 pub fn DogDay::get_day_index(Self) -> Int
 pub fn DogDay::get_dog(Self) -> Dog
+pub fn DogDay::get_name(Self) -> String
 pub fn DogDay::new(Dog, Int) -> Self
-pub impl Culture for DogDay
+pub fn DogDay::to_string(Self) -> String
+pub impl @base.Culture for DogDay
 pub impl Show for DogDay
 
 pub struct Duty {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Duty::from_index(Int) -> Self
 pub fn Duty::from_name(String) -> Result[Self, String]
 pub fn Duty::get_index(Self) -> Int
-pub impl Culture for Duty
-pub impl Tyme for Duty
+pub fn Duty::get_name(Self) -> String
+pub fn Duty::next(Self, Int) -> Self
+pub fn Duty::to_string(Self) -> String
+pub impl @base.Culture for Duty
+pub impl @base.Tyme for Duty
 pub impl Show for Duty
 
 pub struct EarthBranch {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn EarthBranch::combine(Self, Self) -> Element?
 pub fn EarthBranch::equals(Self, Self) -> Bool
@@ -424,24 +418,26 @@ pub fn EarthBranch::get_ominous(Self) -> Direction
 pub fn EarthBranch::get_opposite(Self) -> Self
 pub fn EarthBranch::get_peng_zu_earth_branch(Self) -> PengZuEarthBranch
 pub fn EarthBranch::get_size(Self) -> Int
-pub fn EarthBranch::get_yin_yang(Self) -> YinYang
+pub fn EarthBranch::get_yin_yang(Self) -> @base.YinYang
 pub fn EarthBranch::get_zodiac(Self) -> Zodiac
 pub fn EarthBranch::steps_back_to(Self, Int) -> Int
 pub fn EarthBranch::steps_close_to(Self, Int) -> Int
 pub fn EarthBranch::steps_to(Self, Int) -> Int
-pub impl Culture for EarthBranch
-pub impl Tyme for EarthBranch
+pub impl @base.Culture for EarthBranch
+pub impl @base.Tyme for EarthBranch
 pub impl Show for EarthBranch
 
 pub struct Ecliptic {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Ecliptic::equals(Self, Self) -> Bool
 pub fn Ecliptic::from_index(Int) -> Self
 pub fn Ecliptic::from_name(String) -> Result[Self, String]
-pub fn Ecliptic::get_luck(Self) -> Luck
-pub impl Culture for Ecliptic
-pub impl Tyme for Ecliptic
+pub fn Ecliptic::get_luck(Self) -> @base.Luck
+pub fn Ecliptic::get_name(Self) -> String
+pub fn Ecliptic::to_string(Self) -> String
+pub impl @base.Culture for Ecliptic
+pub impl @base.Tyme for Ecliptic
 pub impl Show for Ecliptic
 
 pub struct EclipticHideHeavenStemDay {
@@ -457,7 +453,7 @@ pub fn EclipticHideHeavenStemDay::get_lon_offset(Self) -> Double
 pub fn EclipticHideHeavenStemDay::get_month_lon(Self) -> Double
 pub fn EclipticHideHeavenStemDay::get_sector_index(Self) -> Int
 pub fn EclipticHideHeavenStemDay::new(HideHeavenStem, Double, Double, Double, Int) -> Self
-pub impl Culture for EclipticHideHeavenStemDay
+pub impl @base.Culture for EclipticHideHeavenStemDay
 pub impl Show for EclipticHideHeavenStemDay
 
 pub struct EightChar {
@@ -477,11 +473,11 @@ pub fn EightChar::get_own_sign(Self) -> SixtyCycle
 pub fn EightChar::get_solar_times(Self, Int, Int) -> Array[SolarTime]
 pub fn EightChar::get_year(Self) -> SixtyCycle
 pub fn EightChar::new(String, String, String, String) -> Result[Self, String]
-pub impl Culture for EightChar
+pub impl @base.Culture for EightChar
 pub impl Show for EightChar
 
 pub struct Element {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Element::equals(Self, Self) -> Bool
 pub fn Element::from_index(Int) -> Self
@@ -492,8 +488,8 @@ pub fn Element::get_reinforce(Self) -> Self
 pub fn Element::get_reinforced(Self) -> Self
 pub fn Element::get_restrain(Self) -> Self
 pub fn Element::get_restrained(Self) -> Self
-pub impl Culture for Element
-pub impl Tyme for Element
+pub impl @base.Culture for Element
+pub impl @base.Tyme for Element
 pub impl Show for Element
 
 pub struct Event {
@@ -513,7 +509,7 @@ pub fn Event::get_type(Self) -> EventType
 pub fn Event::get_value(Self, Int) -> Int
 pub fn Event::new(String, String) -> Result[Self, String]
 pub fn Event::validate(String) -> Result[Unit, String]
-pub impl Culture for Event
+pub impl @base.Culture for Event
 pub impl Show for Event
 
 pub struct EventBuilder {
@@ -550,12 +546,13 @@ pub(all) enum EventType {
 pub fn EventType::from_code(Int) -> Self
 pub fn EventType::get_code(Self) -> Int
 pub fn EventType::get_name(Self) -> String
+pub fn EventType::to_string(Self) -> String
 pub impl Show for EventType
 
 pub struct FetusDay {
   fetus_heaven_stem : FetusHeavenStem
   fetus_earth_branch : FetusEarthBranch
-  side : Side
+  side : @base.Side
   direction : Direction
 }
 pub fn FetusDay::equals(Self, Self) -> Bool
@@ -564,39 +561,46 @@ pub fn FetusDay::from_sixty_cycle_day(SixtyCycleDay) -> Self
 pub fn FetusDay::get_direction(Self) -> Direction
 pub fn FetusDay::get_fetus_earth_branch(Self) -> FetusEarthBranch
 pub fn FetusDay::get_fetus_heaven_stem(Self) -> FetusHeavenStem
-pub fn FetusDay::get_side(Self) -> Side
+pub fn FetusDay::get_side(Self) -> @base.Side
 pub fn FetusDay::new(SixtyCycle) -> Self
-pub impl Culture for FetusDay
+pub impl @base.Culture for FetusDay
 pub impl Show for FetusDay
 
 pub struct FetusEarthBranch {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn FetusEarthBranch::get_index(Self) -> Int
+pub fn FetusEarthBranch::get_name(Self) -> String
 pub fn FetusEarthBranch::new(Int) -> Self
-pub impl Culture for FetusEarthBranch
-pub impl Tyme for FetusEarthBranch
+pub fn FetusEarthBranch::next(Self, Int) -> Self
+pub fn FetusEarthBranch::to_string(Self) -> String
+pub impl @base.Culture for FetusEarthBranch
+pub impl @base.Tyme for FetusEarthBranch
 pub impl Show for FetusEarthBranch
 
 pub struct FetusHeavenStem {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn FetusHeavenStem::get_index(Self) -> Int
+pub fn FetusHeavenStem::get_name(Self) -> String
 pub fn FetusHeavenStem::new(Int) -> Self
-pub impl Culture for FetusHeavenStem
-pub impl Tyme for FetusHeavenStem
+pub fn FetusHeavenStem::next(Self, Int) -> Self
+pub fn FetusHeavenStem::to_string(Self) -> String
+pub impl @base.Culture for FetusHeavenStem
+pub impl @base.Tyme for FetusHeavenStem
 pub impl Show for FetusHeavenStem
 
 pub struct FetusMonth {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn FetusMonth::from_lunar_month(LunarMonth) -> Self?
 pub fn FetusMonth::get_index(Self) -> Int
 pub fn FetusMonth::get_name(Self) -> String
 pub fn FetusMonth::new(Int) -> Self
 pub fn FetusMonth::next(Self, Int) -> Self
-pub impl Culture for FetusMonth
-pub impl Tyme for FetusMonth
+pub fn FetusMonth::to_string(Self) -> String
+pub impl @base.Culture for FetusMonth
+pub impl @base.Tyme for FetusMonth
 pub impl Show for FetusMonth
 
 pub struct Fortune {
@@ -606,10 +610,13 @@ pub struct Fortune {
 pub fn Fortune::from_child_limit(ChildLimit, Int) -> Self
 pub fn Fortune::get_age(Self) -> Int
 pub fn Fortune::get_lunar_year(Self) -> LunarYear
+pub fn Fortune::get_name(Self) -> String
 pub fn Fortune::get_sixty_cycle(Self) -> SixtyCycle
 pub fn Fortune::get_sixty_cycle_year(Self) -> SixtyCycleYear
-pub impl Culture for Fortune
-pub impl Tyme for Fortune
+pub fn Fortune::next(Self, Int) -> Self
+pub fn Fortune::to_string(Self) -> String
+pub impl @base.Culture for Fortune
+pub impl @base.Tyme for Fortune
 pub impl Show for Fortune
 
 pub(all) enum Gender {
@@ -619,22 +626,26 @@ pub(all) enum Gender {
 pub fn Gender::from_code(Int) -> Self
 pub fn Gender::get_code(Self) -> Int
 pub fn Gender::get_name(Self) -> String
+pub fn Gender::to_string(Self) -> String
 pub impl Show for Gender
 
 pub struct God {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn God::from_index(Int) -> Self
 pub fn God::from_name(String) -> Result[Self, String]
-pub fn God::get_day_gods(SixtyCycle, SixtyCycle) -> Result[Array[Self], String]
+pub fn God::get_day_gods(SixtyCycleMonth, SixtyCycleDay) -> Result[Array[Self], String]
 pub fn God::get_index(Self) -> Int
-pub fn God::get_luck(Self) -> Luck
-pub impl Culture for God
-pub impl Tyme for God
+pub fn God::get_luck(Self) -> @base.Luck
+pub fn God::get_name(Self) -> String
+pub fn God::next(Self, Int) -> Self
+pub fn God::to_string(Self) -> String
+pub impl @base.Culture for God
+pub impl @base.Tyme for God
 pub impl Show for God
 
 pub struct HeavenStem {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn HeavenStem::combine(Self, Self) -> Element?
 pub fn HeavenStem::equals(Self, Self) -> Bool
@@ -653,12 +664,12 @@ pub fn HeavenStem::get_terrain(Self, EarthBranch) -> Terrain
 pub fn HeavenStem::get_wealth_direction(Self) -> Direction
 pub fn HeavenStem::get_yang_direction(Self) -> Direction
 pub fn HeavenStem::get_yin_direction(Self) -> Direction
-pub fn HeavenStem::get_yin_yang(Self) -> YinYang
+pub fn HeavenStem::get_yin_yang(Self) -> @base.YinYang
 pub fn HeavenStem::steps_back_to(Self, Int) -> Int
 pub fn HeavenStem::steps_close_to(Self, Int) -> Int
 pub fn HeavenStem::steps_to(Self, Int) -> Int
-pub impl Culture for HeavenStem
-pub impl Tyme for HeavenStem
+pub impl @base.Culture for HeavenStem
+pub impl @base.Tyme for HeavenStem
 pub impl Show for HeavenStem
 
 pub struct HideHeavenStem {
@@ -667,18 +678,22 @@ pub struct HideHeavenStem {
 }
 pub fn HideHeavenStem::from_index(Int, HideHeavenStemType) -> Self
 pub fn HideHeavenStem::get_heaven_stem(Self) -> HeavenStem
+pub fn HideHeavenStem::get_name(Self) -> String
 pub fn HideHeavenStem::get_type(Self) -> HideHeavenStemType
 pub fn HideHeavenStem::new(String, HideHeavenStemType) -> Result[Self, String]
-pub impl Culture for HideHeavenStem
+pub fn HideHeavenStem::to_string(Self) -> String
+pub impl @base.Culture for HideHeavenStem
 pub impl Show for HideHeavenStem
 
 pub struct HideHeavenStemDay {
-  abstract_culture_day : AbstractCultureDay[HideHeavenStem]
+  abstract_culture_day : @base.AbstractCultureDay[HideHeavenStem]
 }
 pub fn HideHeavenStemDay::get_day_index(Self) -> Int
 pub fn HideHeavenStemDay::get_hide_heaven_stem(Self) -> HideHeavenStem
+pub fn HideHeavenStemDay::get_name(Self) -> String
 pub fn HideHeavenStemDay::new(HideHeavenStem, Int) -> Self
-pub impl Culture for HideHeavenStemDay
+pub fn HideHeavenStemDay::to_string(Self) -> String
+pub impl @base.Culture for HideHeavenStemDay
 pub impl Show for HideHeavenStemDay
 
 pub(all) enum HideHeavenStemType {
@@ -689,10 +704,11 @@ pub(all) enum HideHeavenStemType {
 pub fn HideHeavenStemType::from_code(Int) -> Self
 pub fn HideHeavenStemType::get_code(Self) -> Int
 pub fn HideHeavenStemType::get_name(Self) -> String
+pub fn HideHeavenStemType::to_string(Self) -> String
 pub impl Show for HideHeavenStemType
 
 pub struct HijriDay {
-  day_unit : DayUnit
+  day_unit : @base.DayUnit
 }
 pub fn HijriDay::equals(Self, Self) -> Bool
 pub fn HijriDay::from_ymd(Int, Int, Int) -> Result[Self, String]
@@ -702,19 +718,22 @@ pub fn HijriDay::get_hijri_month(Self) -> HijriMonth
 pub fn HijriDay::get_index_in_year(Self) -> Int
 pub fn HijriDay::get_julian_day(Self) -> JulianDay
 pub fn HijriDay::get_month(Self) -> Int
+pub fn HijriDay::get_name(Self) -> String
 pub fn HijriDay::get_solar_day(Self) -> SolarDay
 pub fn HijriDay::get_year(Self) -> Int
 pub fn HijriDay::is_after(Self, Self) -> Bool
 pub fn HijriDay::is_before(Self, Self) -> Bool
-pub fn HijriDay::new(DayUnit) -> Self
+pub fn HijriDay::new(@base.DayUnit) -> Self
+pub fn HijriDay::next(Self, Int) -> Self
 pub fn HijriDay::subtract(Self, Self) -> Int
+pub fn HijriDay::to_string(Self) -> String
 pub fn HijriDay::validate(Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for HijriDay
-pub impl Tyme for HijriDay
+pub impl @base.Culture for HijriDay
+pub impl @base.Tyme for HijriDay
 pub impl Show for HijriDay
 
 pub struct HijriMonth {
-  month_unit : MonthUnit
+  month_unit : @base.MonthUnit
 }
 pub fn HijriMonth::from_ym(Int, Int) -> Result[Self, String]
 pub fn HijriMonth::get_day_count(Self) -> Int
@@ -723,30 +742,36 @@ pub fn HijriMonth::get_first_day(Self) -> HijriDay
 pub fn HijriMonth::get_hijri_year(Self) -> HijriYear
 pub fn HijriMonth::get_index_in_year(Self) -> Int
 pub fn HijriMonth::get_month(Self) -> Int
+pub fn HijriMonth::get_name(Self) -> String
 pub fn HijriMonth::get_year(Self) -> Int
-pub fn HijriMonth::new(MonthUnit) -> Self
+pub fn HijriMonth::new(@base.MonthUnit) -> Self
+pub fn HijriMonth::next(Self, Int) -> Self
+pub fn HijriMonth::to_string(Self) -> String
 pub fn HijriMonth::validate(Int, Int) -> Result[Unit, String]
-pub impl Culture for HijriMonth
-pub impl Tyme for HijriMonth
+pub impl @base.Culture for HijriMonth
+pub impl @base.Tyme for HijriMonth
 pub impl Show for HijriMonth
 
 pub struct HijriYear {
-  year_unit : YearUnit
+  year_unit : @base.YearUnit
 }
 pub fn HijriYear::from_year(Int) -> Result[Self, String]
 pub fn HijriYear::get_day_count(Self) -> Int
 pub fn HijriYear::get_first_month(Self) -> HijriMonth
 pub fn HijriYear::get_months(Self) -> Array[HijriMonth]
+pub fn HijriYear::get_name(Self) -> String
 pub fn HijriYear::get_year(Self) -> Int
 pub fn HijriYear::is_leap(Self) -> Bool
-pub fn HijriYear::new(YearUnit) -> Self
+pub fn HijriYear::new(@base.YearUnit) -> Self
+pub fn HijriYear::next(Self, Int) -> Self
+pub fn HijriYear::to_string(Self) -> String
 pub fn HijriYear::validate(Int) -> Result[Unit, String]
-pub impl Culture for HijriYear
-pub impl Tyme for HijriYear
+pub impl @base.Culture for HijriYear
+pub impl @base.Tyme for HijriYear
 pub impl Show for HijriYear
 
 pub struct JulianDay {
-  abstract_tyme : AbstractTyme
+  abstract_tyme : @base.AbstractTyme
   day : Double
 }
 pub fn JulianDay::from_julian_day(Double) -> Self
@@ -756,8 +781,8 @@ pub fn JulianDay::get_solar_day(Self) -> Result[SolarDay, String]
 pub fn JulianDay::get_solar_time(Self) -> Result[SolarTime, String]
 pub fn JulianDay::get_week(Self) -> Week
 pub fn JulianDay::subtract(Self, Self) -> Double
-pub impl Culture for JulianDay
-pub impl Tyme for JulianDay
+pub impl @base.Culture for JulianDay
+pub impl @base.Tyme for JulianDay
 pub impl Show for JulianDay
 
 pub struct KitchenGodSteed {
@@ -774,24 +799,27 @@ pub fn KitchenGodSteed::get_gold(Self) -> String
 pub fn KitchenGodSteed::get_grass(Self) -> String
 pub fn KitchenGodSteed::get_horse(Self) -> String
 pub fn KitchenGodSteed::get_mouse(Self) -> String
+pub fn KitchenGodSteed::get_name(Self) -> String
 pub fn KitchenGodSteed::get_people_cakes(Self) -> String
 pub fn KitchenGodSteed::get_people_hoes(Self) -> String
 pub fn KitchenGodSteed::get_pig(Self) -> String
 pub fn KitchenGodSteed::get_silkworm(Self) -> String
 pub fn KitchenGodSteed::new(Int) -> Self
-pub impl Culture for KitchenGodSteed
+pub impl @base.Culture for KitchenGodSteed
 pub impl Show for KitchenGodSteed
 
 pub struct Land {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Land::equals(Self, Self) -> Bool
 pub fn Land::from_index(Int) -> Self
 pub fn Land::from_name(String) -> Result[Self, String]
 pub fn Land::get_direction(Self) -> Direction
 pub fn Land::get_index(Self) -> Int
-pub impl Culture for Land
-pub impl Tyme for Land
+pub fn Land::get_name(Self) -> String
+pub fn Land::to_string(Self) -> String
+pub impl @base.Culture for Land
+pub impl @base.Tyme for Land
 pub impl Show for Land
 
 pub struct LegalHoliday {
@@ -806,36 +834,12 @@ pub fn LegalHoliday::is_work(Self) -> Bool
 pub fn LegalHoliday::new(Int, Int, Int, String) -> Result[Self, String]
 pub fn LegalHoliday::next(Self, Int) -> Self?
 pub fn LegalHoliday::set_data(String) -> Unit
-pub impl Culture for LegalHoliday
+pub fn LegalHoliday::to_string(Self) -> String
+pub impl @base.Culture for LegalHoliday
 pub impl Show for LegalHoliday
 
-pub struct LoopTyme {
-  names : Array[String]
-  mut index : Int
-}
-pub fn LoopTyme::equals(Self, Self) -> Bool
-pub fn LoopTyme::from_index(Array[String], Int) -> Self
-pub fn LoopTyme::from_name(Array[String], String) -> Result[Self, String]
-pub fn LoopTyme::get_index(Self) -> Int
-pub fn LoopTyme::get_size(Self) -> Int
-pub fn LoopTyme::steps_back_to(Self, Int) -> Int
-pub fn LoopTyme::steps_close_to(Self, Int) -> Int
-pub fn LoopTyme::steps_to(Self, Int) -> Int
-pub impl Culture for LoopTyme
-pub impl Show for LoopTyme
-
-pub struct Luck {
-  loop_tyme : LoopTyme
-}
-pub fn Luck::from_index(Int) -> Self
-pub fn Luck::from_name(String) -> Result[Self, String]
-pub fn Luck::get_index(Self) -> Int
-pub impl Culture for Luck
-pub impl Tyme for Luck
-pub impl Show for Luck
-
 pub struct LunarDay {
-  day_unit : DayUnit
+  day_unit : @base.DayUnit
 }
 pub fn LunarDay::equals(Self, Self) -> Bool
 pub fn LunarDay::from_ymd(Int, Int, Int) -> Result[Self, String]
@@ -855,7 +859,7 @@ pub fn LunarDay::get_nine_star(Self) -> NineStar
 pub fn LunarDay::get_phase(Self) -> Phase
 pub fn LunarDay::get_phase_day(Self) -> PhaseDay
 pub fn LunarDay::get_recommends(Self) -> Result[Array[Taboo], String]
-pub fn LunarDay::get_six_star(Self) -> SixStar
+pub fn LunarDay::get_six_star(Self) -> @base.SixStar
 pub fn LunarDay::get_sixty_cycle(Self) -> SixtyCycle
 pub fn LunarDay::get_sixty_cycle_day(Self) -> SixtyCycleDay
 pub fn LunarDay::get_solar_day(Self) -> SolarDay
@@ -868,8 +872,8 @@ pub fn LunarDay::get_year_sixty_cycle(Self) -> SixtyCycle
 pub fn LunarDay::is_after(Self, Self) -> Bool
 pub fn LunarDay::is_before(Self, Self) -> Bool
 pub fn LunarDay::validate(Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for LunarDay
-pub impl Tyme for LunarDay
+pub impl @base.Culture for LunarDay
+pub impl @base.Tyme for LunarDay
 pub impl Show for LunarDay
 
 pub struct LunarFestival {
@@ -884,11 +888,12 @@ pub fn LunarFestival::get_solar_term(Self) -> SolarTerm?
 pub fn LunarFestival::new(Int, Event, LunarDay) -> Self
 pub fn LunarFestival::next(Self, Int) -> Self?
 pub fn LunarFestival::set_data(String) -> Unit
-pub impl Culture for LunarFestival
+pub fn LunarFestival::to_string(Self) -> String
+pub impl @base.Culture for LunarFestival
 pub impl Show for LunarFestival
 
 pub struct LunarHour {
-  second_unit : SecondUnit
+  second_unit : @base.SecondUnit
 }
 pub fn LunarHour::equals(Self, Self) -> Bool
 pub fn LunarHour::from_ymd_hms(Int, Int, Int, Int, Int, Int) -> Result[Self, String]
@@ -904,6 +909,7 @@ pub fn LunarHour::get_minor_ren(Self) -> MinorRen
 pub fn LunarHour::get_minute(Self) -> Int
 pub fn LunarHour::get_month(Self) -> Int
 pub fn LunarHour::get_month_sixty_cycle(Self) -> SixtyCycle
+pub fn LunarHour::get_name(Self) -> String
 pub fn LunarHour::get_nine_star(Self) -> NineStar
 pub fn LunarHour::get_recommends(Self) -> Result[Array[Taboo], String]
 pub fn LunarHour::get_second(Self) -> Int
@@ -915,14 +921,16 @@ pub fn LunarHour::get_year(Self) -> Int
 pub fn LunarHour::get_year_sixty_cycle(Self) -> SixtyCycle
 pub fn LunarHour::is_after(Self, Self) -> Bool
 pub fn LunarHour::is_before(Self, Self) -> Bool
+pub fn LunarHour::next(Self, Int) -> Self
 pub fn LunarHour::set_provider(&IEightCharProvider) -> Unit
+pub fn LunarHour::to_string(Self) -> String
 pub fn LunarHour::validate(Int, Int, Int, Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for LunarHour
-pub impl Tyme for LunarHour
+pub impl @base.Culture for LunarHour
+pub impl @base.Tyme for LunarHour
 pub impl Show for LunarHour
 
 pub struct LunarMonth {
-  month_unit : MonthUnit
+  month_unit : @base.MonthUnit
   leap : Bool
 }
 pub fn LunarMonth::from_ym(Int, Int) -> Result[Self, String]
@@ -945,18 +953,21 @@ pub fn LunarMonth::get_weeks(Self, Int) -> Array[LunarWeek]
 pub fn LunarMonth::get_year(Self) -> Int
 pub fn LunarMonth::is_leap(Self) -> Bool
 pub fn LunarMonth::validate(Int, Int) -> Result[Unit, String]
-pub impl Culture for LunarMonth
-pub impl Tyme for LunarMonth
+pub impl @base.Culture for LunarMonth
+pub impl @base.Tyme for LunarMonth
 pub impl Show for LunarMonth
 
 pub struct LunarSeason {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn LunarSeason::from_index(Int) -> Self
 pub fn LunarSeason::from_name(String) -> Result[Self, String]
 pub fn LunarSeason::get_index(Self) -> Int
-pub impl Culture for LunarSeason
-pub impl Tyme for LunarSeason
+pub fn LunarSeason::get_name(Self) -> String
+pub fn LunarSeason::next(Self, Int) -> Self
+pub fn LunarSeason::to_string(Self) -> String
+pub impl @base.Culture for LunarSeason
+pub impl @base.Tyme for LunarSeason
 pub impl Show for LunarSeason
 
 pub struct LunarSect1ChildLimitProvider {
@@ -978,15 +989,17 @@ pub fn LunarWeek::get_first_day(Self) -> LunarDay
 pub fn LunarWeek::get_index(Self) -> Int
 pub fn LunarWeek::get_lunar_month(Self) -> LunarMonth
 pub fn LunarWeek::get_month(Self) -> Int
+pub fn LunarWeek::get_name(Self) -> String
 pub fn LunarWeek::get_start(Self) -> Week
 pub fn LunarWeek::get_year(Self) -> Int
 pub fn LunarWeek::next(Self, Int) -> Self
+pub fn LunarWeek::to_string(Self) -> String
 pub fn LunarWeek::validate(Int, Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for LunarWeek
+pub impl @base.Culture for LunarWeek
 pub impl Show for LunarWeek
 
 pub struct LunarYear {
-  year_unit : YearUnit
+  year_unit : @base.YearUnit
 }
 pub fn LunarYear::from_year(Int) -> Result[Self, String]
 pub fn LunarYear::get_day_count(Self) -> Int
@@ -998,56 +1011,41 @@ pub fn LunarYear::get_month_count(Self) -> Int
 pub fn LunarYear::get_months(Self) -> Array[LunarMonth]
 pub fn LunarYear::get_nine_star(Self) -> NineStar
 pub fn LunarYear::get_sixty_cycle(Self) -> SixtyCycle
-pub fn LunarYear::get_twenty(Self) -> Twenty
+pub fn LunarYear::get_twenty(Self) -> @base.Twenty
 pub fn LunarYear::get_year(Self) -> Int
 pub fn LunarYear::validate(Int) -> Result[Unit, String]
-pub impl Culture for LunarYear
-pub impl Tyme for LunarYear
+pub impl @base.Culture for LunarYear
+pub impl @base.Tyme for LunarYear
 pub impl Show for LunarYear
 
 pub struct MinorRen {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn MinorRen::from_index(Int) -> Self
 pub fn MinorRen::from_name(String) -> Result[Self, String]
 pub fn MinorRen::get_element(Self) -> Element
 pub fn MinorRen::get_index(Self) -> Int
-pub fn MinorRen::get_luck(Self) -> Luck
-pub impl Culture for MinorRen
-pub impl Tyme for MinorRen
+pub fn MinorRen::get_luck(Self) -> @base.Luck
+pub fn MinorRen::get_name(Self) -> String
+pub fn MinorRen::next(Self, Int) -> Self
+pub fn MinorRen::to_string(Self) -> String
+pub impl @base.Culture for MinorRen
+pub impl @base.Tyme for MinorRen
 pub impl Show for MinorRen
 
-pub struct MonthUnit {
-  year_unit : YearUnit
-  month : Int
-}
-pub fn MonthUnit::get_compare_index(Self) -> Int
-pub fn MonthUnit::get_month(Self) -> Int
-pub fn MonthUnit::new(YearUnit, Int) -> Self
-pub impl Culture for MonthUnit
-pub impl Show for MonthUnit
-
-pub struct Nine {
-  loop_tyme : LoopTyme
-}
-pub fn Nine::from_index(Int) -> Self
-pub fn Nine::from_name(String) -> Result[Self, String]
-pub fn Nine::get_index(Self) -> Int
-pub impl Culture for Nine
-pub impl Tyme for Nine
-pub impl Show for Nine
-
 pub struct NineDay {
-  abstract_culture_day : AbstractCultureDay[Nine]
+  abstract_culture_day : @base.AbstractCultureDay[@base.Nine]
 }
 pub fn NineDay::get_day_index(Self) -> Int
-pub fn NineDay::get_nine(Self) -> Nine
-pub fn NineDay::new(Nine, Int) -> Self
-pub impl Culture for NineDay
+pub fn NineDay::get_name(Self) -> String
+pub fn NineDay::get_nine(Self) -> @base.Nine
+pub fn NineDay::new(@base.Nine, Int) -> Self
+pub fn NineDay::to_string(Self) -> String
+pub impl @base.Culture for NineDay
 pub impl Show for NineDay
 
 pub struct NineStar {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn NineStar::from_index(Int) -> Self
 pub fn NineStar::from_name(String) -> Result[Self, String]
@@ -1056,8 +1054,10 @@ pub fn NineStar::get_dipper(Self) -> Dipper
 pub fn NineStar::get_direction(Self) -> Direction
 pub fn NineStar::get_element(Self) -> Element
 pub fn NineStar::get_index(Self) -> Int
-pub impl Culture for NineStar
-pub impl Tyme for NineStar
+pub fn NineStar::get_name(Self) -> String
+pub fn NineStar::to_string(Self) -> String
+pub impl @base.Culture for NineStar
+pub impl @base.Tyme for NineStar
 pub impl Show for NineStar
 
 pub struct PengZu {
@@ -1065,33 +1065,41 @@ pub struct PengZu {
   peng_zu_earth_branch : PengZuEarthBranch
 }
 pub fn PengZu::from_sixty_cycle(SixtyCycle) -> Self
+pub fn PengZu::get_name(Self) -> String
 pub fn PengZu::get_peng_zu_earth_branch(Self) -> PengZuEarthBranch
 pub fn PengZu::get_peng_zu_heaven_stem(Self) -> PengZuHeavenStem
-pub impl Culture for PengZu
+pub fn PengZu::to_string(Self) -> String
+pub impl @base.Culture for PengZu
 pub impl Show for PengZu
 
 pub struct PengZuEarthBranch {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn PengZuEarthBranch::from_index(Int) -> Self
 pub fn PengZuEarthBranch::from_name(String) -> Result[Self, String]
 pub fn PengZuEarthBranch::get_index(Self) -> Int
-pub impl Culture for PengZuEarthBranch
-pub impl Tyme for PengZuEarthBranch
+pub fn PengZuEarthBranch::get_name(Self) -> String
+pub fn PengZuEarthBranch::next(Self, Int) -> Self
+pub fn PengZuEarthBranch::to_string(Self) -> String
+pub impl @base.Culture for PengZuEarthBranch
+pub impl @base.Tyme for PengZuEarthBranch
 pub impl Show for PengZuEarthBranch
 
 pub struct PengZuHeavenStem {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn PengZuHeavenStem::from_index(Int) -> Self
 pub fn PengZuHeavenStem::from_name(String) -> Result[Self, String]
 pub fn PengZuHeavenStem::get_index(Self) -> Int
-pub impl Culture for PengZuHeavenStem
-pub impl Tyme for PengZuHeavenStem
+pub fn PengZuHeavenStem::get_name(Self) -> String
+pub fn PengZuHeavenStem::next(Self, Int) -> Self
+pub fn PengZuHeavenStem::to_string(Self) -> String
+pub impl @base.Culture for PengZuHeavenStem
+pub impl @base.Tyme for PengZuHeavenStem
 pub impl Show for PengZuHeavenStem
 
 pub struct Phase {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
   lunar_year : Int
   lunar_month : Int
 }
@@ -1104,63 +1112,76 @@ pub fn Phase::get_name(Self) -> String
 pub fn Phase::get_solar_day(Self) -> SolarDay
 pub fn Phase::get_solar_time(Self) -> SolarTime
 pub fn Phase::next(Self, Int) -> Self
-pub impl Culture for Phase
-pub impl Tyme for Phase
+pub fn Phase::to_string(Self) -> String
+pub impl @base.Culture for Phase
+pub impl @base.Tyme for Phase
 pub impl Show for Phase
 
 pub struct PhaseDay {
-  day : AbstractCultureDay[Phase]
+  day : @base.AbstractCultureDay[Phase]
 }
 pub fn PhaseDay::get_day_index(Self) -> Int
+pub fn PhaseDay::get_name(Self) -> String
 pub fn PhaseDay::get_phase(Self) -> Phase
 pub fn PhaseDay::new(Phase, Int) -> Self
-pub impl Culture for PhaseDay
+pub fn PhaseDay::to_string(Self) -> String
+pub impl @base.Culture for PhaseDay
 pub impl Show for PhaseDay
 
 pub struct Phenology {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
   year : Int
 }
 pub fn Phenology::from_index(Int, Int) -> Self
 pub fn Phenology::from_name(Int, String) -> Result[Self, String]
 pub fn Phenology::get_index(Self) -> Int
 pub fn Phenology::get_julian_day(Self) -> JulianDay
+pub fn Phenology::get_name(Self) -> String
 pub fn Phenology::get_three_phenology(Self) -> ThreePhenology
 pub fn Phenology::get_year(Self) -> Int
-pub impl Culture for Phenology
-pub impl Tyme for Phenology
+pub fn Phenology::next(Self, Int) -> Self
+pub fn Phenology::to_string(Self) -> String
+pub impl @base.Culture for Phenology
+pub impl @base.Tyme for Phenology
 pub impl Show for Phenology
 
 pub struct PhenologyDay {
-  abstract_culture_day : AbstractCultureDay[Phenology]
+  abstract_culture_day : @base.AbstractCultureDay[Phenology]
 }
 pub fn PhenologyDay::get_day_index(Self) -> Int
+pub fn PhenologyDay::get_name(Self) -> String
 pub fn PhenologyDay::get_phenology(Self) -> Phenology
 pub fn PhenologyDay::new(Phenology, Int) -> Self
-pub impl Culture for PhenologyDay
+pub fn PhenologyDay::to_string(Self) -> String
+pub impl @base.Culture for PhenologyDay
 pub impl Show for PhenologyDay
 
 pub struct PlumRain {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn PlumRain::from_index(Int) -> Self
 pub fn PlumRain::from_name(String) -> Result[Self, String]
 pub fn PlumRain::get_index(Self) -> Int
-pub impl Culture for PlumRain
-pub impl Tyme for PlumRain
+pub fn PlumRain::get_name(Self) -> String
+pub fn PlumRain::next(Self, Int) -> Self
+pub fn PlumRain::to_string(Self) -> String
+pub impl @base.Culture for PlumRain
+pub impl @base.Tyme for PlumRain
 pub impl Show for PlumRain
 
 pub struct PlumRainDay {
-  abstract_culture_day : AbstractCultureDay[PlumRain]
+  abstract_culture_day : @base.AbstractCultureDay[PlumRain]
 }
 pub fn PlumRainDay::get_day_index(Self) -> Int
+pub fn PlumRainDay::get_name(Self) -> String
 pub fn PlumRainDay::get_plum_rain(Self) -> PlumRain
 pub fn PlumRainDay::new(PlumRain, Int) -> Self
-pub impl Culture for PlumRainDay
+pub fn PlumRainDay::to_string(Self) -> String
+pub impl @base.Culture for PlumRainDay
 pub impl Show for PlumRainDay
 
 pub struct RabByungDay {
-  day_unit : DayUnit
+  day_unit : @base.DayUnit
   leap : Bool
 }
 pub fn RabByungDay::equals(Self, Self) -> Bool
@@ -1177,7 +1198,7 @@ pub fn RabByungDay::new(Int, Int, Int) -> Result[Self, String]
 pub fn RabByungDay::next(Self, Int) -> Result[Self, String]
 pub fn RabByungDay::subtract(Self, Self) -> Int
 pub fn RabByungDay::validate(Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for RabByungDay
+pub impl @base.Culture for RabByungDay
 pub impl Show for RabByungDay
 
 pub struct RabByungElement {
@@ -1187,16 +1208,19 @@ pub fn RabByungElement::from_index(Int) -> Self
 pub fn RabByungElement::from_name(String) -> Result[Self, String]
 pub fn RabByungElement::get_element(Self) -> Element
 pub fn RabByungElement::get_index(Self) -> Int
+pub fn RabByungElement::get_name(Self) -> String
 pub fn RabByungElement::get_reinforce(Self) -> Self
 pub fn RabByungElement::get_reinforced(Self) -> Self
 pub fn RabByungElement::get_restrain(Self) -> Self
 pub fn RabByungElement::get_restrained(Self) -> Self
-pub impl Culture for RabByungElement
-pub impl Tyme for RabByungElement
+pub fn RabByungElement::next(Self, Int) -> Self
+pub fn RabByungElement::to_string(Self) -> String
+pub impl @base.Culture for RabByungElement
+pub impl @base.Tyme for RabByungElement
 pub impl Show for RabByungElement
 
 pub struct RabByungMonth {
-  month_unit : MonthUnit
+  month_unit : @base.MonthUnit
   leap : Bool
 }
 pub fn RabByungMonth::equals(Self, Self) -> Bool
@@ -1217,7 +1241,7 @@ pub fn RabByungMonth::is_leap(Self) -> Bool
 pub fn RabByungMonth::new(Int, Int) -> Result[Self, String]
 pub fn RabByungMonth::next(Self, Int) -> Result[Self, String]
 pub fn RabByungMonth::validate(Int, Int) -> Result[Unit, String]
-pub impl Culture for RabByungMonth
+pub impl @base.Culture for RabByungMonth
 pub impl Show for RabByungMonth
 
 pub struct RabByungYear {
@@ -1242,67 +1266,35 @@ pub fn RabByungYear::get_zodiac(Self) -> Zodiac
 pub fn RabByungYear::new(Int, Int, Int) -> Result[Self, String]
 pub fn RabByungYear::next(Self, Int) -> Result[Self, String]
 pub fn RabByungYear::validate(Int) -> Result[Unit, String]
-pub impl Culture for RabByungYear
+pub impl @base.Culture for RabByungYear
 pub impl Show for RabByungYear
 
-pub struct SecondUnit {
-  day_unit : DayUnit
-  hour : Int
-  minute : Int
-  second : Int
-}
-pub fn SecondUnit::get_compare_index(Self) -> Int64
-pub fn SecondUnit::get_hour(Self) -> Int
-pub fn SecondUnit::get_minute(Self) -> Int
-pub fn SecondUnit::get_second(Self) -> Int
-pub fn SecondUnit::get_seconds_in_day(Self) -> Int
-pub fn SecondUnit::new(DayUnit, Int, Int, Int) -> Self
-pub fn SecondUnit::validate(Int, Int, Int, Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for SecondUnit
-pub impl Show for SecondUnit
-
 pub struct SevenStar {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn SevenStar::from_index(Int) -> Self
 pub fn SevenStar::from_name(String) -> Result[Self, String]
 pub fn SevenStar::get_index(Self) -> Int
+pub fn SevenStar::get_name(Self) -> String
 pub fn SevenStar::get_week(Self) -> Week
-pub impl Culture for SevenStar
-pub impl Tyme for SevenStar
+pub fn SevenStar::to_string(Self) -> String
+pub impl @base.Culture for SevenStar
+pub impl @base.Tyme for SevenStar
 pub impl Show for SevenStar
 
-pub(all) enum Side {
-  In
-  Out
+pub struct ShenSha {
+  loop_tyme : @base.LoopTyme
 }
-pub fn Side::from_code(Int) -> Self
-pub fn Side::get_code(Self) -> Int
-pub fn Side::get_name(Self) -> String
-pub impl Show for Side
-
-pub struct SixStar {
-  loop_tyme : LoopTyme
-}
-pub fn SixStar::from_index(Int) -> Self
-pub fn SixStar::from_name(String) -> Result[Self, String]
-pub fn SixStar::get_index(Self) -> Int
-pub impl Culture for SixStar
-pub impl Tyme for SixStar
-pub impl Show for SixStar
-
-pub struct Sixty {
-  loop_tyme : LoopTyme
-}
-pub fn Sixty::from_index(Int) -> Self
-pub fn Sixty::from_name(String) -> Result[Self, String]
-pub fn Sixty::get_index(Self) -> Int
-pub impl Culture for Sixty
-pub impl Tyme for Sixty
-pub impl Show for Sixty
+pub fn ShenSha::from_index(Int) -> Self
+pub fn ShenSha::from_name(String) -> Result[Self, String]
+pub fn ShenSha::get_from_eight_char(EightChar, Gender) -> Array[Self]
+pub fn ShenSha::get_id(Self) -> Int
+pub fn ShenSha::get_name(Self) -> String
+pub impl @base.Culture for ShenSha
+pub impl Show for ShenSha
 
 pub struct SixtyCycle {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn SixtyCycle::equals(Self, Self) -> Bool
 pub fn SixtyCycle::from_index(Int) -> Self
@@ -1313,13 +1305,13 @@ pub fn SixtyCycle::get_heaven_stem(Self) -> HeavenStem
 pub fn SixtyCycle::get_index(Self) -> Int
 pub fn SixtyCycle::get_peng_zu(Self) -> PengZu
 pub fn SixtyCycle::get_size(Self) -> Int
-pub fn SixtyCycle::get_sound(Self) -> Sound
-pub fn SixtyCycle::get_ten(Self) -> Ten
+pub fn SixtyCycle::get_sound(Self) -> @base.Sound
+pub fn SixtyCycle::get_ten(Self) -> @base.Ten
 pub fn SixtyCycle::steps_back_to(Self, Int) -> Int
 pub fn SixtyCycle::steps_close_to(Self, Int) -> Int
 pub fn SixtyCycle::steps_to(Self, Int) -> Int
-pub impl Culture for SixtyCycle
-pub impl Tyme for SixtyCycle
+pub impl @base.Culture for SixtyCycle
+pub impl @base.Tyme for SixtyCycle
 pub impl Show for SixtyCycle
 
 pub struct SixtyCycleDay {
@@ -1346,8 +1338,8 @@ pub fn SixtyCycleDay::get_twelve_star(Self) -> TwelveStar
 pub fn SixtyCycleDay::get_twenty_eight_star(Self) -> TwentyEightStar
 pub fn SixtyCycleDay::get_year(Self) -> SixtyCycle
 pub fn SixtyCycleDay::new(SolarDay, SixtyCycleMonth, SixtyCycle) -> Self
-pub impl Culture for SixtyCycleDay
-pub impl Tyme for SixtyCycleDay
+pub impl @base.Culture for SixtyCycleDay
+pub impl @base.Tyme for SixtyCycleDay
 pub impl Show for SixtyCycleDay
 
 pub struct SixtyCycleHour {
@@ -1361,6 +1353,7 @@ pub fn SixtyCycleHour::get_day(Self) -> SixtyCycle
 pub fn SixtyCycleHour::get_eight_char(Self) -> EightChar
 pub fn SixtyCycleHour::get_index_in_day(Self) -> Int
 pub fn SixtyCycleHour::get_month(Self) -> SixtyCycle
+pub fn SixtyCycleHour::get_name(Self) -> String
 pub fn SixtyCycleHour::get_nine_star(Self) -> NineStar
 pub fn SixtyCycleHour::get_recommends(Self) -> Result[Array[Taboo], String]
 pub fn SixtyCycleHour::get_sixty_cycle(Self) -> SixtyCycle
@@ -1368,8 +1361,10 @@ pub fn SixtyCycleHour::get_sixty_cycle_day(Self) -> SixtyCycleDay
 pub fn SixtyCycleHour::get_solar_time(Self) -> SolarTime
 pub fn SixtyCycleHour::get_twelve_star(Self) -> TwelveStar
 pub fn SixtyCycleHour::get_year(Self) -> SixtyCycle
-pub impl Culture for SixtyCycleHour
-pub impl Tyme for SixtyCycleHour
+pub fn SixtyCycleHour::next(Self, Int) -> Self
+pub fn SixtyCycleHour::to_string(Self) -> String
+pub impl @base.Culture for SixtyCycleHour
+pub impl @base.Tyme for SixtyCycleHour
 pub impl Show for SixtyCycleHour
 
 pub struct SixtyCycleMonth {
@@ -1387,8 +1382,8 @@ pub fn SixtyCycleMonth::get_sixty_cycle(Self) -> SixtyCycle
 pub fn SixtyCycleMonth::get_sixty_cycle_year(Self) -> SixtyCycleYear
 pub fn SixtyCycleMonth::get_year(Self) -> SixtyCycle
 pub fn SixtyCycleMonth::new(SixtyCycleYear, SixtyCycle) -> Self
-pub impl Culture for SixtyCycleMonth
-pub impl Tyme for SixtyCycleMonth
+pub impl @base.Culture for SixtyCycleMonth
+pub impl @base.Tyme for SixtyCycleMonth
 pub impl Show for SixtyCycleMonth
 
 pub struct SixtyCycleYear {
@@ -1401,14 +1396,14 @@ pub fn SixtyCycleYear::get_jupiter_direction(Self) -> Direction
 pub fn SixtyCycleYear::get_months(Self) -> Array[SixtyCycleMonth]
 pub fn SixtyCycleYear::get_nine_star(Self) -> NineStar
 pub fn SixtyCycleYear::get_sixty_cycle(Self) -> SixtyCycle
-pub fn SixtyCycleYear::get_twenty(Self) -> Twenty
+pub fn SixtyCycleYear::get_twenty(Self) -> @base.Twenty
 pub fn SixtyCycleYear::get_year(Self) -> Int
-pub impl Culture for SixtyCycleYear
-pub impl Tyme for SixtyCycleYear
+pub impl @base.Culture for SixtyCycleYear
+pub impl @base.Tyme for SixtyCycleYear
 pub impl Show for SixtyCycleYear
 
 pub struct SolarDay {
-  day_unit : DayUnit
+  day_unit : @base.DayUnit
 }
 pub fn SolarDay::equals(Self, Self) -> Bool
 pub fn SolarDay::from_ymd(Int, Int, Int) -> Result[Self, String]
@@ -1441,11 +1436,11 @@ pub fn SolarDay::get_week(Self) -> Week
 pub fn SolarDay::get_year(Self) -> Int
 pub fn SolarDay::is_after(Self, Self) -> Bool
 pub fn SolarDay::is_before(Self, Self) -> Bool
-pub fn SolarDay::new(DayUnit) -> Self
+pub fn SolarDay::new(@base.DayUnit) -> Self
 pub fn SolarDay::next(Self, Int) -> Self
 pub fn SolarDay::subtract(Self, Self) -> Int
 pub fn SolarDay::validate(Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for SolarDay
+pub impl @base.Culture for SolarDay
 pub impl Show for SolarDay
 
 pub struct SolarFestival {
@@ -1460,7 +1455,8 @@ pub fn SolarFestival::get_start_year(Self) -> Int
 pub fn SolarFestival::new(Int, Event, SolarDay) -> Self
 pub fn SolarFestival::next(Self, Int) -> Self?
 pub fn SolarFestival::set_data(String) -> Unit
-pub impl Culture for SolarFestival
+pub fn SolarFestival::to_string(Self) -> String
+pub impl @base.Culture for SolarFestival
 pub impl Show for SolarFestival
 
 pub struct SolarHalfYear {
@@ -1470,15 +1466,18 @@ pub struct SolarHalfYear {
 pub fn SolarHalfYear::from_index(Int, Int) -> Result[Self, String]
 pub fn SolarHalfYear::get_index(Self) -> Int
 pub fn SolarHalfYear::get_months(Self) -> Array[SolarMonth]
+pub fn SolarHalfYear::get_name(Self) -> String
 pub fn SolarHalfYear::get_seasons(Self) -> Array[SolarSeason]
 pub fn SolarHalfYear::get_solar_year(Self) -> SolarYear
 pub fn SolarHalfYear::get_year(Self) -> Int
-pub impl Culture for SolarHalfYear
-pub impl Tyme for SolarHalfYear
+pub fn SolarHalfYear::next(Self, Int) -> Self
+pub fn SolarHalfYear::to_string(Self) -> String
+pub impl @base.Culture for SolarHalfYear
+pub impl @base.Tyme for SolarHalfYear
 pub impl Show for SolarHalfYear
 
 pub struct SolarMonth {
-  month_unit : MonthUnit
+  month_unit : @base.MonthUnit
 }
 pub fn SolarMonth::equals(Self, Self) -> Bool
 pub fn SolarMonth::from_ym(Int, Int) -> Result[Self, String]
@@ -1491,10 +1490,10 @@ pub fn SolarMonth::get_solar_year(Self) -> SolarYear
 pub fn SolarMonth::get_week_count(Self, Int) -> Int
 pub fn SolarMonth::get_weeks(Self, Int) -> Array[SolarWeek]
 pub fn SolarMonth::get_year(Self) -> Int
-pub fn SolarMonth::new(MonthUnit) -> Self
+pub fn SolarMonth::new(@base.MonthUnit) -> Self
 pub fn SolarMonth::validate(Int, Int) -> Result[Unit, String]
-pub impl Culture for SolarMonth
-pub impl Tyme for SolarMonth
+pub impl @base.Culture for SolarMonth
+pub impl @base.Tyme for SolarMonth
 pub impl Show for SolarMonth
 
 pub struct SolarSeason {
@@ -1504,14 +1503,17 @@ pub struct SolarSeason {
 pub fn SolarSeason::from_index(Int, Int) -> Result[Self, String]
 pub fn SolarSeason::get_index(Self) -> Int
 pub fn SolarSeason::get_months(Self) -> Array[SolarMonth]
+pub fn SolarSeason::get_name(Self) -> String
 pub fn SolarSeason::get_solar_year(Self) -> SolarYear
 pub fn SolarSeason::get_year(Self) -> Int
-pub impl Culture for SolarSeason
-pub impl Tyme for SolarSeason
+pub fn SolarSeason::next(Self, Int) -> Self
+pub fn SolarSeason::to_string(Self) -> String
+pub impl @base.Culture for SolarSeason
+pub impl @base.Tyme for SolarSeason
 pub impl Show for SolarSeason
 
 pub struct SolarTerm {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
   year : Int
   cursory_julian_day : Double
 }
@@ -1519,25 +1521,30 @@ pub fn SolarTerm::from_index(Int, Int) -> Self
 pub fn SolarTerm::from_name(Int, String) -> Result[Self, String]
 pub fn SolarTerm::get_cursory_julian_day(Self) -> Double
 pub fn SolarTerm::get_julian_day(Self) -> JulianDay
+pub fn SolarTerm::get_name(Self) -> String
 pub fn SolarTerm::get_solar_day(Self) -> SolarDay
 pub fn SolarTerm::get_year(Self) -> Int
 pub fn SolarTerm::is_jie(Self) -> Bool
 pub fn SolarTerm::is_qi(Self) -> Bool
-pub impl Culture for SolarTerm
-pub impl Tyme for SolarTerm
+pub fn SolarTerm::next(Self, Int) -> Self
+pub fn SolarTerm::to_string(Self) -> String
+pub impl @base.Culture for SolarTerm
+pub impl @base.Tyme for SolarTerm
 pub impl Show for SolarTerm
 
 pub struct SolarTermDay {
-  abstract_culture_day : AbstractCultureDay[SolarTerm]
+  abstract_culture_day : @base.AbstractCultureDay[SolarTerm]
 }
 pub fn SolarTermDay::get_day_index(Self) -> Int
+pub fn SolarTermDay::get_name(Self) -> String
 pub fn SolarTermDay::get_solar_term(Self) -> SolarTerm
 pub fn SolarTermDay::new(SolarTerm, Int) -> Self
-pub impl Culture for SolarTermDay
+pub fn SolarTermDay::to_string(Self) -> String
+pub impl @base.Culture for SolarTermDay
 pub impl Show for SolarTermDay
 
 pub struct SolarTime {
-  second_unit : SecondUnit
+  second_unit : @base.SecondUnit
 }
 pub fn SolarTime::equals(Self, Self) -> Bool
 pub fn SolarTime::from_ymdhms(Int, Int, Int, Int, Int, Int) -> Result[Self, String]
@@ -1561,12 +1568,12 @@ pub fn SolarTime::get_term(Self) -> SolarTerm
 pub fn SolarTime::get_year(Self) -> Int
 pub fn SolarTime::is_after(Self, Self) -> Bool
 pub fn SolarTime::is_before(Self, Self) -> Bool
-pub fn SolarTime::new(SecondUnit) -> Self
+pub fn SolarTime::new(@base.SecondUnit) -> Self
 pub fn SolarTime::next(Self, Int) -> Self
 pub fn SolarTime::subtract(Self, Self) -> Int64
 pub fn SolarTime::to_true_solar_time(Self, Double) -> Self
 pub fn SolarTime::validate(Int, Int, Int, Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for SolarTime
+pub impl @base.Culture for SolarTime
 pub impl Show for SolarTime
 
 pub struct SolarWeek {
@@ -1579,16 +1586,18 @@ pub fn SolarWeek::get_first_day(Self) -> SolarDay
 pub fn SolarWeek::get_index(Self) -> Int
 pub fn SolarWeek::get_index_in_year(Self) -> Int
 pub fn SolarWeek::get_month(Self) -> Int
+pub fn SolarWeek::get_name(Self) -> String
 pub fn SolarWeek::get_solar_month(Self) -> SolarMonth
 pub fn SolarWeek::get_start(Self) -> Week
 pub fn SolarWeek::get_year(Self) -> Int
 pub fn SolarWeek::next(Self, Int) -> Self
+pub fn SolarWeek::to_string(Self) -> String
 pub fn SolarWeek::validate(Int, Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for SolarWeek
+pub impl @base.Culture for SolarWeek
 pub impl Show for SolarWeek
 
 pub struct SolarYear {
-  year_unit : YearUnit
+  year_unit : @base.YearUnit
 }
 pub fn SolarYear::equals(Self, Self) -> Bool
 pub fn SolarYear::from_year(Int) -> Result[Self, String]
@@ -1599,74 +1608,66 @@ pub fn SolarYear::get_rab_byung_year(Self) -> Result[RabByungYear, String]
 pub fn SolarYear::get_seasons(Self) -> Array[SolarSeason]
 pub fn SolarYear::get_year(Self) -> Int
 pub fn SolarYear::is_leap(Self) -> Bool
-pub fn SolarYear::new(YearUnit) -> Self
+pub fn SolarYear::new(@base.YearUnit) -> Self
 pub fn SolarYear::validate(Int) -> Result[Unit, String]
-pub impl Culture for SolarYear
-pub impl Tyme for SolarYear
+pub impl @base.Culture for SolarYear
+pub impl @base.Tyme for SolarYear
 pub impl Show for SolarYear
 
-pub struct Sound {
-  loop_tyme : LoopTyme
-}
-pub fn Sound::from_index(Int) -> Self
-pub fn Sound::from_name(String) -> Result[Self, String]
-pub fn Sound::get_index(Self) -> Int
-pub impl Culture for Sound
-pub impl Tyme for Sound
-pub impl Show for Sound
-
 pub struct Taboo {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Taboo::from_index(Int) -> Self
 pub fn Taboo::from_name(String) -> Result[Self, String]
-pub fn Taboo::get_day_avoids(SixtyCycle, SixtyCycle) -> Result[Array[Self], String]
-pub fn Taboo::get_day_recommends(SixtyCycle, SixtyCycle) -> Result[Array[Self], String]
+pub fn Taboo::get_day_avoids(SixtyCycleMonth, SixtyCycleDay) -> Result[Array[Self], String]
+pub fn Taboo::get_day_recommends(SixtyCycleMonth, SixtyCycleDay) -> Result[Array[Self], String]
 pub fn Taboo::get_hour_avoids(SixtyCycle, SixtyCycle) -> Result[Array[Self], String]
 pub fn Taboo::get_hour_recommends(SixtyCycle, SixtyCycle) -> Result[Array[Self], String]
 pub fn Taboo::get_index(Self) -> Int
-pub impl Culture for Taboo
-pub impl Tyme for Taboo
+pub fn Taboo::get_name(Self) -> String
+pub fn Taboo::next(Self, Int) -> Self
+pub fn Taboo::to_string(Self) -> String
+pub impl @base.Culture for Taboo
+pub impl @base.Tyme for Taboo
 pub impl Show for Taboo
 
-pub struct Ten {
-  loop_tyme : LoopTyme
-}
-pub fn Ten::from_index(Int) -> Self
-pub fn Ten::from_name(String) -> Result[Self, String]
-pub fn Ten::get_index(Self) -> Int
-pub impl Culture for Ten
-pub impl Tyme for Ten
-pub impl Show for Ten
-
 pub struct TenStar {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn TenStar::from_index(Int) -> Self
 pub fn TenStar::from_name(String) -> Result[Self, String]
 pub fn TenStar::get_index(Self) -> Int
-pub impl Culture for TenStar
-pub impl Tyme for TenStar
+pub fn TenStar::get_name(Self) -> String
+pub fn TenStar::next(Self, Int) -> Self
+pub fn TenStar::to_string(Self) -> String
+pub impl @base.Culture for TenStar
+pub impl @base.Tyme for TenStar
 pub impl Show for TenStar
 
 pub struct Terrain {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Terrain::from_index(Int) -> Self
 pub fn Terrain::from_name(String) -> Result[Self, String]
 pub fn Terrain::get_index(Self) -> Int
-pub impl Culture for Terrain
-pub impl Tyme for Terrain
+pub fn Terrain::get_name(Self) -> String
+pub fn Terrain::next(Self, Int) -> Self
+pub fn Terrain::to_string(Self) -> String
+pub impl @base.Culture for Terrain
+pub impl @base.Tyme for Terrain
 pub impl Show for Terrain
 
 pub struct ThreePhenology {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn ThreePhenology::from_index(Int) -> Self
 pub fn ThreePhenology::from_name(String) -> Result[Self, String]
 pub fn ThreePhenology::get_index(Self) -> Int
-pub impl Culture for ThreePhenology
-pub impl Tyme for ThreePhenology
+pub fn ThreePhenology::get_name(Self) -> String
+pub fn ThreePhenology::next(Self, Int) -> Self
+pub fn ThreePhenology::to_string(Self) -> String
+pub impl @base.Culture for ThreePhenology
+pub impl @base.Tyme for ThreePhenology
 pub impl Show for ThreePhenology
 
 pub struct ThreePillars {
@@ -1681,132 +1682,144 @@ pub fn ThreePillars::get_month(Self) -> SixtyCycle
 pub fn ThreePillars::get_solar_days(Self, Int, Int) -> Array[SolarDay]
 pub fn ThreePillars::get_year(Self) -> SixtyCycle
 pub fn ThreePillars::new(String, String, String) -> Result[Self, String]
-pub impl Culture for ThreePillars
+pub impl @base.Culture for ThreePillars
 pub impl Show for ThreePillars
 
 pub struct TwelveStar {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn TwelveStar::equals(Self, Self) -> Bool
 pub fn TwelveStar::from_index(Int) -> Self
 pub fn TwelveStar::from_name(String) -> Result[Self, String]
 pub fn TwelveStar::get_ecliptic(Self) -> Ecliptic
-pub impl Culture for TwelveStar
-pub impl Tyme for TwelveStar
+pub fn TwelveStar::get_name(Self) -> String
+pub fn TwelveStar::to_string(Self) -> String
+pub impl @base.Culture for TwelveStar
+pub impl @base.Tyme for TwelveStar
 pub impl Show for TwelveStar
 
-pub struct Twenty {
-  loop_tyme : LoopTyme
-}
-pub fn Twenty::equals(Self, Self) -> Bool
-pub fn Twenty::from_index(Int) -> Self
-pub fn Twenty::from_name(String) -> Result[Self, String]
-pub fn Twenty::get_sixty(Self) -> Sixty
-pub impl Culture for Twenty
-pub impl Tyme for Twenty
-pub impl Show for Twenty
-
 pub struct TwentyEightStar {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn TwentyEightStar::from_index(Int) -> Self
 pub fn TwentyEightStar::from_name(String) -> Result[Self, String]
 pub fn TwentyEightStar::get_animal(Self) -> Animal
 pub fn TwentyEightStar::get_index(Self) -> Int
 pub fn TwentyEightStar::get_land(Self) -> Land
-pub fn TwentyEightStar::get_luck(Self) -> Luck
+pub fn TwentyEightStar::get_luck(Self) -> @base.Luck
+pub fn TwentyEightStar::get_name(Self) -> String
 pub fn TwentyEightStar::get_seven_star(Self) -> SevenStar
 pub fn TwentyEightStar::get_zone(Self) -> Zone
-pub impl Culture for TwentyEightStar
-pub impl Tyme for TwentyEightStar
+pub fn TwentyEightStar::next(Self, Int) -> Self
+pub fn TwentyEightStar::to_string(Self) -> String
+pub impl @base.Culture for TwentyEightStar
+pub impl @base.Tyme for TwentyEightStar
 pub impl Show for TwentyEightStar
 
 pub struct Week {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Week::equals(Self, Self) -> Bool
 pub fn Week::from_index(Int) -> Self
 pub fn Week::from_name(String) -> Result[Self, String]
 pub fn Week::get_index(Self) -> Int
+pub fn Week::get_name(Self) -> String
 pub fn Week::get_seven_star(Self) -> SevenStar
 pub fn Week::get_size(Self) -> Int
+pub fn Week::next(Self, Int) -> Self
 pub fn Week::steps_back_to(Self, Int) -> Int
 pub fn Week::steps_close_to(Self, Int) -> Int
 pub fn Week::steps_to(Self, Int) -> Int
-pub impl Culture for Week
-pub impl Tyme for Week
+pub fn Week::to_string(Self) -> String
+pub impl @base.Culture for Week
+pub impl @base.Tyme for Week
 pub impl Show for Week
 
 pub struct WeekUnit {
-  month_unit : MonthUnit
+  month_unit : @base.MonthUnit
   index : Int
   start : Int
 }
 pub fn WeekUnit::get_compare_index(Self) -> Int
 pub fn WeekUnit::get_index(Self) -> Int
 pub fn WeekUnit::get_start(Self) -> Week
-pub fn WeekUnit::new(MonthUnit, Int, Int) -> Self
+pub fn WeekUnit::new(@base.MonthUnit, Int, Int) -> Self
 pub fn WeekUnit::validate(Int, Int, Int, Int) -> Result[Unit, String]
-pub impl Culture for WeekUnit
+pub impl @base.Culture for WeekUnit
 pub impl Show for WeekUnit
 
-pub struct YearUnit {
-  abstract_tyme : AbstractTyme
-  year : Int
-}
-pub fn YearUnit::get_compare_index(Self) -> Int
-pub fn YearUnit::get_year(Self) -> Int
-pub fn YearUnit::new(Int) -> Self
-pub impl Culture for YearUnit
-pub impl Show for YearUnit
-
-pub(all) enum YinYang {
-  Yin
-  Yang
-}
-pub fn YinYang::from_code(Int) -> Self
-pub fn YinYang::get_code(Self) -> Int
-pub fn YinYang::get_name(Self) -> String
-pub impl Show for YinYang
-
 pub struct Zodiac {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Zodiac::equals(Self, Self) -> Bool
 pub fn Zodiac::from_index(Int) -> Self
 pub fn Zodiac::from_name(String) -> Result[Self, String]
 pub fn Zodiac::get_index(Self) -> Int
-pub impl Culture for Zodiac
-pub impl Tyme for Zodiac
+pub fn Zodiac::get_name(Self) -> String
+pub fn Zodiac::next(Self, Int) -> Self
+pub fn Zodiac::to_string(Self) -> String
+pub impl @base.Culture for Zodiac
+pub impl @base.Tyme for Zodiac
 pub impl Show for Zodiac
 
 pub struct Zone {
-  loop_tyme : LoopTyme
+  loop_tyme : @base.LoopTyme
 }
 pub fn Zone::from_index(Int) -> Self
 pub fn Zone::from_name(String) -> Result[Self, String]
 pub fn Zone::get_beast(Self) -> Beast
 pub fn Zone::get_direction(Self) -> Direction
 pub fn Zone::get_index(Self) -> Int
-pub impl Culture for Zone
-pub impl Tyme for Zone
+pub fn Zone::get_name(Self) -> String
+pub fn Zone::to_string(Self) -> String
+pub impl @base.Culture for Zone
+pub impl @base.Tyme for Zone
 pub impl Show for Zone
 
 // Type aliases
+pub using @base {type AbstractCulture}
+
+pub using @base {type AbstractCultureDay}
+
+pub using @base {type AbstractTyme}
+
+pub using @base {type DayUnit}
+
+pub using @base {type LoopTyme}
+
+pub using @base {type Luck}
+
+pub using @base {type MonthUnit}
+
+pub using @base {type Nine}
+
+pub using @base {type SecondUnit}
+
+pub using @base {type Side}
+
+pub using @base {type SixStar}
+
+pub using @base {type Sixty}
+
+pub using @base {type Sound}
+
+pub using @base {type Ten}
+
+pub using @base {type Twenty}
+
+pub using @base {type YearUnit}
+
+pub using @base {type YinYang}
+
+pub using @base {trait Culture}
+
+pub using @base {trait Tyme}
 
 // Traits
-pub trait Culture {
-  fn get_name(Self) -> String
-}
-
 pub trait IChildLimitProvider {
   fn get_info(Self, SolarTime, SolarTerm) -> ChildLimitInfo
 }
 
 pub trait IEightCharProvider {
   fn get_eight_char(Self, LunarHour) -> EightChar
-}
-
-pub trait Tyme : Culture {
-  fn next(Self, Int) -> Self
 }

@@ -1,4 +1,5 @@
 import {
   "moonbitlang/core/math",
   "justinwongcn/tyme4mb/tyme/astronomy",
+  "justinwongcn/tyme4mb/tyme/base",
 }

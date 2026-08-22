@@ -16,7 +16,7 @@ pub struct PengZuHeavenStem {
 }
 
 ///|
-extend PengZuHeavenStem with Show::{to_string}
+pub extend PengZuHeavenStem with Show::{to_string}
 
 ///|
 pub fn PengZuHeavenStem::from_index(index : Int) -> PengZuHeavenStem {
@@ -55,3 +55,9 @@ pub impl Tyme for PengZuHeavenStem with fn next(
 ) -> PengZuHeavenStem {
   PengZuHeavenStem::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend PengZuHeavenStem with Culture::{get_name}
+
+///|
+pub extend PengZuHeavenStem with Tyme::{next}

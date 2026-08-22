@@ -45,3 +45,12 @@ pub impl Show for Duty with fn to_string(self : Duty) -> String {
 pub impl Tyme for Duty with fn next(self : Duty, n : Int) -> Duty {
   Duty::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Duty with Culture::{get_name}
+
+///|
+pub extend Duty with Show::{to_string}
+
+///|
+pub extend Duty with Tyme::{next}

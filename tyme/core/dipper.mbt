@@ -45,3 +45,12 @@ pub impl Show for Dipper with fn to_string(self : Dipper) -> String {
 pub impl Tyme for Dipper with fn next(self : Dipper, n : Int) -> Dipper {
   Dipper::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Dipper with Culture::{get_name}
+
+///|
+pub extend Dipper with Show::{to_string}
+
+///|
+pub extend Dipper with Tyme::{next}

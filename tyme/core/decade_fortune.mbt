@@ -8,7 +8,7 @@ pub struct DecadeFortune {
 }
 
 ///|
-extend DecadeFortune with Culture::{get_name}
+pub extend DecadeFortune with Culture::{get_name}
 
 ///|
 // from_child_limit 从童限与序号构造
@@ -92,3 +92,9 @@ pub impl Show for DecadeFortune with fn to_string(self : DecadeFortune) -> Strin
 pub impl Tyme for DecadeFortune with fn next(self : DecadeFortune, n : Int) -> DecadeFortune {
   DecadeFortune::from_child_limit(self.child_limit, self.index + n)
 }
+
+///|
+pub extend DecadeFortune with Show::{to_string}
+
+///|
+pub extend DecadeFortune with Tyme::{next}

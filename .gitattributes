@@ -1,0 +1,10 @@
+# 规范化行尾：所有文本文件以 LF 入库，工作区按 autocrlf 处理
+* text=auto
+*.mbt text eol=lf
+*.mbti text eol=lf
+*.pkg text eol=lf
+*.md text eol=lf
+*.mod text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf

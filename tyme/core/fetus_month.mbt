@@ -60,3 +60,6 @@ pub impl Show for FetusMonth with fn to_string(self : FetusMonth) -> String {
 pub impl Tyme for FetusMonth with fn next(self : FetusMonth, n : Int) -> FetusMonth {
   self.next(n)
 }
+
+///|
+pub extend FetusMonth with Show::{to_string}

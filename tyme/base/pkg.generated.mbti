@@ -1,0 +1,209 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "justinwongcn/tyme4mb/tyme/base"
+
+// Values
+pub fn luck_names() -> Array[String]
+
+pub fn nine_names() -> Array[String]
+
+pub fn six_star_names() -> Array[String]
+
+pub fn sixty_names() -> Array[String]
+
+pub fn sound_names() -> Array[String]
+
+pub fn ten_names() -> Array[String]
+
+pub fn twenty_names() -> Array[String]
+
+// Errors
+
+// Types and methods
+pub struct AbstractCulture {
+}
+pub fn AbstractCulture::equals(Self, Self) -> Bool
+pub fn AbstractCulture::floor_div(Int, Int) -> Int
+pub fn AbstractCulture::index_of(Int, Int) -> Int
+pub impl Culture for AbstractCulture
+pub impl Show for AbstractCulture
+
+pub struct AbstractCultureDay[C] {
+  culture : C
+  day_index : Int
+}
+pub fn[C] AbstractCultureDay::get_culture(Self[C]) -> C
+pub fn[C] AbstractCultureDay::get_day_index(Self[C]) -> Int
+pub fn[C] AbstractCultureDay::new(C, Int) -> Self[C]
+pub impl[C : Culture] Culture for AbstractCultureDay[C]
+pub impl[C : Culture] Show for AbstractCultureDay[C]
+
+pub struct AbstractTyme {
+}
+pub fn AbstractTyme::new() -> Self
+pub impl Culture for AbstractTyme
+pub impl Show for AbstractTyme
+
+pub struct DayUnit {
+  month_unit : MonthUnit
+  day : Int
+}
+pub fn DayUnit::get_compare_index(Self) -> Int
+pub fn DayUnit::get_day(Self) -> Int
+pub fn DayUnit::new(MonthUnit, Int) -> Self
+pub fn DayUnit::to_string(Self) -> String
+pub impl Culture for DayUnit
+pub impl Show for DayUnit
+
+pub struct LoopTyme {
+  names : Array[String]
+  mut index : Int
+}
+pub fn LoopTyme::equals(Self, Self) -> Bool
+pub fn LoopTyme::from_index(Array[String], Int) -> Self
+pub fn LoopTyme::from_name(Array[String], String) -> Result[Self, String]
+pub fn LoopTyme::get_index(Self) -> Int
+pub fn LoopTyme::get_size(Self) -> Int
+pub fn LoopTyme::index_of(Self, Int) -> Int
+pub fn LoopTyme::index_of_name(Self, String) -> Result[Int, String]
+pub fn LoopTyme::next_index(Self, Int) -> Int
+pub fn LoopTyme::steps_back_to(Self, Int) -> Int
+pub fn LoopTyme::steps_close_to(Self, Int) -> Int
+pub fn LoopTyme::steps_to(Self, Int) -> Int
+pub impl Culture for LoopTyme
+pub impl Show for LoopTyme
+
+pub struct Luck {
+  loop_tyme : LoopTyme
+}
+pub fn Luck::from_index(Int) -> Self
+pub fn Luck::from_name(String) -> Result[Self, String]
+pub fn Luck::get_index(Self) -> Int
+pub impl Culture for Luck
+pub impl Tyme for Luck
+pub impl Show for Luck
+
+pub struct MonthUnit {
+  year_unit : YearUnit
+  month : Int
+}
+pub fn MonthUnit::get_compare_index(Self) -> Int
+pub fn MonthUnit::get_month(Self) -> Int
+pub fn MonthUnit::new(YearUnit, Int) -> Self
+pub impl Culture for MonthUnit
+pub impl Show for MonthUnit
+
+pub struct Nine {
+  loop_tyme : LoopTyme
+}
+pub fn Nine::from_index(Int) -> Self
+pub fn Nine::from_name(String) -> Result[Self, String]
+pub fn Nine::get_index(Self) -> Int
+pub impl Culture for Nine
+pub impl Tyme for Nine
+pub impl Show for Nine
+
+pub struct SecondUnit {
+  day_unit : DayUnit
+  hour : Int
+  minute : Int
+  second : Int
+}
+pub fn SecondUnit::get_compare_index(Self) -> Int64
+pub fn SecondUnit::get_hour(Self) -> Int
+pub fn SecondUnit::get_minute(Self) -> Int
+pub fn SecondUnit::get_second(Self) -> Int
+pub fn SecondUnit::get_seconds_in_day(Self) -> Int
+pub fn SecondUnit::new(DayUnit, Int, Int, Int) -> Self
+pub fn SecondUnit::validate(Int, Int, Int, Int, Int, Int) -> Result[Unit, String]
+pub impl Culture for SecondUnit
+pub impl Show for SecondUnit
+
+pub(all) enum Side {
+  In
+  Out
+}
+pub fn Side::from_code(Int) -> Self
+pub fn Side::get_code(Self) -> Int
+pub fn Side::get_name(Self) -> String
+pub impl Show for Side
+
+pub struct SixStar {
+  loop_tyme : LoopTyme
+}
+pub fn SixStar::from_index(Int) -> Self
+pub fn SixStar::from_name(String) -> Result[Self, String]
+pub fn SixStar::get_index(Self) -> Int
+pub impl Culture for SixStar
+pub impl Tyme for SixStar
+pub impl Show for SixStar
+
+pub struct Sixty {
+  loop_tyme : LoopTyme
+}
+pub fn Sixty::from_index(Int) -> Self
+pub fn Sixty::from_name(String) -> Result[Self, String]
+pub fn Sixty::get_index(Self) -> Int
+pub impl Culture for Sixty
+pub impl Tyme for Sixty
+pub impl Show for Sixty
+
+pub struct Sound {
+  loop_tyme : LoopTyme
+}
+pub fn Sound::from_index(Int) -> Self
+pub fn Sound::from_name(String) -> Result[Self, String]
+pub fn Sound::get_index(Self) -> Int
+pub impl Culture for Sound
+pub impl Tyme for Sound
+pub impl Show for Sound
+
+pub struct Ten {
+  loop_tyme : LoopTyme
+}
+pub fn Ten::from_index(Int) -> Self
+pub fn Ten::from_name(String) -> Result[Self, String]
+pub fn Ten::get_index(Self) -> Int
+pub impl Culture for Ten
+pub impl Tyme for Ten
+pub impl Show for Ten
+
+pub struct Twenty {
+  loop_tyme : LoopTyme
+}
+pub fn Twenty::equals(Self, Self) -> Bool
+pub fn Twenty::from_index(Int) -> Self
+pub fn Twenty::from_name(String) -> Result[Self, String]
+pub fn Twenty::get_sixty(Self) -> Sixty
+pub impl Culture for Twenty
+pub impl Tyme for Twenty
+pub impl Show for Twenty
+
+pub struct YearUnit {
+  abstract_tyme : AbstractTyme
+  year : Int
+}
+pub fn YearUnit::get_compare_index(Self) -> Int
+pub fn YearUnit::get_year(Self) -> Int
+pub fn YearUnit::new(Int) -> Self
+pub impl Culture for YearUnit
+pub impl Show for YearUnit
+
+pub(all) enum YinYang {
+  Yin
+  Yang
+}
+pub fn YinYang::from_code(Int) -> Self
+pub fn YinYang::get_code(Self) -> Int
+pub fn YinYang::get_name(Self) -> String
+pub impl Show for YinYang
+
+// Type aliases
+
+// Traits
+pub(open) trait Culture {
+  fn get_name(Self) -> String
+}
+
+pub(open) trait Tyme : Culture {
+  fn next(Self, Int) -> Self
+}

@@ -46,7 +46,11 @@ pub fn ChildLimit::from_solar_time(
   birth_time : SolarTime,
   gender : Gender,
 ) -> ChildLimit {
-  child_limit_of(birth_time.get_lunar_hour().get_eight_char(), birth_time, gender)
+  child_limit_of(
+    birth_time.get_lunar_hour().get_eight_char(),
+    birth_time,
+    gender,
+  )
 }
 
 ///|

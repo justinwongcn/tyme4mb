@@ -30,3 +30,9 @@ pub impl Culture for SolarTermDay with fn get_name(self : SolarTermDay) -> Strin
 pub impl Show for SolarTermDay with fn to_string(self : SolarTermDay) -> String {
   Show::to_string(self.abstract_culture_day)
 }
+
+///|
+pub extend SolarTermDay with Culture::{get_name}
+
+///|
+pub extend SolarTermDay with Show::{to_string}

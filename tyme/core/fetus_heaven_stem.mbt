@@ -11,7 +11,7 @@ pub struct FetusHeavenStem {
 }
 
 ///|
-extend FetusHeavenStem with Culture::{get_name}
+pub extend FetusHeavenStem with Culture::{get_name}
 
 ///|
 pub fn FetusHeavenStem::new(index : Int) -> FetusHeavenStem {
@@ -37,3 +37,9 @@ pub impl Show for FetusHeavenStem with fn to_string(self : FetusHeavenStem) -> S
 pub impl Tyme for FetusHeavenStem with fn next(self : FetusHeavenStem, n : Int) -> FetusHeavenStem {
   FetusHeavenStem::new(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend FetusHeavenStem with Show::{to_string}
+
+///|
+pub extend FetusHeavenStem with Tyme::{next}

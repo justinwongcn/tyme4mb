@@ -45,13 +45,17 @@ pub fn EclipticHideHeavenStemDay::get_sector_index(
 
 ///|
 // get_month_lon 太阳黄经在月令内的度数 [0, 30)
-pub fn EclipticHideHeavenStemDay::get_month_lon(self : EclipticHideHeavenStemDay) -> Double {
+pub fn EclipticHideHeavenStemDay::get_month_lon(
+  self : EclipticHideHeavenStemDay,
+) -> Double {
   self.month_lon
 }
 
 ///|
 // get_lon_offset 当前司令段起点在月令内的黄经度数（如立春后戊7°段为 0、丙7°段为 7）
-pub fn EclipticHideHeavenStemDay::get_lon_offset(self : EclipticHideHeavenStemDay) -> Double {
+pub fn EclipticHideHeavenStemDay::get_lon_offset(
+  self : EclipticHideHeavenStemDay,
+) -> Double {
   self.lon_offset
 }
 
@@ -83,6 +87,8 @@ pub impl Show for EclipticHideHeavenStemDay with fn to_string(
 // 由太阳黄经 (lon_deg - 285 + 360)/30 取整后 mod 12 得出（黄经 285° 起每 30° 一令）
 // 每项 (天干索引, 段长度数)，段长合计 30；无中段位的月令（卯/酉/子）中间段为 (0,0) 占位
 // 段序（数组下标 0/1/2）仅表示第1/2/3段当令，与藏干的本气/中气/余气分类无关
+
+///|
 fn ecliptic_hide_heaven_stem_sectors(k : Int) -> Array[(Int, Int)] {
   match k {
     // 小寒(285°): 癸9 辛3 己18
@@ -117,7 +123,9 @@ fn ecliptic_hide_heaven_stem_sectors(k : Int) -> Array[(Int, Int)] {
 // 以太阳真黄经（视黄经）度数代替按日计数划分司令分野：
 // 月令与段位全部由黄经度数直接定位（不经节气时刻表），故与按日版在节气边界附近可能存在 1~2 分钟的自然错位
 // 适用年限：约 1000~3000 年（ΔT 用天文观测表 + 抛物线/三次式外推，极端年份黄经误差约 0.03°~0.05°，不影响 1° 级段位）
-pub fn SolarTime::get_hide_heaven_stem_by_ecliptic(self : SolarTime) -> EclipticHideHeavenStemDay {
+pub fn SolarTime::get_hide_heaven_stem_by_ecliptic(
+  self : SolarTime,
+) -> EclipticHideHeavenStemDay {
   // 1. 太阳视黄经（弧度）：北京时间儒略日 → UT（减8h）→ ΔT → TD 世纪数 → sa_lon
   let lon_rad = self.get_julian_day().get_day()
     |> fn(jd) { jd - OneThird } // 北京时间 → UT（减 8h）
@@ -160,7 +168,9 @@ pub fn SolarTime::get_hide_heaven_stem_by_ecliptic(self : SolarTime) -> Ecliptic
   // 防御：分段表每令段宽合计恒为 30、month_lon 经归一化后恒 ∈ [0,30)，
   // 正常情况下循环必在末段命中。若不命中说明月令表或归一化被改动破坏，显式报错而非静默回退。
   if !found {
-    abort("ecliptic hide heaven stem: sector not found for month_lon=\{month_lon} k=\{k}")
+    abort(
+      "ecliptic hide heaven stem: sector not found for month_lon=\{month_lon} k=\{k}",
+    )
   }
   EclipticHideHeavenStemDay::new(
     HideHeavenStem::from_index(stem_index, Main), // 类型恒为 Main（司令无藏干分类），段序见 sector_index

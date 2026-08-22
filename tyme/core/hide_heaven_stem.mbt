@@ -6,7 +6,7 @@ pub struct HideHeavenStem {
 }
 
 ///|
-extend HideHeavenStem with Culture::{get_name}
+pub extend HideHeavenStem with Culture::{get_name}
 
 ///|
 pub fn HideHeavenStem::new(
@@ -51,3 +51,6 @@ pub impl Culture for HideHeavenStem with fn get_name(self : HideHeavenStem) -> S
 pub impl Show for HideHeavenStem with fn to_string(self : HideHeavenStem) -> String {
   self.get_name()
 }
+
+///|
+pub extend HideHeavenStem with Show::{to_string}
