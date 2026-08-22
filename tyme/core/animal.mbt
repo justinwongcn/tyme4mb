@@ -71,3 +71,12 @@ pub impl Show for Animal with fn to_string(self : Animal) -> String {
 pub impl Tyme for Animal with fn next(self : Animal, n : Int) -> Animal {
   Animal::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Animal with Culture::{get_name}
+
+///|
+pub extend Animal with Show::{to_string}
+
+///|
+pub extend Animal with Tyme::{next}

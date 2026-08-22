@@ -11,7 +11,7 @@ pub struct FetusEarthBranch {
 }
 
 ///|
-extend FetusEarthBranch with Culture::{get_name}
+pub extend FetusEarthBranch with Culture::{get_name}
 
 ///|
 pub fn FetusEarthBranch::new(index : Int) -> FetusEarthBranch {
@@ -40,3 +40,9 @@ pub impl Tyme for FetusEarthBranch with fn next(
 ) -> FetusEarthBranch {
   FetusEarthBranch::new(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend FetusEarthBranch with Show::{to_string}
+
+///|
+pub extend FetusEarthBranch with Tyme::{next}

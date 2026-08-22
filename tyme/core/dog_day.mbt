@@ -30,3 +30,9 @@ pub impl Culture for DogDay with fn get_name(self : DogDay) -> String {
 pub impl Show for DogDay with fn to_string(self : DogDay) -> String {
   Show::to_string(self.abstract_culture_day)
 }
+
+///|
+pub extend DogDay with Culture::{get_name}
+
+///|
+pub extend DogDay with Show::{to_string}

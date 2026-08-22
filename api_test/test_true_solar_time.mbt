@@ -50,8 +50,10 @@ test "api_true_solar_time_february" {
   let tst = st.to_true_solar_time(120.0)
   // 真太阳时应约 11:46
   assert_true(tst.get_hour() == 11, "February TST hour = 11")
-  assert_true(tst.get_minute() >= 40 && tst.get_minute() <= 52,
-    "February TST minute in 40-52")
+  assert_true(
+    tst.get_minute() >= 40 && tst.get_minute() <= 52,
+    "February TST minute in 40-52",
+  )
 }
 
 ///|
@@ -61,8 +63,10 @@ test "api_true_solar_time_november" {
   let tst = st.to_true_solar_time(120.0)
   // 真太阳时应约 12:16
   assert_true(tst.get_hour() == 12, "November TST hour = 12")
-  assert_true(tst.get_minute() >= 10 && tst.get_minute() <= 22,
-    "November TST minute in 10-22")
+  assert_true(
+    tst.get_minute() >= 10 && tst.get_minute() <= 22,
+    "November TST minute in 10-22",
+  )
 }
 
 ///|
@@ -100,18 +104,16 @@ test "api_equation_of_time_seasonal_variation" {
   let eot_jan = @tyme.equation_of_time(0.25)
   let eot_jun = @tyme.equation_of_time(0.254666)
   // 1月均时差约 -0.055h，6月约 -0.026h，差异应 > 0.01h
-  assert_true((eot_jan - eot_jun).abs() > 0.01,
-    "EoT seasonal variation > 0.01h")
+  assert_true(
+    (eot_jan - eot_jun).abs() > 0.01,
+    "EoT seasonal variation > 0.01h",
+  )
 }
 
 ///|
 test "api_child_limit_true_solar_time" {
   let st = @tyme.SolarTime::from_ymdhms(1990, 5, 15, 14, 30, 0).unwrap()
-  let cl = @tyme.ChildLimit::from_true_solar_time(
-    st,
-    @tyme.Gender::Man,
-    87.62,
-  )
+  let cl = @tyme.ChildLimit::from_true_solar_time(st, @tyme.Gender::Man, 87.62)
   // 时柱按真太阳时 → 午
   assert_true(
     cl.get_eight_char().get_hour().get_earth_branch().get_name() == "午",

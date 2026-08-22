@@ -31,3 +31,9 @@ pub impl Culture for PhaseDay with fn get_name(self : PhaseDay) -> String {
 pub impl Show for PhaseDay with fn to_string(self : PhaseDay) -> String {
   Show::to_string(self.day)
 }
+
+///|
+pub extend PhaseDay with Culture::{get_name}
+
+///|
+pub extend PhaseDay with Show::{to_string}

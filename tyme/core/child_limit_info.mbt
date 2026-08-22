@@ -94,3 +94,6 @@ pub impl Show for ChildLimitInfo with fn to_string(self : ChildLimitInfo) -> Str
   self.get_minute_count().to_string() +
   "分钟"
 }
+
+///|
+pub extend ChildLimitInfo with Show::{to_string}

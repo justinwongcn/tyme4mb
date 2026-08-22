@@ -45,3 +45,12 @@ pub impl Show for Terrain with fn to_string(self : Terrain) -> String {
 pub impl Tyme for Terrain with fn next(self : Terrain, n : Int) -> Terrain {
   Terrain::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Terrain with Culture::{get_name}
+
+///|
+pub extend Terrain with Show::{to_string}
+
+///|
+pub extend Terrain with Tyme::{next}

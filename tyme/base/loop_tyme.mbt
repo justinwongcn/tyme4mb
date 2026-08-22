@@ -22,7 +22,7 @@ pub fn LoopTyme::get_size(self : LoopTyme) -> Int {
 }
 
 ///|
-fn LoopTyme::index_of_name(
+pub fn LoopTyme::index_of_name(
   self : LoopTyme,
   name : String,
 ) -> Result[Int, String] {
@@ -35,12 +35,12 @@ fn LoopTyme::index_of_name(
 }
 
 ///|
-fn LoopTyme::index_of(self : LoopTyme, index : Int) -> Int {
+pub fn LoopTyme::index_of(self : LoopTyme, index : Int) -> Int {
   AbstractCulture::index_of(index, self.get_size())
 }
 
 ///|
-fn LoopTyme::next_index(self : LoopTyme, n : Int) -> Int {
+pub fn LoopTyme::next_index(self : LoopTyme, n : Int) -> Int {
   self.index_of(self.index + n)
 }
 

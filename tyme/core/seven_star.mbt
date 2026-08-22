@@ -48,3 +48,9 @@ pub impl Show for SevenStar with fn to_string(self : SevenStar) -> String {
 pub impl Tyme for SevenStar with fn next(self : SevenStar, n : Int) -> SevenStar {
   SevenStar::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend SevenStar with Culture::{get_name}
+
+///|
+pub extend SevenStar with Show::{to_string}

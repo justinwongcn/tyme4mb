@@ -27,3 +27,6 @@ warning-report.html
 项目申报书.md
 code-review-report.html
 pub-impl-plan.html
+
+# Local scratch / baseline artifacts
+tmp/

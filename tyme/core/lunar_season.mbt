@@ -45,3 +45,12 @@ pub impl Show for LunarSeason with fn to_string(self : LunarSeason) -> String {
 pub impl Tyme for LunarSeason with fn next(self : LunarSeason, n : Int) -> LunarSeason {
   LunarSeason::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend LunarSeason with Culture::{get_name}
+
+///|
+pub extend LunarSeason with Show::{to_string}
+
+///|
+pub extend LunarSeason with Tyme::{next}

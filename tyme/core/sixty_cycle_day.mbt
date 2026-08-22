@@ -138,7 +138,7 @@ pub fn SixtyCycleDay::get_fetus_day(self : SixtyCycleDay) -> FetusDay {
 pub fn SixtyCycleDay::get_gods(
   self : SixtyCycleDay,
 ) -> Result[Array[God], String] {
-  God::get_day_gods(self.get_month(), self.day)
+  God::get_day_gods(self.get_sixty_cycle_month(), self)
 }
 
 ///|
@@ -146,7 +146,7 @@ pub fn SixtyCycleDay::get_gods(
 pub fn SixtyCycleDay::get_recommends(
   self : SixtyCycleDay,
 ) -> Result[Array[Taboo], String] {
-  Taboo::get_day_recommends(self.get_month(), self.day)
+  Taboo::get_day_recommends(self.get_sixty_cycle_month(), self)
 }
 
 ///|
@@ -154,7 +154,7 @@ pub fn SixtyCycleDay::get_recommends(
 pub fn SixtyCycleDay::get_avoids(
   self : SixtyCycleDay,
 ) -> Result[Array[Taboo], String] {
-  Taboo::get_day_avoids(self.get_month(), self.day)
+  Taboo::get_day_avoids(self.get_sixty_cycle_month(), self)
 }
 
 ///|

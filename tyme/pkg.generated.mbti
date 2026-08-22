@@ -2,6 +2,7 @@
 package "justinwongcn/tyme4mb/tyme"
 
 import {
+  "justinwongcn/tyme4mb/tyme/base",
   "justinwongcn/tyme4mb/tyme/core",
   "moonbitlang/core/ref",
 }
@@ -133,6 +134,8 @@ pub let sb : String
 
 pub fn seven_star_names() -> Array[String]
 
+pub fn shensha_names() -> Array[String]
+
 pub let shuo_kb : Array[Double]
 
 pub fn six_star_names() -> Array[String]
@@ -198,13 +201,13 @@ pub fn zone_names() -> Array[String]
 // Type aliases
 pub using @core {type AbstractChildLimitProvider}
 
-pub using @core {type AbstractCulture}
+pub using @base {type AbstractCulture}
 
-pub using @core {type AbstractCultureDay}
+pub using @base {type AbstractCultureDay}
 
 pub using @core {type AbstractFestival}
 
-pub using @core {type AbstractTyme}
+pub using @base {type AbstractTyme}
 
 pub using @core {type Animal}
 
@@ -218,7 +221,7 @@ pub using @core {type China95ChildLimitProvider}
 
 pub using @core {type Constellation}
 
-pub using @core {type DayUnit}
+pub using @base {type DayUnit}
 
 pub using @core {type DecadeFortune}
 
@@ -290,9 +293,9 @@ pub using @core {type Land}
 
 pub using @core {type LegalHoliday}
 
-pub using @core {type LoopTyme}
+pub using @base {type LoopTyme}
 
-pub using @core {type Luck}
+pub using @base {type Luck}
 
 pub using @core {type LunarDay}
 
@@ -316,9 +319,9 @@ pub using @core {type LunarYear}
 
 pub using @core {type MinorRen}
 
-pub using @core {type MonthUnit}
+pub using @base {type MonthUnit}
 
-pub using @core {type Nine}
+pub using @base {type Nine}
 
 pub using @core {type NineDay}
 
@@ -350,15 +353,17 @@ pub using @core {type RabByungMonth}
 
 pub using @core {type RabByungYear}
 
-pub using @core {type SecondUnit}
+pub using @base {type SecondUnit}
 
 pub using @core {type SevenStar}
 
-pub using @core {type Side}
+pub using @core {type ShenSha}
 
-pub using @core {type SixStar}
+pub using @base {type Side}
 
-pub using @core {type Sixty}
+pub using @base {type SixStar}
+
+pub using @base {type Sixty}
 
 pub using @core {type SixtyCycle}
 
@@ -390,11 +395,11 @@ pub using @core {type SolarWeek}
 
 pub using @core {type SolarYear}
 
-pub using @core {type Sound}
+pub using @base {type Sound}
 
 pub using @core {type Taboo}
 
-pub using @core {type Ten}
+pub using @base {type Ten}
 
 pub using @core {type TenStar}
 
@@ -406,7 +411,7 @@ pub using @core {type ThreePillars}
 
 pub using @core {type TwelveStar}
 
-pub using @core {type Twenty}
+pub using @base {type Twenty}
 
 pub using @core {type TwentyEightStar}
 
@@ -414,20 +419,20 @@ pub using @core {type Week}
 
 pub using @core {type WeekUnit}
 
-pub using @core {type YearUnit}
+pub using @base {type YearUnit}
 
-pub using @core {type YinYang}
+pub using @base {type YinYang}
 
 pub using @core {type Zodiac}
 
 pub using @core {type Zone}
 
-pub using @core {trait Culture}
+pub using @base {trait Culture}
 
 pub using @core {trait IChildLimitProvider}
 
 pub using @core {trait IEightCharProvider}
 
-pub using @core {trait Tyme}
+pub using @base {trait Tyme}
 
 // Traits

@@ -11,7 +11,7 @@ pub struct Ecliptic {
 }
 
 ///|
-extend Ecliptic with Show::{to_string}
+pub extend Ecliptic with Show::{to_string}
 
 ///|
 pub fn Ecliptic::from_index(index : Int) -> Ecliptic {
@@ -51,3 +51,6 @@ pub impl Show for Ecliptic with fn to_string(self : Ecliptic) -> String {
 pub impl Tyme for Ecliptic with fn next(self : Ecliptic, n : Int) -> Ecliptic {
   Ecliptic::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Ecliptic with Culture::{get_name}

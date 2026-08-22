@@ -26,7 +26,7 @@ pub struct Phenology {
 }
 
 ///|
-extend Phenology with Tyme::{next}
+pub extend Phenology with Tyme::{next}
 
 ///|
 pub fn Phenology::from_index(year : Int, index : Int) -> Phenology {
@@ -101,3 +101,9 @@ pub fn Phenology::get_julian_day(self : Phenology) -> JulianDay {
     t * 36525.0 + J2000.to_double() + 8.0 / 24.0 - dt_t(t * 36525.0),
   )
 }
+
+///|
+pub extend Phenology with Culture::{get_name}
+
+///|
+pub extend Phenology with Show::{to_string}

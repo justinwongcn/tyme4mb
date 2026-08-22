@@ -15,7 +15,7 @@ pub struct TwentyEightStar {
 }
 
 ///|
-extend TwentyEightStar with Tyme::{next}
+pub extend TwentyEightStar with Tyme::{next}
 
 ///|
 pub fn TwentyEightStar::from_index(index : Int) -> TwentyEightStar {
@@ -91,3 +91,9 @@ pub impl Show for TwentyEightStar with fn to_string(self : TwentyEightStar) -> S
 pub impl Tyme for TwentyEightStar with fn next(self : TwentyEightStar, n : Int) -> TwentyEightStar {
   TwentyEightStar::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend TwentyEightStar with Culture::{get_name}
+
+///|
+pub extend TwentyEightStar with Show::{to_string}

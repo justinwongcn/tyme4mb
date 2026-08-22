@@ -5,7 +5,7 @@ pub struct LunarHour {
 }
 
 ///|
-extend LunarHour with Show::{to_string}
+pub extend LunarHour with Show::{to_string}
 
 ///|
 // validate 校验
@@ -286,3 +286,9 @@ pub impl Tyme for LunarHour with fn next(self : LunarHour, n : Int) -> LunarHour
 pub fn LunarHour::equals(self : LunarHour, target : LunarHour) -> Bool {
   self.to_string() == target.to_string()
 }
+
+///|
+pub extend LunarHour with Culture::{get_name}
+
+///|
+pub extend LunarHour with Tyme::{next}

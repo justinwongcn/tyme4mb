@@ -154,3 +154,6 @@ pub impl Show for Phase with fn to_string(self : Phase) -> String {
 pub impl Tyme for Phase with fn next(self : Phase, n : Int) -> Phase {
   self.next(n)
 }
+
+///|
+pub extend Phase with Show::{to_string}

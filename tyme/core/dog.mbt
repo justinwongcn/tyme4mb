@@ -42,3 +42,12 @@ pub impl Show for Dog with fn to_string(self : Dog) -> String {
 pub impl Tyme for Dog with fn next(self : Dog, n : Int) -> Dog {
   Dog::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Dog with Culture::{get_name}
+
+///|
+pub extend Dog with Show::{to_string}
+
+///|
+pub extend Dog with Tyme::{next}

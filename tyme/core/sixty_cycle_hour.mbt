@@ -10,10 +10,10 @@ pub struct SixtyCycleHour {
 }
 
 ///|
-extend SixtyCycleHour with Culture::{get_name}
+pub extend SixtyCycleHour with Culture::{get_name}
 
 ///|
-extend SixtyCycleHour with Tyme::{next}
+pub extend SixtyCycleHour with Tyme::{next}
 
 ///|
 // from_solar_time 从公历时刻构造
@@ -185,3 +185,6 @@ pub impl Show for SixtyCycleHour with fn to_string(self : SixtyCycleHour) -> Str
 pub impl Tyme for SixtyCycleHour with fn next(self : SixtyCycleHour, n : Int) -> SixtyCycleHour {
   SixtyCycleHour::from_solar_time(self.solar_time.next(n))
 }
+
+///|
+pub extend SixtyCycleHour with Show::{to_string}

@@ -15,10 +15,10 @@ pub struct HijriMonth {
 }
 
 ///|
-extend HijriMonth with Culture::{get_name}
+pub extend HijriMonth with Culture::{get_name}
 
 ///|
-extend HijriMonth with Show::{to_string}
+pub extend HijriMonth with Show::{to_string}
 
 ///|
 pub fn HijriMonth::new(month_unit : MonthUnit) -> HijriMonth {
@@ -137,3 +137,6 @@ pub impl Tyme for HijriMonth with fn next(self : HijriMonth, n : Int) -> HijriMo
     Err(_) => self
   }
 }
+
+///|
+pub extend HijriMonth with Tyme::{next}

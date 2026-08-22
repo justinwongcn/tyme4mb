@@ -1,6 +1,6 @@
 ///|
 // Tyme Tyme
-pub trait Tyme: Culture {
+pub(open) trait Tyme: Culture {
   // next 推移
   fn next(Self, Int) -> Self
 }

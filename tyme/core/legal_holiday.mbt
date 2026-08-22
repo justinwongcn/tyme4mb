@@ -194,3 +194,6 @@ fn records_for_year(y : Int) -> Array[String] {
   }
   res
 }
+
+///|
+pub extend LegalHoliday with Show::{to_string}

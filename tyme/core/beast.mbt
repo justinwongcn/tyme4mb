@@ -48,3 +48,9 @@ pub impl Show for Beast with fn to_string(self : Beast) -> String {
 pub impl Tyme for Beast with fn next(self : Beast, n : Int) -> Beast {
   Beast::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Beast with Culture::{get_name}
+
+///|
+pub extend Beast with Show::{to_string}

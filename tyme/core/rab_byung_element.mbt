@@ -11,10 +11,10 @@ pub struct RabByungElement {
 }
 
 ///|
-extend RabByungElement with Culture::{get_name}
+pub extend RabByungElement with Culture::{get_name}
 
 ///|
-extend RabByungElement with Tyme::{next}
+pub extend RabByungElement with Tyme::{next}
 
 ///|
 pub fn RabByungElement::from_index(index : Int) -> RabByungElement {
@@ -90,3 +90,6 @@ pub impl Show for RabByungElement with fn to_string(self : RabByungElement) -> S
 pub impl Tyme for RabByungElement with fn next(self : RabByungElement, n : Int) -> RabByungElement {
   RabByungElement::from_index(self.element.get_index() + n)
 }
+
+///|
+pub extend RabByungElement with Show::{to_string}

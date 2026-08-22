@@ -11,7 +11,7 @@ pub struct MinorRen {
 }
 
 ///|
-extend MinorRen with Tyme::{next}
+pub extend MinorRen with Tyme::{next}
 
 ///|
 pub fn MinorRen::from_index(index : Int) -> MinorRen {
@@ -58,3 +58,9 @@ pub impl Show for MinorRen with fn to_string(self : MinorRen) -> String {
 pub impl Tyme for MinorRen with fn next(self : MinorRen, n : Int) -> MinorRen {
   MinorRen::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend MinorRen with Culture::{get_name}
+
+///|
+pub extend MinorRen with Show::{to_string}

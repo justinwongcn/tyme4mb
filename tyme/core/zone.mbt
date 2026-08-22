@@ -57,3 +57,9 @@ pub impl Show for Zone with fn to_string(self : Zone) -> String {
 pub impl Tyme for Zone with fn next(self : Zone, n : Int) -> Zone {
   Zone::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Zone with Culture::{get_name}
+
+///|
+pub extend Zone with Show::{to_string}

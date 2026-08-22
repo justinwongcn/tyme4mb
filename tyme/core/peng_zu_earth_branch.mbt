@@ -16,7 +16,7 @@ pub struct PengZuEarthBranch {
 }
 
 ///|
-extend PengZuEarthBranch with Show::{to_string}
+pub extend PengZuEarthBranch with Show::{to_string}
 
 ///|
 pub fn PengZuEarthBranch::from_index(index : Int) -> PengZuEarthBranch {
@@ -57,3 +57,9 @@ pub impl Tyme for PengZuEarthBranch with fn next(
 ) -> PengZuEarthBranch {
   PengZuEarthBranch::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend PengZuEarthBranch with Culture::{get_name}
+
+///|
+pub extend PengZuEarthBranch with Tyme::{next}

@@ -72,9 +72,9 @@ pub fn HeavenStem::get_element(self : HeavenStem) -> Element {
 // get_yin_yang 阴阳
 pub fn HeavenStem::get_yin_yang(self : HeavenStem) -> YinYang {
   if self.loop_tyme.get_index() % 2 == 0 {
-    Yang
+    @base.Yang
   } else {
-    Yin
+    @base.Yin
   }
 }
 
@@ -149,7 +149,7 @@ pub fn HeavenStem::get_terrain(
 ) -> Terrain {
   let earth_branch_index = earth_branch.get_index()
   let mut offset = earth_branch_index
-  if Yin.get_code() == self.get_yin_yang().get_code() {
+  if @base.Yin.get_code() == self.get_yin_yang().get_code() {
     offset = -offset
   }
   let a = [1, 6, 10, 9, 10, 9, 7, 0, 4, 3]

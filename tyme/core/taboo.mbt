@@ -134,13 +134,13 @@ fn get_taboos(
 ///|
 // get_day_recommends 日宜
 pub fn Taboo::get_day_recommends(
-  month : SixtyCycle,
-  day : SixtyCycle,
+  month : SixtyCycleMonth,
+  day : SixtyCycleDay,
 ) -> Result[Array[Taboo], String] {
   get_taboos(
     day_taboo(),
-    month.get_earth_branch().get_index(),
-    day.get_index(),
+    month.get_sixty_cycle().get_earth_branch().get_index(),
+    day.get_sixty_cycle().get_index(),
     0,
   )
 }
@@ -148,13 +148,13 @@ pub fn Taboo::get_day_recommends(
 ///|
 // get_day_avoids 日忌
 pub fn Taboo::get_day_avoids(
-  month : SixtyCycle,
-  day : SixtyCycle,
+  month : SixtyCycleMonth,
+  day : SixtyCycleDay,
 ) -> Result[Array[Taboo], String] {
   get_taboos(
     day_taboo(),
-    month.get_earth_branch().get_index(),
-    day.get_index(),
+    month.get_sixty_cycle().get_earth_branch().get_index(),
+    day.get_sixty_cycle().get_index(),
     1,
   )
 }
@@ -201,3 +201,12 @@ pub impl Show for Taboo with fn to_string(self : Taboo) -> String {
 pub impl Tyme for Taboo with fn next(self : Taboo, n : Int) -> Taboo {
   Taboo::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Taboo with Culture::{get_name}
+
+///|
+pub extend Taboo with Show::{to_string}
+
+///|
+pub extend Taboo with Tyme::{next}

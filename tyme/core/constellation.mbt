@@ -45,3 +45,12 @@ pub impl Show for Constellation with fn to_string(self : Constellation) -> Strin
 pub impl Tyme for Constellation with fn next(self : Constellation, n : Int) -> Constellation {
   Constellation::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend Constellation with Culture::{get_name}
+
+///|
+pub extend Constellation with Show::{to_string}
+
+///|
+pub extend Constellation with Tyme::{next}

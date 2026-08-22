@@ -91,12 +91,16 @@ fn format_hex2(n : Int) -> String {
 // get_day_gods 日神煞列表(吉神宜趋，凶神宜忌)
 // regexp ";%02X(.[^;]*)" + FindAllStringSubmatch（非重叠、从左到右）
 pub fn God::get_day_gods(
-  month : SixtyCycle,
-  day : SixtyCycle,
+  month : SixtyCycleMonth,
+  day : SixtyCycleDay,
 ) -> Result[Array[God], String] {
   let l : Array[God] = []
-  let prefix = ";" + format_hex2(day.get_index())
-  let s = day_gods()[month.get_earth_branch().next(-2).get_index()]
+  let prefix = ";" + format_hex2(day.get_sixty_cycle().get_index())
+  let s = day_gods()[month
+    .get_sixty_cycle()
+    .get_earth_branch()
+    .next(-2)
+    .get_index()]
   let n = s.length()
   let mut p = 0
   while p < n {
@@ -140,3 +144,12 @@ pub impl Show for God with fn to_string(self : God) -> String {
 pub impl Tyme for God with fn next(self : God, n : Int) -> God {
   God::from_index(self.loop_tyme.get_index() + n)
 }
+
+///|
+pub extend God with Culture::{get_name}
+
+///|
+pub extend God with Show::{to_string}
+
+///|
+pub extend God with Tyme::{next}

@@ -132,3 +132,6 @@ pub impl Culture for SolarFestival with fn get_name(self : SolarFestival) -> Str
 pub impl Show for SolarFestival with fn to_string(self : SolarFestival) -> String {
   self.get_day().to_string() + " " + self.get_name()
 }
+
+///|
+pub extend SolarFestival with Show::{to_string}

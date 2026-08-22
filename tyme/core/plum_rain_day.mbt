@@ -34,3 +34,9 @@ pub impl Show for PlumRainDay with fn to_string(self : PlumRainDay) -> String {
     self.get_plum_rain().get_name()
   }
 }
+
+///|
+pub extend PlumRainDay with Culture::{get_name}
+
+///|
+pub extend PlumRainDay with Show::{to_string}

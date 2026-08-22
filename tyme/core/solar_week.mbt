@@ -5,7 +5,7 @@ pub struct SolarWeek {
 }
 
 ///|
-extend SolarWeek with Culture::{get_name}
+pub extend SolarWeek with Culture::{get_name}
 
 ///|
 // validate 校验
@@ -164,3 +164,6 @@ pub impl Culture for SolarWeek with fn get_name(self : SolarWeek) -> String {
 pub impl Show for SolarWeek with fn to_string(self : SolarWeek) -> String {
   self.get_solar_month().to_string() + self.get_name()
 }
+
+///|
+pub extend SolarWeek with Show::{to_string}

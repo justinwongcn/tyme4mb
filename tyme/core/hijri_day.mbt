@@ -16,10 +16,10 @@ pub struct HijriDay {
 }
 
 ///|
-extend HijriDay with Culture::{get_name}
+pub extend HijriDay with Culture::{get_name}
 
 ///|
-extend HijriDay with Show::{to_string}
+pub extend HijriDay with Show::{to_string}
 
 ///|
 pub fn HijriDay::new(day_unit : DayUnit) -> HijriDay {
@@ -163,3 +163,6 @@ pub impl Show for HijriDay with fn to_string(self : HijriDay) -> String {
 pub impl Tyme for HijriDay with fn next(self : HijriDay, n : Int) -> HijriDay {
   self.get_solar_day().next(n).get_hijri_day()
 }
+
+///|
+pub extend HijriDay with Tyme::{next}
