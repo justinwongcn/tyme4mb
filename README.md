@@ -1,4 +1,4 @@
-# Tyme4MB [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg?style=flat-square)](./LICENSE)
+# Tyme4MB [![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg?style=flat-square)](./LICENSE) [![Mooncakes.io](https://img.shields.io/badge/mooncakes.io-justinwongcn%2Ftyme4mb-5B5BD6.svg?style=flat-square)](https://mooncakes.io/packages/justinwongcn/tyme4mb)
 
 Tyme4MB 是 [tyme4go](https://github.com/6tail/tyme4go) 的 MoonBit 移植版本。Tyme 是一个非常强大的日历工具库，可以看作 [Lunar](https://6tail.cn/calendar/api.html) 的升级版，拥有更优的设计和扩展性，支持公历、农历、藏历（饶迥历）、回历、星座、干支、生肖、节气、月相、法定假日、八字、童限、大运、小运、神煞、宜忌等。
 
@@ -27,7 +27,7 @@ Tyme4MB 是 [tyme4go](https://github.com/6tail/tyme4go) 的 MoonBit 移植版本
 ## 安装
 
 ```bash
-# 通过 mooncakes.io 安装（发布后可用）
+# 通过 mooncakes.io 安装
 moon add justinwongcn/tyme4mb
 ```
 

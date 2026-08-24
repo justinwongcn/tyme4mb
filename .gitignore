@@ -17,7 +17,6 @@ _build/
 tyme4go/
 
 # Project-specific docs (not part of the published package)
-CHANGELOG.md
 PORTING.md
 PROPOSAL.md
 warning-report.html
@@ -30,3 +29,12 @@ pub-impl-plan.html
 
 # Local scratch / baseline artifacts
 tmp/
+
+# Agent tooling / generated skill files (not part of the package)
+.evox/
+
+# Node.js
+node_modules/
+
+# Crawler output (intermediate data, not part of the package)
+shensha.json

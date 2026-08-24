@@ -16,8 +16,14 @@ jobs:
       - name: Install MoonBit
         uses: hustcer/setup-moonbit@v1
 
+      - name: Format check
+        run: moon fmt --check
+
+      - name: Check
+        run: moon check --deny-warn
+
       - name: Build
         run: moon build
 
       - name: Test
-        run: moon test
+        run: moon test --deny-warn
