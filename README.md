@@ -94,8 +94,7 @@ tyme4mb/
 ├── openwiki/              # 自动生成的文档
 ├── .github/workflows/     # CI/CD
 ├── moon.mod               # 模块声明
-├── LICENSE                # MIT 许可证
-└── THIRD_PARTY_LICENSES.md # 第三方许可证与归属说明
+└── LICENSE                # MIT 许可证
 ```
 
 ## 测试
@@ -116,7 +115,7 @@ moon test
 
 ## 移植来源
 
-本项目移植自 [tyme4go](https://github.com/6tail/tyme4go)（Go 版本），采用逐函数翻译方式，保留了原始算法和数据表。详细的移植说明请参阅 [PORTING.md](./PORTING.md)。
+本项目移植自 [tyme4go](https://github.com/6tail/tyme4go)（Go 版本），采用逐函数翻译方式，保留了原始算法和数据表。详细的移植说明随项目交付（PORTING.md）。
 
 ## 致谢
 
@@ -134,7 +133,7 @@ moon test
 
 本项目采用 [MIT](./LICENSE) 许可证。
 
-本项目移植并使用了以下第三方项目的代码或数据，完整的第三方许可证文本与归属说明请参阅 [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md)：
+本项目移植并使用了以下第三方项目的代码或数据，完整的第三方许可证文本与归属说明随项目交付：
 
 | 项目 | 许可证 | 用途 |
 |------|--------|------|
