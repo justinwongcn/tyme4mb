@@ -2987,6 +2987,33 @@ get_hide_heaven_stems()返回为藏干 HideHeavenStem的列表，注意：有些
         // 癸, 丙, 戊
         let hide_heaven_stems = earth_branch.get_hide_heaven_stems()
       
+15. 六破
+子酉破、丑辰破、寅亥破、卯午破、巳申破、戌未破。get_po()返回为地支 EarthBranch，互破对称。
+
+        let earth_branch = EarthBranch::from_name("子")
+         
+        // 酉
+        let po_earth_branch = earth_branch.get_po()
+      
+16. 三合局五行
+申子辰合水局，寅午戌合火局，巳酉丑合金局，亥卯未合木局。get_san_he_element()返回本支所属三合局的五行 Element。
+
+        let earth_branch = EarthBranch::from_name("申")
+         
+        // 水
+        let element = earth_branch.get_san_he_element()
+      
+17. 三会方局
+亥子丑会北方水，寅卯辰会东方木，巳午未会南方火，申酉戌会西方金。get_san_hui_element()返回本支所属方局的五行 Element，get_san_hui_direction()返回本支所属方局的方位 Direction。
+
+        let earth_branch = EarthBranch::from_name("亥")
+         
+        // 水
+        let element = earth_branch.get_san_hui_element()
+         
+        // 北
+        let direction = earth_branch.get_san_hui_direction()
+      
 ## 藏干 HideHeavenStem
 
 ‌‌地支藏干也叫人元，是指地支中包藏着天干，每一个地支里都藏着一至三个天干‌。遁藏的天干依据其力量强弱，可以分为本气、中气以及余气。

@@ -417,6 +417,10 @@ pub fn EarthBranch::get_index(Self) -> Int
 pub fn EarthBranch::get_ominous(Self) -> Direction
 pub fn EarthBranch::get_opposite(Self) -> Self
 pub fn EarthBranch::get_peng_zu_earth_branch(Self) -> PengZuEarthBranch
+pub fn EarthBranch::get_po(Self) -> Self
+pub fn EarthBranch::get_san_he_element(Self) -> Element
+pub fn EarthBranch::get_san_hui_direction(Self) -> Direction
+pub fn EarthBranch::get_san_hui_element(Self) -> Element
 pub fn EarthBranch::get_size(Self) -> Int
 pub fn EarthBranch::get_yin_yang(Self) -> @base.YinYang
 pub fn EarthBranch::get_zodiac(Self) -> Zodiac
