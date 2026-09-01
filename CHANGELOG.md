@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.3] - 2026-09-02
+
+### 新增
+
+- `EarthBranch` 地支六破 `get_po()`（子酉破、丑辰破、寅亥破、卯午破、巳申破、戌未破）
+- `EarthBranch` 三合局五行 `get_san_he_element()`（申子辰水局、寅午戌火局、巳酉丑金局、亥卯未木局）
+- `EarthBranch` 三会方局五行与方位 `get_san_hui_element()` / `get_san_hui_direction()`（亥子丑北水、寅卯辰东木、巳午未南火、申酉戌西金）
+
 ## [0.2.2] - 2026-08-24
 
 ### 新增

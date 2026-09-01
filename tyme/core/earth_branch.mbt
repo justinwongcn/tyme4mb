@@ -203,6 +203,34 @@ pub fn EarthBranch::combine(
 }
 
 ///|
+// get_po 六破（子酉破、丑辰破、寅亥破、卯午破、巳申破、戌未破），互破对称
+pub fn EarthBranch::get_po(self : EarthBranch) -> EarthBranch {
+  let a = [9, 4, 11, 6, 1, 8, 3, 10, 5, 0, 7, 2]
+  EarthBranch::from_index(a[self.loop_tyme.get_index()])
+}
+
+///|
+// get_san_he_element 三合局五行（申子辰合水局，寅午戌合火局，巳酉丑合金局，亥卯未合木局）
+pub fn EarthBranch::get_san_he_element(self : EarthBranch) -> Element {
+  let a = [4, 3, 1, 0, 4, 3, 1, 0, 4, 3, 1, 0]
+  Element::from_index(a[self.loop_tyme.get_index()])
+}
+
+///|
+// get_san_hui_element 三会方局五行（亥子丑会北方水，寅卯辰会东方木，巳午未会南方火，申酉戌会西方金）
+pub fn EarthBranch::get_san_hui_element(self : EarthBranch) -> Element {
+  let a = [4, 4, 0, 0, 0, 1, 1, 1, 3, 3, 3, 4]
+  Element::from_index(a[self.loop_tyme.get_index()])
+}
+
+///|
+// get_san_hui_direction 三会方局方位（亥子丑会北方，寅卯辰会东方，巳午未会南方，申酉戌会西方）
+pub fn EarthBranch::get_san_hui_direction(self : EarthBranch) -> Direction {
+  let a = [0, 0, 2, 2, 2, 8, 8, 8, 6, 6, 6, 0]
+  Direction::from_index(a[self.loop_tyme.get_index()])
+}
+
+///|
 pub impl Culture for EarthBranch with fn get_name(self : EarthBranch) -> String {
   self.loop_tyme.get_name()
 }
