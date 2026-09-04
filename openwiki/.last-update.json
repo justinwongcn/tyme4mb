@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-08-04T09:10:11.886Z",
+  "updatedAt": "2026-09-04T21:09:33.132Z",
   "command": "update",
-  "gitHead": "3c9e5afc3fdc5242929fa90efdca0a9beb2ad512",
+  "gitHead": "65a4fe09123010bdd7f3e54271777f8f8250b7d4",
   "model": "agnes-2.5-flash",
   "status": "complete",
   "language": "zh-CN"

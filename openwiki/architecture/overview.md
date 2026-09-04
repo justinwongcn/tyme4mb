@@ -194,3 +194,5 @@ pub struct SixtyCycle {
 6. **新增强类型**：新增了 `DecadeFortune`（大运）、`KitchenGodSteed`（灶马头）、`MinorRen`（小六壬）、`SixStar`（六曜）、`Sixty`（三元）等命理学概念。
 7. **真太阳时反推**：`EightChar::get_solar_times()` 方法支持根据八字反推可能的公历时刻列表（1-9999年范围）。
 8. **三柱反推**：`ThreePillars::get_solar_days()` 方法支持根据三柱反推公历日期。
+9. **地支关系扩展**：v0.2.3新增地支六破(`get_po()`)、三合局五行(`get_san_he_element()`)、三会方局五行与方位(`get_san_hui_element()`/`get_san_hui_direction()`)。
+10. **真黄经人元司令**：v0.2.2新增基于太阳真黄经的人元司令分野计算(`EclipticHideHeavenStemDay`)。

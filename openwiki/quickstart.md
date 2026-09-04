@@ -45,6 +45,11 @@ description: Tyme4MB 项目入门指南，包含核心概念、快速上手和�
 | 星期 | 周日到周六 | `Week` |
 | 三候 | 节气三候 | `ThreePhenology` |
 | 节气日 | 节气第几天 | `SolarTermDay` |
+| 六破 | 地支相破关系 | `EarthBranch.get_po()` |
+| 三合局 | 三合局五行 | `EarthBranch.get_san_he_element()` |
+| 三会方 | 三会方局五行与方位 | `EarthBranch.get_san_hui_element()` |
+| 真太阳时 | 均时差、太阳视赤经 | `true_solar_time.mbt` |
+| 人元司令 | 真黄经司令分野 | `EclipticHideHeavenStemDay` |
 
 ## 快速上手
 
