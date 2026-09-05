@@ -6,7 +6,7 @@ pub struct DogDay {
 
 ///|
 pub fn DogDay::new(o : Dog, index : Int) -> DogDay {
-  { abstract_culture_day: AbstractCultureDay::new(o, index) }
+  { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
 ///|

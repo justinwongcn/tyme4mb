@@ -46,13 +46,13 @@ pub fn HeavenStem::steps_close_to(self : HeavenStem, target_index : Int) -> Int 
 
 ///|
 pub fn HeavenStem::from_index(index : Int) -> HeavenStem {
-  { loop_tyme: LoopTyme::from_index(heaven_stem_names(), index) }
+  { loop_tyme: LoopTyme::from_index(heaven_stem_names(), index), }
 }
 
 ///|
 pub fn HeavenStem::from_name(name : String) -> Result[HeavenStem, String] {
   match LoopTyme::from_name(heaven_stem_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

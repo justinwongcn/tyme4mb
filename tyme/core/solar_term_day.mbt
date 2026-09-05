@@ -6,7 +6,7 @@ pub struct SolarTermDay {
 
 ///|
 pub fn SolarTermDay::new(o : SolarTerm, index : Int) -> SolarTermDay {
-  { abstract_culture_day: AbstractCultureDay::new(o, index) }
+  { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
 ///|

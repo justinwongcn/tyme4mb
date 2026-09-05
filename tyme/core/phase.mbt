@@ -42,7 +42,7 @@ pub fn Phase::from_name(
     Err(e) => return Err(e)
     Ok(v) => v
   }
-  Ok({ loop_tyme: p, lunar_year, lunar_month })
+  Ok({ loop_tyme: p, lunar_year, lunar_month, })
 }
 
 ///|

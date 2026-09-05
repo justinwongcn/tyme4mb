@@ -16,7 +16,7 @@ pub fn DecadeFortune::from_child_limit(
   child_limit : ChildLimit,
   index : Int,
 ) -> DecadeFortune {
-  { child_limit, index }
+  { child_limit, index, }
 }
 
 ///|

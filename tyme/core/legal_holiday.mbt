@@ -44,7 +44,7 @@ pub fn LegalHoliday::new(
   let name_idx = data.unsafe_get(9).to_int() - '0'.to_int()
   let name = legal_holiday_names()[name_idx]
   let work = work_char.to_int() == '0'.to_int()
-  Ok({ day: d, name, work })
+  Ok({ day: d, name, work, })
 }
 
 ///|

@@ -15,13 +15,13 @@ pub struct Constellation {
 
 ///|
 pub fn Constellation::from_index(index : Int) -> Constellation {
-  { loop_tyme: LoopTyme::from_index(constellation_names(), index) }
+  { loop_tyme: LoopTyme::from_index(constellation_names(), index), }
 }
 
 ///|
 pub fn Constellation::from_name(name : String) -> Result[Constellation, String] {
   match LoopTyme::from_name(constellation_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

@@ -21,13 +21,13 @@ pub struct ShenSha {
 
 ///|
 pub fn ShenSha::from_index(index : Int) -> ShenSha {
-  { loop_tyme: LoopTyme::from_index(shensha_names(), index) }
+  { loop_tyme: LoopTyme::from_index(shensha_names(), index), }
 }
 
 ///|
 pub fn ShenSha::from_name(name : String) -> Result[ShenSha, String] {
   match LoopTyme::from_name(shensha_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

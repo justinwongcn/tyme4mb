@@ -22,7 +22,7 @@ pub fn SixtyCycleMonth::new(
   year : SixtyCycleYear,
   month : SixtyCycle,
 ) -> SixtyCycleMonth {
-  { year, month }
+  { year, month, }
 }
 
 ///|

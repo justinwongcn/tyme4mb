@@ -20,7 +20,7 @@ pub extend PengZuHeavenStem with Show::{to_string}
 
 ///|
 pub fn PengZuHeavenStem::from_index(index : Int) -> PengZuHeavenStem {
-  { loop_tyme: LoopTyme::from_index(peng_zu_heaven_stem_names(), index) }
+  { loop_tyme: LoopTyme::from_index(peng_zu_heaven_stem_names(), index), }
 }
 
 ///|
@@ -28,7 +28,7 @@ pub fn PengZuHeavenStem::from_name(
   name : String,
 ) -> Result[PengZuHeavenStem, String] {
   match LoopTyme::from_name(peng_zu_heaven_stem_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

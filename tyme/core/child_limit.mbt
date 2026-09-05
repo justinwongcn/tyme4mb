@@ -1,7 +1,7 @@
 ///|
 // child_limit_provider 童限计算接口实现（全局可变，可通过 ChildLimit::set_provider 切换）
 pub let child_limit_provider : Ref[&IChildLimitProvider] = Ref::{
-  val: DefaultChildLimitProvider::{  },
+  val: DefaultChildLimitProvider::{ },
 }
 
 ///|
@@ -37,7 +37,7 @@ fn child_limit_of(
     term = term.next(2)
   }
   let info = child_limit_provider.val.get_info(birth_time, term)
-  { eight_char, gender, forward, info }
+  { eight_char, gender, forward, info, }
 }
 
 ///|

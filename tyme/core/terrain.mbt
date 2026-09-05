@@ -15,13 +15,13 @@ pub struct Terrain {
 
 ///|
 pub fn Terrain::from_index(index : Int) -> Terrain {
-  { loop_tyme: LoopTyme::from_index(terrain_names(), index) }
+  { loop_tyme: LoopTyme::from_index(terrain_names(), index), }
 }
 
 ///|
 pub fn Terrain::from_name(name : String) -> Result[Terrain, String] {
   match LoopTyme::from_name(terrain_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

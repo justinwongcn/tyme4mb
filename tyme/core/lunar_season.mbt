@@ -15,13 +15,13 @@ pub struct LunarSeason {
 
 ///|
 pub fn LunarSeason::from_index(index : Int) -> LunarSeason {
-  { loop_tyme: LoopTyme::from_index(lunar_season_names(), index) }
+  { loop_tyme: LoopTyme::from_index(lunar_season_names(), index), }
 }
 
 ///|
 pub fn LunarSeason::from_name(name : String) -> Result[LunarSeason, String] {
   match LoopTyme::from_name(lunar_season_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

@@ -10,7 +10,7 @@ extend YearUnit with Culture::{get_name}
 
 ///|
 pub fn YearUnit::new(year : Int) -> YearUnit {
-  { abstract_tyme: AbstractTyme::new(), year }
+  { abstract_tyme: AbstractTyme::new(), year, }
 }
 
 ///|

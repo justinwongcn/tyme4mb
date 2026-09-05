@@ -25,7 +25,7 @@ pub fn SolarTerm::from_index(year : Int, index : Int) -> SolarTerm {
   let size = parent.get_size()
   let y = (year * size + index) / size
   let cursory = init_by_year(y, parent.get_index())
-  { loop_tyme: parent, year: y, cursory_julian_day: cursory }
+  { loop_tyme: parent, year: y, cursory_julian_day: cursory, }
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn SolarTerm::from_name(
   match LoopTyme::from_name(solar_term_names(), name) {
     Ok(p) => {
       let cursory = init_by_year(year, p.get_index())
-      Ok({ loop_tyme: p, year, cursory_julian_day: cursory })
+      Ok({ loop_tyme: p, year, cursory_julian_day: cursory, })
     }
     Err(e) => Err(e)
   }

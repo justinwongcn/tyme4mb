@@ -32,7 +32,7 @@ pub extend Phenology with Tyme::{next}
 pub fn Phenology::from_index(year : Int, index : Int) -> Phenology {
   let parent = LoopTyme::from_index(phenology_names(), index)
   let size = parent.get_size()
-  { loop_tyme: parent, year: (year * size + index) / size }
+  { loop_tyme: parent, year: (year * size + index) / size, }
 }
 
 ///|
@@ -41,7 +41,7 @@ pub fn Phenology::from_name(
   name : String,
 ) -> Result[Phenology, String] {
   match LoopTyme::from_name(phenology_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p, year })
+    Ok(p) => Ok({ loop_tyme: p, year, })
     Err(e) => Err(e)
   }
 }

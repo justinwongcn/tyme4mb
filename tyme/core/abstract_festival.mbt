@@ -16,7 +16,7 @@ pub fn AbstractFestival::new(
   event : Event,
   day : DayUnit,
 ) -> AbstractFestival {
-  { index, event, day }
+  { index, event, day, }
 }
 
 ///|

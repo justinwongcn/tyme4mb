@@ -67,7 +67,7 @@ pub fn SolarMonth::from_ym(
   month : Int,
 ) -> Result[SolarMonth, String] {
   match SolarMonth::validate(year, month) {
-    Ok(_) => Ok({ month_unit: MonthUnit::new(YearUnit::new(year), month) })
+    Ok(_) => Ok({ month_unit: MonthUnit::new(YearUnit::new(year), month), })
     Err(e) => Err(e)
   }
 }

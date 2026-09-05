@@ -93,7 +93,7 @@ pub fn RabByungMonth::new(
   if m < 0 {
     m = -m
   }
-  Ok({ month_unit: MonthUnit::new(YearUnit::new(year), m), leap: month < 0 })
+  Ok({ month_unit: MonthUnit::new(YearUnit::new(year), m), leap: month < 0, })
 }
 
 ///|
@@ -122,7 +122,7 @@ pub fn RabByungMonth::get_month(self : RabByungMonth) -> Int {
 pub fn RabByungMonth::get_rab_byung_year(self : RabByungMonth) -> RabByungYear {
   match RabByungYear::from_year(self.get_year()) {
     Ok(y) => y
-    Err(_) => { rab_byung_index: 0, element_index: 0, zodiac_index: 0 }
+    Err(_) => { rab_byung_index: 0, element_index: 0, zodiac_index: 0, }
   }
 }
 

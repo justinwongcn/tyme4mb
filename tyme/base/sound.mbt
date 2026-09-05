@@ -18,13 +18,13 @@ pub struct Sound {
 
 ///|
 pub fn Sound::from_index(index : Int) -> Sound {
-  { loop_tyme: LoopTyme::from_index(sound_names(), index) }
+  { loop_tyme: LoopTyme::from_index(sound_names(), index), }
 }
 
 ///|
 pub fn Sound::from_name(name : String) -> Result[Sound, String] {
   match LoopTyme::from_name(sound_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

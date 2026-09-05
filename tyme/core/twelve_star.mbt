@@ -18,13 +18,13 @@ pub extend TwelveStar with Show::{to_string}
 
 ///|
 pub fn TwelveStar::from_index(index : Int) -> TwelveStar {
-  { loop_tyme: LoopTyme::from_index(twelve_star_names(), index) }
+  { loop_tyme: LoopTyme::from_index(twelve_star_names(), index), }
 }
 
 ///|
 pub fn TwelveStar::from_name(name : String) -> Result[TwelveStar, String] {
   match LoopTyme::from_name(twelve_star_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

@@ -25,7 +25,7 @@ pub fn SixtyCycleDay::new(
   month : SixtyCycleMonth,
   day : SixtyCycle,
 ) -> SixtyCycleDay {
-  { solar_day, month, day }
+  { solar_day, month, day, }
 }
 
 ///|

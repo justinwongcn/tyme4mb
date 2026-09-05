@@ -15,13 +15,13 @@ pub extend Ecliptic with Show::{to_string}
 
 ///|
 pub fn Ecliptic::from_index(index : Int) -> Ecliptic {
-  { loop_tyme: LoopTyme::from_index(ecliptic_names(), index) }
+  { loop_tyme: LoopTyme::from_index(ecliptic_names(), index), }
 }
 
 ///|
 pub fn Ecliptic::from_name(name : String) -> Result[Ecliptic, String] {
   match LoopTyme::from_name(ecliptic_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

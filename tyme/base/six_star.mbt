@@ -12,13 +12,13 @@ pub struct SixStar {
 
 ///|
 pub fn SixStar::from_index(index : Int) -> SixStar {
-  { loop_tyme: LoopTyme::from_index(six_star_names(), index) }
+  { loop_tyme: LoopTyme::from_index(six_star_names(), index), }
 }
 
 ///|
 pub fn SixStar::from_name(name : String) -> Result[SixStar, String] {
   match LoopTyme::from_name(six_star_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

@@ -23,13 +23,13 @@ pub fn Land::get_index(self : Land) -> Int {
 
 ///|
 pub fn Land::from_index(index : Int) -> Land {
-  { loop_tyme: LoopTyme::from_index(land_names(), index) }
+  { loop_tyme: LoopTyme::from_index(land_names(), index), }
 }
 
 ///|
 pub fn Land::from_name(name : String) -> Result[Land, String] {
   match LoopTyme::from_name(land_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

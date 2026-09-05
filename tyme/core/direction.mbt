@@ -23,13 +23,13 @@ pub fn Direction::get_index(self : Direction) -> Int {
 
 ///|
 pub fn Direction::from_index(index : Int) -> Direction {
-  { loop_tyme: LoopTyme::from_index(direction_names(), index) }
+  { loop_tyme: LoopTyme::from_index(direction_names(), index), }
 }
 
 ///|
 pub fn Direction::from_name(name : String) -> Result[Direction, String] {
   match LoopTyme::from_name(direction_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

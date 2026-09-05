@@ -70,13 +70,13 @@ pub struct Taboo {
 
 ///|
 pub fn Taboo::from_index(index : Int) -> Taboo {
-  { loop_tyme: LoopTyme::from_index(taboo_names(), index) }
+  { loop_tyme: LoopTyme::from_index(taboo_names(), index), }
 }
 
 ///|
 pub fn Taboo::from_name(name : String) -> Result[Taboo, String] {
   match LoopTyme::from_name(taboo_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

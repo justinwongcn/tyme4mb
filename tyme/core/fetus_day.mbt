@@ -32,7 +32,7 @@ pub fn FetusDay::new(sixty_cycle : SixtyCycle) -> FetusDay {
     side = @base.In
   }
   let direction = Direction::from_index(index)
-  { fetus_heaven_stem, fetus_earth_branch, side, direction }
+  { fetus_heaven_stem, fetus_earth_branch, side, direction, }
 }
 
 ///|

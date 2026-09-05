@@ -27,7 +27,7 @@ pub fn SolarHalfYear::from_index(
   }
   match SolarYear::from_year(year) {
     Err(e) => Err(e)
-    Ok(y) => Ok({ year: y, index })
+    Ok(y) => Ok({ year: y, index, })
   }
 }
 

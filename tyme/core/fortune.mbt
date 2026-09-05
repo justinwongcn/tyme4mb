@@ -16,7 +16,7 @@ pub fn Fortune::from_child_limit(
   child_limit : ChildLimit,
   index : Int,
 ) -> Fortune {
-  { child_limit, index }
+  { child_limit, index, }
 }
 
 ///|

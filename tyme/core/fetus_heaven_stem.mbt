@@ -15,7 +15,7 @@ pub extend FetusHeavenStem with Culture::{get_name}
 
 ///|
 pub fn FetusHeavenStem::new(index : Int) -> FetusHeavenStem {
-  { loop_tyme: LoopTyme::from_index(fetus_heaven_stem_names(), index) }
+  { loop_tyme: LoopTyme::from_index(fetus_heaven_stem_names(), index), }
 }
 
 ///|

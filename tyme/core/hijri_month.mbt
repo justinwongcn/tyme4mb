@@ -53,7 +53,7 @@ pub fn HijriMonth::from_ym(
   month : Int,
 ) -> Result[HijriMonth, String] {
   match HijriMonth::validate(year, month) {
-    Ok(_) => Ok({ month_unit: MonthUnit::new(YearUnit::new(year), month) })
+    Ok(_) => Ok({ month_unit: MonthUnit::new(YearUnit::new(year), month), })
     Err(e) => Err(e)
   }
 }

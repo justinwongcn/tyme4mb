@@ -40,7 +40,7 @@ pub fn SolarYear::validate(year : Int) -> Result[Unit, String] {
 // from_year 从年构造
 pub fn SolarYear::from_year(year : Int) -> Result[SolarYear, String] {
   match SolarYear::validate(year) {
-    Ok(_) => Ok({ year_unit: YearUnit::new(year) })
+    Ok(_) => Ok({ year_unit: YearUnit::new(year), })
     Err(e) => Err(e)
   }
 }

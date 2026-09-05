@@ -30,7 +30,7 @@ pub fn RabByungElement::from_name(
   name : String,
 ) -> Result[RabByungElement, String] {
   match LoopTyme::from_name(rab_byung_element_names(), name) {
-    Ok(p) => Ok({ element: { loop_tyme: p } })
+    Ok(p) => Ok({ element: { loop_tyme: p, }, })
     Err(e) => Err(e)
   }
 }

@@ -4,7 +4,7 @@ pub struct AbstractTyme {}
 
 ///|
 pub fn AbstractTyme::new() -> AbstractTyme {
-  AbstractTyme::{  }
+  AbstractTyme::{ }
 }
 
 ///|

@@ -26,7 +26,7 @@ pub fn LunarFestival::new(
   event : Event,
   day : LunarDay,
 ) -> LunarFestival {
-  { festival: AbstractFestival::new(index, event, day.day_unit) }
+  { festival: AbstractFestival::new(index, event, day.day_unit), }
 }
 
 ///|

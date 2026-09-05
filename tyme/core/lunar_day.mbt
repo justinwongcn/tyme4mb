@@ -55,7 +55,9 @@ pub fn LunarDay::from_ymd(
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok({ day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day) })
+  Ok({
+    day_unit: DayUnit::new(MonthUnit::new(YearUnit::new(year), month), day),
+  })
 }
 
 ///|
