@@ -15,13 +15,13 @@ pub struct TenStar {
 
 ///|
 pub fn TenStar::from_index(index : Int) -> TenStar {
-  { loop_tyme: LoopTyme::from_index(ten_star_names(), index) }
+  { loop_tyme: LoopTyme::from_index(ten_star_names(), index), }
 }
 
 ///|
 pub fn TenStar::from_name(name : String) -> Result[TenStar, String] {
   match LoopTyme::from_name(ten_star_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

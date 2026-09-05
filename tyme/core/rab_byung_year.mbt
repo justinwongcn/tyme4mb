@@ -40,7 +40,7 @@ pub fn RabByungYear::new(
   if zodiac_index < 0 || zodiac_index >= zodiac_names().length() {
     return Err("illegal zodiac index: " + zodiac_index.to_string())
   }
-  Ok({ rab_byung_index, element_index, zodiac_index })
+  Ok({ rab_byung_index, element_index, zodiac_index, })
 }
 
 ///|

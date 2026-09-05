@@ -16,7 +16,7 @@ pub fn fetus_month_names() -> Array[String] {
 ///|
 // new 从索引构造
 pub fn FetusMonth::new(index : Int) -> FetusMonth {
-  { loop_tyme: LoopTyme::from_index(fetus_month_names(), index) }
+  { loop_tyme: LoopTyme::from_index(fetus_month_names(), index), }
 }
 
 ///|

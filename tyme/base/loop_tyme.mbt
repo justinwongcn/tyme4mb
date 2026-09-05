@@ -72,7 +72,7 @@ pub fn LoopTyme::steps_close_to(self : LoopTyme, target_index : Int) -> Int {
 
 ///|
 pub fn LoopTyme::from_index(names : Array[String], index : Int) -> LoopTyme {
-  let instance = LoopTyme::{ names, index: 0 }
+  let instance = LoopTyme::{ names, index: 0, }
   instance.index = instance.next_index(index)
   instance
 }
@@ -82,7 +82,7 @@ pub fn LoopTyme::from_name(
   names : Array[String],
   name : String,
 ) -> Result[LoopTyme, String] {
-  let instance = LoopTyme::{ names, index: 0 }
+  let instance = LoopTyme::{ names, index: 0, }
   match instance.index_of_name(name) {
     Ok(index) => {
       instance.index = index

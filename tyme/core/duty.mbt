@@ -15,13 +15,13 @@ pub struct Duty {
 
 ///|
 pub fn Duty::from_index(index : Int) -> Duty {
-  { loop_tyme: LoopTyme::from_index(duty_names(), index) }
+  { loop_tyme: LoopTyme::from_index(duty_names(), index), }
 }
 
 ///|
 pub fn Duty::from_name(name : String) -> Result[Duty, String] {
   match LoopTyme::from_name(duty_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

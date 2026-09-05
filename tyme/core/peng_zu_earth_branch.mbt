@@ -20,7 +20,7 @@ pub extend PengZuEarthBranch with Show::{to_string}
 
 ///|
 pub fn PengZuEarthBranch::from_index(index : Int) -> PengZuEarthBranch {
-  { loop_tyme: LoopTyme::from_index(peng_zu_earth_branch_names(), index) }
+  { loop_tyme: LoopTyme::from_index(peng_zu_earth_branch_names(), index), }
 }
 
 ///|
@@ -28,7 +28,7 @@ pub fn PengZuEarthBranch::from_name(
   name : String,
 ) -> Result[PengZuEarthBranch, String] {
   match LoopTyme::from_name(peng_zu_earth_branch_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

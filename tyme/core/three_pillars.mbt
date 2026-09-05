@@ -34,7 +34,7 @@ pub fn ThreePillars::new(
     Err(e) => return Err(e)
     Ok(v) => v
   }
-  Ok({ year: y, month: m, day: d })
+  Ok({ year: y, month: m, day: d, })
 }
 
 ///|
@@ -44,7 +44,7 @@ pub fn ThreePillars::from_sixty_cycle(
   month : SixtyCycle,
   day : SixtyCycle,
 ) -> ThreePillars {
-  { year, month, day }
+  { year, month, day, }
 }
 
 ///|

@@ -41,7 +41,7 @@ pub fn Event::new(name : String, data : String) -> Result[Event, String] {
     Err(e) => return Err(e)
     Ok(_) => ()
   }
-  Ok({ name, data })
+  Ok({ name, data, })
 }
 
 ///|

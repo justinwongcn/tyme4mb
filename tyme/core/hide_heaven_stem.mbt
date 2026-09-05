@@ -14,7 +14,7 @@ pub fn HideHeavenStem::new(
   hide_heaven_stem_type : HideHeavenStemType,
 ) -> Result[HideHeavenStem, String] {
   match HeavenStem::from_name(heaven_stem_name) {
-    Ok(h) => Ok({ heaven_stem: h, hide_heaven_stem_type })
+    Ok(h) => Ok({ heaven_stem: h, hide_heaven_stem_type, })
     Err(e) => Err(e)
   }
 }

@@ -12,13 +12,13 @@ pub struct Beast {
 
 ///|
 pub fn Beast::from_index(index : Int) -> Beast {
-  { loop_tyme: LoopTyme::from_index(beast_names(), index) }
+  { loop_tyme: LoopTyme::from_index(beast_names(), index), }
 }
 
 ///|
 pub fn Beast::from_name(name : String) -> Result[Beast, String] {
   match LoopTyme::from_name(beast_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

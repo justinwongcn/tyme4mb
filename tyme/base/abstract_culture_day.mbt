@@ -10,7 +10,7 @@ pub fn[C] AbstractCultureDay::new(
   culture : C,
   day_index : Int,
 ) -> AbstractCultureDay[C] {
-  { culture, day_index }
+  { culture, day_index, }
 }
 
 ///|

@@ -12,7 +12,7 @@ pub fn HideHeavenStemDay::new(
   o : HideHeavenStem,
   index : Int,
 ) -> HideHeavenStemDay {
-  { abstract_culture_day: AbstractCultureDay::new(o, index) }
+  { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
 ///|

@@ -1,7 +1,7 @@
 ///|
 // eight_char_provider 八字计算接口实现（全局可变，可通过 LunarHour::set_provider 切换）
 pub let eight_char_provider : Ref[&IEightCharProvider] = Ref::{
-  val: DefaultEightCharProvider::{  },
+  val: DefaultEightCharProvider::{ },
 }
 
 ///|
@@ -35,7 +35,7 @@ pub fn EightChar::new(
     Ok(v) => v
     Err(e) => return Err(e)
   }
-  Ok({ three_pillars: t, hour: h })
+  Ok({ three_pillars: t, hour: h, })
 }
 
 ///|
@@ -46,7 +46,7 @@ pub fn EightChar::from_sixty_cycle(
   day : SixtyCycle,
   hour : SixtyCycle,
 ) -> EightChar {
-  { three_pillars: ThreePillars::from_sixty_cycle(year, month, day), hour }
+  { three_pillars: ThreePillars::from_sixty_cycle(year, month, day), hour, }
 }
 
 ///|

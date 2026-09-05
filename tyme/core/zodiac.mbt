@@ -21,13 +21,13 @@ pub extend Zodiac with Show::{to_string}
 
 ///|
 pub fn Zodiac::from_index(index : Int) -> Zodiac {
-  { loop_tyme: LoopTyme::from_index(zodiac_names(), index) }
+  { loop_tyme: LoopTyme::from_index(zodiac_names(), index), }
 }
 
 ///|
 pub fn Zodiac::from_name(name : String) -> Result[Zodiac, String] {
   match LoopTyme::from_name(zodiac_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

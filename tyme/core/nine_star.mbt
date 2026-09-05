@@ -21,13 +21,13 @@ pub extend NineStar with Culture::{get_name}
 
 ///|
 pub fn NineStar::from_index(index : Int) -> NineStar {
-  { loop_tyme: LoopTyme::from_index(nine_star_names(), index) }
+  { loop_tyme: LoopTyme::from_index(nine_star_names(), index), }
 }
 
 ///|
 pub fn NineStar::from_name(name : String) -> Result[NineStar, String] {
   match LoopTyme::from_name(nine_star_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

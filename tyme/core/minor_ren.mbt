@@ -15,13 +15,13 @@ pub extend MinorRen with Tyme::{next}
 
 ///|
 pub fn MinorRen::from_index(index : Int) -> MinorRen {
-  { loop_tyme: LoopTyme::from_index(minor_ren_names(), index) }
+  { loop_tyme: LoopTyme::from_index(minor_ren_names(), index), }
 }
 
 ///|
 pub fn MinorRen::from_name(name : String) -> Result[MinorRen, String] {
   match LoopTyme::from_name(minor_ren_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

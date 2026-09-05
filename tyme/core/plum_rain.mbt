@@ -15,13 +15,13 @@ pub extend PlumRain with Culture::{get_name}
 
 ///|
 pub fn PlumRain::from_index(index : Int) -> PlumRain {
-  { loop_tyme: LoopTyme::from_index(plum_rain_names(), index) }
+  { loop_tyme: LoopTyme::from_index(plum_rain_names(), index), }
 }
 
 ///|
 pub fn PlumRain::from_name(name : String) -> Result[PlumRain, String] {
   match LoopTyme::from_name(plum_rain_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

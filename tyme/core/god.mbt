@@ -51,13 +51,13 @@ pub struct God {
 
 ///|
 pub fn God::from_index(index : Int) -> God {
-  { loop_tyme: LoopTyme::from_index(god_names(), index) }
+  { loop_tyme: LoopTyme::from_index(god_names(), index), }
 }
 
 ///|
 pub fn God::from_name(name : String) -> Result[God, String] {
   match LoopTyme::from_name(god_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

@@ -18,13 +18,13 @@ extend Twenty with Show::{to_string}
 
 ///|
 pub fn Twenty::from_index(index : Int) -> Twenty {
-  { loop_tyme: LoopTyme::from_index(twenty_names(), index) }
+  { loop_tyme: LoopTyme::from_index(twenty_names(), index), }
 }
 
 ///|
 pub fn Twenty::from_name(name : String) -> Result[Twenty, String] {
   match LoopTyme::from_name(twenty_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

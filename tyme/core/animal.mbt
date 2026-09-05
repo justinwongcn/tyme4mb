@@ -16,13 +16,13 @@ pub struct Animal {
 
 ///|
 pub fn Animal::from_index(index : Int) -> Animal {
-  { loop_tyme: LoopTyme::from_index(animal_names(), index) }
+  { loop_tyme: LoopTyme::from_index(animal_names(), index), }
 }
 
 ///|
 pub fn Animal::from_name(name : String) -> Result[Animal, String] {
   match LoopTyme::from_name(animal_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

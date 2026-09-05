@@ -7,7 +7,7 @@ pub struct PhaseDay {
 ///|
 // new 构造
 pub fn PhaseDay::new(o : Phase, index : Int) -> PhaseDay {
-  { day: AbstractCultureDay::new(o, index) }
+  { day: AbstractCultureDay::new(o, index), }
 }
 
 ///|

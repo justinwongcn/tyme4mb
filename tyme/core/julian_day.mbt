@@ -19,7 +19,7 @@ extend JulianDay with Tyme::{next}
 ///|
 // from_julian_day 从儒略日构造
 pub fn JulianDay::from_julian_day(day : Double) -> JulianDay {
-  { abstract_tyme: AbstractTyme::new(), day }
+  { abstract_tyme: AbstractTyme::new(), day, }
 }
 
 ///|

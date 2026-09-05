@@ -58,7 +58,7 @@ pub fn LunarMonth::from_ym(
     leap = true
     m = -m
   }
-  Ok({ month_unit: MonthUnit::new(YearUnit::new(year), m), leap })
+  Ok({ month_unit: MonthUnit::new(YearUnit::new(year), m), leap, })
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn LunarMonth::get_month(self : LunarMonth) -> Int {
 pub fn LunarMonth::get_lunar_year(self : LunarMonth) -> LunarYear {
   match LunarYear::from_year(self.get_year()) {
     Ok(y) => y
-    Err(_) => { year_unit: YearUnit::new(self.get_year()) }
+    Err(_) => { year_unit: YearUnit::new(self.get_year()), }
   }
 }
 

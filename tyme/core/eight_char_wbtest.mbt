@@ -63,7 +63,7 @@ test "eight_char_3" {
 ///|
 test "eight_char_4" {
   // 通过 ChildLimit::set_provider 切换全局童限实现为 LunarSect1ChildLimitProvider
-  ChildLimit::set_provider(LunarSect1ChildLimitProvider::{  })
+  ChildLimit::set_provider(LunarSect1ChildLimitProvider::{ })
   let birth_time = SolarTime::from_ymdhms(1994, 10, 17, 1, 0, 0).unwrap()
   let child_limit = ChildLimit::from_solar_time(birth_time, Man)
   expect_eq(
@@ -81,7 +81,7 @@ test "eight_char_4" {
     "ChildLimit.GetStartDecadeFortune()...GetName() (LunarSect1)",
   )
   // 恢复默认实现
-  ChildLimit::set_provider(DefaultChildLimitProvider::{  })
+  ChildLimit::set_provider(DefaultChildLimitProvider::{ })
 }
 
 ///|

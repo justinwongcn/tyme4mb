@@ -55,13 +55,13 @@ pub fn EarthBranch::steps_close_to(
 
 ///|
 pub fn EarthBranch::from_index(index : Int) -> EarthBranch {
-  { loop_tyme: LoopTyme::from_index(earth_branch_names(), index) }
+  { loop_tyme: LoopTyme::from_index(earth_branch_names(), index), }
 }
 
 ///|
 pub fn EarthBranch::from_name(name : String) -> Result[EarthBranch, String] {
   match LoopTyme::from_name(earth_branch_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }
@@ -207,6 +207,50 @@ pub fn EarthBranch::combine(
 pub fn EarthBranch::get_po(self : EarthBranch) -> EarthBranch {
   let a = [9, 4, 11, 6, 1, 8, 3, 10, 5, 0, 7, 2]
   EarthBranch::from_index(a[self.loop_tyme.get_index()])
+}
+
+///|
+// get_jue 地支绝（子巳、亥午、寅酉、卯申），土支不参与
+pub fn EarthBranch::get_jue(self : EarthBranch) -> EarthBranch? {
+  let a = [5, -1, 9, 8, -1, 0, 11, -1, 3, 2, -1, 6]
+  let n = a[self.loop_tyme.get_index()]
+  if n < 0 {
+    None
+  } else {
+    Some(EarthBranch::from_index(n))
+  }
+}
+
+///|
+// get_xing 地支刑（三刑与自刑）
+pub fn EarthBranch::get_xing(self : EarthBranch) -> Array[EarthBranch] {
+  match self.loop_tyme.get_index() {
+    0 => [EarthBranch::from_index(3)]
+    1 => [EarthBranch::from_index(7), EarthBranch::from_index(10)]
+    2 => [EarthBranch::from_index(5), EarthBranch::from_index(8)]
+    3 => [EarthBranch::from_index(0)]
+    4 => [EarthBranch::from_index(4)]
+    5 => [EarthBranch::from_index(2), EarthBranch::from_index(8)]
+    6 => [EarthBranch::from_index(6)]
+    7 => [EarthBranch::from_index(1), EarthBranch::from_index(10)]
+    8 => [EarthBranch::from_index(2), EarthBranch::from_index(5)]
+    9 => [EarthBranch::from_index(9)]
+    10 => [EarthBranch::from_index(1), EarthBranch::from_index(7)]
+    11 => [EarthBranch::from_index(11)]
+    _ => []
+  }
+}
+
+///|
+// get_an_he 地支暗合（寅丑、卯申、午亥）
+pub fn EarthBranch::get_an_he(self : EarthBranch) -> EarthBranch? {
+  let a = [-1, 2, 1, 8, -1, -1, 11, -1, 3, -1, -1, 6]
+  let n = a[self.loop_tyme.get_index()]
+  if n < 0 {
+    None
+  } else {
+    Some(EarthBranch::from_index(n))
+  }
 }
 
 ///|

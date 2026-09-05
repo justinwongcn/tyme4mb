@@ -23,7 +23,7 @@ pub fn WeekUnit::new(
   index : Int,
   start : Int,
 ) -> WeekUnit {
-  { month_unit, index, start }
+  { month_unit, index, start, }
 }
 
 ///|

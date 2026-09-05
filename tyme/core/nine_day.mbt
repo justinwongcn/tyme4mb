@@ -6,7 +6,7 @@ pub struct NineDay {
 
 ///|
 pub fn NineDay::new(o : Nine, index : Int) -> NineDay {
-  { abstract_culture_day: AbstractCultureDay::new(o, index) }
+  { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
 ///|

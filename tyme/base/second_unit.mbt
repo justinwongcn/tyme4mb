@@ -17,7 +17,7 @@ pub fn SecondUnit::new(
   minute : Int,
   second : Int,
 ) -> SecondUnit {
-  { day_unit, hour, minute, second }
+  { day_unit, hour, minute, second, }
 }
 
 ///|

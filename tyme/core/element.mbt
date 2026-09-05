@@ -26,13 +26,13 @@ pub fn Element::get_index(self : Element) -> Int {
 
 ///|
 pub fn Element::from_index(index : Int) -> Element {
-  { loop_tyme: LoopTyme::from_index(element_names(), index) }
+  { loop_tyme: LoopTyme::from_index(element_names(), index), }
 }
 
 ///|
 pub fn Element::from_name(name : String) -> Result[Element, String] {
   match LoopTyme::from_name(element_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

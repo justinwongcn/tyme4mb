@@ -15,13 +15,13 @@ pub extend Week with Tyme::{next}
 
 ///|
 pub fn Week::from_index(index : Int) -> Week {
-  { loop_tyme: LoopTyme::from_index(week_names(), index) }
+  { loop_tyme: LoopTyme::from_index(week_names(), index), }
 }
 
 ///|
 pub fn Week::from_name(name : String) -> Result[Week, String] {
   match LoopTyme::from_name(week_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

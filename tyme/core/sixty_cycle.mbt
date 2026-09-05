@@ -55,13 +55,13 @@ pub fn SixtyCycle::steps_close_to(self : SixtyCycle, target_index : Int) -> Int 
 
 ///|
 pub fn SixtyCycle::from_index(index : Int) -> SixtyCycle {
-  { loop_tyme: LoopTyme::from_index(sixty_cycle_names(), index) }
+  { loop_tyme: LoopTyme::from_index(sixty_cycle_names(), index), }
 }
 
 ///|
 pub fn SixtyCycle::from_name(name : String) -> Result[SixtyCycle, String] {
   match LoopTyme::from_name(sixty_cycle_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

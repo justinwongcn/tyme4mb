@@ -405,6 +405,7 @@ pub fn EarthBranch::combine(Self, Self) -> Element?
 pub fn EarthBranch::equals(Self, Self) -> Bool
 pub fn EarthBranch::from_index(Int) -> Self
 pub fn EarthBranch::from_name(String) -> Result[Self, String]
+pub fn EarthBranch::get_an_he(Self) -> Self?
 pub fn EarthBranch::get_combine(Self) -> Self
 pub fn EarthBranch::get_direction(Self) -> Direction
 pub fn EarthBranch::get_element(Self) -> Element
@@ -414,6 +415,7 @@ pub fn EarthBranch::get_hide_heaven_stem_middle(Self) -> HeavenStem?
 pub fn EarthBranch::get_hide_heaven_stem_residual(Self) -> HeavenStem?
 pub fn EarthBranch::get_hide_heaven_stems(Self) -> Array[HideHeavenStem]
 pub fn EarthBranch::get_index(Self) -> Int
+pub fn EarthBranch::get_jue(Self) -> Self?
 pub fn EarthBranch::get_ominous(Self) -> Direction
 pub fn EarthBranch::get_opposite(Self) -> Self
 pub fn EarthBranch::get_peng_zu_earth_branch(Self) -> PengZuEarthBranch
@@ -422,6 +424,7 @@ pub fn EarthBranch::get_san_he_element(Self) -> Element
 pub fn EarthBranch::get_san_hui_direction(Self) -> Direction
 pub fn EarthBranch::get_san_hui_element(Self) -> Element
 pub fn EarthBranch::get_size(Self) -> Int
+pub fn EarthBranch::get_xing(Self) -> Array[Self]
 pub fn EarthBranch::get_yin_yang(Self) -> @base.YinYang
 pub fn EarthBranch::get_zodiac(Self) -> Zodiac
 pub fn EarthBranch::steps_back_to(Self, Int) -> Int

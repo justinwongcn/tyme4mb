@@ -12,13 +12,13 @@ pub struct Luck {
 
 ///|
 pub fn Luck::from_index(index : Int) -> Luck {
-  { loop_tyme: LoopTyme::from_index(luck_names(), index) }
+  { loop_tyme: LoopTyme::from_index(luck_names(), index), }
 }
 
 ///|
 pub fn Luck::from_name(name : String) -> Result[Luck, String] {
   match LoopTyme::from_name(luck_names(), name) {
-    Ok(p) => Ok({ loop_tyme: p })
+    Ok(p) => Ok({ loop_tyme: p, })
     Err(e) => Err(e)
   }
 }

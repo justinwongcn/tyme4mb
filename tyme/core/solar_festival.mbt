@@ -26,7 +26,7 @@ pub fn SolarFestival::new(
   event : Event,
   day : SolarDay,
 ) -> SolarFestival {
-  { festival: AbstractFestival::new(index, event, day.day_unit) }
+  { festival: AbstractFestival::new(index, event, day.day_unit), }
 }
 
 ///|

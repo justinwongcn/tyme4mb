@@ -15,7 +15,7 @@ pub extend FetusEarthBranch with Culture::{get_name}
 
 ///|
 pub fn FetusEarthBranch::new(index : Int) -> FetusEarthBranch {
-  { loop_tyme: LoopTyme::from_index(fetus_earth_branch_names(), index) }
+  { loop_tyme: LoopTyme::from_index(fetus_earth_branch_names(), index), }
 }
 
 ///|

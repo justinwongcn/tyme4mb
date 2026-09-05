@@ -10,7 +10,7 @@ extend MonthUnit with Culture::{get_name}
 
 ///|
 pub fn MonthUnit::new(year_unit : YearUnit, month : Int) -> MonthUnit {
-  { year_unit, month }
+  { year_unit, month, }
 }
 
 ///|

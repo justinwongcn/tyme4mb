@@ -18,7 +18,7 @@ pub fn numbers() -> Array[String] {
 // new 从农历年构造
 pub fn KitchenGodSteed::new(lunar_year : Int) -> KitchenGodSteed {
   let lunar_day = LunarDay::from_ymd(lunar_year, 1, 1).unwrap()
-  { first_day_sixty_cycle: lunar_day.get_sixty_cycle() }
+  { first_day_sixty_cycle: lunar_day.get_sixty_cycle(), }
 }
 
 ///|

@@ -24,7 +24,7 @@ pub fn EclipticHideHeavenStemDay::new(
   angle_in_sector : Double,
   sector_index : Int,
 ) -> EclipticHideHeavenStemDay {
-  { hide_heaven_stem, month_lon, lon_offset, angle_in_sector, sector_index }
+  { hide_heaven_stem, month_lon, lon_offset, angle_in_sector, sector_index, }
 }
 
 ///|

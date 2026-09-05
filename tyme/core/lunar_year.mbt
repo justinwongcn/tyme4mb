@@ -88,7 +88,7 @@ let lunar_year_leap : Array[Array[Int]] = build_lunar_year_leap()
 // from_year 从年构造
 pub fn LunarYear::from_year(year : Int) -> Result[LunarYear, String] {
   match LunarYear::validate(year) {
-    Ok(_) => Ok({ year_unit: YearUnit::new(year) })
+    Ok(_) => Ok({ year_unit: YearUnit::new(year), })
     Err(e) => Err(e)
   }
 }

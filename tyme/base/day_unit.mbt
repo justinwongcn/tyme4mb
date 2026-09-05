@@ -13,7 +13,7 @@ pub extend DayUnit with Show::{to_string}
 
 ///|
 pub fn DayUnit::new(month_unit : MonthUnit, day : Int) -> DayUnit {
-  { month_unit, day }
+  { month_unit, day, }
 }
 
 ///|

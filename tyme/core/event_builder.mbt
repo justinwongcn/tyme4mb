@@ -8,13 +8,13 @@ pub struct EventBuilder {
 ///|
 // new 事件构造器
 pub fn EventBuilder::new() -> EventBuilder {
-  { name: "", data: "@_____000" }
+  { name: "", data: "@_____000", }
 }
 
 ///|
 // name 设置事件名称
 pub fn EventBuilder::name(self : EventBuilder, name : String) -> EventBuilder {
-  { name, data: self.data }
+  { name, data: self.data, }
 }
 
 ///|
@@ -141,7 +141,7 @@ pub fn EventBuilder::start_year(
       data[9 - i:].to_owned()
     n = n / size
   }
-  { name: self.name, data }
+  { name: self.name, data, }
 }
 
 ///|
