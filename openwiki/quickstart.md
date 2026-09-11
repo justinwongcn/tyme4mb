@@ -17,7 +17,7 @@ description: Tyme4MB 项目入门指南，包含核心概念、快速上手和�
 `tyme4mb` 是一个 MoonBit 库，实现对**中国传统历法与时间体系**的完整计算能力。涵盖公历、农历、回历、干支、八字、节气、神煞、宜忌、童限/小运等模块。
 
 - **包名**：`tyme`
-- **版本**：`0.1.0`
+- **版本**：`0.2.3`
 - **依赖**：`moonbitlang/core/math`（用于天文计算中的取整运算）
 - **输出**：WASM 运行时库（见 `_build/wasm/`）
 
@@ -52,7 +52,7 @@ description: Tyme4MB 项目入门指南，包含核心概念、快速上手和�
 
 ```bash
 # 使用 MoonBit 工具链
-mbt build tyme
+moon build
 ```
 
 构建产物位于 `_build/`，包括 `packages.json` 和 WASM 二进制。
@@ -158,6 +158,11 @@ mbt test tyme/xref_all_wbtest.mbt
 - [领域概念 - 干支系统](./domain-concepts/干支系统.md)
 - [领域概念 - 神煞与宜忌](./domain-concepts/神煞与宜忌.md)
 - [领域概念 - 童限](./domain-concepts/童限.md)
+- [源码地图](./source-map.md)
+- [工作流 - 八字计算](./workflows/八字计算.md)
+- [工作流 - 历法转换](./workflows/历法转换.md)
+- [测试指南](./testing.md)
+- [运维手册](./operations/runbook.md)-concepts/童限.md)
 - [源码地图](./source-map.md)
 - [工作流 - 八字计算](./workflows/八字计算.md)
 - [工作流 - 历法转换](./workflows/历法转换.md)

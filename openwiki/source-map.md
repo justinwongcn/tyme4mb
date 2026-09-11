@@ -80,20 +80,21 @@ description: 完整的文件索引、模块依赖关系和代码统计
 | `lunar_sect2_child_limit_provider.mbt` | 23 | 农历派系2童限计算 |
 | `lunar_sect2_eight_char_provider.mbt` | 18 | 农历派系2八字计算 |
 
-### 干支系统（10个文件）
+### 干支系统（14个文件）
 
 | 文件 | 行数 | 说明 |
 |------|------|------|
-| `sixty_cycle.mbt` | 109 | 六十甲子核心 |
-| `sixty_cycle_day.mbt` | 206 | 六十甲子日 |
-| `sixty_cycle_month.mbt` | 139 | 六十甲子月 |
-| `sixty_cycle_year.mbt` | 112 | 六十甲子年 |
-| `sixty_cycle_hour.mbt` | 169 | 六十甲子时 |
-| `heaven_stem.mbt` | 160 | 天干 |
-| `earth_branch.mbt` | 178 | 地支 |
-| `hide_heaven_stem.mbt` | 47 | 藏干（天干） |
-| `hide_heaven_stem_day.mbt` | 24 | 藏干日 |
-| `hide_heaven_stem_type.mbt` | 30 | 藏干类型 |
+| `sixty_cycle.mbt` | 3643 | 六十甲子核心 |
+| `sixty_cycle_day.mbt` | 5002 | 六十甲子日 |
+| `sixty_cycle_month.mbt` | 3246 | 六十甲子月 |
+| `sixty_cycle_year.mbt` | 2662 | 六十甲子年 |
+| `sixty_cycle_hour.mbt` | 4835 | 六十甲子时 |
+| `heaven_stem.mbt` | 5647 | 天干 |
+| `earth_branch.mbt` | 8355 | 地支（含六冲/六合/六害/六破/三合/三会等关系） |
+| `hide_heaven_stem.mbt` | 1331 | 藏干（天干） |
+| `hide_heaven_stem_day.mbt` | 1200 | 藏干日（真黄经人元司令分野） |
+| `hide_heaven_stem_type.mbt` | 784 | 藏干类型 |
+| `hide_heaven_stem_ecliptic.mbt` | 7073 | 真黄经人元司令分野（v0.2.2新增） |
 
 ### 八字命理（12个文件）
 
@@ -112,16 +113,22 @@ description: 完整的文件索引、模块依赖关系和代码统计
 | `default_child_limit_provider.mbt` | 33 | 默认童限提供者 |
 | `china95_child_limit_provider.mbt` | 35 | 中国95童限方案 |
 
-### 神煞宜忌（6个文件）
+### 神煞宜忌（11个文件）
 
 | 文件 | 行数 | 说明 |
 |------|------|------|
-| `god.mbt` | 131 | 神煞（130种） |
-| `taboo.mbt` | 192 | 宜忌（每日/时辰） |
-| `event.mbt` | 266 | 事件（自定义节日等） |
-| `event_builder.mbt` | 138 | 事件构建器 |
-| `event_manager.mbt` | 41 | 事件管理器 |
-| `event_type.mbt` | 48 | 事件类型枚举 |
+| `god.mbt` | 21693 | 神煞（130种） |
+| `shensha.mbt` | 9409 | 神煞核心 |
+| `shensha_branch.mbt` | 6726 | 地支神煞 |
+| `shensha_month.mbt` | 5665 | 月柱神煞 |
+| `shensha_pillar.mbt` | 4581 | 四柱神煞 |
+| `shensha_stem.mbt` | 8721 | 天干神煞 |
+| `shensha_special.mbt` | 3661 | 特殊神煞 |
+| `taboo.mbt` | 45725 | 宜忌（每日/时辰） |
+| `event.mbt` | 7029 | 事件（自定义节日等） |
+| `event_builder.mbt` | 3378 | 事件构建器 |
+| `event_manager.mbt` | 3264 | 事件管理器 |
+| `event_type.mbt` | 1030 | 事件类型枚举 |
 
 ### 其他命理学概念（25+个文件）
 
@@ -217,6 +224,8 @@ description: 完整的文件索引、模块依赖关系和代码统计
 
 时间系统层
 ├── solar_*.mbt → 基础层
+├── solar_day_cross.mbt / solar_time_cross.mbt → 跨域（v0.2.2拆分）
+├── true_solar_time.mbt → 天文算法（v0.2.2新增）
 ├── lunar_*.mbt → 基础层 + solar_term
 ├── hijri_*.mbt → 基础层
 └── sixty_cycle*.mbt → 基础层
@@ -230,17 +239,13 @@ description: 完整的文件索引、模块依赖关系和代码统计
 
 神煞层
 ├── god.mbt → lunar_day, sixty_cycle
+├── shensha*.mbt → 扩展神煞表（v0.2.2新增）
 ├── taboo.mbt → lunar_day, sixty_cycle
 ├── event*.mbt → 独立
 └── kitchen_god_steed.mbt → 农历年初一
 
 工具层
 ├── shou_xing_util.mbt → 所有时间类型
-└── legal_holiday.mbt → solar_day
-```├── event*.mbt → 独立
-└── kitchen_god_steed.mbt → 农历年初一
-
-工具层
-├── shou_xing_util.mbt → 所有时间类型
+├── hide_heaven_stem_ecliptic.mbt → 真黄经人元司令分野（v0.2.2新增）
 └── legal_holiday.mbt → solar_day
 ```
