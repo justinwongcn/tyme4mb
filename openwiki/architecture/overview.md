@@ -152,6 +152,8 @@ pub struct SixtyCycle {
 | 干支 | `sixty_cycle*.mbt` | 六十甲子循环，支持年/月/日/时四柱 |
 | 八字 | `eight_char.mbt` | 从农历时辰推导四柱，含胎元、命宫、身宫、纳音 |
 | 宜忌 | `taboo.mbt` | 基于十六进制编码表的每日/时辰宜忌查询 |
+| 地支关系 | `earth_branch.mbt` | 六合、六冲、六害、六破、三合局、三会局、刑、暗合、绝等关系查询 |
+| 七煞 | `shensha*.mbt` | 神煞扩展（年/月/日柱/时柱专用表） |
 | 神煞 | `god.mbt` | 130 种神煞名称及每日吉凶查询（吉神0-59，凶神60-129） |
 | 童限 | `child_limit*.mbt` | 出生时刻到起运时刻的时长计算 |
 | 小运/大运 | `fortune.mbt`, `decade_fortune.mbt` | 基于童限推演各年龄段运势 |
@@ -194,3 +196,5 @@ pub struct SixtyCycle {
 6. **新增强类型**：新增了 `DecadeFortune`（大运）、`KitchenGodSteed`（灶马头）、`MinorRen`（小六壬）、`SixStar`（六曜）、`Sixty`（三元）等命理学概念。
 7. **真太阳时反推**：`EightChar::get_solar_times()` 方法支持根据八字反推可能的公历时刻列表（1-9999年范围）。
 8. **三柱反推**：`ThreePillars::get_solar_days()` 方法支持根据三柱反推公历日期。
+9. **真太阳时扩展**：v0.2.2 新增均时差、太阳视赤经、太阳赤纬天文函数，以及童限双轨（真太阳时/平太阳时）和太阳正午/日出日落计算。
+10. **地支关系扩展**：v0.2.3 新增六破 `get_po()`、三合局五行 `get_san_he_element()`、三会方局五行与方位 `get_san_hui_element()` / `get_san_hui_direction()`。
