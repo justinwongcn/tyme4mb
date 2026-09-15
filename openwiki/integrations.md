@@ -1,12 +1,6 @@
 ---
-type: "参考"
-title: "集成点"
-openwiki_generated: true
----
-
----
+type: 参考
 title: 集成点
-type: page
 description: API 参考、浏览器/服务端集成示例和错误处理指南
 ---
 
@@ -56,7 +50,7 @@ solar_day.get_lunar_day() -> LunarDay
 solar_day.get_sixty_cycle_day() -> SixtyCycleDay
 
 // 公历 → 节气
-solar_day.get_solar_term() -> SolarTerm
+solar_day.get_term() -> SolarTerm
 
 // 公历 → 星期
 solar_day.get_weekday() -> Int  // 0=周日, 6=周六
@@ -82,8 +76,9 @@ cycle.get_ten() -> Ten             // 旬
 #### 八字查询
 
 ```moonbit
-// 八字构造（通过 Provider）
-eight_char_provider.get_eight_char(lunar_hour: LunarHour) -> EightChar
+// 八字构造（通过 SolarTime 直接获取）
+let solar_time = SolarTime::from_ymdhms(year, month, day, hour, minute, second)?
+let eight_char = solar_time.get_lunar_hour()?.get_eight_char()
 
 // 八字信息
 eight_char.get_year() -> SixtyCycle     // 年柱
@@ -97,8 +92,9 @@ eight_char.get_life_palace() -> SixtyCycle     // 命宫
 #### 命理查询
 
 ```moonbit
-// 童限
-child_limit_provider.get_info(solar_time: SolarTime, solar_term: SolarTerm) -> ChildLimitInfo
+// 童限（支持真太阳时，v0.2.2 新增）
+ChildLimit::from_solar_time(solar_time: SolarTime, gender: Gender) -> ChildLimit
+ChildLimit::from_true_solar_time(solar_time: SolarTime, gender: Gender, longitude: Float) -> ChildLimit
 
 // 小运
 fortune.get_age() -> Int
@@ -136,7 +132,7 @@ import init from './tyme_wasm.js';
 
 async function initModule() {
   const wasm = await init('./tyme_wasm.wasm');
-  
+
   // 调用函数
   const solarDay = wasm.SolarDay.from_ymd(2026, 8, 3);
   const lunarDay = solarDay.get_lunar_day();
@@ -183,7 +179,7 @@ async def get_lunar_date():
     store = Store()
     module = Module(store.engine, open('tyme_wasm.wasm', 'rb').read())
     instance = Instance(store, module, [])
-    
+
     # 调用 WASM 函数
     # ...
 ```
@@ -209,7 +205,7 @@ import 'package:tyme4mb/tyme4mb.dart';
 
 void main() async {
   await Tyme.init();
-  
+
   final solar = SolarDay.fromYmd(2026, 8, 3);
   final lunar = solar.getLunarDay();
 }
@@ -261,7 +257,7 @@ fn get_solar_festivals(year: Int) -> Array[SolarFestival] {
 // 八字排盘 API
 fn get_bazi(solar_time: SolarTime) -> Result[EightChar, String] {
   let lunar_hour = solar_time.get_lunar_hour()?;
-  Ok(eight_char_provider.get_eight_char(lunar_hour))
+  Ok(lunar_hour.get_eight_char())
 }
 
 // 童限计算 API
@@ -299,13 +295,13 @@ fn calculate_bazi(
 ) -> Result[EightChar, String] {
   // 1. 构造公历时间（含真太阳时）
   let solar_time = SolarTime::from_ymdhms(year, month, day, hour, minute, second)?
-  
+
   // 2. 转换为农历时辰
   let lunar_hour = solar_time.get_lunar_hour()?
-  
+
   // 3. 计算八字
-  let eight_char = eight_char_provider.get_eight_char(lunar_hour)
-  
+  let eight_char = lunar_hour.get_eight_char()
+
   // 4. 返回结果
   Ok(eight_char)
 }

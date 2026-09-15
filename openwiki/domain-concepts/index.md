@@ -1,5 +1,5 @@
 # 文件
 
-- [干支系统 / GanZhi System](%E5%B9%B2%E6%94%AF%E7%B3%BB%E7%BB%9F.md)
+- [干支系统 / GanZhi System](%E5%B9%B2%E6%94%AF%E7%B3%BB%E7%BB%9F.md) - 天干、地支、六十甲子的完整说明，包括六冲、六合、六害、六破、三刑、三合局、三会方等关系
 - [神煞与宜忌 / Gods and Taboos](%E7%A5%9E%E7%85%9E%E4%B8%8E%E5%AE%9C%E5%BF%8C.md)
-- [童限 / Child Limit](%E7%AB%A5%E9%99%90.md)
+- [童限 / Child Limit](%E7%AB%A5%E9%99%90.md) - 童限计算方法、流派选择、真太阳时支持
