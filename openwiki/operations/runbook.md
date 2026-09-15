@@ -1,12 +1,6 @@
 ---
-type: "参考"
-title: "运维手册"
-openwiki_generated: true
----
-
----
+type: 参考
 title: 运维手册
-type: page
 description: 构建流程、CI/CD 配置、版本管理和故障排查指南
 ---
 
@@ -21,22 +15,24 @@ description: 构建流程、CI/CD 配置、版本管理和故障排查指南
 cd <project-root>
 
 # 构建库
-moon build tyme
+moon build
+
+# 运行测试
+moon test
 
 # 构建产物
 # - _build/packages.json  # 包元数据
 # - _build/wasm/          # WASM 二进制
-# - _build/tyme.mbt     # 编译后的 MoonBit 文件
 ```
 
 ### 开发构建
 
 ```bash
 # 监听模式（文件变更自动重新构建）
-moon build tyme --watch
+moon build --watch
 
 # 生成调试信息
-moon build tyme --debug
+moon build --debug
 ```
 
 ## CI/CD 配置
@@ -98,15 +94,16 @@ jobs:
 
 ```
 name = "justinwongcn/tyme4mb"
-version = "0.1.0"
+version = "0.2.3"
 ```
 
 ### 发布流程
 
 1. 更新 `moon.mod` 版本号
-2. 运行完整测试：`moon test tyme`
-3. 提交变更并推送
-4. GitHub Actions 自动创建 PR 更新文档
+2. 更新 `CHANGELOG.md`
+3. 运行完整测试：`moon test`
+4. 提交变更并推送
+5. GitHub Actions 自动创建 PR 更新文档
 
 ## 依赖管理
 
@@ -169,7 +166,7 @@ import tyme.solar_term.{SolarTerm}
 **排查步骤**：
 1. 检查 MoonBit 工具链版本：`moon --version`
 2. 清理构建缓存：`rm -rf _build/`
-3. 重新构建：`moon build tyme`
+3. 重新构建：`moon build`
 
 ### 测试失败
 
@@ -180,7 +177,7 @@ import tyme.solar_term.{SolarTerm}
 2. 检查测试数据是否被修改
 3. 运行单个测试文件定位问题：
    ```bash
-   moon test tyme/xref_all_wbtest.mbt --verbose
+   moon test api_test/test_calendar.mbt --verbose
    ```
 
 ### 文档未更新
@@ -198,18 +195,12 @@ import tyme.solar_term.{SolarTerm}
 
 本项目采用预计算策略优化性能：
 - 节气时刻：运行时计算公式（~250行）
-- 农历闰月：内联压缩表（避免运行时计算）
-- 宜忌神煞：预编码十六进制表（O(1) 查询）
+- 农历闰月：64进制压缩表（查表 O(1)）
+- 宜忌神煞：十六进制位图编码（查表 O(1)）
 
-### WASM 优化
+### 缓存建议
 
-构建时启用 WASM 优化：
-```bash
-moon build tyme --release
-```
-
-## 安全注意事项
-
-1. **API 密钥**：OpenRouter 和 LangSmith 密钥存储在 GitHub Secrets 中，不应硬编码
-2. **数据完整性**：农历闰月编码和宜忌表经过严格测试，不应手动修改
-3. **版本锁定**：使用 `moon-lock` 文件锁定依赖版本
+建议对以下数据进行缓存：
+- 节气时刻（变化频率低）
+- 农历闰月表（变化频率极低）
+- 宜忌神煞表（变化频率极低）

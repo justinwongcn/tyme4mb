@@ -1,12 +1,6 @@
 ---
-type: "参考"
-title: "架构概览"
-openwiki_generated: true
----
-
----
+type: 参考
 title: 架构概览
-type: page
 description: Tyme4MB 系统架构设计，包括层次结构、核心抽象和模块说明
 ---
 
@@ -36,23 +30,26 @@ description: Tyme4MB 系统架构设计，包括层次结构、核心抽象和�
 └──────────────────────┬──────────────────────────────┘
                        │ 调用
 ┌──────────────────────▼──────────────────────────────┐
-│              领域层：时间计算                          │
-│  Solar/Lunar/Hijri 日历转换                           │
+│              领域层：tyme/core                        │
+│  Solar/Lunar/Hijri/RabByung 日历转换                  │
 │  干支/八字/童限/小运推算                              │
 │  节气/月相/宜忌/神煞查询                              │
+│  人元司令分野（含真黄经版）                           │
 └──────────────────────┬──────────────────────────────┘
                        │ 依赖
 ┌──────────────────────▼──────────────────────────────┐
-│              基础层：抽象 trait                        │
+│              基础层：tyme/base                        │
 │  Tyme（推移） / Culture（名称） / Show（打印）        │
 │  LoopTyme（循环索引器）                               │
+│  五行/阴阳/吉凶/旬/纳音等枚举                         │
 └──────────────────────┬──────────────────────────────┘
-                       │ 数据
+                       │ 计算
 ┌──────────────────────▼──────────────────────────────┐
-│              数据层：常量表                           │
-│  天干/地支/六十甲子/节气名/神煞名/宜忌名              │
-│  农历闰月编码（64进制压缩）                           │
-│  日/时辰宜忌、神煞表（十六进制编码）                   │
+│            天文层：tyme/astronomy                     │
+│  节气时刻计算（astronomy_algorithm.mbt）              │
+│  天文常数表（astronomy_constants.mbt）                │
+│  黄道坐标计算（solar_position.mbt）                   │
+│  真太阳时计算（true_solar_time.mbt）                  │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -144,33 +141,35 @@ pub struct SixtyCycle {
 
 ## 算法模块说明
 
-| 模块 | 文件 | 说明 |
+| 模块 | 路径 | 说明 |
 |------|------|------|
-| 公历 | `solar_*.mbt` | 公历日/月/年/时间计算，含闰年、星期、儒略日 |
-| 农历 | `lunar_*.mbt` | 农历闰月算法（64进制压缩表）、月大小、节气定位 |
-| 节气 | `solar_term.mbt` | 基于天文公式的节气时刻计算（~102行） |
-| 干支 | `sixty_cycle*.mbt` | 六十甲子循环，支持年/月/日/时四柱 |
-| 八字 | `eight_char.mbt` | 从农历时辰推导四柱，含胎元、命宫、身宫、纳音 |
-| 宜忌 | `taboo.mbt` | 基于十六进制编码表的每日/时辰宜忌查询 |
-| 神煞 | `god.mbt` | 130 种神煞名称及每日吉凶查询（吉神0-59，凶神60-129） |
-| 童限 | `child_limit*.mbt` | 出生时刻到起运时刻的时长计算 |
-| 小运/大运 | `fortune.mbt`, `decade_fortune.mbt` | 基于童限推演各年龄段运势 |
-| 回历 | `hijri_*.mbt` | 伊斯兰历法转换 |
-| 巴厘岛历 | `rab_byung_*.mbt` | 印尼巴厘岛历法 |
-| 斗宿 | `shou_xing_util.mbt` | 北斗九星相关计算（最大单体文件，~718行） |
-| 事件 | `event*.mbt` | 自定义事件（节日、节假日等）构建与管理 |
-| 灶马头 | `kitchen_god_steed.mbt` | 根据正月初一干支推算农历年运势（几龙治水等） |
-| 小六壬 | `minor_ren.mbt` | 大安/留连/速喜/赤口/小吉/空亡 |
-| 六曜 | `six_star.mbt` | 孔明六曜星（先胜/友引/先负/佛灭/大安/赤口） |
-| 三元 | `sixty.mbt` | 上元/中元/下元（60年一循环） |
-| 月相 | `phase.mbt`, `phase_day.mbt` | 新月/蛾眉月/上弦月等月相计算 |
-| 胎神 | `fetus_month.mbt` | 逐月胎神（正十二月在床房，二三九十门户中等） |
-| 法定假日 | `legal_holiday.mbt` | 中国法定节假日及调休安排（2001年至今） |
-| 宫 | `zone.mbt` | 四方（东/南/西/北）及对应神兽 |
-| 十神 | `ten_star.mbt` | 天干生克关系（比肩/劫财/食神等） |
-| 星期 | `week.mbt` | 周日到周六，可关联七曜 |
-| 三候 | `three_phenology.mbt` | 每节气三候（初候/二候/三候） |
-| 节气日 | `solar_term_day.mbt` | 节气第几天索引 |
+| 公历 | `core/solar_*.mbt` | 公历日/月/年/时间计算，含闰年、星期、儒略日 |
+| 农历 | `core/lunar_*.mbt` | 农历闰月算法（64进制压缩表）、月大小、节气定位 |
+| 节气 | `core/solar_term.mbt` | 基于天文公式的节气时刻计算 |
+| 干支 | `core/sixty_cycle*.mbt` | 六十甲子循环，支持年/月/日/时四柱 |
+| 八字 | `core/eight_char.mbt` | 从农历时辰推导四柱，含胎元、命宫、身宫、纳音 |
+| 宜忌 | `core/taboo.mbt` | 基于十六进制编码表的每日/时辰宜忌查询 |
+| 神煞 | `core/god.mbt`, `core/shensha_*.mbt` | 130 种神煞名称及每日吉凶查询 |
+| 童限 | `core/child_limit*.mbt` | 出生时刻到起运时刻的时长计算 |
+| 小运/大运 | `core/fortune.mbt`, `core/decade_fortune.mbt` | 基于童限推演各年龄段运势 |
+| 回历 | `core/hijri_*.mbt` | 伊斯兰历法转换 |
+| 巴厘岛历 | `core/rab_byung_*.mbt` | 印尼巴厘岛历法 |
+| 天文算法 | `astronomy/astronomy_*.mbt` | 节气计算、黄道坐标等天文算法 |
+| 真太阳时 | `astronomy/true_solar_time.mbt` | 均时差、太阳视赤经、真太阳时计算 |
+| 人元司令 | `core/hide_heaven_stem*.mbt` | 人元司令分野及真黄经版 |
+| 事件 | `core/event*.mbt` | 自定义事件（节日、节假日等）构建与管理 |
+| 灶马头 | `core/kitchen_god_steed.mbt` | 根据正月初一干支推算农历年运势 |
+| 小六壬 | `core/minor_ren.mbt` | 大安/留连/速喜/赤口/小吉/空亡 |
+| 六曜 | `core/six_star.mbt` | 孔明六曜星 |
+| 三元 | `base/sixty.mbt` | 上元/中元/下元（60年一循环） |
+| 月相 | `core/phase.mbt`, `core/phase_day.mbt` | 新月/蛾眉月/上弦月等月相计算 |
+| 胎神 | `core/fetus_*.mbt` | 逐月胎神 |
+| 法定假日 | `core/legal_holiday.mbt` | 中国法定节假日及调休安排 |
+| 五行 | `base/element.mbt` | 五行及生克关系 |
+| 宫 | `core/zone.mbt` | 四方神兽方位 |
+| 十神 | `core/ten_star.mbt` | 天干生克关系 |
+| 星期 | `core/week.mbt` | 周日到周六，可关联七曜 |
+| 三候 | `core/three_phenology.mbt` | 每节气三候 |
 
 ## 数据编码策略
 
@@ -191,6 +190,7 @@ pub struct SixtyCycle {
 3. **Pattern matching**：switch/if-else 大量转换为 MoonBit 的 match 表达式。
 4. **浮点运算**：部分数学函数映射为 `@math.*` 调用。
 5. **多流派支持**：童限和八字支持不同流派算法（Default、LunarSect1、LunarSect2、China95）。
-6. **新增强类型**：新增了 `DecadeFortune`（大运）、`KitchenGodSteed`（灶马头）、`MinorRen`（小六壬）、`SixStar`（六曜）、`Sixty`（三元）等命理学概念。
-7. **真太阳时反推**：`EightChar::get_solar_times()` 方法支持根据八字反推可能的公历时刻列表（1-9999年范围）。
-8. **三柱反推**：`ThreePillars::get_solar_days()` 方法支持根据三柱反推公历日期。
+6. **真太阳时支持**：v0.2.2 新增真太阳时计算，支持均时差、太阳视赤经、太阳赤纬等天文函数。童限支持双轨模式：`ChildLimit::from_solar_time()` 使用平太阳时，`ChildLimit::from_true_solar_time()` 使用真太阳时。
+7. **地支关系扩展**：v0.2.3 新增地支六破（`get_po()`）、三合局五行（`get_san_he_element()`）、三会方局五行与方位（`get_san_hui_element()` / `get_san_hui_direction()`）。
+8. **真黄经人元司令**：新增 `EclipticHideHeavenStemDay` 类型，基于太阳真黄经（含章动与光行差）计算人元司令分野。
+9. **跨域方法分离**：`SolarDay`/`SolarTime` 的跨领域方法（如 `get_lunar_day`、`get_term`）已分离到独立的 `solar_day_cross.mbt` / `solar_time_cross.mbt` 文件中。
