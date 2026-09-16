@@ -112,13 +112,17 @@ pub fn RabByungYear::get_year(self : RabByungYear) -> Int {
 }
 
 ///|
-// get_leap_month 闰月
-pub fn RabByungYear::get_leap_month(self : RabByungYear) -> Int {
+// new 接受 0..150 饶迥及 60 种五行生肖组合，get_year 覆盖 1024..10083。
+// 沿用原递推一次生成该区间的闰月；未访问到的年份保持 0。
+fn build_rab_byung_leap_index() -> Array[Int] {
+  let leap_months = Array::make(9060, 0)
   let mut n = 1
   let mut m = 4
   let mut t = 1
-  let current_year = self.get_year()
-  while n < current_year {
+  while n <= 10083 {
+    if n >= 1024 {
+      leap_months[n - 1024] = m
+    }
     let i = m + 31 + t
     n = n + 2
     m = i - 23
@@ -128,10 +132,16 @@ pub fn RabByungYear::get_leap_month(self : RabByungYear) -> Int {
     }
     t = 1 - t
   }
-  if n == current_year {
-    return m
-  }
-  0
+  leap_months
+}
+
+///|
+let rab_byung_leap_index : Array[Int] = build_rab_byung_leap_index()
+
+///|
+// get_leap_month 闰月
+pub fn RabByungYear::get_leap_month(self : RabByungYear) -> Int {
+  rab_byung_leap_index[self.get_year() - 1024]
 }
 
 ///|

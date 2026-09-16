@@ -31,4 +31,8 @@ test (b : @bench.T) {
     }
     b.keep(checksum)
   })
+  b.bench(name="rab_byung_leap_index_build_once", fn() {
+    let index = build_rab_byung_leap_index()
+    b.keep(index[1027 - 1024] + index[2043 - 1024])
+  })
 }
