@@ -57,3 +57,17 @@ test "lunar_year leap month matches grouped reference for full range" {
     expect_eq(actual, expected, "leap month for year \{year}")
   }
 }
+
+///|
+test "lunar_year direct leap index covers every valid year" {
+  let groups = reference_lunar_year_leap_groups()
+  let index = build_lunar_year_leap_index()
+  expect_eq(index.length(), 10001, "direct index length")
+  for year = -1; year <= 9999; year = year + 1 {
+    expect_eq(
+      index[year + 1],
+      reference_lunar_year_leap_month(year, groups),
+      "direct index for year \{year}",
+    )
+  }
+}

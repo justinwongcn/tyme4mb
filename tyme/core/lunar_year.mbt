@@ -44,30 +44,31 @@ let lunar_year_leap_data : Array[String] = [
 ]
 
 ///|
-// build_lunar_year_leap 构建闰月年表
-fn build_lunar_year_leap() -> Array[Array[Int]] {
-  let res : Array[Array[Int]] = []
-  for i = 0; i < lunar_year_leap_data.length(); i = i + 1 {
-    let m = lunar_year_leap_data[i]
-    let size = m.length() / 2
-    let mut n = 0
-    let l : Array[Int] = []
-    for y = 0; y < size; y = y + 1 {
-      let z = y * 2
-      let mut t = 0
-      let mut c = 1
-      for x = 1; x > -1; x = x - 1 {
-        let idx = z + x
-        t = t +
-          c * chars_index(lunar_year_leap_chars, m.unsafe_get(idx).to_int())
-        c = c * 64
+// build_lunar_year_leap_index 构建按年份直接索引的闰月表；下标为 year + 1
+fn build_lunar_year_leap_index() -> Array[Int] {
+  let leap_months = Array::make(10001, 0)
+  leap_months[0] = 11
+  for month_index = 0
+      month_index < lunar_year_leap_data.length()
+      month_index = month_index + 1 {
+    let encoded = lunar_year_leap_data[month_index]
+    let mut year = 0
+    for offset = 0; offset < encoded.length(); offset = offset + 2 {
+      let high = chars_index(
+        lunar_year_leap_chars,
+        encoded.unsafe_get(offset).to_int(),
+      )
+      let low = chars_index(
+        lunar_year_leap_chars,
+        encoded.unsafe_get(offset + 1).to_int(),
+      )
+      year = year + high * 64 + low
+      if year <= 9999 {
+        leap_months[year + 1] = month_index + 1
       }
-      n = n + t
-      l.push(n)
     }
-    res.push(l)
   }
-  res
+  leap_months
 }
 
 ///|
@@ -82,7 +83,7 @@ fn chars_index(chars : String, c : Int) -> Int {
 }
 
 ///|
-let lunar_year_leap : Array[Array[Int]] = build_lunar_year_leap()
+let lunar_year_leap_index : Array[Int] = build_lunar_year_leap_index()
 
 ///|
 // from_year 从年构造
@@ -122,18 +123,7 @@ pub fn LunarYear::get_month_count(self : LunarYear) -> Int {
 ///|
 // get_leap_month 闰月数字，1代表闰1月，0代表无闰月
 pub fn LunarYear::get_leap_month(self : LunarYear) -> Int {
-  if self.get_year() == -1 {
-    return 11
-  }
-  for i = 0; i < lunar_year_leap.length(); i = i + 1 {
-    let value = lunar_year_leap[i]
-    for j = 0; j < value.length(); j = j + 1 {
-      if value[j] == self.get_year() {
-        return i + 1
-      }
-    }
-  }
-  0
+  lunar_year_leap_index[self.get_year() + 1]
 }
 
 ///|
