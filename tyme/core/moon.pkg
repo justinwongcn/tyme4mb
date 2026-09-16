@@ -3,3 +3,9 @@ import {
   "justinwongcn/tyme4mb/tyme/astronomy",
   "justinwongcn/tyme4mb/tyme/base",
 }
+
+///|
+import {
+  "moonbitlang/core/bench",
+  "justinwongcn/tyme4mb/tyme",
+} for "wbtest"
