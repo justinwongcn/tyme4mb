@@ -8,6 +8,8 @@
 
 **Tech Stack:** MoonBit `0.1.20260803`, `moon` check/test/bench, white-box tests, native differential output, Git worktree.
 
+**Execution clarification (approved):** Record a compilable baseline and benchmark in Task 1. Add each private-builder test immediately before its implementation in Task 2 or 3, respectively, so the focused test can go RED then GREEN without leaving Task 1 unbuildable.
+
 ## Global Constraints
 
 - Do not change public function signatures, public type shapes, call sites, result ordering, result names, or error text.
@@ -22,8 +24,6 @@
 ### Task 1: Establish immutable behavior, interface, and performance baselines
 
 **Files:**
-- Create: `tyme/core/god_query_index_wbtest.mbt`
-- Create: `tyme/core/taboo_query_index_wbtest.mbt`
 - Create: `tyme/core/god_taboo_bench_wbtest.mbt`
 - Read: `tyme/core/xref_gt_wbtest.mbt`
 - Read: `tyme/core/pkg.generated.mbti`
@@ -31,7 +31,7 @@
 
 **Interfaces:**
 - Consumes: existing five public God/Taboo query functions.
-- Produces: private-parser contract tests, public result-isolation tests, a repeatable benchmark, and baseline artifacts under `/tmp`.
+- Produces: a repeatable benchmark and baseline artifacts under `/tmp`.
 
 - [ ] **Step 1: Capture the public interfaces and full native differential output**
 
@@ -45,112 +45,7 @@ moon test --target native tyme/core/xref_gt_wbtest.mbt -f xref_gt > /tmp/tyme4mb
 
 Expected: command exits `0`; the output file contains the complete `GO`, `TB`, `GG`, `TDR`, `TDA`, `THR`, and `THA` records.
 
-- [ ] **Step 2: Write failing white-box tests for the desired private index builders**
-
-Create `tyme/core/god_query_index_wbtest.mbt` with the God builder test, and create `tyme/core/taboo_query_index_wbtest.mbt` with the Taboo builder test:
-
-```moonbit
-///|
-test "build_god_query_index_preserves_record_order" {
-  let index = build_god_query_index([";000102;013C"])
-  inspect(index[0][0], content="Ok([1, 2])")
-  inspect(index[0][1], content="Ok([60])")
-}
-
-///|
-test "build_taboo_query_index_preserves_empty_and_nonempty_fields" {
-  let index = build_taboo_query_index(["0001,;02,0304"])
-  inspect(index[0][0].0, content="Ok([0, 1])")
-  inspect(index[0][0].1, content="Ok([])")
-  inspect(index[0][1].0, content="Ok([2])")
-  inspect(index[0][1].1, content="Ok([3, 4])")
-}
-```
-
-Before finalizing the fixture, use the current `String::split` behavior in a temporary white-box assertion to confirm whether leading empty segments are retained; adjust the synthetic string only, not the production parser contract.
-
-- [ ] **Step 3: Run the parser tests and verify RED**
-
-Run:
-
-```bash
-moon test --target native tyme/core/god_query_index_wbtest.mbt tyme/core/taboo_query_index_wbtest.mbt
-```
-
-Expected: compilation fails specifically because `build_god_query_index` and `build_taboo_query_index` do not exist.
-
-- [ ] **Step 4: Add public result-isolation characterization tests**
-
-Duplicate this small constructor helper in both focused test files so each implementation unit can compile independently:
-
-```moonbit
-fn god_taboo_case(month_index : Int, day_index : Int) -> (SixtyCycleMonth, SixtyCycleDay) {
-  let month = SixtyCycleMonth::new(
-    SixtyCycleYear::from_year(2024).unwrap(),
-    SixtyCycle::from_index(month_index),
-  )
-  let day = SixtyCycleDay::new(
-    SolarDay::from_ymd(2024, 1, 1).unwrap(),
-    month,
-    SixtyCycle::from_index(day_index),
-  )
-  (month, day)
-}
-
-///|
-test "god_query_returns_independent_arrays" {
-  let (month, day) = god_taboo_case(0, 0)
-  let gods1 = God::get_day_gods(month, day).unwrap()
-  let god_count = gods1.length()
-  gods1.push(God::from_index(0))
-  inspect(
-    God::get_day_gods(month, day).unwrap().length() == god_count,
-    content="true",
-  )
-}
-```
-
-Put this test in `taboo_query_index_wbtest.mbt`:
-
-```moonbit
-///|
-test "taboo_query_returns_independent_arrays" {
-  let (month, day) = god_taboo_case(0, 0)
-  let taboos1 = Taboo::get_day_recommends(month, day).unwrap()
-  let taboo_count = taboos1.length()
-  taboos1.push(Taboo::from_index(0))
-  inspect(
-    Taboo::get_day_recommends(month, day).unwrap().length() == taboo_count,
-    content="true",
-  )
-}
-
-///|
-test "taboo_query_preserves_empty_result" {
-  let (month, day) = god_taboo_case(1, 21)
-  inspect(Taboo::get_day_avoids(month, day).unwrap(), content="[]")
-}
-
-///|
-test "taboo_query_covers_last_day_index" {
-  let (month, day) = god_taboo_case(11, 59)
-  let _ = Taboo::get_day_recommends(month, day).unwrap()
-}
-```
-
-Put the corresponding God boundary assertion in `god_query_index_wbtest.mbt`:
-
-```moonbit
-///|
-test "god_query_covers_last_day_index" {
-  let (month, day) = god_taboo_case(11, 59)
-  let _ = God::get_day_gods(month, day).unwrap()
-}
-```
-
-These tests characterize existing behavior and may pass before the optimization; the builder tests are the mandatory RED tests for the new implementation unit.
-
-- [ ] **Step 5: Add the benchmark harness**
+- [ ] **Step 2: Add the benchmark harness**
 
 Create `tyme/core/god_taboo_bench_wbtest.mbt` using `@bench.T`. Build 12 representative month pillars and all 60 day pillars outside the timed closure:
 
@@ -186,7 +81,7 @@ test (b : @bench.T) {
 }
 ```
 
-- [ ] **Step 6: Record the native benchmark baseline**
+- [ ] **Step 3: Record the native benchmark baseline**
 
 Run:
 
@@ -196,17 +91,87 @@ moon bench --target native tyme/core/god_taboo_bench_wbtest.mbt | tee /tmp/tyme4
 
 Expected: benchmark completes and reports `god_taboo_12x60_queries`. Do not add an absolute timing assertion.
 
----
+- [ ] **Step 4: Commit the benchmark harness**
+
+```bash
+git add tyme/core/god_taboo_bench_wbtest.mbt
+git commit -m "bench: establish god taboo query baseline"
+```
 
 ### Task 2: Build and use the God direct index
 
 **Files:**
 - Modify: `tyme/core/god.mbt`
-- Modify: `tyme/core/god_query_index_wbtest.mbt`
+- Create: `tyme/core/god_query_index_wbtest.mbt`
 
 **Interfaces:**
 - Consumes: `parse_hex(String) -> Result[Int, String]` from the same package and the existing encoded God strings.
 - Produces: `build_god_query_index(Array[String]) -> Array[Array[Result[Array[Int], String]]]` and a private module-level query index.
+
+- [ ] **Step 0: Write failing white-box tests for the desired private God index builder**
+
+Create `tyme/core/god_query_index_wbtest.mbt` with the God builder test:
+
+```moonbit
+///|
+test "build_god_query_index_preserves_record_order" {
+  let index = build_god_query_index([";000102;013C"])
+  inspect(index[0][0], content="Ok([1, 2])")
+  inspect(index[0][1], content="Ok([60])")
+}
+
+```
+
+Run the focused test and verify compilation fails specifically because `build_god_query_index` does not exist.
+
+Run:
+
+```bash
+moon test --target native tyme/core/god_query_index_wbtest.mbt
+```
+
+Then add public result-isolation characterization tests to the God test file:
+
+Use this small constructor helper in the God test file; Task 3 duplicates it in the Taboo test file so each implementation unit can compile independently:
+
+```moonbit
+fn god_taboo_case(month_index : Int, day_index : Int) -> (SixtyCycleMonth, SixtyCycleDay) {
+  let month = SixtyCycleMonth::new(
+    SixtyCycleYear::from_year(2024).unwrap(),
+    SixtyCycle::from_index(month_index),
+  )
+  let day = SixtyCycleDay::new(
+    SolarDay::from_ymd(2024, 1, 1).unwrap(),
+    month,
+    SixtyCycle::from_index(day_index),
+  )
+  (month, day)
+}
+
+///|
+test "god_query_returns_independent_arrays" {
+  let (month, day) = god_taboo_case(0, 0)
+  let gods1 = God::get_day_gods(month, day).unwrap()
+  let god_count = gods1.length()
+  gods1.push(God::from_index(0))
+  inspect(
+    God::get_day_gods(month, day).unwrap().length() == god_count,
+    content="true",
+  )
+}
+```
+
+Add the God boundary assertion:
+
+```moonbit
+///|
+test "god_query_covers_last_day_index" {
+  let (month, day) = god_taboo_case(11, 59)
+  let _ = God::get_day_gods(month, day).unwrap()
+}
+```
+
+These public tests characterize existing behavior; the builder test is the mandatory RED test.
 
 - [ ] **Step 1: Convert only the God encoded container to a private module value**
 
@@ -281,12 +246,54 @@ git commit -m "perf: index day god queries"
 
 **Files:**
 - Modify: `tyme/core/taboo.mbt`
-- Modify: `tyme/core/taboo_query_index_wbtest.mbt`
-- Add to commit: `tyme/core/god_taboo_bench_wbtest.mbt`
+- Create: `tyme/core/taboo_query_index_wbtest.mbt`
 
 **Interfaces:**
 - Consumes: existing `parse_hex(String) -> Result[Int, String]` and encoded day/hour Taboo strings.
 - Produces: `build_taboo_query_index(Array[String]) -> Array[Array[(Result[Array[Int], String], Result[Array[Int], String])]]`, plus private day and hour indexes.
+
+- [ ] **Step 0: Write failing white-box tests for the desired private Taboo index builder**
+
+Create `tyme/core/taboo_query_index_wbtest.mbt` with:
+
+```moonbit
+///|
+test "build_taboo_query_index_preserves_empty_and_nonempty_fields" {
+  let index = build_taboo_query_index(["0001,;02,0304"])
+  inspect(index[0][0].0, content="Ok([0, 1])")
+  inspect(index[0][0].1, content="Ok([])")
+  inspect(index[0][1].0, content="Ok([2])")
+  inspect(index[0][1].1, content="Ok([3, 4])")
+}
+```
+
+Before finalizing the fixture, confirm current `String::split` behavior for leading empty segments with a temporary white-box assertion; adjust only the synthetic fixture. Run the focused test and verify RED because `build_taboo_query_index` does not exist. Add the following public characterization tests before implementing the builder (duplicate the small `god_taboo_case` constructor helper from Task 2 so each test file compiles independently):
+
+```moonbit
+///|
+test "taboo_query_returns_independent_arrays" {
+  let (month, day) = god_taboo_case(0, 0)
+  let taboos1 = Taboo::get_day_recommends(month, day).unwrap()
+  let taboo_count = taboos1.length()
+  taboos1.push(Taboo::from_index(0))
+  inspect(
+    Taboo::get_day_recommends(month, day).unwrap().length() == taboo_count,
+    content="true",
+  )
+}
+
+///|
+test "taboo_query_preserves_empty_result" {
+  let (month, day) = god_taboo_case(1, 21)
+  inspect(Taboo::get_day_avoids(month, day).unwrap(), content="[]")
+}
+
+///|
+test "taboo_query_covers_last_day_index" {
+  let (month, day) = god_taboo_case(11, 59)
+  let _ = Taboo::get_day_recommends(month, day).unwrap()
+}
+```
 
 - [ ] **Step 1: Convert the Taboo encoded containers to private module values**
 
@@ -346,10 +353,10 @@ moon bench --target native tyme/core/god_taboo_bench_wbtest.mbt | tee /tmp/tyme4
 
 Compare the same benchmark name and checksum with `/tmp/tyme4mb-god-taboo-bench-before.txt`. If performance does not materially improve, stop and investigate rather than committing the implementation.
 
-- [ ] **Step 7: Commit the Taboo indexes and benchmark**
+- [ ] **Step 7: Commit the Taboo indexes**
 
 ```bash
-git add tyme/core/taboo.mbt tyme/core/taboo_query_index_wbtest.mbt tyme/core/god_taboo_bench_wbtest.mbt
+git add tyme/core/taboo.mbt tyme/core/taboo_query_index_wbtest.mbt
 git commit -m "perf: index taboo queries"
 ```
 
