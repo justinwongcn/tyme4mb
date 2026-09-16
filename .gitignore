@@ -32,6 +32,7 @@ tmp/
 
 # Agent tooling / generated skill files (not part of the package)
 .evox/
+.worktrees/
 
 # Node.js
 node_modules/
