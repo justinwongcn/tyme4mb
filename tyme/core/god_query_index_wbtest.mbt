@@ -1,8 +1,8 @@
 ///|
 test "build_god_query_index_preserves_record_order" {
   let index = build_god_query_index([";000102;013C"])
-  inspect(index[0][0], content="Ok([1, 2])")
-  inspect(index[0][1], content="Ok([60])")
+  debug_inspect(index[0][0], content="Ok([1, 2])")
+  debug_inspect(index[0][1], content="Ok([60])")
 }
 
 ///|

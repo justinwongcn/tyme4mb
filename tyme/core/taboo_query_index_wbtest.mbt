@@ -1,10 +1,10 @@
 ///|
 test "build_taboo_query_index_preserves_empty_and_nonempty_fields" {
   let index = build_taboo_query_index(["0001,;02,0304"])
-  inspect(index[0][0].0, content="Ok([0, 1])")
-  inspect(index[0][0].1, content="Ok([])")
-  inspect(index[0][1].0, content="Ok([2])")
-  inspect(index[0][1].1, content="Ok([3, 4])")
+  debug_inspect(index[0][0].0, content="Ok([0, 1])")
+  debug_inspect(index[0][0].1, content="Ok([])")
+  debug_inspect(index[0][1].0, content="Ok([2])")
+  debug_inspect(index[0][1].1, content="Ok([3, 4])")
 }
 
 ///|
@@ -45,7 +45,10 @@ test "taboo_query_returns_independent_arrays" {
 ///|
 test "taboo_query_preserves_empty_result" {
   let (month, day) = taboo_case(1, 21)
-  inspect(Taboo::get_day_avoids(month, day).unwrap(), content="[]")
+  inspect(
+    Taboo::get_day_avoids(month, day).unwrap().length() == 0,
+    content="true",
+  )
 }
 
 ///|
