@@ -54,6 +54,20 @@ test "LunarMonth" {
 }
 
 ///|
+test "LunarMonth out-of-range year below lower bound preserves fallback behavior" {
+  let lm = @tyme.LunarMonth::from_ym(-2, 1).unwrap()
+  expect_eq(lm.get_lunar_year().get_leap_month(), 0, "fallback leap month")
+  expect_eq(lm.get_index_in_year(), 0, "fallback month index")
+}
+
+///|
+test "LunarMonth out-of-range year above upper bound preserves fallback behavior" {
+  let lm = @tyme.LunarMonth::from_ym(10000, 1).unwrap()
+  expect_eq(lm.get_lunar_year().get_leap_month(), 0, "fallback leap month")
+  expect_eq(lm.get_index_in_year(), 0, "fallback month index")
+}
+
+///|
 test "LunarWeek" {
   let lw = @tyme.LunarWeek::from_ym(2023, 1, 0, 2).unwrap()
   let _ = lw.get_first_day()

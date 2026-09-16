@@ -123,7 +123,11 @@ pub fn LunarYear::get_month_count(self : LunarYear) -> Int {
 ///|
 // get_leap_month 闰月数字，1代表闰1月，0代表无闰月
 pub fn LunarYear::get_leap_month(self : LunarYear) -> Int {
-  lunar_year_leap_index[self.get_year() + 1]
+  let year = self.get_year()
+  if year < -1 || year > 9999 {
+    return 0
+  }
+  lunar_year_leap_index[year + 1]
 }
 
 ///|
