@@ -65,35 +65,35 @@ description: 完整的文件索引、模块依赖关系和代码统计
 
 | 文件 | 行数 | 说明 |
 |------|------|------|
-| `lunar_year.mbt` | 226 | 农历年（闰月核心算法） |
-| `lunar_month.mbt` | 314 | 农历月 |
-| `lunar_day.mbt` | 289 | 农历日 |
-| `lunar_hour.mbt` | 284 | 农历时辰 |
-| `lunar_festival.mbt` | 146 | 农历节日 |
-| `lunar_week.mbt` | 153 | 农历周 |
-| `lunar_season.mbt` | 44 | 农历季节 |
-| `fetus_month.mbt` | 64 | 胎月（逐月胎神） |
-| `fetus_day.mbt` | 131 | 胎日 |
-| `fetus_heaven_stem.mbt` | 47 | 胎天干 |
-| `fetus_earth_branch.mbt` | 48 | 胎地支 |
-| `lunar_sect1_child_limit_provider.mbt` | 41 | 农历派系1童限计算 |
-| `lunar_sect2_child_limit_provider.mbt` | 23 | 农历派系2童限计算 |
-| `lunar_sect2_eight_char_provider.mbt` | 18 | 农历派系2八字计算 |
+| `tyme/core/lunar_year.mbt` | 226 | 农历年（闰月核心算法） |
+| `tyme/core/lunar_month.mbt` | 314 | 农历月 |
+| `tyme/core/lunar_day.mbt` | 289 | 农历日 |
+| `tyme/core/lunar_hour.mbt` | 284 | 农历时辰 |
+| `tyme/core/lunar_festival.mbt` | 146 | 农历节日 |
+| `tyme/core/lunar_week.mbt` | 153 | 农历周 |
+| `tyme/core/lunar_season.mbt` | 44 | 农历季节 |
+| `tyme/core/fetus_month.mbt` | 64 | 胎月（逐月胎神） |
+| `tyme/core/fetus_day.mbt` | 131 | 胎日 |
+| `tyme/core/fetus_heaven_stem.mbt` | 47 | 胎天干 |
+| `tyme/core/fetus_earth_branch.mbt` | 48 | 胎地支 |
+| `tyme/core/lunar_sect1_child_limit_provider.mbt` | 41 | 农历派系1童限计算 |
+| `tyme/core/lunar_sect2_child_limit_provider.mbt` | 23 | 农历派系2童限计算 |
+| `tyme/core/lunar_sect2_eight_char_provider.mbt` | 18 | 农历派系2八字计算 |
 
 ### 干支系统（10个文件）
 
 | 文件 | 行数 | 说明 |
 |------|------|------|
-| `sixty_cycle.mbt` | 109 | 六十甲子核心 |
-| `sixty_cycle_day.mbt` | 206 | 六十甲子日 |
-| `sixty_cycle_month.mbt` | 139 | 六十甲子月 |
-| `sixty_cycle_year.mbt` | 112 | 六十甲子年 |
-| `sixty_cycle_hour.mbt` | 169 | 六十甲子时 |
-| `heaven_stem.mbt` | 160 | 天干 |
-| `earth_branch.mbt` | 178 | 地支 |
-| `hide_heaven_stem.mbt` | 47 | 藏干（天干） |
-| `hide_heaven_stem_day.mbt` | 24 | 藏干日 |
-| `hide_heaven_stem_type.mbt` | 30 | 藏干类型 |
+| `tyme/core/sixty_cycle.mbt` | 109 | 六十甲子核心 |
+| `tyme/core/sixty_cycle_day.mbt` | 206 | 六十甲子日 |
+| `tyme/core/sixty_cycle_month.mbt` | 139 | 六十甲子月 |
+| `tyme/core/sixty_cycle_year.mbt` | 112 | 六十甲子年 |
+| `tyme/core/sixty_cycle_hour.mbt` | 169 | 六十甲子时 |
+| `tyme/core/heaven_stem.mbt` | 160 | 天干 |
+| `tyme/core/earth_branch.mbt` | 178 | 地支 |
+| `tyme/core/hide_heaven_stem.mbt` | 47 | 藏干（天干） |
+| `tyme/core/hide_heaven_stem_day.mbt` | 24 | 藏干日 |
+| `tyme/core/hide_heaven_stem_type.mbt` | 30 | 藏干类型 |
 
 ### 八字命理（12个文件）
 
@@ -165,47 +165,63 @@ description: 完整的文件索引、模块依赖关系和代码统计
 | `rab_byung_month.mbt` | 344 | 巴厘岛历月 |
 | `rab_byung_year.mbt` | 232 | 巴厘岛历年 |
 
+### 天文算法（5个文件）
+
+| 文件 | 行数 | 说明 |
+|------|------|------|
+| `tyme/astronomy/astronomy_algorithm.mbt` | ~450 | 节气/朔望计算核心 |
+| `tyme/astronomy/astronomy_constants.mbt` | - | 天文常数表 |
+| `tyme/astronomy/astronomy_decode.mbt` | - | 编码解码 |
+| `tyme/astronomy/solar_position.mbt` | - | 太阳位置计算 |
+| `tyme/astronomy/true_solar_time.mbt` | - | 真太阳时计算 |
+
 ### 辅助工具（3个文件）
 
 | 文件 | 行数 | 说明 |
 |------|------|------|
-| `shou_xing_util.mbt` | 718 | 斗宿工具（核心天文算法） |
-| `legal_holiday.mbt` | 174 | 法定节假日（含调休） |
-| `loop_tyme.mbt` | 35 | 循环时间工具 |
+| `tyme/core/legal_holiday.mbt` | 174 | 法定节假日（含调休） |
+| `tyme/base/loop_tyme.mbt` | 35 | 循环时间工具 |
+| `tyme/reexports.mbt` | 218 | facade 导出（向后兼容） |
 
-### 测试文件（4个文件）
+### 测试文件（10个文件）
 
-| 文件 | 行数 | 说明 |
-|------|------|------|
-| `xref_all_wbtest.mbt` | 2104 | 全量交叉引用测试 |
-| `xref_gt_wbtest.mbt` | 56 | 子集测试（公历） |
-| `xref_sx_wbtest.mbt` | 78 | 子集测试（特殊） |
-| `eight_char_true_solar_wbtest.mbt` | 100 | 真太阳时测试 |
+| 文件 | 说明 |
+|------|------|
+| `api_test/test_calendar.mbt` | 日历交叉测试 |
+| `api_test/test_culture.mbt` | 文化相关测试 |
+| `api_test/test_festival.mbt` | 节日测试 |
+| `api_test/test_fortune.mbt` | 命理测试 |
+| `api_test/test_hide_heaven_stem_ecliptic.mbt` | 藏干黄道测试 |
+| `api_test/test_lunar.mbt` | 农历测试 |
+| `api_test/test_shensha.mbt` | 神煞测试 |
+| `api_test/test_sixty_cycle.mbt` | 干支测试 |
+| `api_test/test_solar.mbt` | 公历测试 |
+| `api_test/test_true_solar_time.mbt` | 真太阳时测试 |
 
 ## 文件大小排行（Top 15）
 
 | 排名 | 文件 | 行数 |
 |------|------|------|
-| 1 | `xref_all_wbtest.mbt` | 2104 |
-| 2 | `shou_xing_util.mbt` | 718 |
-| 3 | `solar_day.mbt` | 488 |
-| 4 | `rab_byung_month.mbt` | 344 |
-| 5 | `lunar_month.mbt` | 314 |
-| 6 | `lunar_day.mbt` | 289 |
-| 7 | `lunar_hour.mbt` | 284 |
-| 8 | `event.mbt` | 266 |
-| 9 | `eight_char.mbt` | 256 |
-| 10 | `solar_time.mbt` | 252 |
-| 11 | `rab_byung_day.mbt` | 241 |
-| 12 | `rab_byung_year.mbt` | 232 |
-| 13 | `lunar_year.mbt` | 226 |
-| 14 | `taboo.mbt` | 192 |
-| 15 | `sixty_cycle_day.mbt` | 206 |
+| 1 | `api_test/test_calendar.mbt` | ~2100 |
+| 2 | `tyme/astronomy/astronomy_algorithm.mbt` | ~450 |
+| 3 | `tyme/core/solar_day.mbt` | 488 |
+| 4 | `tyme/core/rab_byung_month.mbt` | 344 |
+| 5 | `tyme/core/lunar_month.mbt` | 314 |
+| 6 | `tyme/core/lunar_day.mbt` | 289 |
+| 7 | `tyme/core/lunar_hour.mbt` | 284 |
+| 8 | `tyme/core/event.mbt` | 266 |
+| 9 | `tyme/core/eight_char.mbt` | 256 |
+| 10 | `tyme/core/solar_time.mbt` | 252 |
+| 11 | `tyme/core/rab_byung_day.mbt` | 241 |
+| 12 | `tyme/core/rab_byung_year.mbt` | 232 |
+| 13 | `tyme/core/lunar_year.mbt` | 226 |
+| 14 | `tyme/core/taboo.mbt` | 192 |
+| 15 | `tyme/core/sixty_cycle_day.mbt` | 206 |
 
 ## 模块依赖关系
 
 ```
-基础层
+基础层 (tyme/base/)
 ├── tyme.mbt (Tyme trait)
 ├── culture.mbt (Culture trait)
 ├── element.mbt (五行)
@@ -215,32 +231,38 @@ description: 完整的文件索引、模块依赖关系和代码统计
 ├── sixty.mbt (三元)
 └── six_star.mbt (六曜)
 
-时间系统层
-├── solar_*.mbt → 基础层
-├── lunar_*.mbt → 基础层 + solar_term
+天文算法层 (tyme/astronomy/)
+├── astronomy_algorithm.mbt (节气/朔望计算)
+├── astronomy_constants.mbt (天文常数)
+├── astronomy_decode.mbt (编码解码)
+├── solar_position.mbt (太阳位置)
+└── true_solar_time.mbt (真太阳时)
+
+时间系统层 (tyme/core/)
+├── solar_*.mbt → 基础层 + 天文层
+├── lunar_*.mbt → 基础层 + 天文层
 ├── hijri_*.mbt → 基础层
+├── rab_byung_*.mbt → 基础层
 └── sixty_cycle*.mbt → 基础层
 
-命理层
+命理层 (tyme/core/)
 ├── eight_char.mbt → lunar_hour, sixty_cycle
 ├── child_limit*.mbt → solar_time, solar_term
 ├── fortune.mbt → child_limit
 ├── decade_fortune.mbt → child_limit
 └── three_pillars.mbt → sixty_cycle
 
-神煞层
+神煞层 (tyme/core/)
 ├── god.mbt → lunar_day, sixty_cycle
 ├── taboo.mbt → lunar_day, sixty_cycle
 ├── event*.mbt → 独立
 └── kitchen_god_steed.mbt → 农历年初一
 
-工具层
-├── shou_xing_util.mbt → 所有时间类型
-└── legal_holiday.mbt → solar_day
-```├── event*.mbt → 独立
-└── kitchen_god_steed.mbt → 农历年初一
+Facade 层 (tyme/)
+├── reexports.mbt → @core + @base 重导出
+└── moon.pkg → 包声明
 
 工具层
-├── shou_xing_util.mbt → 所有时间类型
-└── legal_holiday.mbt → solar_day
+├── legal_holiday.mbt → solar_day
+└── imports.mbt → 内部依赖声明
 ```

@@ -1,13 +1,9 @@
 ---
-type: "参考"
-title: "Tyme4MB — 快速开始"
-openwiki_generated: true
----
-
----
-title: 快速开始
 type: page
+title: 快速开始
 description: Tyme4MB 项目入门指南，包含核心概念、快速上手和项目结构
+tags: [quickstart, introduction, moonbit]
+timestamp: 2026-08-04T09:10:11.886Z
 ---
 
 # Tyme4MB — 快速开始
@@ -52,7 +48,7 @@ description: Tyme4MB 项目入门指南，包含核心概念、快速上手和�
 
 ```bash
 # 使用 MoonBit 工具链
-mbt build tyme
+moon build tyme
 ```
 
 构建产物位于 `_build/`，包括 `packages.json` 和 WASM 二进制。
@@ -94,34 +90,37 @@ println(eight_char.to_string())
 
 ```
 tyme4mb/
-├── tyme/                  # 主库源码（.mbt 文件）
-│   ├── moon.pkg           # 包声明
-│   ├── tyme.mbt           # Tyme trait（时间推移接口）
-│   ├── culture.mbt        # Culture trait（传统文化名称接口）
-│   ├── abstract_*.mbt     # 抽象基类型
-│   ├── solar_*.mbt        # 公历相关
-│   ├── lunar_*.mbt        # 农历相关
-│   ├── eight_char.mbt     # 八字
-│   ├── three_pillars.mbt  # 三柱
-│   ├── sixty_cycle*.mbt   # 六十甲子
-│   ├── event.mbt          # 事件（自定义节日等）
-│   ├── event_builder.mbt  # 事件构造器
-│   ├── event_manager.mbt  # 事件管理器（纯值类型，显式状态传递）
-│   ├── event_type.mbt     # 事件类型枚举
-│   ├── god.mbt            # 神煞
-│   ├── taboo.mbt          # 宜忌
-│   ├── hijri_*.mbt        # 回历
-│   ├── child_limit*.mbt   # 童限计算
-│   ├── fortune.mbt        # 小运
-│   ├── decade_fortune.mbt # 大运
-│   ├── kitchen_god_steed.mbt # 灶马头
-│   ├── minor_ren.mbt      # 小六壬
-│   ├── six_star.mbt       # 六曜
-│   ├── sixty.mbt          # 三元
-│   ├── phase.mbt          # 月相
-│   ├── legal_holiday.mbt  # 法定假日
-│   ├── shou_xing_util.mbt # 斗宿工具（~718行，核心算法）
-│   └── *_wbtest.mbt       # 单元测试
+├── tyme/                  # 主库源码
+│   ├── moon.pkg           # 包声明（facade）
+│   ├── reexports.mbt      # 向后兼容重导出（@tyme.* 入口）
+│   ├── base/              # 基础类型层
+│   │   ├── moon.pkg
+│   │   ├── tyme.mbt       # Tyme trait（时间推移接口）
+│   │   ├── culture.mbt    # Culture trait
+│   │   └── abstract_*.mbt # 抽象基类型、阴阳、五行等
+│   ├── core/              # 领域实现层
+│   │   ├── moon.pkg
+│   │   ├── imports.mbt    # 内部依赖声明
+│   │   ├── solar_*.mbt    # 公历相关
+│   │   ├── lunar_*.mbt    # 农历相关
+│   │   ├── eight_char.mbt # 八字
+│   │   ├── three_pillars.mbt # 三柱
+│   │   ├── sixty_cycle*.mbt # 六十甲子
+│   │   ├── event*.mbt     # 事件管理
+│   │   ├── god.mbt        # 神煞
+│   │   ├── taboo.mbt      # 宜忌
+│   │   ├── hijri_*.mbt    # 回历
+│   │   ├── rab_byung_*.mbt # 巴厘岛历
+│   │   ├── child_limit*.mbt # 童限计算
+│   │   ├── fortune.mbt    # 小运
+│   │   ├── decade_fortune.mbt # 大运
+│   │   └── kitchen_god_steed.mbt # 灶马头
+│   └── astronomy/         # 天文算法层
+│       ├── moon.pkg
+│       ├── astronomy_algorithm.mbt # 节气/朔望计算
+│       └── true_solar_time.mbt    # 真太阳时
+├── api_test/              # API 测试（独立包）
+├── examples/              # 示例代码
 ├── openwiki/              # 本 Wiki 文档
 ├── _build/                # 构建产物（WASM + packages.json）
 └── .github/workflows/     # CI/CD（OpenWiki 自动更新）
@@ -135,21 +134,30 @@ tyme4mb/
 4. **静态数据表**：农历闰月编码、神煞宜忌等大数据以内联数组存储，避免外部依赖。
 5. **逐行移植**：注释中保留原始代码引用，便于对照维护。
 6. **多流派支持**：童限支持 Default、China95、LunarSect1、LunarSect2 四种实现。
+7. **Facade 兼容层**：`tyme/reexports.mbt` 通过 `pub using @core {...}` 和 `pub using @base {...}` 保持 `@tyme.*` 命名空间向后兼容，消费者无需修改导入路径。
+8. **天文算法分离**：纯天文计算（节气、朔望、真太阳时）独立为 `tyme/astronomy/` 包，避免领域类型依赖。
 
 ## 测试
 
 ```bash
 # 运行全部单元测试
-mbt test tyme
+moon test
 
-# 运行交叉引用测试
-mbt test tyme/xref_all_wbtest.mbt
+# 运行 API 测试
+moon test api_test
 ```
 
-测试文件：
-- `eight_char_true_solar_wbtest.mbt` — 八字真太阳时测试
-- `xref_all_wbtest.mbt` — 全量交叉引用测试（~2100行）
-- `xref_gt_wbtest.mbt` / `xref_sx_wbtest.mbt` — 子集交叉测试
+测试文件（位于 `api_test/`）：
+- `test_calendar.mbt` — 日历交叉测试
+- `test_culture.mbt` — 文化相关测试
+- `test_festival.mbt` — 节日测试
+- `test_fortune.mbt` — 命理测试
+- `test_hide_heaven_stem_ecliptic.mbt` — 藏干黄道测试
+- `test_lunar.mbt` — 农历测试
+- `test_shensha.mbt` — 神煞测试
+- `test_sixty_cycle.mbt` — 干支测试
+- `test_solar.mbt` — 公历测试
+- `test_true_solar_time.mbt` — 真太阳时测试
 
 ## 相关链接
 
@@ -163,3 +171,4 @@ mbt test tyme/xref_all_wbtest.mbt
 - [工作流 - 历法转换](./workflows/历法转换.md)
 - [测试指南](./testing.md)
 - [运维手册](./operations/runbook.md)
+- [API 参考](../api.md)
