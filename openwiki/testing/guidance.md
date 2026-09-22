@@ -20,10 +20,16 @@ openwiki_generated: true
 
 | 文件 | 类型 | 覆盖范围 |
 |------|------|----------|
-| `eight_char_true_solar_wbtest.mbt` | 单元测试 | 八字真太阳时计算 |
-| `xref_all_wbtest.mbt` | 集成测试 | 全量功能交叉测试 |
-| `xref_gt_wbtest.mbt` | 对比测试 | 交叉验证 |
-| `xref_sx_wbtest.mbt` | 单元测试 | 生肖相关功能 |
+| `api_test/test_calendar.mbt` | 单元测试 | 日历交叉测试 |
+| `api_test/test_culture.mbt` | 单元测试 | 文化相关测试 |
+| `api_test/test_festival.mbt` | 单元测试 | 节日测试 |
+| `api_test/test_fortune.mbt` | 单元测试 | 命理测试 |
+| `api_test/test_hide_heaven_stem_ecliptic.mbt` | 单元测试 | 藏干黄道测试 |
+| `api_test/test_lunar.mbt` | 单元测试 | 农历测试 |
+| `api_test/test_shensha.mbt` | 单元测试 | 神煞测试 |
+| `api_test/test_sixty_cycle.mbt` | 单元测试 | 干支测试 |
+| `api_test/test_solar.mbt` | 单元测试 | 公历测试 |
+| `api_test/test_true_solar_time.mbt` | 单元测试 | 真太阳时测试 |
 
 ## 运行测试
 
@@ -33,10 +39,10 @@ openwiki_generated: true
 moon test
 
 # 运行特定测试文件
-moon test tyme/xref_gt_wbtest.mbt
+moon test api_test/test_solar.mbt
 
 # 运行特定测试函数
-moon test tyme/xref_gt_wbtest.mbt --filter test_eight_char
+moon test api_test/test_calendar.mbt --filter test_eight_char
 
 # 详细输出
 moon test -v
@@ -48,7 +54,7 @@ moon test -v
 moon test --filter "test_solar"
 
 # 按文件过滤
-moon test tyme/*wbtest.mbt
+moon test api_test/*.mbt
 ```
 
 ## 测试模式
@@ -288,4 +294,4 @@ A: 使用 `--filter` 参数运行单个测试，添加 `println` 输出调试信
 A: 在对应的 `_wbtest.mbt` 文件中添加 `#[test]` 标记的函数。
 
 ### Q: 对比测试数据从哪里来？
-A: 从测试用例导出，确保计算结果一致。
+A: 从测试用例导出，确保计算结果一致。测试用例导出，确保计算结果一致。

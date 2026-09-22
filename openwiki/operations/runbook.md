@@ -180,7 +180,7 @@ import tyme.solar_term.{SolarTerm}
 2. 检查测试数据是否被修改
 3. 运行单个测试文件定位问题：
    ```bash
-   moon test tyme/xref_all_wbtest.mbt --verbose
+   moon test api_test/test_calendar.mbt --verbose
    ```
 
 ### 文档未更新

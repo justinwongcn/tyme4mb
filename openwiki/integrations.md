@@ -19,10 +19,7 @@ description: API 参考、浏览器/服务端集成示例和错误处理指南
 所有公共类型和方法都通过 `moon.pkg` 导出：
 
 ```moonbit
-// tyme/moon.pkg
-import {
-  "moonbitlang/core/math" @math
-}
+// tyme/reexports.mbt — 通过 facade 重导出所有公共类型
 ```
 
 ### 常用 API 汇总
