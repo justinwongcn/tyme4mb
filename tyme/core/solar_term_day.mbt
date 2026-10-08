@@ -35,4 +35,4 @@ pub impl Show for SolarTermDay with fn to_string(self : SolarTermDay) -> String 
 pub extend SolarTermDay with Culture::{get_name}
 
 ///|
-pub extend SolarTermDay with Show::{to_string}
+pub extend SolarTermDay with Show::{to_string, output}

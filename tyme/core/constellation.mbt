@@ -50,7 +50,7 @@ pub impl Tyme for Constellation with fn next(self : Constellation, n : Int) -> C
 pub extend Constellation with Culture::{get_name}
 
 ///|
-pub extend Constellation with Show::{to_string}
+pub extend Constellation with Show::{to_string, output}
 
 ///|
 pub extend Constellation with Tyme::{next}

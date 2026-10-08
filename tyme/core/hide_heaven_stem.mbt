@@ -53,4 +53,4 @@ pub impl Show for HideHeavenStem with fn to_string(self : HideHeavenStem) -> Str
 }
 
 ///|
-pub extend HideHeavenStem with Show::{to_string}
+pub extend HideHeavenStem with Show::{to_string, output}

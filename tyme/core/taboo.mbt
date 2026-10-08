@@ -255,7 +255,7 @@ pub impl Tyme for Taboo with fn next(self : Taboo, n : Int) -> Taboo {
 pub extend Taboo with Culture::{get_name}
 
 ///|
-pub extend Taboo with Show::{to_string}
+pub extend Taboo with Show::{to_string, output}
 
 ///|
 pub extend Taboo with Tyme::{next}

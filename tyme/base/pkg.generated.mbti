@@ -23,7 +23,10 @@ pub struct AbstractCulture {
 }
 pub fn AbstractCulture::equals(Self, Self) -> Bool
 pub fn AbstractCulture::floor_div(Int, Int) -> Int
+pub fn AbstractCulture::get_name(Self) -> String
 pub fn AbstractCulture::index_of(Int, Int) -> Int
+pub fn AbstractCulture::output(Self, &Logger) -> Unit
+pub fn AbstractCulture::to_string(Self) -> String
 pub impl Culture for AbstractCulture
 pub impl Show for AbstractCulture
 
@@ -33,13 +36,19 @@ pub struct AbstractCultureDay[C] {
 }
 pub fn[C] AbstractCultureDay::get_culture(Self[C]) -> C
 pub fn[C] AbstractCultureDay::get_day_index(Self[C]) -> Int
+pub fn[C : Culture] AbstractCultureDay::get_name(Self[C]) -> String
 pub fn[C] AbstractCultureDay::new(C, Int) -> Self[C]
+pub fn[C : Culture] AbstractCultureDay::output(Self[C], &Logger) -> Unit
+pub fn[C : Culture] AbstractCultureDay::to_string(Self[C]) -> String
 pub impl[C : Culture] Culture for AbstractCultureDay[C]
 pub impl[C : Culture] Show for AbstractCultureDay[C]
 
 pub struct AbstractTyme {
 }
+pub fn AbstractTyme::get_name(Self) -> String
 pub fn AbstractTyme::new() -> Self
+pub fn AbstractTyme::output(Self, &Logger) -> Unit
+pub fn AbstractTyme::to_string(Self) -> String
 pub impl Culture for AbstractTyme
 pub impl Show for AbstractTyme
 
@@ -49,7 +58,9 @@ pub struct DayUnit {
 }
 pub fn DayUnit::get_compare_index(Self) -> Int
 pub fn DayUnit::get_day(Self) -> Int
+pub fn DayUnit::get_name(Self) -> String
 pub fn DayUnit::new(MonthUnit, Int) -> Self
+pub fn DayUnit::output(Self, &Logger) -> Unit
 pub fn DayUnit::to_string(Self) -> String
 pub impl Culture for DayUnit
 pub impl Show for DayUnit
@@ -62,13 +73,16 @@ pub fn LoopTyme::equals(Self, Self) -> Bool
 pub fn LoopTyme::from_index(Array[String], Int) -> Self
 pub fn LoopTyme::from_name(Array[String], String) -> Result[Self, String]
 pub fn LoopTyme::get_index(Self) -> Int
+pub fn LoopTyme::get_name(Self) -> String
 pub fn LoopTyme::get_size(Self) -> Int
 pub fn LoopTyme::index_of(Self, Int) -> Int
 pub fn LoopTyme::index_of_name(Self, String) -> Result[Int, String]
 pub fn LoopTyme::next_index(Self, Int) -> Int
+pub fn LoopTyme::output(Self, &Logger) -> Unit
 pub fn LoopTyme::steps_back_to(Self, Int) -> Int
 pub fn LoopTyme::steps_close_to(Self, Int) -> Int
 pub fn LoopTyme::steps_to(Self, Int) -> Int
+pub fn LoopTyme::to_string(Self) -> String
 pub impl Culture for LoopTyme
 pub impl Show for LoopTyme
 
@@ -78,6 +92,10 @@ pub struct Luck {
 pub fn Luck::from_index(Int) -> Self
 pub fn Luck::from_name(String) -> Result[Self, String]
 pub fn Luck::get_index(Self) -> Int
+pub fn Luck::get_name(Self) -> String
+pub fn Luck::next(Self, Int) -> Self
+pub fn Luck::output(Self, &Logger) -> Unit
+pub fn Luck::to_string(Self) -> String
 pub impl Culture for Luck
 pub impl Tyme for Luck
 pub impl Show for Luck
@@ -88,7 +106,10 @@ pub struct MonthUnit {
 }
 pub fn MonthUnit::get_compare_index(Self) -> Int
 pub fn MonthUnit::get_month(Self) -> Int
+pub fn MonthUnit::get_name(Self) -> String
 pub fn MonthUnit::new(YearUnit, Int) -> Self
+pub fn MonthUnit::output(Self, &Logger) -> Unit
+pub fn MonthUnit::to_string(Self) -> String
 pub impl Culture for MonthUnit
 pub impl Show for MonthUnit
 
@@ -98,6 +119,10 @@ pub struct Nine {
 pub fn Nine::from_index(Int) -> Self
 pub fn Nine::from_name(String) -> Result[Self, String]
 pub fn Nine::get_index(Self) -> Int
+pub fn Nine::get_name(Self) -> String
+pub fn Nine::next(Self, Int) -> Self
+pub fn Nine::output(Self, &Logger) -> Unit
+pub fn Nine::to_string(Self) -> String
 pub impl Culture for Nine
 pub impl Tyme for Nine
 pub impl Show for Nine
@@ -111,9 +136,12 @@ pub struct SecondUnit {
 pub fn SecondUnit::get_compare_index(Self) -> Int64
 pub fn SecondUnit::get_hour(Self) -> Int
 pub fn SecondUnit::get_minute(Self) -> Int
+pub fn SecondUnit::get_name(Self) -> String
 pub fn SecondUnit::get_second(Self) -> Int
 pub fn SecondUnit::get_seconds_in_day(Self) -> Int
 pub fn SecondUnit::new(DayUnit, Int, Int, Int) -> Self
+pub fn SecondUnit::output(Self, &Logger) -> Unit
+pub fn SecondUnit::to_string(Self) -> String
 pub fn SecondUnit::validate(Int, Int, Int, Int, Int, Int) -> Result[Unit, String]
 pub impl Culture for SecondUnit
 pub impl Show for SecondUnit
@@ -125,6 +153,8 @@ pub(all) enum Side {
 pub fn Side::from_code(Int) -> Self
 pub fn Side::get_code(Self) -> Int
 pub fn Side::get_name(Self) -> String
+pub fn Side::output(Self, &Logger) -> Unit
+pub fn Side::to_string(Self) -> String
 pub impl Show for Side
 
 pub struct SixStar {
@@ -133,6 +163,10 @@ pub struct SixStar {
 pub fn SixStar::from_index(Int) -> Self
 pub fn SixStar::from_name(String) -> Result[Self, String]
 pub fn SixStar::get_index(Self) -> Int
+pub fn SixStar::get_name(Self) -> String
+pub fn SixStar::next(Self, Int) -> Self
+pub fn SixStar::output(Self, &Logger) -> Unit
+pub fn SixStar::to_string(Self) -> String
 pub impl Culture for SixStar
 pub impl Tyme for SixStar
 pub impl Show for SixStar
@@ -143,6 +177,10 @@ pub struct Sixty {
 pub fn Sixty::from_index(Int) -> Self
 pub fn Sixty::from_name(String) -> Result[Self, String]
 pub fn Sixty::get_index(Self) -> Int
+pub fn Sixty::get_name(Self) -> String
+pub fn Sixty::next(Self, Int) -> Self
+pub fn Sixty::output(Self, &Logger) -> Unit
+pub fn Sixty::to_string(Self) -> String
 pub impl Culture for Sixty
 pub impl Tyme for Sixty
 pub impl Show for Sixty
@@ -153,6 +191,10 @@ pub struct Sound {
 pub fn Sound::from_index(Int) -> Self
 pub fn Sound::from_name(String) -> Result[Self, String]
 pub fn Sound::get_index(Self) -> Int
+pub fn Sound::get_name(Self) -> String
+pub fn Sound::next(Self, Int) -> Self
+pub fn Sound::output(Self, &Logger) -> Unit
+pub fn Sound::to_string(Self) -> String
 pub impl Culture for Sound
 pub impl Tyme for Sound
 pub impl Show for Sound
@@ -163,6 +205,10 @@ pub struct Ten {
 pub fn Ten::from_index(Int) -> Self
 pub fn Ten::from_name(String) -> Result[Self, String]
 pub fn Ten::get_index(Self) -> Int
+pub fn Ten::get_name(Self) -> String
+pub fn Ten::next(Self, Int) -> Self
+pub fn Ten::output(Self, &Logger) -> Unit
+pub fn Ten::to_string(Self) -> String
 pub impl Culture for Ten
 pub impl Tyme for Ten
 pub impl Show for Ten
@@ -173,7 +219,11 @@ pub struct Twenty {
 pub fn Twenty::equals(Self, Self) -> Bool
 pub fn Twenty::from_index(Int) -> Self
 pub fn Twenty::from_name(String) -> Result[Self, String]
+pub fn Twenty::get_name(Self) -> String
 pub fn Twenty::get_sixty(Self) -> Sixty
+pub fn Twenty::next(Self, Int) -> Self
+pub fn Twenty::output(Self, &Logger) -> Unit
+pub fn Twenty::to_string(Self) -> String
 pub impl Culture for Twenty
 pub impl Tyme for Twenty
 pub impl Show for Twenty
@@ -183,8 +233,11 @@ pub struct YearUnit {
   year : Int
 }
 pub fn YearUnit::get_compare_index(Self) -> Int
+pub fn YearUnit::get_name(Self) -> String
 pub fn YearUnit::get_year(Self) -> Int
 pub fn YearUnit::new(Int) -> Self
+pub fn YearUnit::output(Self, &Logger) -> Unit
+pub fn YearUnit::to_string(Self) -> String
 pub impl Culture for YearUnit
 pub impl Show for YearUnit
 
@@ -195,6 +248,8 @@ pub(all) enum YinYang {
 pub fn YinYang::from_code(Int) -> Self
 pub fn YinYang::get_code(Self) -> Int
 pub fn YinYang::get_name(Self) -> String
+pub fn YinYang::output(Self, &Logger) -> Unit
+pub fn YinYang::to_string(Self) -> String
 pub impl Show for YinYang
 
 // Type aliases

@@ -50,7 +50,7 @@ pub impl Tyme for Dipper with fn next(self : Dipper, n : Int) -> Dipper {
 pub extend Dipper with Culture::{get_name}
 
 ///|
-pub extend Dipper with Show::{to_string}
+pub extend Dipper with Show::{to_string, output}
 
 ///|
 pub extend Dipper with Tyme::{next}

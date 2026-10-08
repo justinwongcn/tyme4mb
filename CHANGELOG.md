@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.4] - 2026-10-08
+
+### 变更
+
+- 适配 moon `0.1.20260920`：为全部 `pub impl` 补齐显式 `pub extend` 声明（`Culture`/`Show`/`Tyme`），消除隐式提升弃用（诊断 `implicit_impl_as_method`）；`Show` 需同时列出 `to_string, output`
+- 移除 `Event`、`FetusMonth`、`LegalHoliday`、`LunarFestival`、`Phase`、`ShenSha`、`SolarFestival` 与 trait impl 重复的同名固有方法，函数体原样移入 trait impl，公开接口不变
+- 移除 `tyme/base` 中未使用的 `moonbitlang/core/math` 依赖
+- `pkg.generated.mbti` 同步刷新：新增 218 行均为此前经隐式提升已可调用的方法，无删除、无签名变更
+- 文档：`AGENTS.md` 同步工具链版本、包结构（补 `tyme/base`）与 trait 方法显式提升约定
+
+### 新增
+
+- 日出/日落回归测试：南北半球春分/秋分后昼夜增减趋势、赤道昼长全年稳定性、夏至极昼临界纬度、冬至极夜临界纬度、日出日落次序与对称不变量
+
 ## [0.2.3] - 2026-09-02
 
 ### 新增

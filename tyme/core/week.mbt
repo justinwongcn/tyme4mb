@@ -81,4 +81,4 @@ pub impl Tyme for Week with fn next(self : Week, n : Int) -> Week {
 pub extend Week with Culture::{get_name}
 
 ///|
-pub extend Week with Show::{to_string}
+pub extend Week with Show::{to_string, output}

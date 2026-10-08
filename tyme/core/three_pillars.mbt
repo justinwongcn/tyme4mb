@@ -10,10 +10,10 @@ pub struct ThreePillars {
 }
 
 ///|
-extend ThreePillars with Culture::{get_name}
+pub extend ThreePillars with Culture::{get_name}
 
 ///|
-extend ThreePillars with Show::{to_string}
+pub extend ThreePillars with Show::{to_string, output}
 
 ///|
 // new 从年月日柱名称构造

@@ -6,10 +6,10 @@ pub struct DayUnit {
 }
 
 ///|
-extend DayUnit with Culture::{get_name}
+pub extend DayUnit with Culture::{get_name}
 
 ///|
-pub extend DayUnit with Show::{to_string}
+pub extend DayUnit with Show::{to_string, output}
 
 ///|
 pub fn DayUnit::new(month_unit : MonthUnit, day : Int) -> DayUnit {

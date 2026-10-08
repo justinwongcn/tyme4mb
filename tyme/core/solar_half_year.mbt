@@ -91,7 +91,7 @@ pub impl Tyme for SolarHalfYear with fn next(self : SolarHalfYear, n : Int) -> S
 }
 
 ///|
-pub extend SolarHalfYear with Show::{to_string}
+pub extend SolarHalfYear with Show::{to_string, output}
 
 ///|
 pub extend SolarHalfYear with Tyme::{next}

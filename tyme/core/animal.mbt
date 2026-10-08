@@ -76,7 +76,7 @@ pub impl Tyme for Animal with fn next(self : Animal, n : Int) -> Animal {
 pub extend Animal with Culture::{get_name}
 
 ///|
-pub extend Animal with Show::{to_string}
+pub extend Animal with Show::{to_string, output}
 
 ///|
 pub extend Animal with Tyme::{next}

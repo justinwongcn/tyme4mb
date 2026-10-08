@@ -11,13 +11,13 @@ pub struct HeavenStem {
 }
 
 ///|
-extend HeavenStem with Culture::{get_name}
+pub extend HeavenStem with Culture::{get_name}
 
 ///|
-extend HeavenStem with Show::{to_string}
+pub extend HeavenStem with Show::{to_string, output}
 
 ///|
-extend HeavenStem with Tyme::{next}
+pub extend HeavenStem with Tyme::{next}
 
 ///|
 pub fn HeavenStem::get_index(self : HeavenStem) -> Int {

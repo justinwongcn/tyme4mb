@@ -16,10 +16,10 @@ pub struct SolarTime {
 }
 
 ///|
-extend SolarTime with Culture::{get_name}
+pub extend SolarTime with Culture::{get_name}
 
 ///|
-extend SolarTime with Show::{to_string}
+pub extend SolarTime with Show::{to_string, output}
 
 ///|
 pub fn SolarTime::new(second_unit : SecondUnit) -> SolarTime {

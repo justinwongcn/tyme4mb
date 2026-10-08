@@ -106,4 +106,4 @@ pub fn Phenology::get_julian_day(self : Phenology) -> JulianDay {
 pub extend Phenology with Culture::{get_name}
 
 ///|
-pub extend Phenology with Show::{to_string}
+pub extend Phenology with Show::{to_string, output}

@@ -30,6 +30,9 @@ pub fn Side::get_name(self : Side) -> String {
 }
 
 ///|
+pub extend Side with Show::{to_string, output}
+
+///|
 pub impl Show for Side with fn to_string(self : Side) -> String {
   self.get_name()
 }

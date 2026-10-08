@@ -39,14 +39,15 @@ pub fn ShenSha::get_id(self : ShenSha) -> Int {
 }
 
 ///|
-pub fn ShenSha::get_name(self : ShenSha) -> String {
-  self.loop_tyme.get_name()
-}
+pub extend ShenSha with Culture::{get_name}
 
 ///|
 pub impl Culture for ShenSha with fn get_name(self : ShenSha) -> String {
   self.loop_tyme.get_name()
 }
+
+///|
+pub extend ShenSha with Show::{to_string, output}
 
 ///|
 pub impl Show for ShenSha with fn to_string(self : ShenSha) -> String {

@@ -47,7 +47,7 @@ pub impl Tyme for PlumRain with fn next(self : PlumRain, n : Int) -> PlumRain {
 }
 
 ///|
-pub extend PlumRain with Show::{to_string}
+pub extend PlumRain with Show::{to_string, output}
 
 ///|
 pub extend PlumRain with Tyme::{next}

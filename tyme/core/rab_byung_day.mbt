@@ -18,10 +18,10 @@ pub struct RabByungDay {
 }
 
 ///|
-extend RabByungDay with Culture::{get_name}
+pub extend RabByungDay with Culture::{get_name}
 
 ///|
-extend RabByungDay with Show::{to_string}
+pub extend RabByungDay with Show::{to_string, output}
 
 ///|
 // validate 校验

@@ -74,11 +74,6 @@ pub fn LegalHoliday::get_day(self : LegalHoliday) -> SolarDay {
 }
 
 ///|
-pub fn LegalHoliday::get_name(self : LegalHoliday) -> String {
-  self.name
-}
-
-///|
 pub fn LegalHoliday::is_work(self : LegalHoliday) -> Bool {
   self.work
 }
@@ -88,6 +83,9 @@ pub fn LegalHoliday::is_work(self : LegalHoliday) -> Bool {
 pub fn LegalHoliday::set_data(data : String) -> Unit {
   legal_holiday_data.val = data
 }
+
+///|
+pub extend LegalHoliday with Culture::{get_name}
 
 ///|
 pub impl Culture for LegalHoliday with fn get_name(self : LegalHoliday) -> String {
@@ -196,4 +194,4 @@ fn records_for_year(y : Int) -> Array[String] {
 }
 
 ///|
-pub extend LegalHoliday with Show::{to_string}
+pub extend LegalHoliday with Show::{to_string, output}

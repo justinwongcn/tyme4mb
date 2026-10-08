@@ -10,13 +10,13 @@ pub struct SixtyCycleDay {
 }
 
 ///|
-extend SixtyCycleDay with Culture::{get_name}
+pub extend SixtyCycleDay with Culture::{get_name}
 
 ///|
-extend SixtyCycleDay with Show::{to_string}
+pub extend SixtyCycleDay with Show::{to_string, output}
 
 ///|
-extend SixtyCycleDay with Tyme::{next}
+pub extend SixtyCycleDay with Tyme::{next}
 
 ///|
 // new 从公历日/干支月/日柱构造

@@ -78,12 +78,6 @@ pub fn Event::get_month(self : Event, year : Int) -> (Int, Int) {
 }
 
 ///|
-// get_name 事件名称
-pub fn Event::get_name(self : Event) -> String {
-  self.name
-}
-
-///|
 // get_data 事件数据
 pub fn Event::get_data(self : Event) -> String {
   self.data
@@ -309,9 +303,15 @@ pub fn Event::from_solar_day(d : SolarDay) -> Array[Event] {
 }
 
 ///|
+pub extend Event with Culture::{get_name}
+
+///|
 pub impl Culture for Event with fn get_name(self : Event) -> String {
   self.name
 }
+
+///|
+pub extend Event with Show::{to_string, output}
 
 ///|
 pub impl Show for Event with fn to_string(self : Event) -> String {

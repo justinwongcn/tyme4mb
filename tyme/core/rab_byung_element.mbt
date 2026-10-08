@@ -92,4 +92,4 @@ pub impl Tyme for RabByungElement with fn next(self : RabByungElement, n : Int) 
 }
 
 ///|
-pub extend RabByungElement with Show::{to_string}
+pub extend RabByungElement with Show::{to_string, output}

@@ -11,13 +11,13 @@ pub struct Element {
 }
 
 ///|
-extend Element with Culture::{get_name}
+pub extend Element with Culture::{get_name}
 
 ///|
-extend Element with Show::{to_string}
+pub extend Element with Show::{to_string, output}
 
 ///|
-extend Element with Tyme::{next}
+pub extend Element with Tyme::{next}
 
 ///|
 pub fn Element::get_index(self : Element) -> Int {

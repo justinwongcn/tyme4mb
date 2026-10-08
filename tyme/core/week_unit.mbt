@@ -15,7 +15,7 @@ pub struct WeekUnit {
 }
 
 ///|
-extend WeekUnit with Culture::{get_name}
+pub extend WeekUnit with Culture::{get_name}
 
 ///|
 pub fn WeekUnit::new(
@@ -65,6 +65,9 @@ pub fn WeekUnit::validate(
 pub impl Culture for WeekUnit with fn get_name(self : WeekUnit) -> String {
   self.month_unit.get_name()
 }
+
+///|
+pub extend WeekUnit with Show::{to_string, output}
 
 ///|
 pub impl Show for WeekUnit with fn to_string(self : WeekUnit) -> String {

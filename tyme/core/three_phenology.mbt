@@ -49,7 +49,7 @@ pub impl Tyme for ThreePhenology with fn next(self : ThreePhenology, n : Int) ->
 pub extend ThreePhenology with Culture::{get_name}
 
 ///|
-pub extend ThreePhenology with Show::{to_string}
+pub extend ThreePhenology with Show::{to_string, output}
 
 ///|
 pub extend ThreePhenology with Tyme::{next}

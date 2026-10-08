@@ -50,7 +50,7 @@ pub impl Tyme for LunarSeason with fn next(self : LunarSeason, n : Int) -> Lunar
 pub extend LunarSeason with Culture::{get_name}
 
 ///|
-pub extend LunarSeason with Show::{to_string}
+pub extend LunarSeason with Show::{to_string, output}
 
 ///|
 pub extend LunarSeason with Tyme::{next}

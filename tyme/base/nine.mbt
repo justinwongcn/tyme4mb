@@ -32,14 +32,23 @@ pub fn Nine::get_index(self : Nine) -> Int {
 }
 
 ///|
+pub extend Nine with Culture::{get_name}
+
+///|
 pub impl Culture for Nine with fn get_name(self : Nine) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
+pub extend Nine with Show::{to_string, output}
+
+///|
 pub impl Show for Nine with fn to_string(self : Nine) -> String {
   self.loop_tyme.get_name()
 }
+
+///|
+pub extend Nine with Tyme::{next}
 
 ///|
 pub impl Tyme for Nine with fn next(self : Nine, n : Int) -> Nine {

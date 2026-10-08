@@ -35,4 +35,4 @@ pub impl Show for Gender with fn to_string(self : Gender) -> String {
 }
 
 ///|
-pub extend Gender with Show::{to_string}
+pub extend Gender with Show::{to_string, output}

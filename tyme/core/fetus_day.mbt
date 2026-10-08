@@ -8,10 +8,10 @@ pub struct FetusDay {
 }
 
 ///|
-extend FetusDay with Culture::{get_name}
+pub extend FetusDay with Culture::{get_name}
 
 ///|
-extend FetusDay with Show::{to_string}
+pub extend FetusDay with Show::{to_string, output}
 
 ///|
 // new 从干支构造

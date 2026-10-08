@@ -42,7 +42,7 @@ pub impl Tyme for FetusEarthBranch with fn next(
 }
 
 ///|
-pub extend FetusEarthBranch with Show::{to_string}
+pub extend FetusEarthBranch with Show::{to_string, output}
 
 ///|
 pub extend FetusEarthBranch with Tyme::{next}

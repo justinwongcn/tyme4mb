@@ -176,7 +176,7 @@ pub impl Tyme for God with fn next(self : God, n : Int) -> God {
 pub extend God with Culture::{get_name}
 
 ///|
-pub extend God with Show::{to_string}
+pub extend God with Show::{to_string, output}
 
 ///|
 pub extend God with Tyme::{next}

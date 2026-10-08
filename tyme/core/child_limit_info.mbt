@@ -96,4 +96,4 @@ pub impl Show for ChildLimitInfo with fn to_string(self : ChildLimitInfo) -> Str
 }
 
 ///|
-pub extend ChildLimitInfo with Show::{to_string}
+pub extend ChildLimitInfo with Show::{to_string, output}

@@ -50,7 +50,7 @@ pub impl Tyme for TenStar with fn next(self : TenStar, n : Int) -> TenStar {
 pub extend TenStar with Culture::{get_name}
 
 ///|
-pub extend TenStar with Show::{to_string}
+pub extend TenStar with Show::{to_string, output}
 
 ///|
 pub extend TenStar with Tyme::{next}

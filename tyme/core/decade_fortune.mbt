@@ -94,7 +94,7 @@ pub impl Tyme for DecadeFortune with fn next(self : DecadeFortune, n : Int) -> D
 }
 
 ///|
-pub extend DecadeFortune with Show::{to_string}
+pub extend DecadeFortune with Show::{to_string, output}
 
 ///|
 pub extend DecadeFortune with Tyme::{next}

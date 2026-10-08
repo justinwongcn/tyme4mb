@@ -16,13 +16,13 @@ pub struct LunarMonth {
 }
 
 ///|
-extend LunarMonth with Culture::{get_name}
+pub extend LunarMonth with Culture::{get_name}
 
 ///|
-extend LunarMonth with Show::{to_string}
+pub extend LunarMonth with Show::{to_string, output}
 
 ///|
-extend LunarMonth with Tyme::{next}
+pub extend LunarMonth with Tyme::{next}
 
 ///|
 // validate 校验

@@ -27,11 +27,17 @@ pub fn[C] AbstractCultureDay::get_culture(self : AbstractCultureDay[C]) -> C {
 }
 
 ///|
+pub extend AbstractCultureDay with Culture::{get_name}
+
+///|
 pub impl[C : Culture] Culture for AbstractCultureDay[C] with fn get_name(
   self : AbstractCultureDay[C],
 ) -> String {
   Culture::get_name(self.culture)
 }
+
+///|
+pub extend AbstractCultureDay with Show::{to_string, output}
 
 ///|
 pub impl[C : Culture] Show for AbstractCultureDay[C] with fn to_string(

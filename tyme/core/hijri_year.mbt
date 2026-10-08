@@ -8,7 +8,7 @@ pub struct HijriYear {
 pub extend HijriYear with Culture::{get_name}
 
 ///|
-pub extend HijriYear with Show::{to_string}
+pub extend HijriYear with Show::{to_string, output}
 
 ///|
 pub fn HijriYear::new(year_unit : YearUnit) -> HijriYear {

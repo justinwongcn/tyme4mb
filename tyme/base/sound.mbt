@@ -35,14 +35,23 @@ pub fn Sound::get_index(self : Sound) -> Int {
 }
 
 ///|
+pub extend Sound with Culture::{get_name}
+
+///|
 pub impl Culture for Sound with fn get_name(self : Sound) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
+pub extend Sound with Show::{to_string, output}
+
+///|
 pub impl Show for Sound with fn to_string(self : Sound) -> String {
   self.loop_tyme.get_name()
 }
+
+///|
+pub extend Sound with Tyme::{next}
 
 ///|
 pub impl Tyme for Sound with fn next(self : Sound, n : Int) -> Sound {

@@ -19,7 +19,7 @@ pub struct HijriDay {
 pub extend HijriDay with Culture::{get_name}
 
 ///|
-pub extend HijriDay with Show::{to_string}
+pub extend HijriDay with Show::{to_string, output}
 
 ///|
 pub fn HijriDay::new(day_unit : DayUnit) -> HijriDay {

@@ -66,7 +66,7 @@ pub impl Tyme for Fortune with fn next(self : Fortune, n : Int) -> Fortune {
 }
 
 ///|
-pub extend Fortune with Show::{to_string}
+pub extend Fortune with Show::{to_string, output}
 
 ///|
 pub extend Fortune with Tyme::{next}

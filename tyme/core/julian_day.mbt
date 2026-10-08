@@ -11,10 +11,10 @@ pub struct JulianDay {
 }
 
 ///|
-extend JulianDay with Culture::{get_name}
+pub extend JulianDay with Culture::{get_name}
 
 ///|
-extend JulianDay with Tyme::{next}
+pub extend JulianDay with Tyme::{next}
 
 ///|
 // from_julian_day 从儒略日构造
@@ -145,6 +145,9 @@ fn JulianDay::get_solar_day_unchecked(self : JulianDay) -> SolarDay {
 pub impl Culture for JulianDay with fn get_name(self : JulianDay) -> String {
   "\{self.day}"
 }
+
+///|
+pub extend JulianDay with Show::{to_string, output}
 
 ///|
 pub impl Show for JulianDay with fn to_string(self : JulianDay) -> String {

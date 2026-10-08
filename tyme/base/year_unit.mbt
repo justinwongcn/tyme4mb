@@ -6,7 +6,7 @@ pub struct YearUnit {
 }
 
 ///|
-extend YearUnit with Culture::{get_name}
+pub extend YearUnit with Culture::{get_name}
 
 ///|
 pub fn YearUnit::new(year : Int) -> YearUnit {
@@ -29,6 +29,9 @@ pub fn YearUnit::get_compare_index(self : YearUnit) -> Int {
 pub impl Culture for YearUnit with fn get_name(self : YearUnit) -> String {
   self.abstract_tyme.get_name()
 }
+
+///|
+pub extend YearUnit with Show::{to_string, output}
 
 ///|
 pub impl Show for YearUnit with fn to_string(self : YearUnit) -> String {

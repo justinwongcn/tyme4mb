@@ -6,13 +6,13 @@ pub struct SixtyCycleYear {
 }
 
 ///|
-extend SixtyCycleYear with Culture::{get_name}
+pub extend SixtyCycleYear with Culture::{get_name}
 
 ///|
-extend SixtyCycleYear with Show::{to_string}
+pub extend SixtyCycleYear with Show::{to_string, output}
 
 ///|
-extend SixtyCycleYear with Tyme::{next}
+pub extend SixtyCycleYear with Tyme::{next}
 
 ///|
 // from_year 从年构造

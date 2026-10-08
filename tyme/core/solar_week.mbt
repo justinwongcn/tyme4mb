@@ -166,4 +166,4 @@ pub impl Show for SolarWeek with fn to_string(self : SolarWeek) -> String {
 }
 
 ///|
-pub extend SolarWeek with Show::{to_string}
+pub extend SolarWeek with Show::{to_string, output}

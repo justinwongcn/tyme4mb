@@ -121,4 +121,4 @@ pub fn SolarTerm::get_cursory_julian_day(self : SolarTerm) -> Double {
 pub extend SolarTerm with Culture::{get_name}
 
 ///|
-pub extend SolarTerm with Show::{to_string}
+pub extend SolarTerm with Show::{to_string, output}

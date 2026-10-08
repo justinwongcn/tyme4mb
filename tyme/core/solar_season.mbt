@@ -80,7 +80,7 @@ pub impl Tyme for SolarSeason with fn next(self : SolarSeason, n : Int) -> Solar
 }
 
 ///|
-pub extend SolarSeason with Show::{to_string}
+pub extend SolarSeason with Show::{to_string, output}
 
 ///|
 pub extend SolarSeason with Tyme::{next}

@@ -151,16 +151,13 @@ pub fn LunarFestival::next(self : LunarFestival, n : Int) -> LunarFestival? {
 }
 
 ///|
-// get_name 名称
-pub fn LunarFestival::get_name(self : LunarFestival) -> String {
-  Culture::get_name(self.festival)
-}
-
-///|
 // get_index 索引
 pub fn LunarFestival::get_index(self : LunarFestival) -> Int {
   self.festival.get_index()
 }
+
+///|
+pub extend LunarFestival with Culture::{get_name}
 
 ///|
 pub impl Culture for LunarFestival with fn get_name(self : LunarFestival) -> String {
@@ -173,4 +170,4 @@ pub impl Show for LunarFestival with fn to_string(self : LunarFestival) -> Strin
 }
 
 ///|
-pub extend LunarFestival with Show::{to_string}
+pub extend LunarFestival with Show::{to_string, output}

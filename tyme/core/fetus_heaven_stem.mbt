@@ -39,7 +39,7 @@ pub impl Tyme for FetusHeavenStem with fn next(self : FetusHeavenStem, n : Int) 
 }
 
 ///|
-pub extend FetusHeavenStem with Show::{to_string}
+pub extend FetusHeavenStem with Show::{to_string, output}
 
 ///|
 pub extend FetusHeavenStem with Tyme::{next}

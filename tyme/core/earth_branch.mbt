@@ -14,13 +14,13 @@ pub struct EarthBranch {
 }
 
 ///|
-extend EarthBranch with Culture::{get_name}
+pub extend EarthBranch with Culture::{get_name}
 
 ///|
-extend EarthBranch with Show::{to_string}
+pub extend EarthBranch with Show::{to_string, output}
 
 ///|
-extend EarthBranch with Tyme::{next}
+pub extend EarthBranch with Tyme::{next}
 
 ///|
 pub fn EarthBranch::get_index(self : EarthBranch) -> Int {

@@ -45,4 +45,4 @@ pub fn PengZu::get_peng_zu_earth_branch(self : PengZu) -> PengZuEarthBranch {
 }
 
 ///|
-pub extend PengZu with Show::{to_string}
+pub extend PengZu with Show::{to_string, output}

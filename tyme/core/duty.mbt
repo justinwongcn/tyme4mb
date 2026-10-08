@@ -50,7 +50,7 @@ pub impl Tyme for Duty with fn next(self : Duty, n : Int) -> Duty {
 pub extend Duty with Culture::{get_name}
 
 ///|
-pub extend Duty with Show::{to_string}
+pub extend Duty with Show::{to_string, output}
 
 ///|
 pub extend Duty with Tyme::{next}

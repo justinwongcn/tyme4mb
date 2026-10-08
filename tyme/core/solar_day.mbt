@@ -17,10 +17,10 @@ pub struct SolarDay {
 }
 
 ///|
-extend SolarDay with Culture::{get_name}
+pub extend SolarDay with Culture::{get_name}
 
 ///|
-extend SolarDay with Show::{to_string}
+pub extend SolarDay with Show::{to_string, output}
 
 ///|
 pub fn SolarDay::new(day_unit : DayUnit) -> SolarDay {

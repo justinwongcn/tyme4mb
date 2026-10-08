@@ -187,4 +187,4 @@ pub impl Tyme for SixtyCycleHour with fn next(self : SixtyCycleHour, n : Int) ->
 }
 
 ///|
-pub extend SixtyCycleHour with Show::{to_string}
+pub extend SixtyCycleHour with Show::{to_string, output}

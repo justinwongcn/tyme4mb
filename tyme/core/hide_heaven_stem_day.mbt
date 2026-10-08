@@ -43,4 +43,4 @@ pub impl Show for HideHeavenStemDay with fn to_string(self : HideHeavenStemDay) 
 }
 
 ///|
-pub extend HideHeavenStemDay with Show::{to_string}
+pub extend HideHeavenStemDay with Show::{to_string, output}

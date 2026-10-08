@@ -129,6 +129,9 @@ pub impl Culture for KitchenGodSteed with fn get_name(_ : KitchenGodSteed) -> St
 }
 
 ///|
+pub extend KitchenGodSteed with Show::{to_string, output}
+
+///|
 pub impl Show for KitchenGodSteed with fn to_string(self : KitchenGodSteed) -> String {
   Culture::get_name(self)
 }

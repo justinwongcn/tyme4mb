@@ -50,7 +50,7 @@ pub impl Tyme for Terrain with fn next(self : Terrain, n : Int) -> Terrain {
 pub extend Terrain with Culture::{get_name}
 
 ///|
-pub extend Terrain with Show::{to_string}
+pub extend Terrain with Show::{to_string, output}
 
 ///|
 pub extend Terrain with Tyme::{next}

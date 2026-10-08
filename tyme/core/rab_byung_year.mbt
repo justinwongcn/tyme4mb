@@ -10,10 +10,10 @@ pub struct RabByungYear {
 }
 
 ///|
-extend RabByungYear with Culture::{get_name}
+pub extend RabByungYear with Culture::{get_name}
 
 ///|
-extend RabByungYear with Show::{to_string}
+pub extend RabByungYear with Show::{to_string, output}
 
 ///|
 // validate 校验

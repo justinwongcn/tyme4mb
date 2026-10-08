@@ -46,26 +46,6 @@ pub fn Phase::from_name(
 }
 
 ///|
-// next 推移
-pub fn Phase::next(self : Phase, n : Int) -> Phase {
-  let size = self.loop_tyme.get_size()
-  let mut i = self.loop_tyme.get_index() + n
-  if i < 0 {
-    i = i - size
-  }
-  i = i / size
-  let mut month = LunarMonth::from_ym(self.lunar_year, self.lunar_month).unwrap()
-  if i != 0 {
-    month = month.next(i)
-  }
-  Phase::from_index(
-    month.get_year(),
-    month.get_month_with_leap(),
-    self.loop_tyme.next_index(n),
-  )
-}
-
-///|
 fn Phase::get_start_solar_time(self : Phase) -> SolarTime {
   let n = @math.floor(
     (self.lunar_year - 2000).to_double() * 365.2422 / 29.53058886,
@@ -123,12 +103,6 @@ pub fn Phase::get_index(self : Phase) -> Int {
 }
 
 ///|
-// get_name 名称
-pub fn Phase::get_name(self : Phase) -> String {
-  phase_names()[self.loop_tyme.get_index()]
-}
-
-///|
 // get_lunar_year 农历年
 pub fn Phase::get_lunar_year(self : Phase) -> Int {
   self.lunar_year
@@ -141,8 +115,11 @@ pub fn Phase::get_lunar_month(self : Phase) -> Int {
 }
 
 ///|
+pub extend Phase with Culture::{get_name}
+
+///|
 pub impl Culture for Phase with fn get_name(self : Phase) -> String {
-  self.get_name()
+  phase_names()[self.loop_tyme.get_index()]
 }
 
 ///|
@@ -151,9 +128,26 @@ pub impl Show for Phase with fn to_string(self : Phase) -> String {
 }
 
 ///|
+pub extend Phase with Tyme::{next}
+
+///|
 pub impl Tyme for Phase with fn next(self : Phase, n : Int) -> Phase {
-  self.next(n)
+  let size = self.loop_tyme.get_size()
+  let mut i = self.loop_tyme.get_index() + n
+  if i < 0 {
+    i = i - size
+  }
+  i = i / size
+  let mut month = LunarMonth::from_ym(self.lunar_year, self.lunar_month).unwrap()
+  if i != 0 {
+    month = month.next(i)
+  }
+  Phase::from_index(
+    month.get_year(),
+    month.get_month_with_leap(),
+    self.loop_tyme.next_index(n),
+  )
 }
 
 ///|
-pub extend Phase with Show::{to_string}
+pub extend Phase with Show::{to_string, output}

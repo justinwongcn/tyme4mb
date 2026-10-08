@@ -14,7 +14,7 @@ pub struct Twenty {
 }
 
 ///|
-extend Twenty with Show::{to_string}
+pub extend Twenty with Show::{to_string, output}
 
 ///|
 pub fn Twenty::from_index(index : Int) -> Twenty {
@@ -41,6 +41,9 @@ pub fn Twenty::get_sixty(self : Twenty) -> Sixty {
 }
 
 ///|
+pub extend Twenty with Culture::{get_name}
+
+///|
 pub impl Culture for Twenty with fn get_name(self : Twenty) -> String {
   self.loop_tyme.get_name()
 }
@@ -49,6 +52,9 @@ pub impl Culture for Twenty with fn get_name(self : Twenty) -> String {
 pub impl Show for Twenty with fn to_string(self : Twenty) -> String {
   self.loop_tyme.get_name()
 }
+
+///|
+pub extend Twenty with Tyme::{next}
 
 ///|
 pub impl Tyme for Twenty with fn next(self : Twenty, n : Int) -> Twenty {

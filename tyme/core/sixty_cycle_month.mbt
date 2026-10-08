@@ -8,13 +8,13 @@ pub struct SixtyCycleMonth {
 }
 
 ///|
-extend SixtyCycleMonth with Culture::{get_name}
+pub extend SixtyCycleMonth with Culture::{get_name}
 
 ///|
-extend SixtyCycleMonth with Show::{to_string}
+pub extend SixtyCycleMonth with Show::{to_string, output}
 
 ///|
-extend SixtyCycleMonth with Tyme::{next}
+pub extend SixtyCycleMonth with Tyme::{next}
 
 ///|
 // new 从年与月柱构造

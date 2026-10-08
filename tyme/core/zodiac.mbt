@@ -17,7 +17,7 @@ pub struct Zodiac {
 pub extend Zodiac with Culture::{get_name}
 
 ///|
-pub extend Zodiac with Show::{to_string}
+pub extend Zodiac with Show::{to_string, output}
 
 ///|
 pub fn Zodiac::from_index(index : Int) -> Zodiac {

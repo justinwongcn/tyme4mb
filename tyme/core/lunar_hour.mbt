@@ -5,7 +5,7 @@ pub struct LunarHour {
 }
 
 ///|
-pub extend LunarHour with Show::{to_string}
+pub extend LunarHour with Show::{to_string, output}
 
 ///|
 // validate 校验

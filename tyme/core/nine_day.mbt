@@ -35,4 +35,4 @@ pub impl Show for NineDay with fn to_string(self : NineDay) -> String {
 pub extend NineDay with Culture::{get_name}
 
 ///|
-pub extend NineDay with Show::{to_string}
+pub extend NineDay with Show::{to_string, output}

@@ -4,10 +4,10 @@
 pub struct AbstractCulture {}
 
 ///|
-extend AbstractCulture with Culture::{get_name}
+pub extend AbstractCulture with Culture::{get_name}
 
 ///|
-extend AbstractCulture with Show::{to_string}
+pub extend AbstractCulture with Show::{to_string, output}
 
 ///|
 // index_of 转换为不超范围的索引

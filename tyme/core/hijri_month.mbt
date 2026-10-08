@@ -18,7 +18,7 @@ pub struct HijriMonth {
 pub extend HijriMonth with Culture::{get_name}
 
 ///|
-pub extend HijriMonth with Show::{to_string}
+pub extend HijriMonth with Show::{to_string, output}
 
 ///|
 pub fn HijriMonth::new(month_unit : MonthUnit) -> HijriMonth {

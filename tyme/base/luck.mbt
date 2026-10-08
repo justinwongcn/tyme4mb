@@ -29,14 +29,23 @@ pub fn Luck::get_index(self : Luck) -> Int {
 }
 
 ///|
+pub extend Luck with Culture::{get_name}
+
+///|
 pub impl Culture for Luck with fn get_name(self : Luck) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
+pub extend Luck with Show::{to_string, output}
+
+///|
 pub impl Show for Luck with fn to_string(self : Luck) -> String {
   self.loop_tyme.get_name()
 }
+
+///|
+pub extend Luck with Tyme::{next}
 
 ///|
 pub impl Tyme for Luck with fn next(self : Luck, n : Int) -> Luck {

@@ -112,16 +112,13 @@ pub fn SolarFestival::next(self : SolarFestival, n : Int) -> SolarFestival? {
 }
 
 ///|
-// get_name 名称
-pub fn SolarFestival::get_name(self : SolarFestival) -> String {
-  Culture::get_name(self.festival)
-}
-
-///|
 // get_index 索引
 pub fn SolarFestival::get_index(self : SolarFestival) -> Int {
   self.festival.get_index()
 }
+
+///|
+pub extend SolarFestival with Culture::{get_name}
 
 ///|
 pub impl Culture for SolarFestival with fn get_name(self : SolarFestival) -> String {
@@ -134,4 +131,4 @@ pub impl Show for SolarFestival with fn to_string(self : SolarFestival) -> Strin
 }
 
 ///|
-pub extend SolarFestival with Show::{to_string}
+pub extend SolarFestival with Show::{to_string, output}

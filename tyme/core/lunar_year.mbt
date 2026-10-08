@@ -5,13 +5,13 @@ pub struct LunarYear {
 }
 
 ///|
-extend LunarYear with Culture::{get_name}
+pub extend LunarYear with Culture::{get_name}
 
 ///|
-extend LunarYear with Show::{to_string}
+pub extend LunarYear with Show::{to_string, output}
 
 ///|
-extend LunarYear with Tyme::{next}
+pub extend LunarYear with Tyme::{next}
 
 ///|
 // validate 校验

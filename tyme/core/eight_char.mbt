@@ -14,10 +14,10 @@ pub struct EightChar {
 }
 
 ///|
-extend EightChar with Culture::{get_name}
+pub extend EightChar with Culture::{get_name}
 
 ///|
-extend EightChar with Show::{to_string}
+pub extend EightChar with Show::{to_string, output}
 
 ///|
 // new 从年月日时柱名称构造

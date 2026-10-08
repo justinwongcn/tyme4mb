@@ -20,13 +20,13 @@ pub struct SolarMonth {
 }
 
 ///|
-extend SolarMonth with Culture::{get_name}
+pub extend SolarMonth with Culture::{get_name}
 
 ///|
-extend SolarMonth with Show::{to_string}
+pub extend SolarMonth with Show::{to_string, output}
 
 ///|
-extend SolarMonth with Tyme::{next}
+pub extend SolarMonth with Tyme::{next}
 
 ///|
 pub fn SolarMonth::new(month_unit : MonthUnit) -> SolarMonth {

@@ -29,26 +29,17 @@ pub fn FetusMonth::from_lunar_month(lunar_month : LunarMonth) -> FetusMonth? {
 }
 
 ///|
-// next 推移
-pub fn FetusMonth::next(self : FetusMonth, n : Int) -> FetusMonth {
-  FetusMonth::new(self.loop_tyme.next_index(n))
-}
-
-///|
 // get_index 索引
 pub fn FetusMonth::get_index(self : FetusMonth) -> Int {
   self.loop_tyme.get_index()
 }
 
 ///|
-// get_name 名称
-pub fn FetusMonth::get_name(self : FetusMonth) -> String {
-  fetus_month_names()[self.loop_tyme.get_index()]
-}
+pub extend FetusMonth with Culture::{get_name}
 
 ///|
 pub impl Culture for FetusMonth with fn get_name(self : FetusMonth) -> String {
-  self.get_name()
+  fetus_month_names()[self.loop_tyme.get_index()]
 }
 
 ///|
@@ -57,9 +48,12 @@ pub impl Show for FetusMonth with fn to_string(self : FetusMonth) -> String {
 }
 
 ///|
+pub extend FetusMonth with Tyme::{next}
+
+///|
 pub impl Tyme for FetusMonth with fn next(self : FetusMonth, n : Int) -> FetusMonth {
-  self.next(n)
+  FetusMonth::new(self.loop_tyme.next_index(n))
 }
 
 ///|
-pub extend FetusMonth with Show::{to_string}
+pub extend FetusMonth with Show::{to_string, output}

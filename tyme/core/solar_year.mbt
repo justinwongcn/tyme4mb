@@ -5,10 +5,10 @@ pub struct SolarYear {
 }
 
 ///|
-extend SolarYear with Culture::{get_name}
+pub extend SolarYear with Culture::{get_name}
 
 ///|
-extend SolarYear with Show::{to_string}
+pub extend SolarYear with Show::{to_string, output}
 
 ///|
 pub fn SolarYear::new(year_unit : YearUnit) -> SolarYear {
@@ -123,6 +123,9 @@ pub impl Culture for SolarYear with fn get_name(self : SolarYear) -> String {
 pub impl Show for SolarYear with fn to_string(self : SolarYear) -> String {
   self.get_name()
 }
+
+///|
+pub extend SolarYear with Tyme::{next}
 
 ///|
 pub impl Tyme for SolarYear with fn next(self : SolarYear, n : Int) -> SolarYear {

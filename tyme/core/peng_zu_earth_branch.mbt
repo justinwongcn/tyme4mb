@@ -16,7 +16,7 @@ pub struct PengZuEarthBranch {
 }
 
 ///|
-pub extend PengZuEarthBranch with Show::{to_string}
+pub extend PengZuEarthBranch with Show::{to_string, output}
 
 ///|
 pub fn PengZuEarthBranch::from_index(index : Int) -> PengZuEarthBranch {

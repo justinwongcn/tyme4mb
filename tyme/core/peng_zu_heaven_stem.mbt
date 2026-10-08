@@ -16,7 +16,7 @@ pub struct PengZuHeavenStem {
 }
 
 ///|
-pub extend PengZuHeavenStem with Show::{to_string}
+pub extend PengZuHeavenStem with Show::{to_string, output}
 
 ///|
 pub fn PengZuHeavenStem::from_index(index : Int) -> PengZuHeavenStem {

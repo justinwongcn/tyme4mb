@@ -29,14 +29,23 @@ pub fn Sixty::get_index(self : Sixty) -> Int {
 }
 
 ///|
+pub extend Sixty with Culture::{get_name}
+
+///|
 pub impl Culture for Sixty with fn get_name(self : Sixty) -> String {
   self.loop_tyme.get_name()
 }
 
 ///|
+pub extend Sixty with Show::{to_string, output}
+
+///|
 pub impl Show for Sixty with fn to_string(self : Sixty) -> String {
   self.loop_tyme.get_name()
 }
+
+///|
+pub extend Sixty with Tyme::{next}
 
 ///|
 pub impl Tyme for Sixty with fn next(self : Sixty, n : Int) -> Sixty {

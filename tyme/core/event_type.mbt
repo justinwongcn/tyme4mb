@@ -51,4 +51,4 @@ pub impl Show for EventType with fn to_string(self : EventType) -> String {
 }
 
 ///|
-pub extend EventType with Show::{to_string}
+pub extend EventType with Show::{to_string, output}

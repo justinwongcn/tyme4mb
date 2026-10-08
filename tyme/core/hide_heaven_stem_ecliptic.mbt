@@ -14,7 +14,7 @@ pub struct EclipticHideHeavenStemDay {
 }
 
 ///|
-extend EclipticHideHeavenStemDay with Culture::{get_name}
+pub extend EclipticHideHeavenStemDay with Culture::{get_name}
 
 ///|
 pub fn EclipticHideHeavenStemDay::new(
@@ -76,6 +76,9 @@ pub impl Culture for EclipticHideHeavenStemDay with fn get_name(
 }
 
 ///|
+pub extend EclipticHideHeavenStemDay with Show::{to_string, output}
+
+///|
 pub impl Show for EclipticHideHeavenStemDay with fn to_string(
   self : EclipticHideHeavenStemDay,
 ) -> String {
@@ -128,10 +131,10 @@ pub fn SolarTime::get_hide_heaven_stem_by_ecliptic(
 ) -> EclipticHideHeavenStemDay {
   // 1. 太阳视黄经（弧度）：北京时间儒略日 → UT（减8h）→ ΔT → TD 世纪数 → sa_lon
   let lon_rad = self.get_julian_day().get_day()
-    |> fn(jd) { jd - OneThird } // 北京时间 → UT（减 8h）
-    |> fn(jd_ut) { jd_ut - J2000.to_double() } // J2000 起 UT 天数
-    |> fn(t_ut) { (t_ut + dt_t(t_ut)) / 36525.0 } // ΔT → J2000 起 TD 世纪数
-    |> fn(t_td) { sa_lon(t_td, 10) }
+    |> jd => { jd - OneThird } // 北京时间 → UT（减 8h）
+    |> jd_ut => { jd_ut - J2000.to_double() } // J2000 起 UT 天数
+    |> t_ut => { (t_ut + dt_t(t_ut)) / 36525.0 } // ΔT → J2000 起 TD 世纪数
+    |> t_td => { sa_lon(t_td, 10) }
   // 2. 归一化到 [0, 360) 度
   let lon_deg = lon_rad * 180.0 / @math.PI
   let lon_deg = lon_deg - 360.0 * @math.floor(lon_deg / 360.0)

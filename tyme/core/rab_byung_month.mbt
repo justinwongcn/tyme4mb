@@ -16,10 +16,10 @@ pub struct RabByungMonth {
 }
 
 ///|
-extend RabByungMonth with Culture::{get_name}
+pub extend RabByungMonth with Culture::{get_name}
 
 ///|
-extend RabByungMonth with Show::{to_string}
+pub extend RabByungMonth with Show::{to_string, output}
 
 ///|
 // validate 校验

@@ -209,7 +209,10 @@ pub struct AbstractFestival {
 }
 pub fn AbstractFestival::get_day(Self) -> @base.DayUnit
 pub fn AbstractFestival::get_index(Self) -> Int
+pub fn AbstractFestival::get_name(Self) -> String
 pub fn AbstractFestival::new(Int, Event, @base.DayUnit) -> Self
+pub fn AbstractFestival::output(Self, &Logger) -> Unit
+pub fn AbstractFestival::to_string(Self) -> String
 pub impl @base.Culture for AbstractFestival
 pub impl Show for AbstractFestival
 
@@ -223,6 +226,7 @@ pub fn Animal::get_index(Self) -> Int
 pub fn Animal::get_name(Self) -> String
 pub fn Animal::get_size(Self) -> Int
 pub fn Animal::next(Self, Int) -> Self
+pub fn Animal::output(Self, &Logger) -> Unit
 pub fn Animal::steps_back_to(Self, Int) -> Int
 pub fn Animal::steps_close_to(Self, Int) -> Int
 pub fn Animal::steps_to(Self, Int) -> Int
@@ -239,6 +243,8 @@ pub fn Beast::from_name(String) -> Result[Self, String]
 pub fn Beast::get_index(Self) -> Int
 pub fn Beast::get_name(Self) -> String
 pub fn Beast::get_zone(Self) -> Zone
+pub fn Beast::next(Self, Int) -> Self
+pub fn Beast::output(Self, &Logger) -> Unit
 pub fn Beast::to_string(Self) -> String
 pub impl @base.Culture for Beast
 pub impl @base.Tyme for Beast
@@ -270,7 +276,9 @@ pub fn ChildLimit::get_start_sixty_cycle_year(Self) -> SixtyCycleYear
 pub fn ChildLimit::get_start_time(Self) -> SolarTime
 pub fn ChildLimit::get_year_count(Self) -> Int
 pub fn ChildLimit::is_forward(Self) -> Bool
+pub fn ChildLimit::output(Self, &Logger) -> Unit
 pub fn ChildLimit::set_provider(&IChildLimitProvider) -> Unit
+pub fn ChildLimit::to_string(Self) -> String
 pub impl Show for ChildLimit
 
 pub struct ChildLimitInfo {
@@ -290,6 +298,7 @@ pub fn ChildLimitInfo::get_month_count(Self) -> Int
 pub fn ChildLimitInfo::get_start_time(Self) -> SolarTime
 pub fn ChildLimitInfo::get_year_count(Self) -> Int
 pub fn ChildLimitInfo::new(SolarTime, SolarTime, Int, Int, Int, Int, Int) -> Self
+pub fn ChildLimitInfo::output(Self, &Logger) -> Unit
 pub fn ChildLimitInfo::to_string(Self) -> String
 pub impl Show for ChildLimitInfo
 
@@ -304,6 +313,7 @@ pub fn Constellation::from_name(String) -> Result[Self, String]
 pub fn Constellation::get_index(Self) -> Int
 pub fn Constellation::get_name(Self) -> String
 pub fn Constellation::next(Self, Int) -> Self
+pub fn Constellation::output(Self, &Logger) -> Unit
 pub fn Constellation::to_string(Self) -> String
 pub impl @base.Culture for Constellation
 pub impl @base.Tyme for Constellation
@@ -324,6 +334,7 @@ pub fn DecadeFortune::get_start_fortune(Self) -> Fortune
 pub fn DecadeFortune::get_start_lunar_year(Self) -> LunarYear
 pub fn DecadeFortune::get_start_sixty_cycle_year(Self) -> SixtyCycleYear
 pub fn DecadeFortune::next(Self, Int) -> Self
+pub fn DecadeFortune::output(Self, &Logger) -> Unit
 pub fn DecadeFortune::to_string(Self) -> String
 pub impl @base.Culture for DecadeFortune
 pub impl @base.Tyme for DecadeFortune
@@ -343,6 +354,7 @@ pub fn Dipper::from_name(String) -> Result[Self, String]
 pub fn Dipper::get_index(Self) -> Int
 pub fn Dipper::get_name(Self) -> String
 pub fn Dipper::next(Self, Int) -> Self
+pub fn Dipper::output(Self, &Logger) -> Unit
 pub fn Dipper::to_string(Self) -> String
 pub impl @base.Culture for Dipper
 pub impl @base.Tyme for Dipper
@@ -357,6 +369,10 @@ pub fn Direction::from_name(String) -> Result[Self, String]
 pub fn Direction::get_element(Self) -> Element
 pub fn Direction::get_index(Self) -> Int
 pub fn Direction::get_land(Self) -> Land
+pub fn Direction::get_name(Self) -> String
+pub fn Direction::next(Self, Int) -> Self
+pub fn Direction::output(Self, &Logger) -> Unit
+pub fn Direction::to_string(Self) -> String
 pub impl @base.Culture for Direction
 pub impl @base.Tyme for Direction
 pub impl Show for Direction
@@ -369,6 +385,7 @@ pub fn Dog::from_name(String) -> Result[Self, String]
 pub fn Dog::get_index(Self) -> Int
 pub fn Dog::get_name(Self) -> String
 pub fn Dog::next(Self, Int) -> Self
+pub fn Dog::output(Self, &Logger) -> Unit
 pub fn Dog::to_string(Self) -> String
 pub impl @base.Culture for Dog
 pub impl @base.Tyme for Dog
@@ -381,6 +398,7 @@ pub fn DogDay::get_day_index(Self) -> Int
 pub fn DogDay::get_dog(Self) -> Dog
 pub fn DogDay::get_name(Self) -> String
 pub fn DogDay::new(Dog, Int) -> Self
+pub fn DogDay::output(Self, &Logger) -> Unit
 pub fn DogDay::to_string(Self) -> String
 pub impl @base.Culture for DogDay
 pub impl Show for DogDay
@@ -393,6 +411,7 @@ pub fn Duty::from_name(String) -> Result[Self, String]
 pub fn Duty::get_index(Self) -> Int
 pub fn Duty::get_name(Self) -> String
 pub fn Duty::next(Self, Int) -> Self
+pub fn Duty::output(Self, &Logger) -> Unit
 pub fn Duty::to_string(Self) -> String
 pub impl @base.Culture for Duty
 pub impl @base.Tyme for Duty
@@ -416,6 +435,7 @@ pub fn EarthBranch::get_hide_heaven_stem_residual(Self) -> HeavenStem?
 pub fn EarthBranch::get_hide_heaven_stems(Self) -> Array[HideHeavenStem]
 pub fn EarthBranch::get_index(Self) -> Int
 pub fn EarthBranch::get_jue(Self) -> Self?
+pub fn EarthBranch::get_name(Self) -> String
 pub fn EarthBranch::get_ominous(Self) -> Direction
 pub fn EarthBranch::get_opposite(Self) -> Self
 pub fn EarthBranch::get_peng_zu_earth_branch(Self) -> PengZuEarthBranch
@@ -427,9 +447,12 @@ pub fn EarthBranch::get_size(Self) -> Int
 pub fn EarthBranch::get_xing(Self) -> Array[Self]
 pub fn EarthBranch::get_yin_yang(Self) -> @base.YinYang
 pub fn EarthBranch::get_zodiac(Self) -> Zodiac
+pub fn EarthBranch::next(Self, Int) -> Self
+pub fn EarthBranch::output(Self, &Logger) -> Unit
 pub fn EarthBranch::steps_back_to(Self, Int) -> Int
 pub fn EarthBranch::steps_close_to(Self, Int) -> Int
 pub fn EarthBranch::steps_to(Self, Int) -> Int
+pub fn EarthBranch::to_string(Self) -> String
 pub impl @base.Culture for EarthBranch
 pub impl @base.Tyme for EarthBranch
 pub impl Show for EarthBranch
@@ -442,6 +465,8 @@ pub fn Ecliptic::from_index(Int) -> Self
 pub fn Ecliptic::from_name(String) -> Result[Self, String]
 pub fn Ecliptic::get_luck(Self) -> @base.Luck
 pub fn Ecliptic::get_name(Self) -> String
+pub fn Ecliptic::next(Self, Int) -> Self
+pub fn Ecliptic::output(Self, &Logger) -> Unit
 pub fn Ecliptic::to_string(Self) -> String
 pub impl @base.Culture for Ecliptic
 pub impl @base.Tyme for Ecliptic
@@ -458,8 +483,11 @@ pub fn EclipticHideHeavenStemDay::get_angle_in_sector(Self) -> Double
 pub fn EclipticHideHeavenStemDay::get_hide_heaven_stem(Self) -> HideHeavenStem
 pub fn EclipticHideHeavenStemDay::get_lon_offset(Self) -> Double
 pub fn EclipticHideHeavenStemDay::get_month_lon(Self) -> Double
+pub fn EclipticHideHeavenStemDay::get_name(Self) -> String
 pub fn EclipticHideHeavenStemDay::get_sector_index(Self) -> Int
 pub fn EclipticHideHeavenStemDay::new(HideHeavenStem, Double, Double, Double, Int) -> Self
+pub fn EclipticHideHeavenStemDay::output(Self, &Logger) -> Unit
+pub fn EclipticHideHeavenStemDay::to_string(Self) -> String
 pub impl @base.Culture for EclipticHideHeavenStemDay
 pub impl Show for EclipticHideHeavenStemDay
 
@@ -476,10 +504,13 @@ pub fn EightChar::get_fetal_breath(Self) -> SixtyCycle
 pub fn EightChar::get_fetal_origin(Self) -> SixtyCycle
 pub fn EightChar::get_hour(Self) -> SixtyCycle
 pub fn EightChar::get_month(Self) -> SixtyCycle
+pub fn EightChar::get_name(Self) -> String
 pub fn EightChar::get_own_sign(Self) -> SixtyCycle
 pub fn EightChar::get_solar_times(Self, Int, Int) -> Array[SolarTime]
 pub fn EightChar::get_year(Self) -> SixtyCycle
 pub fn EightChar::new(String, String, String, String) -> Result[Self, String]
+pub fn EightChar::output(Self, &Logger) -> Unit
+pub fn EightChar::to_string(Self) -> String
 pub impl @base.Culture for EightChar
 pub impl Show for EightChar
 
@@ -491,10 +522,14 @@ pub fn Element::from_index(Int) -> Self
 pub fn Element::from_name(String) -> Result[Self, String]
 pub fn Element::get_direction(Self) -> Direction
 pub fn Element::get_index(Self) -> Int
+pub fn Element::get_name(Self) -> String
 pub fn Element::get_reinforce(Self) -> Self
 pub fn Element::get_reinforced(Self) -> Self
 pub fn Element::get_restrain(Self) -> Self
 pub fn Element::get_restrained(Self) -> Self
+pub fn Element::next(Self, Int) -> Self
+pub fn Element::output(Self, &Logger) -> Unit
+pub fn Element::to_string(Self) -> String
 pub impl @base.Culture for Element
 pub impl @base.Tyme for Element
 pub impl Show for Element
@@ -515,6 +550,8 @@ pub fn Event::get_start_year(Self) -> Int
 pub fn Event::get_type(Self) -> EventType
 pub fn Event::get_value(Self, Int) -> Int
 pub fn Event::new(String, String) -> Result[Self, String]
+pub fn Event::output(Self, &Logger) -> Unit
+pub fn Event::to_string(Self) -> String
 pub fn Event::validate(String) -> Result[Unit, String]
 pub impl @base.Culture for Event
 pub impl Show for Event
@@ -553,6 +590,7 @@ pub(all) enum EventType {
 pub fn EventType::from_code(Int) -> Self
 pub fn EventType::get_code(Self) -> Int
 pub fn EventType::get_name(Self) -> String
+pub fn EventType::output(Self, &Logger) -> Unit
 pub fn EventType::to_string(Self) -> String
 pub impl Show for EventType
 
@@ -568,8 +606,11 @@ pub fn FetusDay::from_sixty_cycle_day(SixtyCycleDay) -> Self
 pub fn FetusDay::get_direction(Self) -> Direction
 pub fn FetusDay::get_fetus_earth_branch(Self) -> FetusEarthBranch
 pub fn FetusDay::get_fetus_heaven_stem(Self) -> FetusHeavenStem
+pub fn FetusDay::get_name(Self) -> String
 pub fn FetusDay::get_side(Self) -> @base.Side
 pub fn FetusDay::new(SixtyCycle) -> Self
+pub fn FetusDay::output(Self, &Logger) -> Unit
+pub fn FetusDay::to_string(Self) -> String
 pub impl @base.Culture for FetusDay
 pub impl Show for FetusDay
 
@@ -580,6 +621,7 @@ pub fn FetusEarthBranch::get_index(Self) -> Int
 pub fn FetusEarthBranch::get_name(Self) -> String
 pub fn FetusEarthBranch::new(Int) -> Self
 pub fn FetusEarthBranch::next(Self, Int) -> Self
+pub fn FetusEarthBranch::output(Self, &Logger) -> Unit
 pub fn FetusEarthBranch::to_string(Self) -> String
 pub impl @base.Culture for FetusEarthBranch
 pub impl @base.Tyme for FetusEarthBranch
@@ -592,6 +634,7 @@ pub fn FetusHeavenStem::get_index(Self) -> Int
 pub fn FetusHeavenStem::get_name(Self) -> String
 pub fn FetusHeavenStem::new(Int) -> Self
 pub fn FetusHeavenStem::next(Self, Int) -> Self
+pub fn FetusHeavenStem::output(Self, &Logger) -> Unit
 pub fn FetusHeavenStem::to_string(Self) -> String
 pub impl @base.Culture for FetusHeavenStem
 pub impl @base.Tyme for FetusHeavenStem
@@ -605,6 +648,7 @@ pub fn FetusMonth::get_index(Self) -> Int
 pub fn FetusMonth::get_name(Self) -> String
 pub fn FetusMonth::new(Int) -> Self
 pub fn FetusMonth::next(Self, Int) -> Self
+pub fn FetusMonth::output(Self, &Logger) -> Unit
 pub fn FetusMonth::to_string(Self) -> String
 pub impl @base.Culture for FetusMonth
 pub impl @base.Tyme for FetusMonth
@@ -621,6 +665,7 @@ pub fn Fortune::get_name(Self) -> String
 pub fn Fortune::get_sixty_cycle(Self) -> SixtyCycle
 pub fn Fortune::get_sixty_cycle_year(Self) -> SixtyCycleYear
 pub fn Fortune::next(Self, Int) -> Self
+pub fn Fortune::output(Self, &Logger) -> Unit
 pub fn Fortune::to_string(Self) -> String
 pub impl @base.Culture for Fortune
 pub impl @base.Tyme for Fortune
@@ -633,6 +678,7 @@ pub(all) enum Gender {
 pub fn Gender::from_code(Int) -> Self
 pub fn Gender::get_code(Self) -> Int
 pub fn Gender::get_name(Self) -> String
+pub fn Gender::output(Self, &Logger) -> Unit
 pub fn Gender::to_string(Self) -> String
 pub impl Show for Gender
 
@@ -646,6 +692,7 @@ pub fn God::get_index(Self) -> Int
 pub fn God::get_luck(Self) -> @base.Luck
 pub fn God::get_name(Self) -> String
 pub fn God::next(Self, Int) -> Self
+pub fn God::output(Self, &Logger) -> Unit
 pub fn God::to_string(Self) -> String
 pub impl @base.Culture for God
 pub impl @base.Tyme for God
@@ -664,6 +711,7 @@ pub fn HeavenStem::get_element(Self) -> Element
 pub fn HeavenStem::get_index(Self) -> Int
 pub fn HeavenStem::get_joy_direction(Self) -> Direction
 pub fn HeavenStem::get_mascot_direction(Self) -> Direction
+pub fn HeavenStem::get_name(Self) -> String
 pub fn HeavenStem::get_peng_zu_heaven_stem(Self) -> PengZuHeavenStem
 pub fn HeavenStem::get_size(Self) -> Int
 pub fn HeavenStem::get_ten_star(Self, Self) -> TenStar
@@ -672,9 +720,12 @@ pub fn HeavenStem::get_wealth_direction(Self) -> Direction
 pub fn HeavenStem::get_yang_direction(Self) -> Direction
 pub fn HeavenStem::get_yin_direction(Self) -> Direction
 pub fn HeavenStem::get_yin_yang(Self) -> @base.YinYang
+pub fn HeavenStem::next(Self, Int) -> Self
+pub fn HeavenStem::output(Self, &Logger) -> Unit
 pub fn HeavenStem::steps_back_to(Self, Int) -> Int
 pub fn HeavenStem::steps_close_to(Self, Int) -> Int
 pub fn HeavenStem::steps_to(Self, Int) -> Int
+pub fn HeavenStem::to_string(Self) -> String
 pub impl @base.Culture for HeavenStem
 pub impl @base.Tyme for HeavenStem
 pub impl Show for HeavenStem
@@ -688,6 +739,7 @@ pub fn HideHeavenStem::get_heaven_stem(Self) -> HeavenStem
 pub fn HideHeavenStem::get_name(Self) -> String
 pub fn HideHeavenStem::get_type(Self) -> HideHeavenStemType
 pub fn HideHeavenStem::new(String, HideHeavenStemType) -> Result[Self, String]
+pub fn HideHeavenStem::output(Self, &Logger) -> Unit
 pub fn HideHeavenStem::to_string(Self) -> String
 pub impl @base.Culture for HideHeavenStem
 pub impl Show for HideHeavenStem
@@ -699,6 +751,7 @@ pub fn HideHeavenStemDay::get_day_index(Self) -> Int
 pub fn HideHeavenStemDay::get_hide_heaven_stem(Self) -> HideHeavenStem
 pub fn HideHeavenStemDay::get_name(Self) -> String
 pub fn HideHeavenStemDay::new(HideHeavenStem, Int) -> Self
+pub fn HideHeavenStemDay::output(Self, &Logger) -> Unit
 pub fn HideHeavenStemDay::to_string(Self) -> String
 pub impl @base.Culture for HideHeavenStemDay
 pub impl Show for HideHeavenStemDay
@@ -711,6 +764,7 @@ pub(all) enum HideHeavenStemType {
 pub fn HideHeavenStemType::from_code(Int) -> Self
 pub fn HideHeavenStemType::get_code(Self) -> Int
 pub fn HideHeavenStemType::get_name(Self) -> String
+pub fn HideHeavenStemType::output(Self, &Logger) -> Unit
 pub fn HideHeavenStemType::to_string(Self) -> String
 pub impl Show for HideHeavenStemType
 
@@ -732,6 +786,7 @@ pub fn HijriDay::is_after(Self, Self) -> Bool
 pub fn HijriDay::is_before(Self, Self) -> Bool
 pub fn HijriDay::new(@base.DayUnit) -> Self
 pub fn HijriDay::next(Self, Int) -> Self
+pub fn HijriDay::output(Self, &Logger) -> Unit
 pub fn HijriDay::subtract(Self, Self) -> Int
 pub fn HijriDay::to_string(Self) -> String
 pub fn HijriDay::validate(Int, Int, Int) -> Result[Unit, String]
@@ -753,6 +808,7 @@ pub fn HijriMonth::get_name(Self) -> String
 pub fn HijriMonth::get_year(Self) -> Int
 pub fn HijriMonth::new(@base.MonthUnit) -> Self
 pub fn HijriMonth::next(Self, Int) -> Self
+pub fn HijriMonth::output(Self, &Logger) -> Unit
 pub fn HijriMonth::to_string(Self) -> String
 pub fn HijriMonth::validate(Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for HijriMonth
@@ -771,6 +827,7 @@ pub fn HijriYear::get_year(Self) -> Int
 pub fn HijriYear::is_leap(Self) -> Bool
 pub fn HijriYear::new(@base.YearUnit) -> Self
 pub fn HijriYear::next(Self, Int) -> Self
+pub fn HijriYear::output(Self, &Logger) -> Unit
 pub fn HijriYear::to_string(Self) -> String
 pub fn HijriYear::validate(Int) -> Result[Unit, String]
 pub impl @base.Culture for HijriYear
@@ -784,10 +841,14 @@ pub struct JulianDay {
 pub fn JulianDay::from_julian_day(Double) -> Self
 pub fn JulianDay::from_ymdhms(Int, Int, Int, Int, Int, Int) -> Self
 pub fn JulianDay::get_day(Self) -> Double
+pub fn JulianDay::get_name(Self) -> String
 pub fn JulianDay::get_solar_day(Self) -> Result[SolarDay, String]
 pub fn JulianDay::get_solar_time(Self) -> Result[SolarTime, String]
 pub fn JulianDay::get_week(Self) -> Week
+pub fn JulianDay::next(Self, Int) -> Self
+pub fn JulianDay::output(Self, &Logger) -> Unit
 pub fn JulianDay::subtract(Self, Self) -> Double
+pub fn JulianDay::to_string(Self) -> String
 pub impl @base.Culture for JulianDay
 pub impl @base.Tyme for JulianDay
 pub impl Show for JulianDay
@@ -812,6 +873,8 @@ pub fn KitchenGodSteed::get_people_hoes(Self) -> String
 pub fn KitchenGodSteed::get_pig(Self) -> String
 pub fn KitchenGodSteed::get_silkworm(Self) -> String
 pub fn KitchenGodSteed::new(Int) -> Self
+pub fn KitchenGodSteed::output(Self, &Logger) -> Unit
+pub fn KitchenGodSteed::to_string(Self) -> String
 pub impl @base.Culture for KitchenGodSteed
 pub impl Show for KitchenGodSteed
 
@@ -824,6 +887,8 @@ pub fn Land::from_name(String) -> Result[Self, String]
 pub fn Land::get_direction(Self) -> Direction
 pub fn Land::get_index(Self) -> Int
 pub fn Land::get_name(Self) -> String
+pub fn Land::next(Self, Int) -> Self
+pub fn Land::output(Self, &Logger) -> Unit
 pub fn Land::to_string(Self) -> String
 pub impl @base.Culture for Land
 pub impl @base.Tyme for Land
@@ -840,6 +905,7 @@ pub fn LegalHoliday::get_name(Self) -> String
 pub fn LegalHoliday::is_work(Self) -> Bool
 pub fn LegalHoliday::new(Int, Int, Int, String) -> Result[Self, String]
 pub fn LegalHoliday::next(Self, Int) -> Self?
+pub fn LegalHoliday::output(Self, &Logger) -> Unit
 pub fn LegalHoliday::set_data(String) -> Unit
 pub fn LegalHoliday::to_string(Self) -> String
 pub impl @base.Culture for LegalHoliday
@@ -862,6 +928,7 @@ pub fn LunarDay::get_lunar_month(Self) -> LunarMonth
 pub fn LunarDay::get_minor_ren(Self) -> MinorRen
 pub fn LunarDay::get_month(Self) -> Int
 pub fn LunarDay::get_month_sixty_cycle(Self) -> SixtyCycle
+pub fn LunarDay::get_name(Self) -> String
 pub fn LunarDay::get_nine_star(Self) -> NineStar
 pub fn LunarDay::get_phase(Self) -> Phase
 pub fn LunarDay::get_phase_day(Self) -> PhaseDay
@@ -878,6 +945,9 @@ pub fn LunarDay::get_year(Self) -> Int
 pub fn LunarDay::get_year_sixty_cycle(Self) -> SixtyCycle
 pub fn LunarDay::is_after(Self, Self) -> Bool
 pub fn LunarDay::is_before(Self, Self) -> Bool
+pub fn LunarDay::next(Self, Int) -> Self
+pub fn LunarDay::output(Self, &Logger) -> Unit
+pub fn LunarDay::to_string(Self) -> String
 pub fn LunarDay::validate(Int, Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for LunarDay
 pub impl @base.Tyme for LunarDay
@@ -894,6 +964,7 @@ pub fn LunarFestival::get_name(Self) -> String
 pub fn LunarFestival::get_solar_term(Self) -> SolarTerm?
 pub fn LunarFestival::new(Int, Event, LunarDay) -> Self
 pub fn LunarFestival::next(Self, Int) -> Self?
+pub fn LunarFestival::output(Self, &Logger) -> Unit
 pub fn LunarFestival::set_data(String) -> Unit
 pub fn LunarFestival::to_string(Self) -> String
 pub impl @base.Culture for LunarFestival
@@ -929,6 +1000,7 @@ pub fn LunarHour::get_year_sixty_cycle(Self) -> SixtyCycle
 pub fn LunarHour::is_after(Self, Self) -> Bool
 pub fn LunarHour::is_before(Self, Self) -> Bool
 pub fn LunarHour::next(Self, Int) -> Self
+pub fn LunarHour::output(Self, &Logger) -> Unit
 pub fn LunarHour::set_provider(&IEightCharProvider) -> Unit
 pub fn LunarHour::to_string(Self) -> String
 pub fn LunarHour::validate(Int, Int, Int, Int, Int, Int) -> Result[Unit, String]
@@ -952,6 +1024,7 @@ pub fn LunarMonth::get_lunar_year(Self) -> LunarYear
 pub fn LunarMonth::get_minor_ren(Self) -> MinorRen
 pub fn LunarMonth::get_month(Self) -> Int
 pub fn LunarMonth::get_month_with_leap(Self) -> Int
+pub fn LunarMonth::get_name(Self) -> String
 pub fn LunarMonth::get_nine_star(Self) -> NineStar
 pub fn LunarMonth::get_season(Self) -> LunarSeason
 pub fn LunarMonth::get_sixty_cycle(Self) -> SixtyCycle
@@ -959,6 +1032,9 @@ pub fn LunarMonth::get_week_count(Self, Int) -> Int
 pub fn LunarMonth::get_weeks(Self, Int) -> Array[LunarWeek]
 pub fn LunarMonth::get_year(Self) -> Int
 pub fn LunarMonth::is_leap(Self) -> Bool
+pub fn LunarMonth::next(Self, Int) -> Self
+pub fn LunarMonth::output(Self, &Logger) -> Unit
+pub fn LunarMonth::to_string(Self) -> String
 pub fn LunarMonth::validate(Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for LunarMonth
 pub impl @base.Tyme for LunarMonth
@@ -972,6 +1048,7 @@ pub fn LunarSeason::from_name(String) -> Result[Self, String]
 pub fn LunarSeason::get_index(Self) -> Int
 pub fn LunarSeason::get_name(Self) -> String
 pub fn LunarSeason::next(Self, Int) -> Self
+pub fn LunarSeason::output(Self, &Logger) -> Unit
 pub fn LunarSeason::to_string(Self) -> String
 pub impl @base.Culture for LunarSeason
 pub impl @base.Tyme for LunarSeason
@@ -1000,6 +1077,7 @@ pub fn LunarWeek::get_name(Self) -> String
 pub fn LunarWeek::get_start(Self) -> Week
 pub fn LunarWeek::get_year(Self) -> Int
 pub fn LunarWeek::next(Self, Int) -> Self
+pub fn LunarWeek::output(Self, &Logger) -> Unit
 pub fn LunarWeek::to_string(Self) -> String
 pub fn LunarWeek::validate(Int, Int, Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for LunarWeek
@@ -1016,10 +1094,14 @@ pub fn LunarYear::get_kitchen_god_steed(Self) -> KitchenGodSteed
 pub fn LunarYear::get_leap_month(Self) -> Int
 pub fn LunarYear::get_month_count(Self) -> Int
 pub fn LunarYear::get_months(Self) -> Array[LunarMonth]
+pub fn LunarYear::get_name(Self) -> String
 pub fn LunarYear::get_nine_star(Self) -> NineStar
 pub fn LunarYear::get_sixty_cycle(Self) -> SixtyCycle
 pub fn LunarYear::get_twenty(Self) -> @base.Twenty
 pub fn LunarYear::get_year(Self) -> Int
+pub fn LunarYear::next(Self, Int) -> Self
+pub fn LunarYear::output(Self, &Logger) -> Unit
+pub fn LunarYear::to_string(Self) -> String
 pub fn LunarYear::validate(Int) -> Result[Unit, String]
 pub impl @base.Culture for LunarYear
 pub impl @base.Tyme for LunarYear
@@ -1035,6 +1117,7 @@ pub fn MinorRen::get_index(Self) -> Int
 pub fn MinorRen::get_luck(Self) -> @base.Luck
 pub fn MinorRen::get_name(Self) -> String
 pub fn MinorRen::next(Self, Int) -> Self
+pub fn MinorRen::output(Self, &Logger) -> Unit
 pub fn MinorRen::to_string(Self) -> String
 pub impl @base.Culture for MinorRen
 pub impl @base.Tyme for MinorRen
@@ -1047,6 +1130,7 @@ pub fn NineDay::get_day_index(Self) -> Int
 pub fn NineDay::get_name(Self) -> String
 pub fn NineDay::get_nine(Self) -> @base.Nine
 pub fn NineDay::new(@base.Nine, Int) -> Self
+pub fn NineDay::output(Self, &Logger) -> Unit
 pub fn NineDay::to_string(Self) -> String
 pub impl @base.Culture for NineDay
 pub impl Show for NineDay
@@ -1062,6 +1146,8 @@ pub fn NineStar::get_direction(Self) -> Direction
 pub fn NineStar::get_element(Self) -> Element
 pub fn NineStar::get_index(Self) -> Int
 pub fn NineStar::get_name(Self) -> String
+pub fn NineStar::next(Self, Int) -> Self
+pub fn NineStar::output(Self, &Logger) -> Unit
 pub fn NineStar::to_string(Self) -> String
 pub impl @base.Culture for NineStar
 pub impl @base.Tyme for NineStar
@@ -1075,6 +1161,7 @@ pub fn PengZu::from_sixty_cycle(SixtyCycle) -> Self
 pub fn PengZu::get_name(Self) -> String
 pub fn PengZu::get_peng_zu_earth_branch(Self) -> PengZuEarthBranch
 pub fn PengZu::get_peng_zu_heaven_stem(Self) -> PengZuHeavenStem
+pub fn PengZu::output(Self, &Logger) -> Unit
 pub fn PengZu::to_string(Self) -> String
 pub impl @base.Culture for PengZu
 pub impl Show for PengZu
@@ -1087,6 +1174,7 @@ pub fn PengZuEarthBranch::from_name(String) -> Result[Self, String]
 pub fn PengZuEarthBranch::get_index(Self) -> Int
 pub fn PengZuEarthBranch::get_name(Self) -> String
 pub fn PengZuEarthBranch::next(Self, Int) -> Self
+pub fn PengZuEarthBranch::output(Self, &Logger) -> Unit
 pub fn PengZuEarthBranch::to_string(Self) -> String
 pub impl @base.Culture for PengZuEarthBranch
 pub impl @base.Tyme for PengZuEarthBranch
@@ -1100,6 +1188,7 @@ pub fn PengZuHeavenStem::from_name(String) -> Result[Self, String]
 pub fn PengZuHeavenStem::get_index(Self) -> Int
 pub fn PengZuHeavenStem::get_name(Self) -> String
 pub fn PengZuHeavenStem::next(Self, Int) -> Self
+pub fn PengZuHeavenStem::output(Self, &Logger) -> Unit
 pub fn PengZuHeavenStem::to_string(Self) -> String
 pub impl @base.Culture for PengZuHeavenStem
 pub impl @base.Tyme for PengZuHeavenStem
@@ -1119,6 +1208,7 @@ pub fn Phase::get_name(Self) -> String
 pub fn Phase::get_solar_day(Self) -> SolarDay
 pub fn Phase::get_solar_time(Self) -> SolarTime
 pub fn Phase::next(Self, Int) -> Self
+pub fn Phase::output(Self, &Logger) -> Unit
 pub fn Phase::to_string(Self) -> String
 pub impl @base.Culture for Phase
 pub impl @base.Tyme for Phase
@@ -1131,6 +1221,7 @@ pub fn PhaseDay::get_day_index(Self) -> Int
 pub fn PhaseDay::get_name(Self) -> String
 pub fn PhaseDay::get_phase(Self) -> Phase
 pub fn PhaseDay::new(Phase, Int) -> Self
+pub fn PhaseDay::output(Self, &Logger) -> Unit
 pub fn PhaseDay::to_string(Self) -> String
 pub impl @base.Culture for PhaseDay
 pub impl Show for PhaseDay
@@ -1147,6 +1238,7 @@ pub fn Phenology::get_name(Self) -> String
 pub fn Phenology::get_three_phenology(Self) -> ThreePhenology
 pub fn Phenology::get_year(Self) -> Int
 pub fn Phenology::next(Self, Int) -> Self
+pub fn Phenology::output(Self, &Logger) -> Unit
 pub fn Phenology::to_string(Self) -> String
 pub impl @base.Culture for Phenology
 pub impl @base.Tyme for Phenology
@@ -1159,6 +1251,7 @@ pub fn PhenologyDay::get_day_index(Self) -> Int
 pub fn PhenologyDay::get_name(Self) -> String
 pub fn PhenologyDay::get_phenology(Self) -> Phenology
 pub fn PhenologyDay::new(Phenology, Int) -> Self
+pub fn PhenologyDay::output(Self, &Logger) -> Unit
 pub fn PhenologyDay::to_string(Self) -> String
 pub impl @base.Culture for PhenologyDay
 pub impl Show for PhenologyDay
@@ -1171,6 +1264,7 @@ pub fn PlumRain::from_name(String) -> Result[Self, String]
 pub fn PlumRain::get_index(Self) -> Int
 pub fn PlumRain::get_name(Self) -> String
 pub fn PlumRain::next(Self, Int) -> Self
+pub fn PlumRain::output(Self, &Logger) -> Unit
 pub fn PlumRain::to_string(Self) -> String
 pub impl @base.Culture for PlumRain
 pub impl @base.Tyme for PlumRain
@@ -1183,6 +1277,7 @@ pub fn PlumRainDay::get_day_index(Self) -> Int
 pub fn PlumRainDay::get_name(Self) -> String
 pub fn PlumRainDay::get_plum_rain(Self) -> PlumRain
 pub fn PlumRainDay::new(PlumRain, Int) -> Self
+pub fn PlumRainDay::output(Self, &Logger) -> Unit
 pub fn PlumRainDay::to_string(Self) -> String
 pub impl @base.Culture for PlumRainDay
 pub impl Show for PlumRainDay
@@ -1197,13 +1292,16 @@ pub fn RabByungDay::from_ymd(Int, Int, Int) -> Result[Self, String]
 pub fn RabByungDay::get_day(Self) -> Int
 pub fn RabByungDay::get_day_with_leap(Self) -> Int
 pub fn RabByungDay::get_month(Self) -> Int
+pub fn RabByungDay::get_name(Self) -> String
 pub fn RabByungDay::get_rab_byung_month(Self) -> RabByungMonth
 pub fn RabByungDay::get_solar_day(Self) -> SolarDay
 pub fn RabByungDay::get_year(Self) -> Int
 pub fn RabByungDay::is_leap(Self) -> Bool
 pub fn RabByungDay::new(Int, Int, Int) -> Result[Self, String]
 pub fn RabByungDay::next(Self, Int) -> Result[Self, String]
+pub fn RabByungDay::output(Self, &Logger) -> Unit
 pub fn RabByungDay::subtract(Self, Self) -> Int
+pub fn RabByungDay::to_string(Self) -> String
 pub fn RabByungDay::validate(Int, Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for RabByungDay
 pub impl Show for RabByungDay
@@ -1221,6 +1319,7 @@ pub fn RabByungElement::get_reinforced(Self) -> Self
 pub fn RabByungElement::get_restrain(Self) -> Self
 pub fn RabByungElement::get_restrained(Self) -> Self
 pub fn RabByungElement::next(Self, Int) -> Self
+pub fn RabByungElement::output(Self, &Logger) -> Unit
 pub fn RabByungElement::to_string(Self) -> String
 pub impl @base.Culture for RabByungElement
 pub impl @base.Tyme for RabByungElement
@@ -1241,12 +1340,15 @@ pub fn RabByungMonth::get_leap_days(Self) -> Array[Int]
 pub fn RabByungMonth::get_miss_days(Self) -> Array[Int]
 pub fn RabByungMonth::get_month(Self) -> Int
 pub fn RabByungMonth::get_month_with_leap(Self) -> Int
+pub fn RabByungMonth::get_name(Self) -> String
 pub fn RabByungMonth::get_rab_byung_year(Self) -> RabByungYear
 pub fn RabByungMonth::get_special_days(Self) -> Array[Int]
 pub fn RabByungMonth::get_year(Self) -> Int
 pub fn RabByungMonth::is_leap(Self) -> Bool
 pub fn RabByungMonth::new(Int, Int) -> Result[Self, String]
 pub fn RabByungMonth::next(Self, Int) -> Result[Self, String]
+pub fn RabByungMonth::output(Self, &Logger) -> Unit
+pub fn RabByungMonth::to_string(Self) -> String
 pub fn RabByungMonth::validate(Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for RabByungMonth
 pub impl Show for RabByungMonth
@@ -1265,6 +1367,7 @@ pub fn RabByungYear::get_first_month(Self) -> RabByungMonth
 pub fn RabByungYear::get_leap_month(Self) -> Int
 pub fn RabByungYear::get_month_count(Self) -> Int
 pub fn RabByungYear::get_months(Self) -> Array[RabByungMonth]
+pub fn RabByungYear::get_name(Self) -> String
 pub fn RabByungYear::get_rab_byung_index(Self) -> Int
 pub fn RabByungYear::get_sixty_cycle(Self) -> SixtyCycle
 pub fn RabByungYear::get_solar_year(Self) -> SolarYear
@@ -1272,6 +1375,8 @@ pub fn RabByungYear::get_year(Self) -> Int
 pub fn RabByungYear::get_zodiac(Self) -> Zodiac
 pub fn RabByungYear::new(Int, Int, Int) -> Result[Self, String]
 pub fn RabByungYear::next(Self, Int) -> Result[Self, String]
+pub fn RabByungYear::output(Self, &Logger) -> Unit
+pub fn RabByungYear::to_string(Self) -> String
 pub fn RabByungYear::validate(Int) -> Result[Unit, String]
 pub impl @base.Culture for RabByungYear
 pub impl Show for RabByungYear
@@ -1284,6 +1389,8 @@ pub fn SevenStar::from_name(String) -> Result[Self, String]
 pub fn SevenStar::get_index(Self) -> Int
 pub fn SevenStar::get_name(Self) -> String
 pub fn SevenStar::get_week(Self) -> Week
+pub fn SevenStar::next(Self, Int) -> Self
+pub fn SevenStar::output(Self, &Logger) -> Unit
 pub fn SevenStar::to_string(Self) -> String
 pub impl @base.Culture for SevenStar
 pub impl @base.Tyme for SevenStar
@@ -1297,6 +1404,8 @@ pub fn ShenSha::from_name(String) -> Result[Self, String]
 pub fn ShenSha::get_from_eight_char(EightChar, Gender) -> Array[Self]
 pub fn ShenSha::get_id(Self) -> Int
 pub fn ShenSha::get_name(Self) -> String
+pub fn ShenSha::output(Self, &Logger) -> Unit
+pub fn ShenSha::to_string(Self) -> String
 pub impl @base.Culture for ShenSha
 pub impl Show for ShenSha
 
@@ -1310,13 +1419,17 @@ pub fn SixtyCycle::get_earth_branch(Self) -> EarthBranch
 pub fn SixtyCycle::get_extra_earth_branches(Self) -> Array[EarthBranch]
 pub fn SixtyCycle::get_heaven_stem(Self) -> HeavenStem
 pub fn SixtyCycle::get_index(Self) -> Int
+pub fn SixtyCycle::get_name(Self) -> String
 pub fn SixtyCycle::get_peng_zu(Self) -> PengZu
 pub fn SixtyCycle::get_size(Self) -> Int
 pub fn SixtyCycle::get_sound(Self) -> @base.Sound
 pub fn SixtyCycle::get_ten(Self) -> @base.Ten
+pub fn SixtyCycle::next(Self, Int) -> Self
+pub fn SixtyCycle::output(Self, &Logger) -> Unit
 pub fn SixtyCycle::steps_back_to(Self, Int) -> Int
 pub fn SixtyCycle::steps_close_to(Self, Int) -> Int
 pub fn SixtyCycle::steps_to(Self, Int) -> Int
+pub fn SixtyCycle::to_string(Self) -> String
 pub impl @base.Culture for SixtyCycle
 pub impl @base.Tyme for SixtyCycle
 pub impl Show for SixtyCycle
@@ -1335,6 +1448,7 @@ pub fn SixtyCycleDay::get_gods(Self) -> Result[Array[God], String]
 pub fn SixtyCycleDay::get_hours(Self) -> Array[SixtyCycleHour]
 pub fn SixtyCycleDay::get_jupiter_direction(Self) -> Direction
 pub fn SixtyCycleDay::get_month(Self) -> SixtyCycle
+pub fn SixtyCycleDay::get_name(Self) -> String
 pub fn SixtyCycleDay::get_nine_star(Self) -> NineStar
 pub fn SixtyCycleDay::get_recommends(Self) -> Result[Array[Taboo], String]
 pub fn SixtyCycleDay::get_sixty_cycle(Self) -> SixtyCycle
@@ -1345,6 +1459,9 @@ pub fn SixtyCycleDay::get_twelve_star(Self) -> TwelveStar
 pub fn SixtyCycleDay::get_twenty_eight_star(Self) -> TwentyEightStar
 pub fn SixtyCycleDay::get_year(Self) -> SixtyCycle
 pub fn SixtyCycleDay::new(SolarDay, SixtyCycleMonth, SixtyCycle) -> Self
+pub fn SixtyCycleDay::next(Self, Int) -> Self
+pub fn SixtyCycleDay::output(Self, &Logger) -> Unit
+pub fn SixtyCycleDay::to_string(Self) -> String
 pub impl @base.Culture for SixtyCycleDay
 pub impl @base.Tyme for SixtyCycleDay
 pub impl Show for SixtyCycleDay
@@ -1369,6 +1486,7 @@ pub fn SixtyCycleHour::get_solar_time(Self) -> SolarTime
 pub fn SixtyCycleHour::get_twelve_star(Self) -> TwelveStar
 pub fn SixtyCycleHour::get_year(Self) -> SixtyCycle
 pub fn SixtyCycleHour::next(Self, Int) -> Self
+pub fn SixtyCycleHour::output(Self, &Logger) -> Unit
 pub fn SixtyCycleHour::to_string(Self) -> String
 pub impl @base.Culture for SixtyCycleHour
 pub impl @base.Tyme for SixtyCycleHour
@@ -1384,11 +1502,15 @@ pub fn SixtyCycleMonth::get_days(Self) -> Array[SixtyCycleDay]
 pub fn SixtyCycleMonth::get_first_day(Self) -> SixtyCycleDay
 pub fn SixtyCycleMonth::get_index_in_year(Self) -> Int
 pub fn SixtyCycleMonth::get_jupiter_direction(Self) -> Direction
+pub fn SixtyCycleMonth::get_name(Self) -> String
 pub fn SixtyCycleMonth::get_nine_star(Self) -> NineStar
 pub fn SixtyCycleMonth::get_sixty_cycle(Self) -> SixtyCycle
 pub fn SixtyCycleMonth::get_sixty_cycle_year(Self) -> SixtyCycleYear
 pub fn SixtyCycleMonth::get_year(Self) -> SixtyCycle
 pub fn SixtyCycleMonth::new(SixtyCycleYear, SixtyCycle) -> Self
+pub fn SixtyCycleMonth::next(Self, Int) -> Self
+pub fn SixtyCycleMonth::output(Self, &Logger) -> Unit
+pub fn SixtyCycleMonth::to_string(Self) -> String
 pub impl @base.Culture for SixtyCycleMonth
 pub impl @base.Tyme for SixtyCycleMonth
 pub impl Show for SixtyCycleMonth
@@ -1401,10 +1523,14 @@ pub fn SixtyCycleYear::from_year(Int) -> Result[Self, String]
 pub fn SixtyCycleYear::get_first_month(Self) -> SixtyCycleMonth
 pub fn SixtyCycleYear::get_jupiter_direction(Self) -> Direction
 pub fn SixtyCycleYear::get_months(Self) -> Array[SixtyCycleMonth]
+pub fn SixtyCycleYear::get_name(Self) -> String
 pub fn SixtyCycleYear::get_nine_star(Self) -> NineStar
 pub fn SixtyCycleYear::get_sixty_cycle(Self) -> SixtyCycle
 pub fn SixtyCycleYear::get_twenty(Self) -> @base.Twenty
 pub fn SixtyCycleYear::get_year(Self) -> Int
+pub fn SixtyCycleYear::next(Self, Int) -> Self
+pub fn SixtyCycleYear::output(Self, &Logger) -> Unit
+pub fn SixtyCycleYear::to_string(Self) -> String
 pub impl @base.Culture for SixtyCycleYear
 pub impl @base.Tyme for SixtyCycleYear
 pub impl Show for SixtyCycleYear
@@ -1426,6 +1552,7 @@ pub fn SolarDay::get_julian_day(Self) -> JulianDay
 pub fn SolarDay::get_legal_holiday(Self) -> LegalHoliday?
 pub fn SolarDay::get_lunar_day(Self) -> LunarDay
 pub fn SolarDay::get_month(Self) -> Int
+pub fn SolarDay::get_name(Self) -> String
 pub fn SolarDay::get_nine_day(Self) -> NineDay?
 pub fn SolarDay::get_nine_star(Self) -> NineStar
 pub fn SolarDay::get_phase(Self) -> Phase
@@ -1445,7 +1572,9 @@ pub fn SolarDay::is_after(Self, Self) -> Bool
 pub fn SolarDay::is_before(Self, Self) -> Bool
 pub fn SolarDay::new(@base.DayUnit) -> Self
 pub fn SolarDay::next(Self, Int) -> Self
+pub fn SolarDay::output(Self, &Logger) -> Unit
 pub fn SolarDay::subtract(Self, Self) -> Int
+pub fn SolarDay::to_string(Self) -> String
 pub fn SolarDay::validate(Int, Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for SolarDay
 pub impl Show for SolarDay
@@ -1461,6 +1590,7 @@ pub fn SolarFestival::get_name(Self) -> String
 pub fn SolarFestival::get_start_year(Self) -> Int
 pub fn SolarFestival::new(Int, Event, SolarDay) -> Self
 pub fn SolarFestival::next(Self, Int) -> Self?
+pub fn SolarFestival::output(Self, &Logger) -> Unit
 pub fn SolarFestival::set_data(String) -> Unit
 pub fn SolarFestival::to_string(Self) -> String
 pub impl @base.Culture for SolarFestival
@@ -1478,6 +1608,7 @@ pub fn SolarHalfYear::get_seasons(Self) -> Array[SolarSeason]
 pub fn SolarHalfYear::get_solar_year(Self) -> SolarYear
 pub fn SolarHalfYear::get_year(Self) -> Int
 pub fn SolarHalfYear::next(Self, Int) -> Self
+pub fn SolarHalfYear::output(Self, &Logger) -> Unit
 pub fn SolarHalfYear::to_string(Self) -> String
 pub impl @base.Culture for SolarHalfYear
 pub impl @base.Tyme for SolarHalfYear
@@ -1493,11 +1624,15 @@ pub fn SolarMonth::get_days(Self) -> Array[SolarDay]
 pub fn SolarMonth::get_first_day(Self) -> SolarDay
 pub fn SolarMonth::get_index_in_year(Self) -> Int
 pub fn SolarMonth::get_month(Self) -> Int
+pub fn SolarMonth::get_name(Self) -> String
 pub fn SolarMonth::get_solar_year(Self) -> SolarYear
 pub fn SolarMonth::get_week_count(Self, Int) -> Int
 pub fn SolarMonth::get_weeks(Self, Int) -> Array[SolarWeek]
 pub fn SolarMonth::get_year(Self) -> Int
 pub fn SolarMonth::new(@base.MonthUnit) -> Self
+pub fn SolarMonth::next(Self, Int) -> Self
+pub fn SolarMonth::output(Self, &Logger) -> Unit
+pub fn SolarMonth::to_string(Self) -> String
 pub fn SolarMonth::validate(Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for SolarMonth
 pub impl @base.Tyme for SolarMonth
@@ -1514,6 +1649,7 @@ pub fn SolarSeason::get_name(Self) -> String
 pub fn SolarSeason::get_solar_year(Self) -> SolarYear
 pub fn SolarSeason::get_year(Self) -> Int
 pub fn SolarSeason::next(Self, Int) -> Self
+pub fn SolarSeason::output(Self, &Logger) -> Unit
 pub fn SolarSeason::to_string(Self) -> String
 pub impl @base.Culture for SolarSeason
 pub impl @base.Tyme for SolarSeason
@@ -1534,6 +1670,7 @@ pub fn SolarTerm::get_year(Self) -> Int
 pub fn SolarTerm::is_jie(Self) -> Bool
 pub fn SolarTerm::is_qi(Self) -> Bool
 pub fn SolarTerm::next(Self, Int) -> Self
+pub fn SolarTerm::output(Self, &Logger) -> Unit
 pub fn SolarTerm::to_string(Self) -> String
 pub impl @base.Culture for SolarTerm
 pub impl @base.Tyme for SolarTerm
@@ -1546,6 +1683,7 @@ pub fn SolarTermDay::get_day_index(Self) -> Int
 pub fn SolarTermDay::get_name(Self) -> String
 pub fn SolarTermDay::get_solar_term(Self) -> SolarTerm
 pub fn SolarTermDay::new(SolarTerm, Int) -> Self
+pub fn SolarTermDay::output(Self, &Logger) -> Unit
 pub fn SolarTermDay::to_string(Self) -> String
 pub impl @base.Culture for SolarTermDay
 pub impl Show for SolarTermDay
@@ -1563,6 +1701,7 @@ pub fn SolarTime::get_julian_day(Self) -> JulianDay
 pub fn SolarTime::get_lunar_hour(Self) -> LunarHour
 pub fn SolarTime::get_minute(Self) -> Int
 pub fn SolarTime::get_month(Self) -> Int
+pub fn SolarTime::get_name(Self) -> String
 pub fn SolarTime::get_phase(Self) -> Phase
 pub fn SolarTime::get_phenology(Self) -> Phenology
 pub fn SolarTime::get_second(Self) -> Int
@@ -1577,7 +1716,9 @@ pub fn SolarTime::is_after(Self, Self) -> Bool
 pub fn SolarTime::is_before(Self, Self) -> Bool
 pub fn SolarTime::new(@base.SecondUnit) -> Self
 pub fn SolarTime::next(Self, Int) -> Self
+pub fn SolarTime::output(Self, &Logger) -> Unit
 pub fn SolarTime::subtract(Self, Self) -> Int64
+pub fn SolarTime::to_string(Self) -> String
 pub fn SolarTime::to_true_solar_time(Self, Double) -> Self
 pub fn SolarTime::validate(Int, Int, Int, Int, Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for SolarTime
@@ -1598,6 +1739,7 @@ pub fn SolarWeek::get_solar_month(Self) -> SolarMonth
 pub fn SolarWeek::get_start(Self) -> Week
 pub fn SolarWeek::get_year(Self) -> Int
 pub fn SolarWeek::next(Self, Int) -> Self
+pub fn SolarWeek::output(Self, &Logger) -> Unit
 pub fn SolarWeek::to_string(Self) -> String
 pub fn SolarWeek::validate(Int, Int, Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for SolarWeek
@@ -1611,11 +1753,15 @@ pub fn SolarYear::from_year(Int) -> Result[Self, String]
 pub fn SolarYear::get_day_count(Self) -> Int
 pub fn SolarYear::get_half_years(Self) -> Array[SolarHalfYear]
 pub fn SolarYear::get_months(Self) -> Array[SolarMonth]
+pub fn SolarYear::get_name(Self) -> String
 pub fn SolarYear::get_rab_byung_year(Self) -> Result[RabByungYear, String]
 pub fn SolarYear::get_seasons(Self) -> Array[SolarSeason]
 pub fn SolarYear::get_year(Self) -> Int
 pub fn SolarYear::is_leap(Self) -> Bool
 pub fn SolarYear::new(@base.YearUnit) -> Self
+pub fn SolarYear::next(Self, Int) -> Self
+pub fn SolarYear::output(Self, &Logger) -> Unit
+pub fn SolarYear::to_string(Self) -> String
 pub fn SolarYear::validate(Int) -> Result[Unit, String]
 pub impl @base.Culture for SolarYear
 pub impl @base.Tyme for SolarYear
@@ -1633,6 +1779,7 @@ pub fn Taboo::get_hour_recommends(SixtyCycle, SixtyCycle) -> Result[Array[Self],
 pub fn Taboo::get_index(Self) -> Int
 pub fn Taboo::get_name(Self) -> String
 pub fn Taboo::next(Self, Int) -> Self
+pub fn Taboo::output(Self, &Logger) -> Unit
 pub fn Taboo::to_string(Self) -> String
 pub impl @base.Culture for Taboo
 pub impl @base.Tyme for Taboo
@@ -1646,6 +1793,7 @@ pub fn TenStar::from_name(String) -> Result[Self, String]
 pub fn TenStar::get_index(Self) -> Int
 pub fn TenStar::get_name(Self) -> String
 pub fn TenStar::next(Self, Int) -> Self
+pub fn TenStar::output(Self, &Logger) -> Unit
 pub fn TenStar::to_string(Self) -> String
 pub impl @base.Culture for TenStar
 pub impl @base.Tyme for TenStar
@@ -1659,6 +1807,7 @@ pub fn Terrain::from_name(String) -> Result[Self, String]
 pub fn Terrain::get_index(Self) -> Int
 pub fn Terrain::get_name(Self) -> String
 pub fn Terrain::next(Self, Int) -> Self
+pub fn Terrain::output(Self, &Logger) -> Unit
 pub fn Terrain::to_string(Self) -> String
 pub impl @base.Culture for Terrain
 pub impl @base.Tyme for Terrain
@@ -1672,6 +1821,7 @@ pub fn ThreePhenology::from_name(String) -> Result[Self, String]
 pub fn ThreePhenology::get_index(Self) -> Int
 pub fn ThreePhenology::get_name(Self) -> String
 pub fn ThreePhenology::next(Self, Int) -> Self
+pub fn ThreePhenology::output(Self, &Logger) -> Unit
 pub fn ThreePhenology::to_string(Self) -> String
 pub impl @base.Culture for ThreePhenology
 pub impl @base.Tyme for ThreePhenology
@@ -1686,9 +1836,12 @@ pub fn ThreePillars::equals(Self, Self) -> Bool
 pub fn ThreePillars::from_sixty_cycle(SixtyCycle, SixtyCycle, SixtyCycle) -> Self
 pub fn ThreePillars::get_day(Self) -> SixtyCycle
 pub fn ThreePillars::get_month(Self) -> SixtyCycle
+pub fn ThreePillars::get_name(Self) -> String
 pub fn ThreePillars::get_solar_days(Self, Int, Int) -> Array[SolarDay]
 pub fn ThreePillars::get_year(Self) -> SixtyCycle
 pub fn ThreePillars::new(String, String, String) -> Result[Self, String]
+pub fn ThreePillars::output(Self, &Logger) -> Unit
+pub fn ThreePillars::to_string(Self) -> String
 pub impl @base.Culture for ThreePillars
 pub impl Show for ThreePillars
 
@@ -1700,6 +1853,8 @@ pub fn TwelveStar::from_index(Int) -> Self
 pub fn TwelveStar::from_name(String) -> Result[Self, String]
 pub fn TwelveStar::get_ecliptic(Self) -> Ecliptic
 pub fn TwelveStar::get_name(Self) -> String
+pub fn TwelveStar::next(Self, Int) -> Self
+pub fn TwelveStar::output(Self, &Logger) -> Unit
 pub fn TwelveStar::to_string(Self) -> String
 pub impl @base.Culture for TwelveStar
 pub impl @base.Tyme for TwelveStar
@@ -1718,6 +1873,7 @@ pub fn TwentyEightStar::get_name(Self) -> String
 pub fn TwentyEightStar::get_seven_star(Self) -> SevenStar
 pub fn TwentyEightStar::get_zone(Self) -> Zone
 pub fn TwentyEightStar::next(Self, Int) -> Self
+pub fn TwentyEightStar::output(Self, &Logger) -> Unit
 pub fn TwentyEightStar::to_string(Self) -> String
 pub impl @base.Culture for TwentyEightStar
 pub impl @base.Tyme for TwentyEightStar
@@ -1734,6 +1890,7 @@ pub fn Week::get_name(Self) -> String
 pub fn Week::get_seven_star(Self) -> SevenStar
 pub fn Week::get_size(Self) -> Int
 pub fn Week::next(Self, Int) -> Self
+pub fn Week::output(Self, &Logger) -> Unit
 pub fn Week::steps_back_to(Self, Int) -> Int
 pub fn Week::steps_close_to(Self, Int) -> Int
 pub fn Week::steps_to(Self, Int) -> Int
@@ -1749,8 +1906,11 @@ pub struct WeekUnit {
 }
 pub fn WeekUnit::get_compare_index(Self) -> Int
 pub fn WeekUnit::get_index(Self) -> Int
+pub fn WeekUnit::get_name(Self) -> String
 pub fn WeekUnit::get_start(Self) -> Week
 pub fn WeekUnit::new(@base.MonthUnit, Int, Int) -> Self
+pub fn WeekUnit::output(Self, &Logger) -> Unit
+pub fn WeekUnit::to_string(Self) -> String
 pub fn WeekUnit::validate(Int, Int, Int, Int) -> Result[Unit, String]
 pub impl @base.Culture for WeekUnit
 pub impl Show for WeekUnit
@@ -1764,6 +1924,7 @@ pub fn Zodiac::from_name(String) -> Result[Self, String]
 pub fn Zodiac::get_index(Self) -> Int
 pub fn Zodiac::get_name(Self) -> String
 pub fn Zodiac::next(Self, Int) -> Self
+pub fn Zodiac::output(Self, &Logger) -> Unit
 pub fn Zodiac::to_string(Self) -> String
 pub impl @base.Culture for Zodiac
 pub impl @base.Tyme for Zodiac
@@ -1778,6 +1939,8 @@ pub fn Zone::get_beast(Self) -> Beast
 pub fn Zone::get_direction(Self) -> Direction
 pub fn Zone::get_index(Self) -> Int
 pub fn Zone::get_name(Self) -> String
+pub fn Zone::next(Self, Int) -> Self
+pub fn Zone::output(Self, &Logger) -> Unit
 pub fn Zone::to_string(Self) -> String
 pub impl @base.Culture for Zone
 pub impl @base.Tyme for Zone

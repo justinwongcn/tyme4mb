@@ -6,10 +6,10 @@ pub struct LoopTyme {
 }
 
 ///|
-extend LoopTyme with Culture::{get_name}
+pub extend LoopTyme with Culture::{get_name}
 
 ///|
-extend LoopTyme with Show::{to_string}
+pub extend LoopTyme with Show::{to_string, output}
 
 ///|
 pub fn LoopTyme::get_index(self : LoopTyme) -> Int {

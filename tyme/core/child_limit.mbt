@@ -195,6 +195,9 @@ pub fn ChildLimit::set_provider(p : &IChildLimitProvider) -> Unit {
 }
 
 ///|
+pub extend ChildLimit with Show::{to_string, output}
+
+///|
 pub impl Show for ChildLimit with fn to_string(self : ChildLimit) -> String {
   self.get_eight_char().to_string() +
   " " +

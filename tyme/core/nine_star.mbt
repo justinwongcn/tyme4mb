@@ -72,9 +72,12 @@ pub impl Show for NineStar with fn to_string(self : NineStar) -> String {
 }
 
 ///|
+pub extend NineStar with Tyme::{next}
+
+///|
 pub impl Tyme for NineStar with fn next(self : NineStar, n : Int) -> NineStar {
   NineStar::from_index(self.loop_tyme.get_index() + n)
 }
 
 ///|
-pub extend NineStar with Show::{to_string}
+pub extend NineStar with Show::{to_string, output}

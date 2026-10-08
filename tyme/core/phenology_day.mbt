@@ -35,4 +35,4 @@ pub impl Show for PhenologyDay with fn to_string(self : PhenologyDay) -> String 
 pub extend PhenologyDay with Culture::{get_name}
 
 ///|
-pub extend PhenologyDay with Show::{to_string}
+pub extend PhenologyDay with Show::{to_string, output}

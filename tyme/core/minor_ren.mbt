@@ -63,4 +63,4 @@ pub impl Tyme for MinorRen with fn next(self : MinorRen, n : Int) -> MinorRen {
 pub extend MinorRen with Culture::{get_name}
 
 ///|
-pub extend MinorRen with Show::{to_string}
+pub extend MinorRen with Show::{to_string, output}

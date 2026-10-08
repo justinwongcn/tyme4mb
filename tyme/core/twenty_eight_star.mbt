@@ -96,4 +96,4 @@ pub impl Tyme for TwentyEightStar with fn next(self : TwentyEightStar, n : Int) 
 pub extend TwentyEightStar with Culture::{get_name}
 
 ///|
-pub extend TwentyEightStar with Show::{to_string}
+pub extend TwentyEightStar with Show::{to_string, output}

@@ -159,4 +159,4 @@ pub fn LunarWeek::equals(self : LunarWeek, target : LunarWeek) -> Bool {
 }
 
 ///|
-pub extend LunarWeek with Show::{to_string}
+pub extend LunarWeek with Show::{to_string, output}

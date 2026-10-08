@@ -20,13 +20,13 @@ pub struct SixtyCycle {
 }
 
 ///|
-extend SixtyCycle with Culture::{get_name}
+pub extend SixtyCycle with Culture::{get_name}
 
 ///|
-extend SixtyCycle with Show::{to_string}
+pub extend SixtyCycle with Show::{to_string, output}
 
 ///|
-extend SixtyCycle with Tyme::{next}
+pub extend SixtyCycle with Tyme::{next}
 
 ///|
 pub fn SixtyCycle::get_index(self : SixtyCycle) -> Int {

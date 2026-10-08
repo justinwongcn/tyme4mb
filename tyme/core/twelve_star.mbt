@@ -14,7 +14,7 @@ pub struct TwelveStar {
 }
 
 ///|
-pub extend TwelveStar with Show::{to_string}
+pub extend TwelveStar with Show::{to_string, output}
 
 ///|
 pub fn TwelveStar::from_index(index : Int) -> TwelveStar {
@@ -50,6 +50,9 @@ pub impl Culture for TwelveStar with fn get_name(self : TwelveStar) -> String {
 pub impl Show for TwelveStar with fn to_string(self : TwelveStar) -> String {
   self.loop_tyme.get_name()
 }
+
+///|
+pub extend TwelveStar with Tyme::{next}
 
 ///|
 pub impl Tyme for TwelveStar with fn next(self : TwelveStar, n : Int) -> TwelveStar {

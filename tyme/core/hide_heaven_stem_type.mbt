@@ -41,4 +41,4 @@ pub impl Show for HideHeavenStemType with fn to_string(
 }
 
 ///|
-pub extend HideHeavenStemType with Show::{to_string}
+pub extend HideHeavenStemType with Show::{to_string, output}

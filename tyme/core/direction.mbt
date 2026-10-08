@@ -11,10 +11,10 @@ pub struct Direction {
 }
 
 ///|
-extend Direction with Culture::{get_name}
+pub extend Direction with Culture::{get_name}
 
 ///|
-extend Direction with Show::{to_string}
+pub extend Direction with Show::{to_string, output}
 
 ///|
 pub fn Direction::get_index(self : Direction) -> Int {
@@ -61,6 +61,9 @@ pub impl Culture for Direction with fn get_name(self : Direction) -> String {
 pub impl Show for Direction with fn to_string(self : Direction) -> String {
   self.loop_tyme.get_name()
 }
+
+///|
+pub extend Direction with Tyme::{next}
 
 ///|
 pub impl Tyme for Direction with fn next(self : Direction, n : Int) -> Direction {
