@@ -38,7 +38,7 @@ pub fn qi_accurate2(Double) -> Double
 
 pub let qi_kb : Array[Double]
 
-pub fn sa_lon(Double, Int) -> Double
+pub fn sa_lon(Double, Int32) -> Double
 
 pub fn sa_lon_t(Double) -> Double
 

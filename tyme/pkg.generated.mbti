@@ -8,7 +8,7 @@ import {
 }
 
 // Values
-pub const J2000 : Int = 2451545
+pub const J2000 : Int32 = 2451545
 
 pub const OneThird : Double = 0.333333333333
 
@@ -126,7 +126,7 @@ pub fn rab_byung_month_aliases() -> Array[String]
 
 pub let rab_byung_month_data : String
 
-pub fn sa_lon(Double, Int) -> Double
+pub fn sa_lon(Double, Int32) -> Double
 
 pub fn sa_lon_t(Double) -> Double
 
@@ -154,7 +154,7 @@ pub fn solar_festival_names() -> Array[String]
 
 pub fn solar_half_year_names() -> Array[String]
 
-pub fn solar_month_days() -> Array[Int]
+pub fn solar_month_days() -> Array[Int32]
 
 pub fn solar_month_names() -> Array[String]
 
