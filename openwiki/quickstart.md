@@ -1,165 +1,86 @@
----
-type: "参考"
-title: "Tyme4MB — 快速开始"
-openwiki_generated: true
----
+# Quickstart
 
----
-title: 快速开始
-type: page
-description: Tyme4MB 项目入门指南，包含核心概念、快速上手和项目结构
----
+Tyme4MB（`justinwongcn/tyme4mb`，当前 0.2.5，MIT）是 [tyme4go](https://github.com/6tail/tyme4go) v1.5.0 的 MoonBit 逐函数移植，一个中国传统历法计算库：公历、农历、藏历（饶迥历 RabByung）、回历（Hijri）、干支、生肖、节气、月相、法定假日、八字、童限、大运、神煞、宜忌等。零第三方依赖（仅 `moonbitlang/core`），编译目标为 wasm-gc / wasm / js / native（`moon.mod`，`AGENTS.md`）。
 
-# Tyme4MB — 快速开始
+> 阅读提示：README 中部分数字已过时——"43 个测试文件"实际为 `tyme/core` 下 60 个白盒测试文件 + `api_test/` 下 10 个黑盒测试文件（约 2472 行）；"130 种吉凶神煞"实际为 151 条（另有宜忌 140 项），详见 [testing.md](testing.md) 与 [domain-shensha.md](domain-shensha.md)。
 
-## 项目简介
+## 功能全景
 
-`tyme4mb` 是一个 MoonBit 库，实现对**中国传统历法与时间体系**的完整计算能力。涵盖公历、农历、回历、干支、八字、节气、神煞、宜忌、童限/小运等模块。
-
-- **包名**：`tyme`
-- **版本**：`0.1.0`
-- **依赖**：`moonbitlang/core/math`（用于天文计算中的取整运算）
-- **输出**：WASM 运行时库（见 `_build/wasm/`）
-
-## 核心概念速览
-
-| 概念 | 说明 | 主要类型 |
+| 领域 | 内容 | 详细文档 |
 |------|------|----------|
-| 公历 | 格里高利历 | `SolarDay`, `SolarMonth`, `SolarYear`, `SolarTime` |
-| 农历 | 中国传统阴阳合历 | `LunarDay`, `LunarMonth`, `LunarYear` |
-| 干支 | 六十甲子循环 | `SixtyCycle`, `HeavenStem`, `EarthBranch` |
-| 八字 | 四柱（年/月/日/时） | `EightChar`, `ThreePillars` |
-| 节气 | 黄道十二节与中气 | `SolarTerm` |
-| 宜忌 | 每日吉凶事项 | `Taboo` |
-| 神煞 | 吉凶神煞符号（130种） | `God` |
-| 童限/小运/大运 | 命理推算 | `ChildLimit`, `Fortune`, `DecadeFortune` |
-| 回历 | 伊斯兰历 | `HijriDay`, `HijriMonth`, `HijriYear` |
-| 巴厘岛历 | 印尼历法 | `RabByungDay`, `RabByungMonth`, `RabByungYear` |
-| 月相 | 月相变化 | `Phase`, `PhaseDay` |
-| 小六壬 | 占卜方法 | `MinorRen` |
-| 六曜 | 孔明六曜星 | `SixStar` |
-| 三元 | 上元/中元/下元 | `Sixty` |
-| 灶马头 | 农历年运势 | `KitchenGodSteed` |
-| 十神 | 天干生克关系 | `TenStar` |
-| 宫 | 四方神兽方位 | `Zone` |
-| 星期 | 周日到周六 | `Week` |
-| 三候 | 节气三候 | `ThreePhenology` |
-| 节气日 | 节气第几天 | `SolarTermDay` |
+| 历法 | 公历（含 1582 年儒略/格里切换）、农历（天文朔日推算、闰月）、干支六十甲子、藏历、回历、儒略日 | [domain-calendars.md](domain-calendars.md) |
+| 八字命理 | 四柱排盘（多种流派）、童限/大运/流年、十神、十二长生、藏干 | [domain-bazi.md](domain-bazi.md) |
+| 神煞宜忌 | 八字神煞 V2（55 条）、日神煞（151 条吉凶神）、每日/时辰宜忌（140 项） | [domain-shensha.md](domain-shensha.md) |
+| 文化杂项 | 物候、三伏、梅雨、数九、九星、二十八宿、胎神、彭祖百忌、六曜、小六壬、灶马头等 | [domain-culture.md](domain-culture.md) |
+| 天文算法 | 寿星天文历节气/朔日、真太阳时、均时差、日出日落 | [astronomy.md](astronomy.md) |
 
-## 快速上手
+本项目相对上游 tyme4go 的主要扩展（上游无对应实现，不能以 Go 版为黄金参照）：真太阳时家族（`SolarTime::to_true_solar_time` / `get_solar_noon` / `get_sunrise` / `get_sunset`）、童限真太阳时双轨、八字神煞 V2、真黄经人元司令分野（`hide_heaven_stem_ecliptic.mbt`）、地支六破/三合/三会，以及闰月/神煞查询的索引性能优化。
 
-### 1. 克隆与构建
+## 安装与最小用法
 
 ```bash
-# 使用 MoonBit 工具链
-mbt build tyme
+moon add justinwongcn/tyme4mb
 ```
-
-构建产物位于 `_build/`，包括 `packages.json` 和 WASM 二进制。
-
-### 2. 基本用法：计算某日的干支
 
 ```moonbit
-import tyme.{SolarDay, SolarTerm}
+import tyme.{SolarDay, SolarTime}
 
-// 获取某公历日的干支
-let day = SolarDay::from_ymd(2026, 8, 3)?
-let sc_day = day.get_sixty_cycle_day()
-println(sc_day.to_string())  // 输出干支日名称
+// 公历日与星期、星座
+let solar_day = SolarDay::from_ymd(1986, 5, 29).unwrap()
+println(solar_day.to_string())          // 1986年5月29日
+
+// 公历 → 农历 / 藏历 / 回历
+println(solar_day.get_lunar_day().to_string())      // 农历丙寅年四月廿一
+println(solar_day.get_rab_byung_day().unwrap().to_string())  // 第十七饶迥火虎年四月廿一
+println(solar_day.get_hijri_day().to_string())      // 1406年赖买丹月20日
+
+// 公历时刻 → 干支八字
+let solar_time = SolarTime::from_ymdhms(1986, 5, 29, 13, 0, 0).unwrap()
+let lunar_hour = solar_time.get_lunar_hour().unwrap()
+println(lunar_hour.get_eight_char().to_string())    // 丙寅 癸巳 癸酉 己未
 ```
 
-### 3. 农历转换
+公开 API 一律经 facade 包 `tyme`（`@tyme.*`）访问，签名见 [tyme/pkg.generated.mbti](../tyme/pkg.generated.mbti)；接口语义以 `AGENTS.md` 所列的 `go.md` / `java.md` / `ts.md` 三份上游接口文档为主要依据。
 
-```moonbit
-import tyme.{LunarDay, SolarDay}
-
-// 公历转农历
-let solar = SolarDay::from_ymd(2026, 1, 29)?
-let lunar = solar.get_lunar_day()
-println(lunar.to_string())  // 农历日期
-```
-
-### 4. 八字排盘
-
-```moonbit
-import tyme.{EightChar, LunarHour}
-
-// 通过农历时辰构造八字
-let hour = LunarHour::from_ymd_time(year, month, day, hour_idx)?
-let eight_char = eight_char_provider.get_eight_char(hour)
-println(eight_char.to_string())
-```
-
-## 项目结构
-
-```
-tyme4mb/
-├── tyme/                  # 主库源码（.mbt 文件）
-│   ├── moon.pkg           # 包声明
-│   ├── tyme.mbt           # Tyme trait（时间推移接口）
-│   ├── culture.mbt        # Culture trait（传统文化名称接口）
-│   ├── abstract_*.mbt     # 抽象基类型
-│   ├── solar_*.mbt        # 公历相关
-│   ├── lunar_*.mbt        # 农历相关
-│   ├── eight_char.mbt     # 八字
-│   ├── three_pillars.mbt  # 三柱
-│   ├── sixty_cycle*.mbt   # 六十甲子
-│   ├── event.mbt          # 事件（自定义节日等）
-│   ├── event_builder.mbt  # 事件构造器
-│   ├── event_manager.mbt  # 事件管理器（纯值类型，显式状态传递）
-│   ├── event_type.mbt     # 事件类型枚举
-│   ├── god.mbt            # 神煞
-│   ├── taboo.mbt          # 宜忌
-│   ├── hijri_*.mbt        # 回历
-│   ├── child_limit*.mbt   # 童限计算
-│   ├── fortune.mbt        # 小运
-│   ├── decade_fortune.mbt # 大运
-│   ├── kitchen_god_steed.mbt # 灶马头
-│   ├── minor_ren.mbt      # 小六壬
-│   ├── six_star.mbt       # 六曜
-│   ├── sixty.mbt          # 三元
-│   ├── phase.mbt          # 月相
-│   ├── legal_holiday.mbt  # 法定假日
-│   ├── shou_xing_util.mbt # 斗宿工具（~718行，核心算法）
-│   └── *_wbtest.mbt       # 单元测试
-├── openwiki/              # 本 Wiki 文档
-├── _build/                # 构建产物（WASM + packages.json）
-└── .github/workflows/     # CI/CD（OpenWiki 自动更新）
-```
-
-## 主要设计模式
-
-1. **Trait-based 抽象**：`Tyme`（推移）、`Culture`（名称）、`Show`（字符串化）构成核心抽象层。
-2. **LoopTyme 循环类型**：几乎所有枚举/序列类型底层都包装 `LoopTyme`，支持环形索引与推移操作。
-3. **Provider 接口**：`IChildLimitProvider`、`IEightCharProvider` 支持策略注入（如不同流派算法）。
-4. **静态数据表**：农历闰月编码、神煞宜忌等大数据以内联数组存储，避免外部依赖。
-5. **逐行移植**：注释中保留原始代码引用，便于对照维护。
-6. **多流派支持**：童限支持 Default、China95、LunarSect1、LunarSect2 四种实现。
-
-## 测试
+## 常用命令
 
 ```bash
-# 运行全部单元测试
-mbt test tyme
-
-# 运行交叉引用测试
-mbt test tyme/xref_all_wbtest.mbt
+moon build          # 构建（默认 wasm-gc；--target all 四目标均可通过）
+moon test           # 全量测试（CI 用 --deny-warn）
+moon run examples   # 12 节交互式示例（examples/main.mbt），覆盖全部主要能力
+moon fmt            # 格式化（CI 检查 moon fmt --check）
+moon check --deny-warn  # 静态检查，任何 warning 即失败
+moon info           # 变更公开 API 后刷新 pkg.generated.mbti
 ```
 
-测试文件：
-- `eight_char_true_solar_wbtest.mbt` — 八字真太阳时测试
-- `xref_all_wbtest.mbt` — 全量交叉引用测试（~2100行）
-- `xref_gt_wbtest.mbt` / `xref_sx_wbtest.mbt` — 子集交叉测试
+## 包结构
 
-## 相关链接
+```
+tyme/base/        基础抽象：Culture/Tyme trait、LoopTyme 环形枚举、单位与二元枚举（零外部依赖）
+tyme/astronomy/   纯天文算法：寿星天文历、真太阳时（仅依赖 moonbitlang/core/math）
+tyme/core/        领域实现：约 130 个源文件，所有历法与文化类型
+tyme/             facade：reexports.mbt 以 pub using 重导出，保持 @tyme 兼容边界
+api_test/         黑盒测试（仅 import tyme）
+examples/         可执行示例（is-main）
+```
 
-- [架构概览](./architecture/overview.md)
-- [领域概念 - 历法体系](./concepts/calendar-systems.md)
-- [领域概念 - 干支系统](./domain-concepts/干支系统.md)
-- [领域概念 - 神煞与宜忌](./domain-concepts/神煞与宜忌.md)
-- [领域概念 - 童限](./domain-concepts/童限.md)
-- [源码地图](./source-map.md)
-- [工作流 - 八字计算](./workflows/八字计算.md)
-- [工作流 - 历法转换](./workflows/历法转换.md)
-- [测试指南](./testing.md)
-- [运维手册](./operations/runbook.md)
+依赖方向严格单向：`base ← astronomy ← core ← facade`。分层细节、抽象模型与修改公开 API 的标准流程见 [architecture.md](architecture.md)。
+
+## 文档地图
+
+- [architecture.md](architecture.md) — 包分层、抽象模型、重导出链、全局可变单点、工程约定
+- [domain-calendars.md](domain-calendars.md) — 五大历法体系、儒略日中介、换算主干、节日/假日/事件
+- [domain-bazi.md](domain-bazi.md) — 八字、童限（含真太阳时双轨）、大运流年、命理要素
+- [domain-shensha.md](domain-shensha.md) — 两套神煞宜忌体系、查询索引优化、数据来源
+- [domain-culture.md](domain-culture.md) — 文化杂项类型分组与 LoopTyme 模式
+- [astronomy.md](astronomy.md) — 天文算法、真太阳时链路、精度与年份边界
+- [testing.md](testing.md) — 测试分层、与 Go 参考实现的差分对拍、基准、CI、验证缺口
+
+## 来源与致谢
+
+- [tyme4go](https://github.com/6tail/tyme4go)（MIT, 6tail）— 整体移植来源，`tyme4go/` 为本地参考源码（不入库）
+- [寿星天文历 sxwnl](https://github.com/sxwnl/sxwnl)（许剑伟）— 节气/朔日天文算法
+- [starainrt/astro](https://github.com/starainrt/astro)（Apache 2.0）— 真太阳时算法
+- [stonelf/zangli](https://github.com/stonelf/zangli)（MIT）— 藏历数据
+
+完整许可证归属见 [THIRD_PARTY_LICENSES.md](../THIRD_PARTY_LICENSES.md)。

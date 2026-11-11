@@ -2,14 +2,22 @@
 
 ## OpenWiki
 
-This repository has a generated `openwiki/` evidence index. It is optional just-in-time context, not required startup reading.
+This repository has documentation located in the /openwiki directory.
+
+Start here:
+- [OpenWiki quickstart](openwiki/quickstart.md)
+
+OpenWiki includes repository overview, architecture notes, workflows, domain concepts, operations, integrations, testing guidance, and source maps.
+
+When working in this repository, read the OpenWiki quickstart first, then follow its links to the relevant architecture, workflow, domain, operation, and testing notes.
+
+<!-- OPENWIKI:END -->
+
+## 文档与验证约定
 
 - Treat source code and tests as authoritative. A brief's unknowns and review items are verification gaps, not automatic requirements.
 - Prefer the narrowest quiet validation that proves the changed behavior. Preserve complete failure output.
-
-The scheduled OpenWiki GitHub Actions workflow refreshes the repository wiki. Do not hand-edit generated OpenWiki pages unless explicitly asked; prefer updating source code/docs and letting OpenWiki regenerate.
-
-<!-- OPENWIKI:END -->
+- `openwiki/` 由 `/openwiki-init`、`/openwiki-update` 技能维护；另有一个定时 GitHub Actions 工作流（npm openwiki）会刷新 wiki，其输出格式可能与当前结构不同。除非显式要求，不要手工改写 `openwiki/` 页面；优先更新源码与 docs/，再走再生成流程。
 
 ## Review 与修复原则
 
@@ -25,8 +33,9 @@ Go、Java 和 TypeScript 的接口文档分别位于 `go.md`、`java.md` 和 `ts
 
 ### 工具链
 
-- **moon 版本**: `0.1.20260920`（2026-09-20 构建）
+- **moon 版本**: `0.1.20261104`（2026-11-04 构建；`moonc v0.10.20+65efd5b93` 2026-11-05，`moonrun 0.1.20261104`）。2026-11-12 经 `moon upgrade --force` 校验为官方当前发布版
 - **Feature flags**: `rr_moon_mod`（使用 `moon.mod` 而非旧版 `moon.mod.json`）、`rr_moon_pkg`（使用 `moon.pkg` 而非旧版 `moon.pkg.json`）
+- **`moon fmt` 类型注解规范化**: moonc `v0.10.20`（2026-11-05）起，`moon fmt` 会把源码类型注解中的 `Int` 别名改写为规范名 `Int32`（语义不变）；`moon fmt --check` 会因此拒绝旧写法。提交前先跑 `moon fmt`
 - **已验证支持的编译目标**: `wasm-gc`、`wasm`、`js`、`native`（`--target all` 均可通过）
 - **默认编译目标**: `wasm-gc`（moon 默认）
 - **项目无 `preferred-target` 设置**，所有目标均可用
@@ -69,7 +78,7 @@ tyme4mb/
 
 - 模块声明文件: `moon.mod`（非 `moon.mod.json`）
 - 包声明文件: `moon.pkg`（非 `moon.pkg.json`）
-- 公开接口签名: `pkg.generated.mbti`（由 `moon info` 生成，已纳入版本控制）
+- 公开接口签名: `pkg.generated.mbti`（由 `moon info` 生成，已纳入版本控制；moon `0.1.20261023` 起签名中的 `Int` 渲染为 `Int32`，语义不变；moonc `v0.10.20` 起 `moon fmt` 对源码注解做同样的规范化）
 - 源码文件: `*.mbt`，白盒测试: `*_wbtest.mbt`，黑盒测试: `*_test.mbt`
 
 ### trait 方法显式提升约定
