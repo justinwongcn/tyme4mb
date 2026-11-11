@@ -11,7 +11,7 @@ pub struct Zone {
 }
 
 ///|
-pub fn Zone::from_index(index : Int) -> Zone {
+pub fn Zone::from_index(index : Int32) -> Zone {
   { loop_tyme: LoopTyme::from_index(zone_names(), index), }
 }
 
@@ -24,7 +24,7 @@ pub fn Zone::from_name(name : String) -> Result[Zone, String] {
 }
 
 ///|
-pub fn Zone::get_index(self : Zone) -> Int {
+pub fn Zone::get_index(self : Zone) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -57,7 +57,7 @@ pub impl Show for Zone with fn to_string(self : Zone) -> String {
 pub extend Zone with Tyme::{next}
 
 ///|
-pub impl Tyme for Zone with fn next(self : Zone, n : Int) -> Zone {
+pub impl Tyme for Zone with fn next(self : Zone, n : Int32) -> Zone {
   Zone::from_index(self.loop_tyme.get_index() + n)
 }
 

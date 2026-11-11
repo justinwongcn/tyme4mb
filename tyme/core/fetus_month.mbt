@@ -15,7 +15,7 @@ pub fn fetus_month_names() -> Array[String] {
 
 ///|
 // new 从索引构造
-pub fn FetusMonth::new(index : Int) -> FetusMonth {
+pub fn FetusMonth::new(index : Int32) -> FetusMonth {
   { loop_tyme: LoopTyme::from_index(fetus_month_names(), index), }
 }
 
@@ -30,7 +30,7 @@ pub fn FetusMonth::from_lunar_month(lunar_month : LunarMonth) -> FetusMonth? {
 
 ///|
 // get_index 索引
-pub fn FetusMonth::get_index(self : FetusMonth) -> Int {
+pub fn FetusMonth::get_index(self : FetusMonth) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -51,7 +51,7 @@ pub impl Show for FetusMonth with fn to_string(self : FetusMonth) -> String {
 pub extend FetusMonth with Tyme::{next}
 
 ///|
-pub impl Tyme for FetusMonth with fn next(self : FetusMonth, n : Int) -> FetusMonth {
+pub impl Tyme for FetusMonth with fn next(self : FetusMonth, n : Int32) -> FetusMonth {
   FetusMonth::new(self.loop_tyme.next_index(n))
 }
 

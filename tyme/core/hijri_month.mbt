@@ -27,19 +27,22 @@ pub fn HijriMonth::new(month_unit : MonthUnit) -> HijriMonth {
 
 ///|
 // get_year 年
-pub fn HijriMonth::get_year(self : HijriMonth) -> Int {
+pub fn HijriMonth::get_year(self : HijriMonth) -> Int32 {
   self.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn HijriMonth::get_month(self : HijriMonth) -> Int {
+pub fn HijriMonth::get_month(self : HijriMonth) -> Int32 {
   self.month_unit.get_month()
 }
 
 ///|
 // validate 校验
-pub fn HijriMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
+pub fn HijriMonth::validate(
+  year : Int32,
+  month : Int32,
+) -> Result[Unit, String] {
   if month < 1 || month > 12 {
     return Err("illegal hijri month: " + month.to_string())
   }
@@ -49,8 +52,8 @@ pub fn HijriMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
 ///|
 // from_ym 从年月构造
 pub fn HijriMonth::from_ym(
-  year : Int,
-  month : Int,
+  year : Int32,
+  month : Int32,
 ) -> Result[HijriMonth, String] {
   match HijriMonth::validate(year, month) {
     Ok(_) => Ok({ month_unit: MonthUnit::new(YearUnit::new(year), month), })
@@ -69,7 +72,7 @@ pub fn HijriMonth::get_hijri_year(self : HijriMonth) -> HijriYear {
 
 ///|
 // get_day_count 天数（单数月30天，双数月29天，闰年第12月30天)
-pub fn HijriMonth::get_day_count(self : HijriMonth) -> Int {
+pub fn HijriMonth::get_day_count(self : HijriMonth) -> Int32 {
   let mut d = 30
   if self.get_month() % 2 == 0 {
     d = 29
@@ -82,7 +85,7 @@ pub fn HijriMonth::get_day_count(self : HijriMonth) -> Int {
 
 ///|
 // get_index_in_year 位于当年的索引(0-11)
-pub fn HijriMonth::get_index_in_year(self : HijriMonth) -> Int {
+pub fn HijriMonth::get_index_in_year(self : HijriMonth) -> Int32 {
   self.get_month() - 1
 }
 
@@ -126,7 +129,7 @@ pub impl Show for HijriMonth with fn to_string(self : HijriMonth) -> String {
 }
 
 ///|
-pub impl Tyme for HijriMonth with fn next(self : HijriMonth, n : Int) -> HijriMonth {
+pub impl Tyme for HijriMonth with fn next(self : HijriMonth, n : Int32) -> HijriMonth {
   let i = self.get_month() - 1 + n
   match
     HijriMonth::from_ym(

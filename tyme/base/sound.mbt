@@ -17,7 +17,7 @@ pub struct Sound {
 }
 
 ///|
-pub fn Sound::from_index(index : Int) -> Sound {
+pub fn Sound::from_index(index : Int32) -> Sound {
   { loop_tyme: LoopTyme::from_index(sound_names(), index), }
 }
 
@@ -30,7 +30,7 @@ pub fn Sound::from_name(name : String) -> Result[Sound, String] {
 }
 
 ///|
-pub fn Sound::get_index(self : Sound) -> Int {
+pub fn Sound::get_index(self : Sound) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -54,6 +54,6 @@ pub impl Show for Sound with fn to_string(self : Sound) -> String {
 pub extend Sound with Tyme::{next}
 
 ///|
-pub impl Tyme for Sound with fn next(self : Sound, n : Int) -> Sound {
+pub impl Tyme for Sound with fn next(self : Sound, n : Int32) -> Sound {
   Sound::from_index(self.loop_tyme.get_index() + n)
 }

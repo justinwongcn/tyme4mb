@@ -11,7 +11,7 @@ pub struct Luck {
 }
 
 ///|
-pub fn Luck::from_index(index : Int) -> Luck {
+pub fn Luck::from_index(index : Int32) -> Luck {
   { loop_tyme: LoopTyme::from_index(luck_names(), index), }
 }
 
@@ -24,7 +24,7 @@ pub fn Luck::from_name(name : String) -> Result[Luck, String] {
 }
 
 ///|
-pub fn Luck::get_index(self : Luck) -> Int {
+pub fn Luck::get_index(self : Luck) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -48,6 +48,6 @@ pub impl Show for Luck with fn to_string(self : Luck) -> String {
 pub extend Luck with Tyme::{next}
 
 ///|
-pub impl Tyme for Luck with fn next(self : Luck, n : Int) -> Luck {
+pub impl Tyme for Luck with fn next(self : Luck, n : Int32) -> Luck {
   Luck::from_index(self.loop_tyme.get_index() + n)
 }

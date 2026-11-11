@@ -21,7 +21,7 @@ pub fn HideHeavenStem::new(
 
 ///|
 pub fn HideHeavenStem::from_index(
-  heaven_stem_index : Int,
+  heaven_stem_index : Int32,
   hide_heaven_stem_type : HideHeavenStemType,
 ) -> HideHeavenStem {
   {

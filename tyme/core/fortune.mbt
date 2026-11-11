@@ -4,7 +4,7 @@ pub struct Fortune {
   // 童限
   child_limit : ChildLimit
   // 序号
-  index : Int
+  index : Int32
 }
 
 ///|
@@ -14,14 +14,14 @@ pub extend Fortune with Culture::{get_name}
 // from_child_limit 从童限与序号构造
 pub fn Fortune::from_child_limit(
   child_limit : ChildLimit,
-  index : Int,
+  index : Int32,
 ) -> Fortune {
   { child_limit, index, }
 }
 
 ///|
 // get_age 年龄
-pub fn Fortune::get_age(self : Fortune) -> Int {
+pub fn Fortune::get_age(self : Fortune) -> Int32 {
   self.child_limit.get_end_sixty_cycle_year().get_year() -
   self.child_limit.get_start_sixty_cycle_year().get_year() +
   1 +
@@ -61,7 +61,7 @@ pub impl Show for Fortune with fn to_string(self : Fortune) -> String {
 }
 
 ///|
-pub impl Tyme for Fortune with fn next(self : Fortune, n : Int) -> Fortune {
+pub impl Tyme for Fortune with fn next(self : Fortune, n : Int32) -> Fortune {
   Fortune::from_child_limit(self.child_limit, self.index + n)
 }
 

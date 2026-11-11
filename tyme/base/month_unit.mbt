@@ -2,26 +2,26 @@
 // MonthUnit 月
 pub struct MonthUnit {
   year_unit : YearUnit
-  month : Int
+  month : Int32
 }
 
 ///|
 pub extend MonthUnit with Culture::{get_name}
 
 ///|
-pub fn MonthUnit::new(year_unit : YearUnit, month : Int) -> MonthUnit {
+pub fn MonthUnit::new(year_unit : YearUnit, month : Int32) -> MonthUnit {
   { year_unit, month, }
 }
 
 ///|
 // get_month 月
-pub fn MonthUnit::get_month(self : MonthUnit) -> Int {
+pub fn MonthUnit::get_month(self : MonthUnit) -> Int32 {
   self.month
 }
 
 ///|
 // get_compare_index 用于比较大小的索引
-pub fn MonthUnit::get_compare_index(self : MonthUnit) -> Int {
+pub fn MonthUnit::get_compare_index(self : MonthUnit) -> Int32 {
   let m = if self.month > 0 { self.month * 2 } else { -self.month * 2 + 1 }
   self.year_unit.get_compare_index() + m * 100
 }

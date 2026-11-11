@@ -29,32 +29,38 @@ pub extend SixtyCycle with Show::{to_string, output}
 pub extend SixtyCycle with Tyme::{next}
 
 ///|
-pub fn SixtyCycle::get_index(self : SixtyCycle) -> Int {
+pub fn SixtyCycle::get_index(self : SixtyCycle) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
-pub fn SixtyCycle::get_size(self : SixtyCycle) -> Int {
+pub fn SixtyCycle::get_size(self : SixtyCycle) -> Int32 {
   self.loop_tyme.get_size()
 }
 
 ///|
-pub fn SixtyCycle::steps_to(self : SixtyCycle, target_index : Int) -> Int {
+pub fn SixtyCycle::steps_to(self : SixtyCycle, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_to(target_index)
 }
 
 ///|
-pub fn SixtyCycle::steps_back_to(self : SixtyCycle, target_index : Int) -> Int {
+pub fn SixtyCycle::steps_back_to(
+  self : SixtyCycle,
+  target_index : Int32,
+) -> Int32 {
   self.loop_tyme.steps_back_to(target_index)
 }
 
 ///|
-pub fn SixtyCycle::steps_close_to(self : SixtyCycle, target_index : Int) -> Int {
+pub fn SixtyCycle::steps_close_to(
+  self : SixtyCycle,
+  target_index : Int32,
+) -> Int32 {
   self.loop_tyme.steps_close_to(target_index)
 }
 
 ///|
-pub fn SixtyCycle::from_index(index : Int) -> SixtyCycle {
+pub fn SixtyCycle::from_index(index : Int32) -> SixtyCycle {
   { loop_tyme: LoopTyme::from_index(sixty_cycle_names(), index), }
 }
 
@@ -131,6 +137,6 @@ pub impl Show for SixtyCycle with fn to_string(self : SixtyCycle) -> String {
 }
 
 ///|
-pub impl Tyme for SixtyCycle with fn next(self : SixtyCycle, n : Int) -> SixtyCycle {
+pub impl Tyme for SixtyCycle with fn next(self : SixtyCycle, n : Int32) -> SixtyCycle {
   SixtyCycle::from_index(self.loop_tyme.get_index() + n)
 }

@@ -6,7 +6,7 @@ pub(all) enum Gender {
 }
 
 ///|
-pub fn Gender::get_code(self : Gender) -> Int {
+pub fn Gender::get_code(self : Gender) -> Int32 {
   match self {
     Woman => 0
     Man => 1
@@ -14,7 +14,7 @@ pub fn Gender::get_code(self : Gender) -> Int {
 }
 
 ///|
-pub fn Gender::from_code(code : Int) -> Gender {
+pub fn Gender::from_code(code : Int32) -> Gender {
   match code {
     1 => Man
     _ => Woman

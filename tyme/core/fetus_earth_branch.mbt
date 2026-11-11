@@ -14,12 +14,12 @@ pub struct FetusEarthBranch {
 pub extend FetusEarthBranch with Culture::{get_name}
 
 ///|
-pub fn FetusEarthBranch::new(index : Int) -> FetusEarthBranch {
+pub fn FetusEarthBranch::new(index : Int32) -> FetusEarthBranch {
   { loop_tyme: LoopTyme::from_index(fetus_earth_branch_names(), index), }
 }
 
 ///|
-pub fn FetusEarthBranch::get_index(self : FetusEarthBranch) -> Int {
+pub fn FetusEarthBranch::get_index(self : FetusEarthBranch) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -36,7 +36,7 @@ pub impl Show for FetusEarthBranch with fn to_string(self : FetusEarthBranch) ->
 ///|
 pub impl Tyme for FetusEarthBranch with fn next(
   self : FetusEarthBranch,
-  n : Int,
+  n : Int32,
 ) -> FetusEarthBranch {
   FetusEarthBranch::new(self.loop_tyme.get_index() + n)
 }

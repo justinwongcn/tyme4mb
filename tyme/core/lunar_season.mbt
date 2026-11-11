@@ -14,7 +14,7 @@ pub struct LunarSeason {
 }
 
 ///|
-pub fn LunarSeason::from_index(index : Int) -> LunarSeason {
+pub fn LunarSeason::from_index(index : Int32) -> LunarSeason {
   { loop_tyme: LoopTyme::from_index(lunar_season_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn LunarSeason::from_name(name : String) -> Result[LunarSeason, String] {
 }
 
 ///|
-pub fn LunarSeason::get_index(self : LunarSeason) -> Int {
+pub fn LunarSeason::get_index(self : LunarSeason) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -42,7 +42,7 @@ pub impl Show for LunarSeason with fn to_string(self : LunarSeason) -> String {
 }
 
 ///|
-pub impl Tyme for LunarSeason with fn next(self : LunarSeason, n : Int) -> LunarSeason {
+pub impl Tyme for LunarSeason with fn next(self : LunarSeason, n : Int32) -> LunarSeason {
   LunarSeason::from_index(self.loop_tyme.get_index() + n)
 }
 

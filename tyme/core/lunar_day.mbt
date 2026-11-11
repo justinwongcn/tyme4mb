@@ -27,9 +27,9 @@ pub extend LunarDay with Tyme::{next}
 ///|
 // validate 校验
 pub fn LunarDay::validate(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[Unit, String] {
   if day < 1 {
     return Err("illegal lunar day: " + day.to_string())
@@ -47,9 +47,9 @@ pub fn LunarDay::validate(
 ///|
 // from_ymd 从年月日构造
 pub fn LunarDay::from_ymd(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[LunarDay, String] {
   match LunarDay::validate(year, month, day) {
     Err(e) => return Err(e)
@@ -62,19 +62,19 @@ pub fn LunarDay::from_ymd(
 
 ///|
 // get_year 年
-pub fn LunarDay::get_year(self : LunarDay) -> Int {
+pub fn LunarDay::get_year(self : LunarDay) -> Int32 {
   self.day_unit.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn LunarDay::get_month(self : LunarDay) -> Int {
+pub fn LunarDay::get_month(self : LunarDay) -> Int32 {
   self.day_unit.month_unit.get_month()
 }
 
 ///|
 // get_day 日
-pub fn LunarDay::get_day(self : LunarDay) -> Int {
+pub fn LunarDay::get_day(self : LunarDay) -> Int32 {
   self.day_unit.get_day()
 }
 
@@ -309,6 +309,6 @@ pub impl Show for LunarDay with fn to_string(self : LunarDay) -> String {
 }
 
 ///|
-pub impl Tyme for LunarDay with fn next(self : LunarDay, n : Int) -> LunarDay {
+pub impl Tyme for LunarDay with fn next(self : LunarDay, n : Int32) -> LunarDay {
   self.get_solar_day().next(n).get_lunar_day()
 }

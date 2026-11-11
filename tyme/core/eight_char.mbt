@@ -137,8 +137,8 @@ pub fn EightChar::get_duty(self : EightChar) -> Duty {
 // get_solar_times 公历时刻列表(支持1-9999年)
 pub fn EightChar::get_solar_times(
   self : EightChar,
-  start_year : Int,
-  end_year : Int,
+  start_year : Int32,
+  end_year : Int32,
 ) -> Array[SolarTime] {
   let l : Array[SolarTime] = []
   let year = self.get_year()

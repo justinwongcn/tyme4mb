@@ -22,7 +22,7 @@ pub let solar_festival_data : Ref[String] = Ref::{
 ///|
 // new 构造
 pub fn SolarFestival::new(
-  index : Int,
+  index : Int32,
   event : Event,
   day : SolarDay,
 ) -> SolarFestival {
@@ -31,7 +31,7 @@ pub fn SolarFestival::new(
 
 ///|
 // from_index 从索引构造
-pub fn SolarFestival::from_index(year : Int, index : Int) -> SolarFestival? {
+pub fn SolarFestival::from_index(year : Int32, index : Int32) -> SolarFestival? {
   if index < 0 || index >= solar_festival_names().length() {
     return None
   }
@@ -53,9 +53,9 @@ pub fn SolarFestival::from_index(year : Int, index : Int) -> SolarFestival? {
 ///|
 // from_ymd 从年月日构造
 pub fn SolarFestival::from_ymd(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> SolarFestival? {
   let d = match SolarDay::from_ymd(year, month, day) {
     Err(_) => return None
@@ -96,13 +96,13 @@ pub fn SolarFestival::get_day(self : SolarFestival) -> SolarDay {
 
 ///|
 // get_start_year 起始年
-pub fn SolarFestival::get_start_year(self : SolarFestival) -> Int {
+pub fn SolarFestival::get_start_year(self : SolarFestival) -> Int32 {
   self.festival.event.get_start_year()
 }
 
 ///|
 // next 推移
-pub fn SolarFestival::next(self : SolarFestival, n : Int) -> SolarFestival? {
+pub fn SolarFestival::next(self : SolarFestival, n : Int32) -> SolarFestival? {
   let size = solar_festival_names().length()
   let i = self.festival.index + n
   SolarFestival::from_index(
@@ -113,7 +113,7 @@ pub fn SolarFestival::next(self : SolarFestival, n : Int) -> SolarFestival? {
 
 ///|
 // get_index 索引
-pub fn SolarFestival::get_index(self : SolarFestival) -> Int {
+pub fn SolarFestival::get_index(self : SolarFestival) -> Int32 {
   self.festival.get_index()
 }
 

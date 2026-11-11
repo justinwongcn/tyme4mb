@@ -311,7 +311,7 @@ test "event_3" {
     "全国中小学生安全教育日",
     "e.GetName() 应为注册名",
   )
-  let cases : Array[(Int, String)] = [
+  let cases : Array[(Int32, String)] = [
     (2008, "2008年3月31日"),
     (2015, "2015年3月30日"),
     (2018, "2018年3月26日"),

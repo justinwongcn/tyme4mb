@@ -14,7 +14,7 @@ pub struct MinorRen {
 pub extend MinorRen with Tyme::{next}
 
 ///|
-pub fn MinorRen::from_index(index : Int) -> MinorRen {
+pub fn MinorRen::from_index(index : Int32) -> MinorRen {
   { loop_tyme: LoopTyme::from_index(minor_ren_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn MinorRen::from_name(name : String) -> Result[MinorRen, String] {
 }
 
 ///|
-pub fn MinorRen::get_index(self : MinorRen) -> Int {
+pub fn MinorRen::get_index(self : MinorRen) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -55,7 +55,7 @@ pub impl Show for MinorRen with fn to_string(self : MinorRen) -> String {
 }
 
 ///|
-pub impl Tyme for MinorRen with fn next(self : MinorRen, n : Int) -> MinorRen {
+pub impl Tyme for MinorRen with fn next(self : MinorRen, n : Int32) -> MinorRen {
   MinorRen::from_index(self.loop_tyme.get_index() + n)
 }
 

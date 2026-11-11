@@ -17,12 +17,12 @@ pub struct Land {
 pub extend Land with Show::{to_string, output}
 
 ///|
-pub fn Land::get_index(self : Land) -> Int {
+pub fn Land::get_index(self : Land) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
-pub fn Land::from_index(index : Int) -> Land {
+pub fn Land::from_index(index : Int32) -> Land {
   { loop_tyme: LoopTyme::from_index(land_names(), index), }
 }
 
@@ -59,7 +59,7 @@ pub impl Show for Land with fn to_string(self : Land) -> String {
 pub extend Land with Tyme::{next}
 
 ///|
-pub impl Tyme for Land with fn next(self : Land, n : Int) -> Land {
+pub impl Tyme for Land with fn next(self : Land, n : Int32) -> Land {
   Land::from_index(self.loop_tyme.get_index() + n)
 }
 

@@ -23,38 +23,38 @@ pub extend EarthBranch with Show::{to_string, output}
 pub extend EarthBranch with Tyme::{next}
 
 ///|
-pub fn EarthBranch::get_index(self : EarthBranch) -> Int {
+pub fn EarthBranch::get_index(self : EarthBranch) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
-pub fn EarthBranch::get_size(self : EarthBranch) -> Int {
+pub fn EarthBranch::get_size(self : EarthBranch) -> Int32 {
   self.loop_tyme.get_size()
 }
 
 ///|
-pub fn EarthBranch::steps_to(self : EarthBranch, target_index : Int) -> Int {
+pub fn EarthBranch::steps_to(self : EarthBranch, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_to(target_index)
 }
 
 ///|
 pub fn EarthBranch::steps_back_to(
   self : EarthBranch,
-  target_index : Int,
-) -> Int {
+  target_index : Int32,
+) -> Int32 {
   self.loop_tyme.steps_back_to(target_index)
 }
 
 ///|
 pub fn EarthBranch::steps_close_to(
   self : EarthBranch,
-  target_index : Int,
-) -> Int {
+  target_index : Int32,
+) -> Int32 {
   self.loop_tyme.steps_close_to(target_index)
 }
 
 ///|
-pub fn EarthBranch::from_index(index : Int) -> EarthBranch {
+pub fn EarthBranch::from_index(index : Int32) -> EarthBranch {
   { loop_tyme: LoopTyme::from_index(earth_branch_names(), index), }
 }
 
@@ -285,6 +285,6 @@ pub impl Show for EarthBranch with fn to_string(self : EarthBranch) -> String {
 }
 
 ///|
-pub impl Tyme for EarthBranch with fn next(self : EarthBranch, n : Int) -> EarthBranch {
+pub impl Tyme for EarthBranch with fn next(self : EarthBranch, n : Int32) -> EarthBranch {
   EarthBranch::from_index(self.loop_tyme.get_index() + n)
 }

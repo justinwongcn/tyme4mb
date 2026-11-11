@@ -17,13 +17,13 @@ pub fn HijriYear::new(year_unit : YearUnit) -> HijriYear {
 
 ///|
 // get_year 年
-pub fn HijriYear::get_year(self : HijriYear) -> Int {
+pub fn HijriYear::get_year(self : HijriYear) -> Int32 {
   self.year_unit.get_year()
 }
 
 ///|
 // validate 校验
-pub fn HijriYear::validate(year : Int) -> Result[Unit, String] {
+pub fn HijriYear::validate(year : Int32) -> Result[Unit, String] {
   if year < -640 || year > 9666 {
     return Err("illegal hijri year: " + year.to_string())
   }
@@ -32,7 +32,7 @@ pub fn HijriYear::validate(year : Int) -> Result[Unit, String] {
 
 ///|
 // from_year 从年构造
-pub fn HijriYear::from_year(year : Int) -> Result[HijriYear, String] {
+pub fn HijriYear::from_year(year : Int32) -> Result[HijriYear, String] {
   match HijriYear::validate(year) {
     Ok(_) => Ok({ year_unit: YearUnit::new(year), })
     Err(e) => Err(e)
@@ -41,7 +41,7 @@ pub fn HijriYear::from_year(year : Int) -> Result[HijriYear, String] {
 
 ///|
 // get_day_count 天数（平年354天，闰年355天）
-pub fn HijriYear::get_day_count(self : HijriYear) -> Int {
+pub fn HijriYear::get_day_count(self : HijriYear) -> Int32 {
   if self.is_leap() {
     return 355
   }
@@ -98,7 +98,7 @@ pub impl Show for HijriYear with fn to_string(self : HijriYear) -> String {
 }
 
 ///|
-pub impl Tyme for HijriYear with fn next(self : HijriYear, n : Int) -> HijriYear {
+pub impl Tyme for HijriYear with fn next(self : HijriYear, n : Int32) -> HijriYear {
   match HijriYear::from_year(self.get_year() + n) {
     Ok(y) => y
     Err(_) => self

@@ -2,7 +2,7 @@
 // AbstractFestival 节日抽象
 pub struct AbstractFestival {
   // 序号
-  index : Int
+  index : Int32
   // 日
   day : DayUnit
   // 事件
@@ -12,7 +12,7 @@ pub struct AbstractFestival {
 ///|
 // new 构造
 pub fn AbstractFestival::new(
-  index : Int,
+  index : Int32,
   event : Event,
   day : DayUnit,
 ) -> AbstractFestival {
@@ -27,7 +27,7 @@ pub fn AbstractFestival::get_day(self : AbstractFestival) -> DayUnit {
 
 ///|
 // get_index 索引
-pub fn AbstractFestival::get_index(self : AbstractFestival) -> Int {
+pub fn AbstractFestival::get_index(self : AbstractFestival) -> Int32 {
   self.index
 }
 

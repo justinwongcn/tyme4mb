@@ -22,7 +22,7 @@ fn ec(
 
 ///|
 // has_shensha 八字是否带指定 id 的神煞
-fn has_shensha(bc : @tyme.EightChar, gender : @tyme.Gender, id : Int) -> Bool {
+fn has_shensha(bc : @tyme.EightChar, gender : @tyme.Gender, id : Int32) -> Bool {
   let list = @tyme.ShenSha::get_from_eight_char(bc, gender)
   for s in list {
     if s.get_id() == id {

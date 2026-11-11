@@ -1,5 +1,5 @@
 ///|
-fn legacy_rab_byung_leap_month(year : Int) -> Int {
+fn legacy_rab_byung_leap_month(year : Int32) -> Int32 {
   let mut n = 1
   let mut m = 4
   let mut t = 1

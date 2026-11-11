@@ -15,8 +15,8 @@ test "build_taboo_query_index_ignores_trailing_record_separator" {
 
 ///|
 fn taboo_case(
-  month_index : Int,
-  day_index : Int,
+  month_index : Int32,
+  day_index : Int32,
 ) -> (SixtyCycleMonth, SixtyCycleDay) {
   let month = SixtyCycleMonth::new(
     SixtyCycleYear::from_year(2024).unwrap(),

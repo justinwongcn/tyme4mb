@@ -2,11 +2,11 @@
 // RabByungYear 藏历年(公历1027年为藏历元年，第一饶迥火兔年）
 pub struct RabByungYear {
   // 饶迥(胜生周)序号，从0开始
-  rab_byung_index : Int
+  rab_byung_index : Int32
   // 五行索引，从0开始
-  element_index : Int
+  element_index : Int32
   // 生肖索引，从0开始
-  zodiac_index : Int
+  zodiac_index : Int32
 }
 
 ///|
@@ -17,7 +17,7 @@ pub extend RabByungYear with Show::{to_string, output}
 
 ///|
 // validate 校验
-pub fn RabByungYear::validate(year : Int) -> Result[Unit, String] {
+pub fn RabByungYear::validate(year : Int32) -> Result[Unit, String] {
   if year < 1027 || year > 9999 {
     return Err("illegal rab-byung year: " + year.to_string())
   }
@@ -27,9 +27,9 @@ pub fn RabByungYear::validate(year : Int) -> Result[Unit, String] {
 ///|
 // new 从索引构造
 pub fn RabByungYear::new(
-  rab_byung_index : Int,
-  element_index : Int,
-  zodiac_index : Int,
+  rab_byung_index : Int32,
+  element_index : Int32,
+  zodiac_index : Int32,
 ) -> Result[RabByungYear, String] {
   if rab_byung_index < 0 || rab_byung_index > 150 {
     return Err("illegal rab-byung index: " + rab_byung_index.to_string())
@@ -46,7 +46,7 @@ pub fn RabByungYear::new(
 ///|
 // from_sixty_cycle 从干支构造
 pub fn RabByungYear::from_sixty_cycle(
-  rab_byung_index : Int,
+  rab_byung_index : Int32,
   sixty_cycle : SixtyCycle,
 ) -> Result[RabByungYear, String] {
   RabByungYear::new(
@@ -59,7 +59,7 @@ pub fn RabByungYear::from_sixty_cycle(
 ///|
 // from_element_zodiac 从五行生肖构造
 pub fn RabByungYear::from_element_zodiac(
-  rab_byung_index : Int,
+  rab_byung_index : Int32,
   element : RabByungElement,
   zodiac : Zodiac,
 ) -> Result[RabByungYear, String] {
@@ -68,7 +68,7 @@ pub fn RabByungYear::from_element_zodiac(
 
 ///|
 // from_year 从年构造
-pub fn RabByungYear::from_year(year : Int) -> Result[RabByungYear, String] {
+pub fn RabByungYear::from_year(year : Int32) -> Result[RabByungYear, String] {
   match RabByungYear::validate(year) {
     Ok(_) =>
       RabByungYear::from_sixty_cycle(
@@ -81,7 +81,7 @@ pub fn RabByungYear::from_year(year : Int) -> Result[RabByungYear, String] {
 
 ///|
 // get_rab_byung_index 饶迥序号
-pub fn RabByungYear::get_rab_byung_index(self : RabByungYear) -> Int {
+pub fn RabByungYear::get_rab_byung_index(self : RabByungYear) -> Int32 {
   self.rab_byung_index
 }
 
@@ -107,14 +107,14 @@ pub fn RabByungYear::get_element(self : RabByungYear) -> RabByungElement {
 
 ///|
 // get_year 年
-pub fn RabByungYear::get_year(self : RabByungYear) -> Int {
+pub fn RabByungYear::get_year(self : RabByungYear) -> Int32 {
   1024 + self.rab_byung_index * 60 + self.get_sixty_cycle().get_index()
 }
 
 ///|
 // new 接受 0..150 饶迥及 60 种五行生肖组合，get_year 覆盖 1024..10083。
 // 沿用原递推一次生成该区间的闰月；未访问到的年份保持 0。
-fn build_rab_byung_leap_index() -> Array[Int] {
+fn build_rab_byung_leap_index() -> Array[Int32] {
   let leap_months = Array::make(9060, 0)
   let mut n = 1
   let mut m = 4
@@ -136,11 +136,11 @@ fn build_rab_byung_leap_index() -> Array[Int] {
 }
 
 ///|
-let rab_byung_leap_index : Array[Int] = build_rab_byung_leap_index()
+let rab_byung_leap_index : Array[Int32] = build_rab_byung_leap_index()
 
 ///|
 // get_leap_month 闰月
-pub fn RabByungYear::get_leap_month(self : RabByungYear) -> Int {
+pub fn RabByungYear::get_leap_month(self : RabByungYear) -> Int32 {
   rab_byung_leap_index[self.get_year() - 1024]
 }
 
@@ -168,7 +168,7 @@ pub fn RabByungYear::get_first_month(self : RabByungYear) -> RabByungMonth {
 
 ///|
 // get_month_count 月数
-pub fn RabByungYear::get_month_count(self : RabByungYear) -> Int {
+pub fn RabByungYear::get_month_count(self : RabByungYear) -> Int32 {
   if self.get_leap_month() < 1 {
     return 12
   }
@@ -200,7 +200,7 @@ pub fn RabByungYear::get_months(self : RabByungYear) -> Array[RabByungMonth] {
 // next 推移
 pub fn RabByungYear::next(
   self : RabByungYear,
-  n : Int,
+  n : Int32,
 ) -> Result[RabByungYear, String] {
   RabByungYear::from_year(self.get_year() + n)
 }

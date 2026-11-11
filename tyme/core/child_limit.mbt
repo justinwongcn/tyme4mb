@@ -87,31 +87,31 @@ pub fn ChildLimit::is_forward(self : ChildLimit) -> Bool {
 
 ///|
 // get_year_count 年数
-pub fn ChildLimit::get_year_count(self : ChildLimit) -> Int {
+pub fn ChildLimit::get_year_count(self : ChildLimit) -> Int32 {
   self.info.get_year_count()
 }
 
 ///|
 // get_month_count 月数
-pub fn ChildLimit::get_month_count(self : ChildLimit) -> Int {
+pub fn ChildLimit::get_month_count(self : ChildLimit) -> Int32 {
   self.info.get_month_count()
 }
 
 ///|
 // get_day_count 日数
-pub fn ChildLimit::get_day_count(self : ChildLimit) -> Int {
+pub fn ChildLimit::get_day_count(self : ChildLimit) -> Int32 {
   self.info.get_day_count()
 }
 
 ///|
 // get_hour_count 小时数
-pub fn ChildLimit::get_hour_count(self : ChildLimit) -> Int {
+pub fn ChildLimit::get_hour_count(self : ChildLimit) -> Int32 {
   self.info.get_hour_count()
 }
 
 ///|
 // get_minute_count 分钟数
-pub fn ChildLimit::get_minute_count(self : ChildLimit) -> Int {
+pub fn ChildLimit::get_minute_count(self : ChildLimit) -> Int32 {
   self.info.get_minute_count()
 }
 
@@ -173,13 +173,13 @@ pub fn ChildLimit::get_end_sixty_cycle_year(
 
 ///|
 // get_start_age 开始年龄
-pub fn ChildLimit::get_start_age(_ : ChildLimit) -> Int {
+pub fn ChildLimit::get_start_age(_ : ChildLimit) -> Int32 {
   1
 }
 
 ///|
 // get_end_age 结束年龄
-pub fn ChildLimit::get_end_age(self : ChildLimit) -> Int {
+pub fn ChildLimit::get_end_age(self : ChildLimit) -> Int32 {
   let n = self.get_end_sixty_cycle_year().get_year() -
     self.get_start_sixty_cycle_year().get_year()
   if n > 1 {

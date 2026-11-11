@@ -19,7 +19,7 @@ pub struct PengZuEarthBranch {
 pub extend PengZuEarthBranch with Show::{to_string, output}
 
 ///|
-pub fn PengZuEarthBranch::from_index(index : Int) -> PengZuEarthBranch {
+pub fn PengZuEarthBranch::from_index(index : Int32) -> PengZuEarthBranch {
   { loop_tyme: LoopTyme::from_index(peng_zu_earth_branch_names(), index), }
 }
 
@@ -34,7 +34,7 @@ pub fn PengZuEarthBranch::from_name(
 }
 
 ///|
-pub fn PengZuEarthBranch::get_index(self : PengZuEarthBranch) -> Int {
+pub fn PengZuEarthBranch::get_index(self : PengZuEarthBranch) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -53,7 +53,7 @@ pub impl Show for PengZuEarthBranch with fn to_string(self : PengZuEarthBranch) 
 ///|
 pub impl Tyme for PengZuEarthBranch with fn next(
   self : PengZuEarthBranch,
-  n : Int,
+  n : Int32,
 ) -> PengZuEarthBranch {
   PengZuEarthBranch::from_index(self.loop_tyme.get_index() + n)
 }

@@ -6,7 +6,7 @@ pub struct PhaseDay {
 
 ///|
 // new 构造
-pub fn PhaseDay::new(o : Phase, index : Int) -> PhaseDay {
+pub fn PhaseDay::new(o : Phase, index : Int32) -> PhaseDay {
   { day: AbstractCultureDay::new(o, index), }
 }
 
@@ -18,7 +18,7 @@ pub fn PhaseDay::get_phase(self : PhaseDay) -> Phase {
 
 ///|
 // get_day_index 天索引
-pub fn PhaseDay::get_day_index(self : PhaseDay) -> Int {
+pub fn PhaseDay::get_day_index(self : PhaseDay) -> Int32 {
   self.day.get_day_index()
 }
 

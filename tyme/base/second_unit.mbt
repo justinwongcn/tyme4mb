@@ -2,9 +2,9 @@
 // SecondUnit 秒
 pub struct SecondUnit {
   day_unit : DayUnit
-  hour : Int
-  minute : Int
-  second : Int
+  hour : Int32
+  minute : Int32
+  second : Int32
 }
 
 ///|
@@ -13,40 +13,40 @@ pub extend SecondUnit with Culture::{get_name}
 ///|
 pub fn SecondUnit::new(
   day_unit : DayUnit,
-  hour : Int,
-  minute : Int,
-  second : Int,
+  hour : Int32,
+  minute : Int32,
+  second : Int32,
 ) -> SecondUnit {
   { day_unit, hour, minute, second, }
 }
 
 ///|
 // get_hour 时
-pub fn SecondUnit::get_hour(self : SecondUnit) -> Int {
+pub fn SecondUnit::get_hour(self : SecondUnit) -> Int32 {
   self.hour
 }
 
 ///|
 // get_minute 分
-pub fn SecondUnit::get_minute(self : SecondUnit) -> Int {
+pub fn SecondUnit::get_minute(self : SecondUnit) -> Int32 {
   self.minute
 }
 
 ///|
 // get_second 秒
-pub fn SecondUnit::get_second(self : SecondUnit) -> Int {
+pub fn SecondUnit::get_second(self : SecondUnit) -> Int32 {
   self.second
 }
 
 ///|
 // validate 校验
 pub fn SecondUnit::validate(
-  _year : Int,
-  _month : Int,
-  _day : Int,
-  hour : Int,
-  minute : Int,
-  second : Int,
+  _year : Int32,
+  _month : Int32,
+  _day : Int32,
+  hour : Int32,
+  minute : Int32,
+  second : Int32,
 ) -> Result[Unit, String] {
   if hour < 0 || hour > 23 {
     return Err("illegal hour: " + hour.to_string())
@@ -62,7 +62,7 @@ pub fn SecondUnit::validate(
 
 ///|
 // get_seconds_in_day 当天秒数
-pub fn SecondUnit::get_seconds_in_day(self : SecondUnit) -> Int {
+pub fn SecondUnit::get_seconds_in_day(self : SecondUnit) -> Int32 {
   self.hour * 3600 + self.minute * 60 + self.second
 }
 

@@ -6,7 +6,7 @@ pub(all) enum Side {
 }
 
 ///|
-pub fn Side::get_code(self : Side) -> Int {
+pub fn Side::get_code(self : Side) -> Int32 {
   match self {
     In => 0
     Out => 1
@@ -14,7 +14,7 @@ pub fn Side::get_code(self : Side) -> Int {
 }
 
 ///|
-pub fn Side::from_code(code : Int) -> Side {
+pub fn Side::from_code(code : Int32) -> Side {
   match code {
     1 => Out
     _ => In

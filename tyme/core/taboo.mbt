@@ -65,7 +65,7 @@ pub struct Taboo {
 }
 
 ///|
-pub fn Taboo::from_index(index : Int) -> Taboo {
+pub fn Taboo::from_index(index : Int32) -> Taboo {
   { loop_tyme: LoopTyme::from_index(taboo_names(), index), }
 }
 
@@ -78,13 +78,13 @@ pub fn Taboo::from_name(name : String) -> Result[Taboo, String] {
 }
 
 ///|
-pub fn Taboo::get_index(self : Taboo) -> Int {
+pub fn Taboo::get_index(self : Taboo) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
 // parse_hex 解析十六进制字符串
-fn parse_hex(s : String) -> Result[Int, String] {
+fn parse_hex(s : String) -> Result[Int32, String] {
   let mut n = 0
   for c in s {
     let v = if c >= '0' && c <= '9' {
@@ -105,8 +105,8 @@ fn parse_hex(s : String) -> Result[Int, String] {
 }
 
 ///|
-fn parse_taboo_ids(s : String) -> Result[Array[Int], String] {
-  let ids : Array[Int] = []
+fn parse_taboo_ids(s : String) -> Result[Array[Int32], String] {
+  let ids : Array[Int32] = []
   let size = s.length()
   let mut i = 0
   while i < size {
@@ -122,12 +122,14 @@ fn parse_taboo_ids(s : String) -> Result[Array[Int], String] {
 ///|
 fn build_taboo_query_index(
   data : Array[String],
-) -> Array[Array[(Result[Array[Int], String], Result[Array[Int], String])]] {
+) -> Array[Array[(Result[Array[Int32], String], Result[Array[Int32], String])]] {
   let index : Array[
-    Array[(Result[Array[Int], String], Result[Array[Int], String])],
+    Array[(Result[Array[Int32], String], Result[Array[Int32], String])],
   ] = []
   for row in data {
-    let cells : Array[(Result[Array[Int], String], Result[Array[Int], String])] = []
+    let cells : Array[
+      (Result[Array[Int32], String], Result[Array[Int32], String]),
+    ] = []
     let records : Array[String] = row
       .split(";")
       .map(fn(s) { s.to_owned() })
@@ -148,20 +150,22 @@ fn build_taboo_query_index(
 
 ///|
 let day_taboo_query_index : Array[
-  Array[(Result[Array[Int], String], Result[Array[Int], String])],
+  Array[(Result[Array[Int32], String], Result[Array[Int32], String])],
 ] = build_taboo_query_index(day_taboo_data)
 
 ///|
 let hour_taboo_query_index : Array[
-  Array[(Result[Array[Int], String], Result[Array[Int], String])],
+  Array[(Result[Array[Int32], String], Result[Array[Int32], String])],
 ] = build_taboo_query_index(hour_taboo_data)
 
 ///|
 fn get_taboos(
-  data : Array[Array[(Result[Array[Int], String], Result[Array[Int], String])]],
-  sup_index : Int,
-  sub_index : Int,
-  index : Int,
+  data : Array[
+    Array[(Result[Array[Int32], String], Result[Array[Int32], String])],
+  ],
+  sup_index : Int32,
+  sub_index : Int32,
+  index : Int32,
 ) -> Result[Array[Taboo], String] {
   let l : Array[Taboo] = []
   let ids = if index == 0 {
@@ -247,7 +251,7 @@ pub impl Show for Taboo with fn to_string(self : Taboo) -> String {
 }
 
 ///|
-pub impl Tyme for Taboo with fn next(self : Taboo, n : Int) -> Taboo {
+pub impl Tyme for Taboo with fn next(self : Taboo, n : Int32) -> Taboo {
   Taboo::from_index(self.loop_tyme.get_index() + n)
 }
 

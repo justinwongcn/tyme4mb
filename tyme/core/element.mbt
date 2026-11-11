@@ -20,12 +20,12 @@ pub extend Element with Show::{to_string, output}
 pub extend Element with Tyme::{next}
 
 ///|
-pub fn Element::get_index(self : Element) -> Int {
+pub fn Element::get_index(self : Element) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
-pub fn Element::from_index(index : Int) -> Element {
+pub fn Element::from_index(index : Int32) -> Element {
   { loop_tyme: LoopTyme::from_index(element_names(), index), }
 }
 
@@ -84,6 +84,6 @@ pub impl Show for Element with fn to_string(self : Element) -> String {
 }
 
 ///|
-pub impl Tyme for Element with fn next(self : Element, n : Int) -> Element {
+pub impl Tyme for Element with fn next(self : Element, n : Int32) -> Element {
   Element::from_index(self.loop_tyme.get_index() + n)
 }

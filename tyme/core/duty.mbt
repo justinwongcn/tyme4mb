@@ -14,7 +14,7 @@ pub struct Duty {
 }
 
 ///|
-pub fn Duty::from_index(index : Int) -> Duty {
+pub fn Duty::from_index(index : Int32) -> Duty {
   { loop_tyme: LoopTyme::from_index(duty_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn Duty::from_name(name : String) -> Result[Duty, String] {
 }
 
 ///|
-pub fn Duty::get_index(self : Duty) -> Int {
+pub fn Duty::get_index(self : Duty) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -42,7 +42,7 @@ pub impl Show for Duty with fn to_string(self : Duty) -> String {
 }
 
 ///|
-pub impl Tyme for Duty with fn next(self : Duty, n : Int) -> Duty {
+pub impl Tyme for Duty with fn next(self : Duty, n : Int32) -> Duty {
   Duty::from_index(self.loop_tyme.get_index() + n)
 }
 

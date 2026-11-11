@@ -28,8 +28,8 @@ pub fn SixtyCycleMonth::new(
 ///|
 // from_index 从年与索引构造
 pub fn SixtyCycleMonth::from_index(
-  year : Int,
-  index : Int,
+  year : Int32,
+  index : Int32,
 ) -> Result[SixtyCycleMonth, String] {
   match SixtyCycleYear::from_year(year) {
     Ok(y) => Ok(y.get_first_month().next(index))
@@ -59,7 +59,7 @@ pub fn SixtyCycleMonth::get_sixty_cycle(self : SixtyCycleMonth) -> SixtyCycle {
 
 ///|
 // get_index_in_year 位于当年的索引(0-11)，寅月为0，依次类推
-pub fn SixtyCycleMonth::get_index_in_year(self : SixtyCycleMonth) -> Int {
+pub fn SixtyCycleMonth::get_index_in_year(self : SixtyCycleMonth) -> Int32 {
   self.month.get_earth_branch().next(-2).get_index()
 }
 
@@ -114,7 +114,10 @@ pub fn SixtyCycleMonth::get_jupiter_direction(
 
 ///|
 // next 推移
-pub impl Tyme for SixtyCycleMonth with fn next(self : SixtyCycleMonth, n : Int) -> SixtyCycleMonth {
+pub impl Tyme for SixtyCycleMonth with fn next(
+  self : SixtyCycleMonth,
+  n : Int32,
+) -> SixtyCycleMonth {
   let y = SixtyCycleYear::from_year(
     (self.year.get_year() * 12 + self.get_index_in_year() + n) / 12,
   ).unwrap()

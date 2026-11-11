@@ -6,7 +6,7 @@ pub(all) enum YinYang {
 }
 
 ///|
-pub fn YinYang::get_code(self : YinYang) -> Int {
+pub fn YinYang::get_code(self : YinYang) -> Int32 {
   match self {
     Yin => 0
     Yang => 1
@@ -14,7 +14,7 @@ pub fn YinYang::get_code(self : YinYang) -> Int {
 }
 
 ///|
-pub fn YinYang::from_code(code : Int) -> YinYang {
+pub fn YinYang::from_code(code : Int32) -> YinYang {
   match code {
     1 => Yang
     _ => Yin

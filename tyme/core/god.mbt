@@ -44,10 +44,10 @@ let day_god_data : Array[String] = [
 ///|
 fn build_god_query_index(
   data : Array[String],
-) -> Array[Array[Result[Array[Int], String]]] {
-  let index : Array[Array[Result[Array[Int], String]]] = []
+) -> Array[Array[Result[Array[Int32], String]]] {
+  let index : Array[Array[Result[Array[Int32], String]]] = []
   for row in data {
-    let cells : Array[Result[Array[Int], String]] = []
+    let cells : Array[Result[Array[Int32], String]] = []
     let assigned : Array[Bool] = []
     for _ in 0..<60 {
       cells.push(Ok([]))
@@ -62,7 +62,7 @@ fn build_god_query_index(
         match parse_hex(record[0:2].to_owned()) {
           Ok(day_index) =>
             if day_index >= 0 && day_index < 60 {
-              let ids : Array[Int] = []
+              let ids : Array[Int32] = []
               let mut i = 2
               let size = record.length()
               let mut error : String? = None
@@ -94,7 +94,7 @@ fn build_god_query_index(
 }
 
 ///|
-let day_god_query_index : Array[Array[Result[Array[Int], String]]] = build_god_query_index(
+let day_god_query_index : Array[Array[Result[Array[Int32], String]]] = build_god_query_index(
   day_god_data,
 )
 
@@ -105,7 +105,7 @@ pub struct God {
 }
 
 ///|
-pub fn God::from_index(index : Int) -> God {
+pub fn God::from_index(index : Int32) -> God {
   { loop_tyme: LoopTyme::from_index(god_names(), index), }
 }
 
@@ -118,7 +118,7 @@ pub fn God::from_name(name : String) -> Result[God, String] {
 }
 
 ///|
-pub fn God::get_index(self : God) -> Int {
+pub fn God::get_index(self : God) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -168,7 +168,7 @@ pub impl Show for God with fn to_string(self : God) -> String {
 }
 
 ///|
-pub impl Tyme for God with fn next(self : God, n : Int) -> God {
+pub impl Tyme for God with fn next(self : God, n : Int32) -> God {
   God::from_index(self.loop_tyme.get_index() + n)
 }
 

@@ -14,7 +14,7 @@ pub struct Week {
 pub extend Week with Tyme::{next}
 
 ///|
-pub fn Week::from_index(index : Int) -> Week {
+pub fn Week::from_index(index : Int32) -> Week {
   { loop_tyme: LoopTyme::from_index(week_names(), index), }
 }
 
@@ -27,27 +27,27 @@ pub fn Week::from_name(name : String) -> Result[Week, String] {
 }
 
 ///|
-pub fn Week::get_index(self : Week) -> Int {
+pub fn Week::get_index(self : Week) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
-pub fn Week::get_size(self : Week) -> Int {
+pub fn Week::get_size(self : Week) -> Int32 {
   self.loop_tyme.get_size()
 }
 
 ///|
-pub fn Week::steps_to(self : Week, target_index : Int) -> Int {
+pub fn Week::steps_to(self : Week, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_to(target_index)
 }
 
 ///|
-pub fn Week::steps_back_to(self : Week, target_index : Int) -> Int {
+pub fn Week::steps_back_to(self : Week, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_back_to(target_index)
 }
 
 ///|
-pub fn Week::steps_close_to(self : Week, target_index : Int) -> Int {
+pub fn Week::steps_close_to(self : Week, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_close_to(target_index)
 }
 
@@ -73,7 +73,7 @@ pub impl Show for Week with fn to_string(self : Week) -> String {
 }
 
 ///|
-pub impl Tyme for Week with fn next(self : Week, n : Int) -> Week {
+pub impl Tyme for Week with fn next(self : Week, n : Int32) -> Week {
   Week::from_index(self.loop_tyme.get_index() + n)
 }
 

@@ -31,9 +31,9 @@ pub struct LegalHoliday {
 
 ///|
 pub fn LegalHoliday::new(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
   data : String,
 ) -> Result[LegalHoliday, String] {
   let d = match SolarDay::from_ymd(year, month, day) {
@@ -49,9 +49,9 @@ pub fn LegalHoliday::new(
 
 ///|
 pub fn LegalHoliday::from_ymd(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[LegalHoliday, String] {
   let data = legal_holiday_data.val
   let n = data.length()
@@ -93,7 +93,7 @@ pub impl Culture for LegalHoliday with fn get_name(self : LegalHoliday) -> Strin
 }
 
 ///|
-pub fn LegalHoliday::next(self : LegalHoliday, n : Int) -> LegalHoliday? {
+pub fn LegalHoliday::next(self : LegalHoliday, n : Int32) -> LegalHoliday? {
   let year = self.day.get_year()
   let month = self.day.get_month()
   let day = self.day.get_day()
@@ -154,7 +154,7 @@ pub impl Show for LegalHoliday with fn to_string(self : LegalHoliday) -> String 
 }
 
 ///|
-fn parse4(s : String, k : Int) -> Int {
+fn parse4(s : String, k : Int32) -> Int32 {
   (s.unsafe_get(k).to_int() - '0'.to_int()) * 1000 +
   (s.unsafe_get(k + 1).to_int() - '0'.to_int()) * 100 +
   (s.unsafe_get(k + 2).to_int() - '0'.to_int()) * 10 +
@@ -162,13 +162,13 @@ fn parse4(s : String, k : Int) -> Int {
 }
 
 ///|
-fn parse2(s : String, k : Int) -> Int {
+fn parse2(s : String, k : Int32) -> Int32 {
   (s.unsafe_get(k).to_int() - '0'.to_int()) * 10 +
   (s.unsafe_get(k + 1).to_int() - '0'.to_int())
 }
 
 ///|
-fn pad2(n : Int) -> String {
+fn pad2(n : Int32) -> String {
   let s = n.to_string()
   if s.length() < 2 {
     "0" + s
@@ -178,7 +178,7 @@ fn pad2(n : Int) -> String {
 }
 
 ///|
-fn records_for_year(y : Int) -> Array[String] {
+fn records_for_year(y : Int32) -> Array[String] {
   let data = legal_holiday_data.val
   let n = data.length()
   let res : Array[String] = []

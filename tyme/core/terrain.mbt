@@ -14,7 +14,7 @@ pub struct Terrain {
 }
 
 ///|
-pub fn Terrain::from_index(index : Int) -> Terrain {
+pub fn Terrain::from_index(index : Int32) -> Terrain {
   { loop_tyme: LoopTyme::from_index(terrain_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn Terrain::from_name(name : String) -> Result[Terrain, String] {
 }
 
 ///|
-pub fn Terrain::get_index(self : Terrain) -> Int {
+pub fn Terrain::get_index(self : Terrain) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -42,7 +42,7 @@ pub impl Show for Terrain with fn to_string(self : Terrain) -> String {
 }
 
 ///|
-pub impl Tyme for Terrain with fn next(self : Terrain, n : Int) -> Terrain {
+pub impl Tyme for Terrain with fn next(self : Terrain, n : Int32) -> Terrain {
   Terrain::from_index(self.loop_tyme.get_index() + n)
 }
 

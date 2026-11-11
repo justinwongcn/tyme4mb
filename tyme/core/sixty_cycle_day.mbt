@@ -191,7 +191,7 @@ pub fn SixtyCycleDay::get_hours(self : SixtyCycleDay) -> Array[SixtyCycleHour] {
 
 ///|
 // next 推移
-pub impl Tyme for SixtyCycleDay with fn next(self : SixtyCycleDay, n : Int) -> SixtyCycleDay {
+pub impl Tyme for SixtyCycleDay with fn next(self : SixtyCycleDay, n : Int32) -> SixtyCycleDay {
   SixtyCycleDay::from_solar_day(self.solar_day.next(n))
 }
 

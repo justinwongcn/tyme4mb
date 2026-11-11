@@ -20,7 +20,7 @@ pub struct NineStar {
 pub extend NineStar with Culture::{get_name}
 
 ///|
-pub fn NineStar::from_index(index : Int) -> NineStar {
+pub fn NineStar::from_index(index : Int32) -> NineStar {
   { loop_tyme: LoopTyme::from_index(nine_star_names(), index), }
 }
 
@@ -33,7 +33,7 @@ pub fn NineStar::from_name(name : String) -> Result[NineStar, String] {
 }
 
 ///|
-pub fn NineStar::get_index(self : NineStar) -> Int {
+pub fn NineStar::get_index(self : NineStar) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -75,7 +75,7 @@ pub impl Show for NineStar with fn to_string(self : NineStar) -> String {
 pub extend NineStar with Tyme::{next}
 
 ///|
-pub impl Tyme for NineStar with fn next(self : NineStar, n : Int) -> NineStar {
+pub impl Tyme for NineStar with fn next(self : NineStar, n : Int32) -> NineStar {
   NineStar::from_index(self.loop_tyme.get_index() + n)
 }
 

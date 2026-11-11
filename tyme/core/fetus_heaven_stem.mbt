@@ -14,12 +14,12 @@ pub struct FetusHeavenStem {
 pub extend FetusHeavenStem with Culture::{get_name}
 
 ///|
-pub fn FetusHeavenStem::new(index : Int) -> FetusHeavenStem {
+pub fn FetusHeavenStem::new(index : Int32) -> FetusHeavenStem {
   { loop_tyme: LoopTyme::from_index(fetus_heaven_stem_names(), index), }
 }
 
 ///|
-pub fn FetusHeavenStem::get_index(self : FetusHeavenStem) -> Int {
+pub fn FetusHeavenStem::get_index(self : FetusHeavenStem) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -34,7 +34,10 @@ pub impl Show for FetusHeavenStem with fn to_string(self : FetusHeavenStem) -> S
 }
 
 ///|
-pub impl Tyme for FetusHeavenStem with fn next(self : FetusHeavenStem, n : Int) -> FetusHeavenStem {
+pub impl Tyme for FetusHeavenStem with fn next(
+  self : FetusHeavenStem,
+  n : Int32,
+) -> FetusHeavenStem {
   FetusHeavenStem::new(self.loop_tyme.get_index() + n)
 }
 

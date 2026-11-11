@@ -10,7 +10,7 @@ pub extend HideHeavenStemDay with Culture::{get_name}
 ///|
 pub fn HideHeavenStemDay::new(
   o : HideHeavenStem,
-  index : Int,
+  index : Int32,
 ) -> HideHeavenStemDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
@@ -25,7 +25,7 @@ pub fn HideHeavenStemDay::get_hide_heaven_stem(
 
 ///|
 // get_day_index 天索引
-pub fn HideHeavenStemDay::get_day_index(self : HideHeavenStemDay) -> Int {
+pub fn HideHeavenStemDay::get_day_index(self : HideHeavenStemDay) -> Int32 {
   self.abstract_culture_day.get_day_index()
 }
 

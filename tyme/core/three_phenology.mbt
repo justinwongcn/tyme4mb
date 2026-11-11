@@ -11,7 +11,7 @@ pub struct ThreePhenology {
 }
 
 ///|
-pub fn ThreePhenology::from_index(index : Int) -> ThreePhenology {
+pub fn ThreePhenology::from_index(index : Int32) -> ThreePhenology {
   { loop_tyme: LoopTyme::from_index(three_phenology_names(), index), }
 }
 
@@ -26,7 +26,7 @@ pub fn ThreePhenology::from_name(
 }
 
 ///|
-pub fn ThreePhenology::get_index(self : ThreePhenology) -> Int {
+pub fn ThreePhenology::get_index(self : ThreePhenology) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -41,7 +41,7 @@ pub impl Show for ThreePhenology with fn to_string(self : ThreePhenology) -> Str
 }
 
 ///|
-pub impl Tyme for ThreePhenology with fn next(self : ThreePhenology, n : Int) -> ThreePhenology {
+pub impl Tyme for ThreePhenology with fn next(self : ThreePhenology, n : Int32) -> ThreePhenology {
   ThreePhenology::from_index(self.loop_tyme.get_index() + n)
 }
 

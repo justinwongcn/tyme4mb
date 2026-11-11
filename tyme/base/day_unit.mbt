@@ -2,7 +2,7 @@
 // DayUnit 日
 pub struct DayUnit {
   month_unit : MonthUnit
-  day : Int
+  day : Int32
 }
 
 ///|
@@ -12,19 +12,19 @@ pub extend DayUnit with Culture::{get_name}
 pub extend DayUnit with Show::{to_string, output}
 
 ///|
-pub fn DayUnit::new(month_unit : MonthUnit, day : Int) -> DayUnit {
+pub fn DayUnit::new(month_unit : MonthUnit, day : Int32) -> DayUnit {
   { month_unit, day, }
 }
 
 ///|
 // get_day 日
-pub fn DayUnit::get_day(self : DayUnit) -> Int {
+pub fn DayUnit::get_day(self : DayUnit) -> Int32 {
   self.day
 }
 
 ///|
 // get_compare_index 用于比较大小的索引
-pub fn DayUnit::get_compare_index(self : DayUnit) -> Int {
+pub fn DayUnit::get_compare_index(self : DayUnit) -> Int32 {
   self.month_unit.get_compare_index() + self.day
 }
 

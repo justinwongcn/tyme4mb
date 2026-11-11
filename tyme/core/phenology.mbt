@@ -22,14 +22,14 @@ pub fn phenology_names() -> Array[String] {
 // Phenology 候
 pub struct Phenology {
   loop_tyme : LoopTyme
-  year : Int
+  year : Int32
 }
 
 ///|
 pub extend Phenology with Tyme::{next}
 
 ///|
-pub fn Phenology::from_index(year : Int, index : Int) -> Phenology {
+pub fn Phenology::from_index(year : Int32, index : Int32) -> Phenology {
   let parent = LoopTyme::from_index(phenology_names(), index)
   let size = parent.get_size()
   { loop_tyme: parent, year: (year * size + index) / size, }
@@ -37,7 +37,7 @@ pub fn Phenology::from_index(year : Int, index : Int) -> Phenology {
 
 ///|
 pub fn Phenology::from_name(
-  year : Int,
+  year : Int32,
   name : String,
 ) -> Result[Phenology, String] {
   match LoopTyme::from_name(phenology_names(), name) {
@@ -57,7 +57,7 @@ pub impl Show for Phenology with fn to_string(self : Phenology) -> String {
 }
 
 ///|
-pub impl Tyme for Phenology with fn next(self : Phenology, n : Int) -> Phenology {
+pub impl Tyme for Phenology with fn next(self : Phenology, n : Int32) -> Phenology {
   let size = self.loop_tyme.get_size()
   let i = self.loop_tyme.get_index() + n
   Phenology::from_index(
@@ -74,13 +74,13 @@ pub fn Phenology::get_three_phenology(self : Phenology) -> ThreePhenology {
 
 ///|
 // get_year 年
-pub fn Phenology::get_year(self : Phenology) -> Int {
+pub fn Phenology::get_year(self : Phenology) -> Int32 {
   self.year
 }
 
 ///|
 // get_index 索引
-pub fn Phenology::get_index(self : Phenology) -> Int {
+pub fn Phenology::get_index(self : Phenology) -> Int32 {
   self.loop_tyme.get_index()
 }
 

@@ -14,7 +14,7 @@ pub struct Constellation {
 }
 
 ///|
-pub fn Constellation::from_index(index : Int) -> Constellation {
+pub fn Constellation::from_index(index : Int32) -> Constellation {
   { loop_tyme: LoopTyme::from_index(constellation_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn Constellation::from_name(name : String) -> Result[Constellation, String] 
 }
 
 ///|
-pub fn Constellation::get_index(self : Constellation) -> Int {
+pub fn Constellation::get_index(self : Constellation) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -42,7 +42,7 @@ pub impl Show for Constellation with fn to_string(self : Constellation) -> Strin
 }
 
 ///|
-pub impl Tyme for Constellation with fn next(self : Constellation, n : Int) -> Constellation {
+pub impl Tyme for Constellation with fn next(self : Constellation, n : Int32) -> Constellation {
   Constellation::from_index(self.loop_tyme.get_index() + n)
 }
 

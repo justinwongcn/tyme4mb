@@ -17,7 +17,7 @@ pub struct Twenty {
 pub extend Twenty with Show::{to_string, output}
 
 ///|
-pub fn Twenty::from_index(index : Int) -> Twenty {
+pub fn Twenty::from_index(index : Int32) -> Twenty {
   { loop_tyme: LoopTyme::from_index(twenty_names(), index), }
 }
 
@@ -57,6 +57,6 @@ pub impl Show for Twenty with fn to_string(self : Twenty) -> String {
 pub extend Twenty with Tyme::{next}
 
 ///|
-pub impl Tyme for Twenty with fn next(self : Twenty, n : Int) -> Twenty {
+pub impl Tyme for Twenty with fn next(self : Twenty, n : Int32) -> Twenty {
   Twenty::from_index(self.loop_tyme.get_index() + n)
 }

@@ -1,7 +1,7 @@
 // J2000 2000年儒略日数(2000-1-1 12:00:00 UTC)
 
 ///|
-pub const J2000 : Int = 2451545
+pub const J2000 : Int32 = 2451545
 
 ///|
 // JulianDay 儒略日
@@ -25,12 +25,12 @@ pub fn JulianDay::from_julian_day(day : Double) -> JulianDay {
 ///|
 // from_ymdhms 从年月日时分秒构造
 pub fn JulianDay::from_ymdhms(
-  year : Int,
-  month : Int,
-  day : Int,
-  hour : Int,
-  minute : Int,
-  second : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
+  hour : Int32,
+  minute : Int32,
+  second : Int32,
 ) -> JulianDay {
   let d = day.to_double() +
     ((second.to_double() / 60.0 + minute.to_double()) / 60.0 + hour.to_double()) /
@@ -155,6 +155,6 @@ pub impl Show for JulianDay with fn to_string(self : JulianDay) -> String {
 }
 
 ///|
-pub impl Tyme for JulianDay with fn next(self : JulianDay, n : Int) -> JulianDay {
+pub impl Tyme for JulianDay with fn next(self : JulianDay, n : Int32) -> JulianDay {
   JulianDay::from_julian_day(self.day + n.to_double())
 }

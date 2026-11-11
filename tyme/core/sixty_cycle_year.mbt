@@ -2,7 +2,7 @@
 // SixtyCycleYear 干支年
 pub struct SixtyCycleYear {
   // 年
-  year : Int
+  year : Int32
 }
 
 ///|
@@ -16,7 +16,9 @@ pub extend SixtyCycleYear with Tyme::{next}
 
 ///|
 // from_year 从年构造
-pub fn SixtyCycleYear::from_year(year : Int) -> Result[SixtyCycleYear, String] {
+pub fn SixtyCycleYear::from_year(
+  year : Int32,
+) -> Result[SixtyCycleYear, String] {
   if year < -1 || year > 9999 {
     return Err("illegal sixty cycle year: " + year.to_string())
   }
@@ -25,7 +27,7 @@ pub fn SixtyCycleYear::from_year(year : Int) -> Result[SixtyCycleYear, String] {
 
 ///|
 // get_year 年
-pub fn SixtyCycleYear::get_year(self : SixtyCycleYear) -> Int {
+pub fn SixtyCycleYear::get_year(self : SixtyCycleYear) -> Int32 {
   self.year
 }
 
@@ -97,7 +99,7 @@ pub impl Show for SixtyCycleYear with fn to_string(self : SixtyCycleYear) -> Str
 }
 
 ///|
-pub impl Tyme for SixtyCycleYear with fn next(self : SixtyCycleYear, n : Int) -> SixtyCycleYear {
+pub impl Tyme for SixtyCycleYear with fn next(self : SixtyCycleYear, n : Int32) -> SixtyCycleYear {
   match SixtyCycleYear::from_year(self.year + n) {
     Ok(y) => y
     Err(_) => self

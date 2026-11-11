@@ -15,7 +15,7 @@ pub struct Animal {
 }
 
 ///|
-pub fn Animal::from_index(index : Int) -> Animal {
+pub fn Animal::from_index(index : Int32) -> Animal {
   { loop_tyme: LoopTyme::from_index(animal_names(), index), }
 }
 
@@ -28,27 +28,27 @@ pub fn Animal::from_name(name : String) -> Result[Animal, String] {
 }
 
 ///|
-pub fn Animal::get_index(self : Animal) -> Int {
+pub fn Animal::get_index(self : Animal) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
-pub fn Animal::get_size(self : Animal) -> Int {
+pub fn Animal::get_size(self : Animal) -> Int32 {
   self.loop_tyme.get_size()
 }
 
 ///|
-pub fn Animal::steps_to(self : Animal, target_index : Int) -> Int {
+pub fn Animal::steps_to(self : Animal, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_to(target_index)
 }
 
 ///|
-pub fn Animal::steps_back_to(self : Animal, target_index : Int) -> Int {
+pub fn Animal::steps_back_to(self : Animal, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_back_to(target_index)
 }
 
 ///|
-pub fn Animal::steps_close_to(self : Animal, target_index : Int) -> Int {
+pub fn Animal::steps_close_to(self : Animal, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_close_to(target_index)
 }
 
@@ -68,7 +68,7 @@ pub impl Show for Animal with fn to_string(self : Animal) -> String {
 }
 
 ///|
-pub impl Tyme for Animal with fn next(self : Animal, n : Int) -> Animal {
+pub impl Tyme for Animal with fn next(self : Animal, n : Int32) -> Animal {
   Animal::from_index(self.loop_tyme.get_index() + n)
 }
 

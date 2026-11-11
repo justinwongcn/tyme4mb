@@ -6,15 +6,15 @@ pub struct ChildLimitInfo {
   // 结束(即开始起运)的公历时刻
   end_time : SolarTime
   // 年数
-  year_count : Int
+  year_count : Int32
   // 月数
-  month_count : Int
+  month_count : Int32
   // 日数
-  day_count : Int
+  day_count : Int32
   // 小时数
-  hour_count : Int
+  hour_count : Int32
   // 分钟数
-  minute_count : Int
+  minute_count : Int32
 }
 
 ///|
@@ -22,11 +22,11 @@ pub struct ChildLimitInfo {
 pub fn ChildLimitInfo::new(
   start_time : SolarTime,
   end_time : SolarTime,
-  year_count : Int,
-  month_count : Int,
-  day_count : Int,
-  hour_count : Int,
-  minute_count : Int,
+  year_count : Int32,
+  month_count : Int32,
+  day_count : Int32,
+  hour_count : Int32,
+  minute_count : Int32,
 ) -> ChildLimitInfo {
   {
     start_time,
@@ -53,31 +53,31 @@ pub fn ChildLimitInfo::get_end_time(self : ChildLimitInfo) -> SolarTime {
 
 ///|
 // get_year_count 年数
-pub fn ChildLimitInfo::get_year_count(self : ChildLimitInfo) -> Int {
+pub fn ChildLimitInfo::get_year_count(self : ChildLimitInfo) -> Int32 {
   self.year_count
 }
 
 ///|
 // get_month_count 月数
-pub fn ChildLimitInfo::get_month_count(self : ChildLimitInfo) -> Int {
+pub fn ChildLimitInfo::get_month_count(self : ChildLimitInfo) -> Int32 {
   self.month_count
 }
 
 ///|
 // get_day_count 日数
-pub fn ChildLimitInfo::get_day_count(self : ChildLimitInfo) -> Int {
+pub fn ChildLimitInfo::get_day_count(self : ChildLimitInfo) -> Int32 {
   self.day_count
 }
 
 ///|
 // get_hour_count 小时数
-pub fn ChildLimitInfo::get_hour_count(self : ChildLimitInfo) -> Int {
+pub fn ChildLimitInfo::get_hour_count(self : ChildLimitInfo) -> Int32 {
   self.hour_count
 }
 
 ///|
 // get_minute_count 分钟数
-pub fn ChildLimitInfo::get_minute_count(self : ChildLimitInfo) -> Int {
+pub fn ChildLimitInfo::get_minute_count(self : ChildLimitInfo) -> Int32 {
   self.minute_count
 }
 

@@ -18,15 +18,15 @@ pub fn EventBuilder::name(self : EventBuilder, name : String) -> EventBuilder {
 }
 
 ///|
-fn EventBuilder::get_char(_ : EventBuilder, index : Int) -> String {
+fn EventBuilder::get_char(_ : EventBuilder, index : Int32) -> String {
   event_manager_chars()[index:index + 1].to_owned()
 }
 
 ///|
 fn EventBuilder::set_value(
   self : EventBuilder,
-  index : Int,
-  n : Int,
+  index : Int32,
+  n : Int32,
 ) -> EventBuilder {
   let c = event_manager_chars()[31 + n:32 + n].to_owned()
   {
@@ -45,9 +45,9 @@ fn EventBuilder::encode_type(t : EventType) -> String {
 fn EventBuilder::content(
   self : EventBuilder,
   t : EventType,
-  a : Int,
-  b : Int,
-  c : Int,
+  a : Int32,
+  b : Int32,
+  c : Int32,
 ) -> EventBuilder {
   let mut r = EventBuilder::{
     name: self.name,
@@ -65,9 +65,9 @@ fn EventBuilder::content(
 // solar_day 公历日期
 pub fn EventBuilder::solar_day(
   self : EventBuilder,
-  solar_month : Int,
-  solar_day : Int,
-  delay_days : Int,
+  solar_month : Int32,
+  solar_day : Int32,
+  delay_days : Int32,
 ) -> EventBuilder {
   self.content(SolarDay, solar_month, solar_day, delay_days)
 }
@@ -76,9 +76,9 @@ pub fn EventBuilder::solar_day(
 // lunar_day 农历日期
 pub fn EventBuilder::lunar_day(
   self : EventBuilder,
-  lunar_month : Int,
-  lunar_day : Int,
-  delay_days : Int,
+  lunar_month : Int32,
+  lunar_day : Int32,
+  delay_days : Int32,
 ) -> EventBuilder {
   self.content(LunarDay, lunar_month, lunar_day, delay_days)
 }
@@ -87,9 +87,9 @@ pub fn EventBuilder::lunar_day(
 // solar_week 几月第几个星期几
 pub fn EventBuilder::solar_week(
   self : EventBuilder,
-  solar_month : Int,
-  week_index : Int,
-  week : Int,
+  solar_month : Int32,
+  week_index : Int32,
+  week : Int32,
 ) -> EventBuilder {
   self.content(SolarWeek, solar_month, week_index, week)
 }
@@ -98,8 +98,8 @@ pub fn EventBuilder::solar_week(
 // term_day 节气日期
 pub fn EventBuilder::term_day(
   self : EventBuilder,
-  term_index : Int,
-  delay_days : Int,
+  term_index : Int32,
+  delay_days : Int32,
 ) -> EventBuilder {
   self.content(TermDay, term_index, 0, delay_days)
 }
@@ -108,9 +108,9 @@ pub fn EventBuilder::term_day(
 // term_heaven_stem 节气天干
 pub fn EventBuilder::term_heaven_stem(
   self : EventBuilder,
-  term_index : Int,
-  heaven_stem_index : Int,
-  delay_days : Int,
+  term_index : Int32,
+  heaven_stem_index : Int32,
+  delay_days : Int32,
 ) -> EventBuilder {
   self.content(TermHs, term_index, heaven_stem_index, delay_days)
 }
@@ -119,9 +119,9 @@ pub fn EventBuilder::term_heaven_stem(
 // term_earth_branch 节气地支
 pub fn EventBuilder::term_earth_branch(
   self : EventBuilder,
-  term_index : Int,
-  earth_branch_index : Int,
-  delay_days : Int,
+  term_index : Int32,
+  earth_branch_index : Int32,
+  delay_days : Int32,
 ) -> EventBuilder {
   self.content(TermEb, term_index, earth_branch_index, delay_days)
 }
@@ -130,7 +130,7 @@ pub fn EventBuilder::term_earth_branch(
 // start_year 起始年
 pub fn EventBuilder::start_year(
   self : EventBuilder,
-  year : Int,
+  year : Int32,
 ) -> EventBuilder {
   let size = event_manager_chars().length()
   let mut n = year
@@ -146,7 +146,7 @@ pub fn EventBuilder::start_year(
 
 ///|
 // offset 偏移天数（最远支持-31至31天）
-pub fn EventBuilder::offset(self : EventBuilder, days : Int) -> EventBuilder {
+pub fn EventBuilder::offset(self : EventBuilder, days : Int32) -> EventBuilder {
   self.set_value(5, days)
 }
 

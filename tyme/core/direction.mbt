@@ -17,12 +17,12 @@ pub extend Direction with Culture::{get_name}
 pub extend Direction with Show::{to_string, output}
 
 ///|
-pub fn Direction::get_index(self : Direction) -> Int {
+pub fn Direction::get_index(self : Direction) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
-pub fn Direction::from_index(index : Int) -> Direction {
+pub fn Direction::from_index(index : Int32) -> Direction {
   { loop_tyme: LoopTyme::from_index(direction_names(), index), }
 }
 
@@ -66,6 +66,6 @@ pub impl Show for Direction with fn to_string(self : Direction) -> String {
 pub extend Direction with Tyme::{next}
 
 ///|
-pub impl Tyme for Direction with fn next(self : Direction, n : Int) -> Direction {
+pub impl Tyme for Direction with fn next(self : Direction, n : Int32) -> Direction {
   Direction::from_index(self.loop_tyme.get_index() + n)
 }

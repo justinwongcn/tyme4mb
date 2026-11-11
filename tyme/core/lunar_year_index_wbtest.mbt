@@ -1,11 +1,11 @@
 ///|
-fn reference_lunar_year_leap_groups() -> Array[Array[Int]] {
-  let groups : Array[Array[Int]] = []
+fn reference_lunar_year_leap_groups() -> Array[Array[Int32]] {
+  let groups : Array[Array[Int32]] = []
   for month_index = 0
       month_index < lunar_year_leap_data.length()
       month_index = month_index + 1 {
     let encoded = lunar_year_leap_data[month_index]
-    let years : Array[Int] = []
+    let years : Array[Int32] = []
     let mut year = 0
     for offset = 0; offset < encoded.length(); offset = offset + 2 {
       let high = chars_index(
@@ -26,9 +26,9 @@ fn reference_lunar_year_leap_groups() -> Array[Array[Int]] {
 
 ///|
 fn reference_lunar_year_leap_month(
-  year : Int,
-  groups : Array[Array[Int]],
-) -> Int {
+  year : Int32,
+  groups : Array[Array[Int32]],
+) -> Int32 {
   if year == -1 {
     return 11
   }

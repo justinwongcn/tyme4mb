@@ -19,7 +19,7 @@ pub struct PengZuHeavenStem {
 pub extend PengZuHeavenStem with Show::{to_string, output}
 
 ///|
-pub fn PengZuHeavenStem::from_index(index : Int) -> PengZuHeavenStem {
+pub fn PengZuHeavenStem::from_index(index : Int32) -> PengZuHeavenStem {
   { loop_tyme: LoopTyme::from_index(peng_zu_heaven_stem_names(), index), }
 }
 
@@ -34,7 +34,7 @@ pub fn PengZuHeavenStem::from_name(
 }
 
 ///|
-pub fn PengZuHeavenStem::get_index(self : PengZuHeavenStem) -> Int {
+pub fn PengZuHeavenStem::get_index(self : PengZuHeavenStem) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -51,7 +51,7 @@ pub impl Show for PengZuHeavenStem with fn to_string(self : PengZuHeavenStem) ->
 ///|
 pub impl Tyme for PengZuHeavenStem with fn next(
   self : PengZuHeavenStem,
-  n : Int,
+  n : Int32,
 ) -> PengZuHeavenStem {
   PengZuHeavenStem::from_index(self.loop_tyme.get_index() + n)
 }

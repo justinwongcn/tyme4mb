@@ -18,7 +18,7 @@ pub struct TwentyEightStar {
 pub extend TwentyEightStar with Tyme::{next}
 
 ///|
-pub fn TwentyEightStar::from_index(index : Int) -> TwentyEightStar {
+pub fn TwentyEightStar::from_index(index : Int32) -> TwentyEightStar {
   { loop_tyme: LoopTyme::from_index(twenty_eight_star_names(), index), }
 }
 
@@ -33,7 +33,7 @@ pub fn TwentyEightStar::from_name(
 }
 
 ///|
-pub fn TwentyEightStar::get_index(self : TwentyEightStar) -> Int {
+pub fn TwentyEightStar::get_index(self : TwentyEightStar) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -88,7 +88,10 @@ pub impl Show for TwentyEightStar with fn to_string(self : TwentyEightStar) -> S
 }
 
 ///|
-pub impl Tyme for TwentyEightStar with fn next(self : TwentyEightStar, n : Int) -> TwentyEightStar {
+pub impl Tyme for TwentyEightStar with fn next(
+  self : TwentyEightStar,
+  n : Int32,
+) -> TwentyEightStar {
   TwentyEightStar::from_index(self.loop_tyme.get_index() + n)
 }
 

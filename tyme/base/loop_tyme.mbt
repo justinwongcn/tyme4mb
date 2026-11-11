@@ -2,7 +2,7 @@
 // LoopTyme 可轮回的Tyme
 pub struct LoopTyme {
   names : Array[String]
-  mut index : Int
+  mut index : Int32
 }
 
 ///|
@@ -12,12 +12,12 @@ pub extend LoopTyme with Culture::{get_name}
 pub extend LoopTyme with Show::{to_string, output}
 
 ///|
-pub fn LoopTyme::get_index(self : LoopTyme) -> Int {
+pub fn LoopTyme::get_index(self : LoopTyme) -> Int32 {
   self.index
 }
 
 ///|
-pub fn LoopTyme::get_size(self : LoopTyme) -> Int {
+pub fn LoopTyme::get_size(self : LoopTyme) -> Int32 {
   self.names.length()
 }
 
@@ -25,7 +25,7 @@ pub fn LoopTyme::get_size(self : LoopTyme) -> Int {
 pub fn LoopTyme::index_of_name(
   self : LoopTyme,
   name : String,
-) -> Result[Int, String] {
+) -> Result[Int32, String] {
   for i, v in self.names {
     if v == name {
       return Ok(i)
@@ -35,28 +35,28 @@ pub fn LoopTyme::index_of_name(
 }
 
 ///|
-pub fn LoopTyme::index_of(self : LoopTyme, index : Int) -> Int {
+pub fn LoopTyme::index_of(self : LoopTyme, index : Int32) -> Int32 {
   AbstractCulture::index_of(index, self.get_size())
 }
 
 ///|
-pub fn LoopTyme::next_index(self : LoopTyme, n : Int) -> Int {
+pub fn LoopTyme::next_index(self : LoopTyme, n : Int32) -> Int32 {
   self.index_of(self.index + n)
 }
 
 ///|
-pub fn LoopTyme::steps_to(self : LoopTyme, target_index : Int) -> Int {
+pub fn LoopTyme::steps_to(self : LoopTyme, target_index : Int32) -> Int32 {
   self.index_of(target_index - self.index)
 }
 
 ///|
-pub fn LoopTyme::steps_back_to(self : LoopTyme, target_index : Int) -> Int {
+pub fn LoopTyme::steps_back_to(self : LoopTyme, target_index : Int32) -> Int32 {
   let n = self.get_size()
   -((self.index - target_index + n) % n)
 }
 
 ///|
-pub fn LoopTyme::steps_close_to(self : LoopTyme, target_index : Int) -> Int {
+pub fn LoopTyme::steps_close_to(self : LoopTyme, target_index : Int32) -> Int32 {
   let d1 = self.steps_to(target_index)
   let d2 = self.steps_back_to(target_index)
   let mut t = d2
@@ -71,7 +71,7 @@ pub fn LoopTyme::steps_close_to(self : LoopTyme, target_index : Int) -> Int {
 }
 
 ///|
-pub fn LoopTyme::from_index(names : Array[String], index : Int) -> LoopTyme {
+pub fn LoopTyme::from_index(names : Array[String], index : Int32) -> LoopTyme {
   let instance = LoopTyme::{ names, index: 0, }
   instance.index = instance.next_index(index)
   instance

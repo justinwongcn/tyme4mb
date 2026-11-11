@@ -14,7 +14,7 @@ pub struct TenStar {
 }
 
 ///|
-pub fn TenStar::from_index(index : Int) -> TenStar {
+pub fn TenStar::from_index(index : Int32) -> TenStar {
   { loop_tyme: LoopTyme::from_index(ten_star_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn TenStar::from_name(name : String) -> Result[TenStar, String] {
 }
 
 ///|
-pub fn TenStar::get_index(self : TenStar) -> Int {
+pub fn TenStar::get_index(self : TenStar) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -42,7 +42,7 @@ pub impl Show for TenStar with fn to_string(self : TenStar) -> String {
 }
 
 ///|
-pub impl Tyme for TenStar with fn next(self : TenStar, n : Int) -> TenStar {
+pub impl Tyme for TenStar with fn next(self : TenStar, n : Int32) -> TenStar {
   TenStar::from_index(self.loop_tyme.get_index() + n)
 }
 

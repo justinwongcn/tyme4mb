@@ -294,10 +294,10 @@ test "EclipticHideHeavenStemDay_all_months_sampling" {
   // 每令取第1/2/3段 3 个中点日（约等于月令内 4~10/12~13/18~23°），
   // 断言天干 + 段序 + 段起点，数据来自 2024 年实测算例。
   fn probe(
-    term_idx : Int,
-    days : Int,
+    term_idx : Int32,
+    days : Int32,
     stem : String,
-    sector : Int,
+    sector : Int32,
     offset : Double,
   ) -> Unit {
     let term = @tyme.SolarTerm::from_index(2024, term_idx)

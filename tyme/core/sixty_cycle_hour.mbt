@@ -109,7 +109,7 @@ pub fn SixtyCycleHour::get_solar_time(self : SixtyCycleHour) -> SolarTime {
 
 ///|
 // get_index_in_day 位于当天的索引
-pub fn SixtyCycleHour::get_index_in_day(self : SixtyCycleHour) -> Int {
+pub fn SixtyCycleHour::get_index_in_day(self : SixtyCycleHour) -> Int32 {
   let h = self.solar_time.get_hour()
   if h == 23 {
     return 0
@@ -182,7 +182,7 @@ pub impl Show for SixtyCycleHour with fn to_string(self : SixtyCycleHour) -> Str
 }
 
 ///|
-pub impl Tyme for SixtyCycleHour with fn next(self : SixtyCycleHour, n : Int) -> SixtyCycleHour {
+pub impl Tyme for SixtyCycleHour with fn next(self : SixtyCycleHour, n : Int32) -> SixtyCycleHour {
   SixtyCycleHour::from_solar_time(self.solar_time.next(n))
 }
 

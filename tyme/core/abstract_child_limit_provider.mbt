@@ -6,12 +6,12 @@ pub struct AbstractChildLimitProvider {}
 ///|
 pub fn AbstractChildLimitProvider::next(
   birth_time : SolarTime,
-  add_year : Int,
-  add_month : Int,
-  add_day : Int,
-  add_hour : Int,
-  add_minute : Int,
-  add_second : Int,
+  add_year : Int32,
+  add_month : Int32,
+  add_day : Int32,
+  add_hour : Int32,
+  add_minute : Int32,
+  add_second : Int32,
 ) -> ChildLimitInfo {
   let mut d = birth_time.get_day() + add_day
   let mut h = birth_time.get_hour() + add_hour

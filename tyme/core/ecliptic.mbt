@@ -14,7 +14,7 @@ pub struct Ecliptic {
 pub extend Ecliptic with Show::{to_string, output}
 
 ///|
-pub fn Ecliptic::from_index(index : Int) -> Ecliptic {
+pub fn Ecliptic::from_index(index : Int32) -> Ecliptic {
   { loop_tyme: LoopTyme::from_index(ecliptic_names(), index), }
 }
 
@@ -51,7 +51,7 @@ pub impl Show for Ecliptic with fn to_string(self : Ecliptic) -> String {
 pub extend Ecliptic with Tyme::{next}
 
 ///|
-pub impl Tyme for Ecliptic with fn next(self : Ecliptic, n : Int) -> Ecliptic {
+pub impl Tyme for Ecliptic with fn next(self : Ecliptic, n : Int32) -> Ecliptic {
   Ecliptic::from_index(self.loop_tyme.get_index() + n)
 }
 

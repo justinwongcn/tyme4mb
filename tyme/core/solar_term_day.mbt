@@ -5,7 +5,7 @@ pub struct SolarTermDay {
 }
 
 ///|
-pub fn SolarTermDay::new(o : SolarTerm, index : Int) -> SolarTermDay {
+pub fn SolarTermDay::new(o : SolarTerm, index : Int32) -> SolarTermDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
@@ -17,7 +17,7 @@ pub fn SolarTermDay::get_solar_term(self : SolarTermDay) -> SolarTerm {
 
 ///|
 // get_day_index 天索引
-pub fn SolarTermDay::get_day_index(self : SolarTermDay) -> Int {
+pub fn SolarTermDay::get_day_index(self : SolarTermDay) -> Int32 {
   self.abstract_culture_day.get_day_index()
 }
 

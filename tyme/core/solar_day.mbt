@@ -30,9 +30,9 @@ pub fn SolarDay::new(day_unit : DayUnit) -> SolarDay {
 ///|
 // validate 校验
 pub fn SolarDay::validate(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[Unit, String] {
   let mut illegal = day < 1
   if !illegal {
@@ -54,9 +54,9 @@ pub fn SolarDay::validate(
 ///|
 // from_ymd 从年月日构造
 pub fn SolarDay::from_ymd(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[SolarDay, String] {
   match SolarDay::validate(year, month, day) {
     Ok(_) =>
@@ -81,7 +81,7 @@ pub fn SolarDay::get_solar_month(self : SolarDay) -> SolarMonth {
 
 ///|
 // get_index_in_year 位于当年的索引
-pub fn SolarDay::get_index_in_year(self : SolarDay) -> Int {
+pub fn SolarDay::get_index_in_year(self : SolarDay) -> Int32 {
   match SolarDay::from_ymd(self.get_year(), 1, 1) {
     Ok(d) => self.subtract(d)
     Err(_) => 0
@@ -96,19 +96,19 @@ pub fn SolarDay::equals(self : SolarDay, target : SolarDay) -> Bool {
 
 ///|
 // get_year 年
-pub fn SolarDay::get_year(self : SolarDay) -> Int {
+pub fn SolarDay::get_year(self : SolarDay) -> Int32 {
   self.day_unit.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn SolarDay::get_month(self : SolarDay) -> Int {
+pub fn SolarDay::get_month(self : SolarDay) -> Int32 {
   self.day_unit.month_unit.get_month()
 }
 
 ///|
 // get_day 日
-pub fn SolarDay::get_day(self : SolarDay) -> Int {
+pub fn SolarDay::get_day(self : SolarDay) -> Int32 {
   self.day_unit.get_day()
 }
 
@@ -135,7 +135,7 @@ pub fn SolarDay::get_week(self : SolarDay) -> Week {
 // get_solar_week 公历周（参数 start：起始星期，1234560 分别代表星期一至星期天）
 pub fn SolarDay::get_solar_week(
   self : SolarDay,
-  start : Int,
+  start : Int32,
 ) -> Result[SolarWeek, String] {
   let first = self.get_solar_month().get_first_day()
   let x = first.get_week().next(-start).get_index()
@@ -157,7 +157,7 @@ pub fn SolarDay::get_constellation(self : SolarDay) -> Constellation {
 
 ///|
 // get_compare_index 用于比较大小的索引
-pub fn SolarDay::get_compare_index(self : SolarDay) -> Int {
+pub fn SolarDay::get_compare_index(self : SolarDay) -> Int32 {
   self.day_unit.get_compare_index()
 }
 
@@ -175,13 +175,13 @@ pub fn SolarDay::is_after(self : SolarDay, target : SolarDay) -> Bool {
 
 ///|
 // subtract 公历日期相减，获得相差天数
-pub fn SolarDay::subtract(self : SolarDay, target : SolarDay) -> Int {
+pub fn SolarDay::subtract(self : SolarDay, target : SolarDay) -> Int32 {
   self.get_julian_day().subtract(target.get_julian_day()).to_int()
 }
 
 ///|
 // next 偏移 n 天
-pub fn SolarDay::next(self : SolarDay, n : Int) -> SolarDay {
+pub fn SolarDay::next(self : SolarDay, n : Int32) -> SolarDay {
   self.get_julian_day().next(n).get_solar_day_unchecked()
 }
 

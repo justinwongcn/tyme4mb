@@ -14,7 +14,7 @@ pub struct PlumRain {
 pub extend PlumRain with Culture::{get_name}
 
 ///|
-pub fn PlumRain::from_index(index : Int) -> PlumRain {
+pub fn PlumRain::from_index(index : Int32) -> PlumRain {
   { loop_tyme: LoopTyme::from_index(plum_rain_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn PlumRain::from_name(name : String) -> Result[PlumRain, String] {
 }
 
 ///|
-pub fn PlumRain::get_index(self : PlumRain) -> Int {
+pub fn PlumRain::get_index(self : PlumRain) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -42,7 +42,7 @@ pub impl Show for PlumRain with fn to_string(self : PlumRain) -> String {
 }
 
 ///|
-pub impl Tyme for PlumRain with fn next(self : PlumRain, n : Int) -> PlumRain {
+pub impl Tyme for PlumRain with fn next(self : PlumRain, n : Int32) -> PlumRain {
   PlumRain::from_index(self.loop_tyme.get_index() + n)
 }
 

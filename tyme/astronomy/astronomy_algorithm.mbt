@@ -15,7 +15,7 @@ fn nutation_lon2(t : Double) -> Double {
 }
 
 ///|
-fn e_lon(t : Double, n : Int) -> Double {
+fn e_lon(t : Double, n : Int32) -> Double {
   let t = t / 10.0
   let mut v = 0.0
   let mut tn = 1.0
@@ -54,7 +54,7 @@ fn e_lon(t : Double, n : Int) -> Double {
 }
 
 ///|
-fn m_lon(t : Double, n : Int) -> Double {
+fn m_lon(t : Double, n : Int32) -> Double {
   let ob = xl1
   let obl = ob[0].length()
   let mut tn = 1.0
@@ -142,7 +142,7 @@ fn ev(t : Double) -> Double {
 }
 
 ///|
-pub fn sa_lon(t : Double, n : Int) -> Double {
+pub fn sa_lon(t : Double, n : Int32) -> Double {
   e_lon(t, n) + nutation_lon2(t) + gxc_sun_lon(t) + @math.PI
 }
 
@@ -216,7 +216,7 @@ pub fn sa_lon_t(w : Double) -> Double {
 }
 
 ///|
-fn msa_lon(t : Double, mn : Int, sn : Int) -> Double {
+fn msa_lon(t : Double, mn : Int32, sn : Int32) -> Double {
   m_lon(t, mn) + -3.4e-6 - (e_lon(t, sn) + gxc_sun_lon(t) + @math.PI)
 }
 

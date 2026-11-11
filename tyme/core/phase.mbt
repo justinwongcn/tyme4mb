@@ -2,8 +2,8 @@
 // Phase 月相
 pub struct Phase {
   loop_tyme : LoopTyme
-  lunar_year : Int
-  lunar_month : Int
+  lunar_year : Int32
+  lunar_month : Int32
 }
 
 ///|
@@ -18,9 +18,9 @@ pub fn phase_names() -> Array[String] {
 ///|
 // from_index 从年月索引构造
 pub fn Phase::from_index(
-  lunar_year : Int,
-  lunar_month : Int,
-  index : Int,
+  lunar_year : Int32,
+  lunar_month : Int32,
+  index : Int32,
 ) -> Phase {
   let m = LunarMonth::from_ym(lunar_year, lunar_month).unwrap()
   let month = m.next(index / phase_names().length())
@@ -34,8 +34,8 @@ pub fn Phase::from_index(
 ///|
 // from_name 从名称构造
 pub fn Phase::from_name(
-  lunar_year : Int,
-  lunar_month : Int,
+  lunar_year : Int32,
+  lunar_month : Int32,
   name : String,
 ) -> Result[Phase, String] {
   let p = match LoopTyme::from_name(phase_names(), name) {
@@ -64,7 +64,7 @@ fn Phase::get_start_solar_time(self : Phase) -> SolarTime {
     }
     i = i + 1
   }
-  let arr : Array[Int] = [0, 90, 180, 270]
+  let arr : Array[Int32] = [0, 90, 180, 270]
   let t = msa_lon_t(
       (
         (n + i).to_double() +
@@ -98,19 +98,19 @@ pub fn Phase::get_solar_day(self : Phase) -> SolarDay {
 
 ///|
 // get_index 索引
-pub fn Phase::get_index(self : Phase) -> Int {
+pub fn Phase::get_index(self : Phase) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
 // get_lunar_year 农历年
-pub fn Phase::get_lunar_year(self : Phase) -> Int {
+pub fn Phase::get_lunar_year(self : Phase) -> Int32 {
   self.lunar_year
 }
 
 ///|
 // get_lunar_month 农历月
-pub fn Phase::get_lunar_month(self : Phase) -> Int {
+pub fn Phase::get_lunar_month(self : Phase) -> Int32 {
   self.lunar_month
 }
 
@@ -131,7 +131,7 @@ pub impl Show for Phase with fn to_string(self : Phase) -> String {
 pub extend Phase with Tyme::{next}
 
 ///|
-pub impl Tyme for Phase with fn next(self : Phase, n : Int) -> Phase {
+pub impl Tyme for Phase with fn next(self : Phase, n : Int32) -> Phase {
   let size = self.loop_tyme.get_size()
   let mut i = self.loop_tyme.get_index() + n
   if i < 0 {

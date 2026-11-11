@@ -5,7 +5,7 @@ pub struct NineDay {
 }
 
 ///|
-pub fn NineDay::new(o : Nine, index : Int) -> NineDay {
+pub fn NineDay::new(o : Nine, index : Int32) -> NineDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
@@ -17,7 +17,7 @@ pub fn NineDay::get_nine(self : NineDay) -> Nine {
 
 ///|
 // get_day_index 天索引
-pub fn NineDay::get_day_index(self : NineDay) -> Int {
+pub fn NineDay::get_day_index(self : NineDay) -> Int32 {
   self.abstract_culture_day.get_day_index()
 }
 

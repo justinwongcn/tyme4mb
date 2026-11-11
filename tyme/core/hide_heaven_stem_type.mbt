@@ -7,7 +7,7 @@ pub(all) enum HideHeavenStemType {
 }
 
 ///|
-pub fn HideHeavenStemType::get_code(self : HideHeavenStemType) -> Int {
+pub fn HideHeavenStemType::get_code(self : HideHeavenStemType) -> Int32 {
   match self {
     Residual => 0
     Middle => 1
@@ -16,7 +16,7 @@ pub fn HideHeavenStemType::get_code(self : HideHeavenStemType) -> Int {
 }
 
 ///|
-pub fn HideHeavenStemType::from_code(code : Int) -> HideHeavenStemType {
+pub fn HideHeavenStemType::from_code(code : Int32) -> HideHeavenStemType {
   match code {
     1 => Middle
     2 => Main

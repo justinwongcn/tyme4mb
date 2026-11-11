@@ -2,13 +2,13 @@
 // AbstractCultureDay 带天索引的传统文化抽象
 pub struct AbstractCultureDay[C] {
   culture : C
-  day_index : Int
+  day_index : Int32
 }
 
 ///|
 pub fn[C] AbstractCultureDay::new(
   culture : C,
-  day_index : Int,
+  day_index : Int32,
 ) -> AbstractCultureDay[C] {
   { culture, day_index, }
 }
@@ -17,7 +17,7 @@ pub fn[C] AbstractCultureDay::new(
 // get_day_index 天索引
 pub fn[C] AbstractCultureDay::get_day_index(
   self : AbstractCultureDay[C],
-) -> Int {
+) -> Int32 {
   self.day_index
 }
 

@@ -22,7 +22,7 @@ pub let lunar_festival_data : Ref[String] = Ref::{
 ///|
 // new 构造
 pub fn LunarFestival::new(
-  index : Int,
+  index : Int32,
   event : Event,
   day : LunarDay,
 ) -> LunarFestival {
@@ -31,7 +31,7 @@ pub fn LunarFestival::new(
 
 ///|
 // from_index 从索引构造
-pub fn LunarFestival::from_index(year : Int, index : Int) -> LunarFestival? {
+pub fn LunarFestival::from_index(year : Int32, index : Int32) -> LunarFestival? {
   if index < 0 || index >= lunar_festival_names().length() {
     return None
   }
@@ -67,9 +67,9 @@ pub fn LunarFestival::from_index(year : Int, index : Int) -> LunarFestival? {
 ///|
 // from_ymd 从年月日构造
 pub fn LunarFestival::from_ymd(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> LunarFestival? {
   let d = match LunarDay::from_ymd(year, month, day) {
     Err(_) => return None
@@ -141,7 +141,7 @@ pub fn LunarFestival::get_solar_term(self : LunarFestival) -> SolarTerm? {
 
 ///|
 // next 推移
-pub fn LunarFestival::next(self : LunarFestival, n : Int) -> LunarFestival? {
+pub fn LunarFestival::next(self : LunarFestival, n : Int32) -> LunarFestival? {
   let size = lunar_festival_names().length()
   let i = self.festival.index + n
   LunarFestival::from_index(
@@ -152,7 +152,7 @@ pub fn LunarFestival::next(self : LunarFestival, n : Int) -> LunarFestival? {
 
 ///|
 // get_index 索引
-pub fn LunarFestival::get_index(self : LunarFestival) -> Int {
+pub fn LunarFestival::get_index(self : LunarFestival) -> Int32 {
   self.festival.get_index()
 }
 

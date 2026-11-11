@@ -26,7 +26,10 @@ pub extend LunarMonth with Tyme::{next}
 
 ///|
 // validate 校验
-pub fn LunarMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
+pub fn LunarMonth::validate(
+  year : Int32,
+  month : Int32,
+) -> Result[Unit, String] {
   if month == 0 || month > 12 || month < -12 {
     return Err("illegal lunar month: " + month.to_string())
   }
@@ -45,8 +48,8 @@ pub fn LunarMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
 ///|
 // from_ym 从年月构造
 pub fn LunarMonth::from_ym(
-  year : Int,
-  month : Int,
+  year : Int32,
+  month : Int32,
 ) -> Result[LunarMonth, String] {
   match LunarMonth::validate(year, month) {
     Err(e) => return Err(e)
@@ -63,13 +66,13 @@ pub fn LunarMonth::from_ym(
 
 ///|
 // get_year 年
-pub fn LunarMonth::get_year(self : LunarMonth) -> Int {
+pub fn LunarMonth::get_year(self : LunarMonth) -> Int32 {
   self.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn LunarMonth::get_month(self : LunarMonth) -> Int {
+pub fn LunarMonth::get_month(self : LunarMonth) -> Int32 {
   self.month_unit.get_month()
 }
 
@@ -84,7 +87,7 @@ pub fn LunarMonth::get_lunar_year(self : LunarMonth) -> LunarYear {
 
 ///|
 // get_month_with_leap 月，当月为闰月时，返回负数
-pub fn LunarMonth::get_month_with_leap(self : LunarMonth) -> Int {
+pub fn LunarMonth::get_month_with_leap(self : LunarMonth) -> Int32 {
   if self.leap {
     return -self.get_month()
   }
@@ -117,14 +120,14 @@ fn LunarMonth::get_new_moon(self : LunarMonth) -> Double {
 
 ///|
 // get_day_count 天数(大月30天，小月29天)
-pub fn LunarMonth::get_day_count(self : LunarMonth) -> Int {
+pub fn LunarMonth::get_day_count(self : LunarMonth) -> Int32 {
   let w = self.get_new_moon()
   (calc_shuo(w + 29.5306) - calc_shuo(w)).to_int()
 }
 
 ///|
 // get_index_in_year 位于当年的索引(0-12)
-pub fn LunarMonth::get_index_in_year(self : LunarMonth) -> Int {
+pub fn LunarMonth::get_index_in_year(self : LunarMonth) -> Int32 {
   let mut index = self.get_month() - 1
   if self.leap {
     index = index + 1
@@ -157,7 +160,7 @@ pub fn LunarMonth::is_leap(self : LunarMonth) -> Bool {
 
 ///|
 // get_week_count 周数
-pub fn LunarMonth::get_week_count(self : LunarMonth, start : Int) -> Int {
+pub fn LunarMonth::get_week_count(self : LunarMonth, start : Int32) -> Int32 {
   (
     AbstractCulture::index_of(
       self.get_first_julian_day().get_week().get_index() - start,
@@ -218,7 +221,7 @@ pub fn LunarMonth::get_fetus(self : LunarMonth) -> FetusMonth? {
 // get_weeks 本月的农历周列表
 pub fn LunarMonth::get_weeks(
   self : LunarMonth,
-  start : Int,
+  start : Int32,
 ) -> Array[LunarWeek] {
   let l : Array[LunarWeek] = []
   let size = self.get_week_count(start)
@@ -231,7 +234,7 @@ pub fn LunarMonth::get_weeks(
 
 ///|
 // next 推移
-pub impl Tyme for LunarMonth with fn next(self : LunarMonth, n : Int) -> LunarMonth {
+pub impl Tyme for LunarMonth with fn next(self : LunarMonth, n : Int32) -> LunarMonth {
   if n == 0 {
     return match
       LunarMonth::from_ym(self.get_year(), self.get_month_with_leap()) {

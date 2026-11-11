@@ -5,7 +5,7 @@ pub struct PlumRainDay {
 }
 
 ///|
-pub fn PlumRainDay::new(o : PlumRain, index : Int) -> PlumRainDay {
+pub fn PlumRainDay::new(o : PlumRain, index : Int32) -> PlumRainDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
@@ -17,7 +17,7 @@ pub fn PlumRainDay::get_plum_rain(self : PlumRainDay) -> PlumRain {
 
 ///|
 // get_day_index 天索引
-pub fn PlumRainDay::get_day_index(self : PlumRainDay) -> Int {
+pub fn PlumRainDay::get_day_index(self : PlumRainDay) -> Int32 {
   self.abstract_culture_day.get_day_index()
 }
 

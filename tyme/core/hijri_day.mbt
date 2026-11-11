@@ -28,28 +28,28 @@ pub fn HijriDay::new(day_unit : DayUnit) -> HijriDay {
 
 ///|
 // get_year 年
-pub fn HijriDay::get_year(self : HijriDay) -> Int {
+pub fn HijriDay::get_year(self : HijriDay) -> Int32 {
   self.day_unit.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn HijriDay::get_month(self : HijriDay) -> Int {
+pub fn HijriDay::get_month(self : HijriDay) -> Int32 {
   self.day_unit.month_unit.get_month()
 }
 
 ///|
 // get_day 日
-pub fn HijriDay::get_day(self : HijriDay) -> Int {
+pub fn HijriDay::get_day(self : HijriDay) -> Int32 {
   self.day_unit.get_day()
 }
 
 ///|
 // validate 校验
 pub fn HijriDay::validate(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[Unit, String] {
   let m = match HijriMonth::from_ym(year, month) {
     Ok(v) => v
@@ -64,9 +64,9 @@ pub fn HijriDay::validate(
 ///|
 // from_ymd 从年月日构造
 pub fn HijriDay::from_ymd(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[HijriDay, String] {
   match HijriDay::validate(year, month, day) {
     Ok(_) =>
@@ -91,7 +91,7 @@ pub fn HijriDay::get_hijri_month(self : HijriDay) -> HijriMonth {
 
 ///|
 // get_compare_index 用于比较大小的索引
-pub fn HijriDay::get_compare_index(self : HijriDay) -> Int {
+pub fn HijriDay::get_compare_index(self : HijriDay) -> Int32 {
   self.day_unit.get_compare_index()
 }
 
@@ -109,7 +109,7 @@ pub fn HijriDay::is_after(self : HijriDay, target : HijriDay) -> Bool {
 
 ///|
 // get_index_in_year 位于当年的索引
-pub fn HijriDay::get_index_in_year(self : HijriDay) -> Int {
+pub fn HijriDay::get_index_in_year(self : HijriDay) -> Int32 {
   match HijriDay::from_ymd(self.get_year(), 1, 1) {
     Ok(d) => self.subtract(d)
     Err(_) => 0
@@ -118,7 +118,7 @@ pub fn HijriDay::get_index_in_year(self : HijriDay) -> Int {
 
 ///|
 // subtract 回历日期相减，获得相差天数
-pub fn HijriDay::subtract(self : HijriDay, target : HijriDay) -> Int {
+pub fn HijriDay::subtract(self : HijriDay, target : HijriDay) -> Int32 {
   self.get_julian_day().subtract(target.get_julian_day()).to_int()
 }
 
@@ -160,7 +160,7 @@ pub impl Show for HijriDay with fn to_string(self : HijriDay) -> String {
 }
 
 ///|
-pub impl Tyme for HijriDay with fn next(self : HijriDay, n : Int) -> HijriDay {
+pub impl Tyme for HijriDay with fn next(self : HijriDay, n : Int32) -> HijriDay {
   self.get_solar_day().next(n).get_hijri_day()
 }
 

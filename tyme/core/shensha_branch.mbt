@@ -3,7 +3,11 @@
 // 依据 shensha.json 的求法（三合局/方局/对冲/偏移）实现。
 
 // hit_rest_branches 以第 basis 柱为基准，其余三支是否含 target
-fn hit_rest_branches(ec : EightChar, basis : Int, target : EarthBranch) -> Bool {
+fn hit_rest_branches(
+  ec : EightChar,
+  basis : Int32,
+  target : EarthBranch,
+) -> Bool {
   has_branch(branches_except(ec, basis), target)
 }
 

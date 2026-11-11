@@ -4,7 +4,7 @@ pub struct DecadeFortune {
   // 童限
   child_limit : ChildLimit
   // 序号
-  index : Int
+  index : Int32
 }
 
 ///|
@@ -14,14 +14,14 @@ pub extend DecadeFortune with Culture::{get_name}
 // from_child_limit 从童限与序号构造
 pub fn DecadeFortune::from_child_limit(
   child_limit : ChildLimit,
-  index : Int,
+  index : Int32,
 ) -> DecadeFortune {
   { child_limit, index, }
 }
 
 ///|
 // get_start_age 开始年龄
-pub fn DecadeFortune::get_start_age(self : DecadeFortune) -> Int {
+pub fn DecadeFortune::get_start_age(self : DecadeFortune) -> Int32 {
   self.child_limit.get_end_sixty_cycle_year().get_year() -
   self.child_limit.get_start_sixty_cycle_year().get_year() +
   1 +
@@ -30,7 +30,7 @@ pub fn DecadeFortune::get_start_age(self : DecadeFortune) -> Int {
 
 ///|
 // get_end_age 结束年龄
-pub fn DecadeFortune::get_end_age(self : DecadeFortune) -> Int {
+pub fn DecadeFortune::get_end_age(self : DecadeFortune) -> Int32 {
   self.get_start_age() + 9
 }
 
@@ -89,7 +89,7 @@ pub impl Show for DecadeFortune with fn to_string(self : DecadeFortune) -> Strin
 }
 
 ///|
-pub impl Tyme for DecadeFortune with fn next(self : DecadeFortune, n : Int) -> DecadeFortune {
+pub impl Tyme for DecadeFortune with fn next(self : DecadeFortune, n : Int32) -> DecadeFortune {
   DecadeFortune::from_child_limit(self.child_limit, self.index + n)
 }
 

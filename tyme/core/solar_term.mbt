@@ -12,7 +12,7 @@ pub fn solar_term_names() -> Array[String] {
 // SolarTerm 节气
 pub struct SolarTerm {
   loop_tyme : LoopTyme
-  year : Int
+  year : Int32
   cursory_julian_day : Double
 }
 
@@ -20,7 +20,7 @@ pub struct SolarTerm {
 pub extend SolarTerm with Tyme::{next}
 
 ///|
-pub fn SolarTerm::from_index(year : Int, index : Int) -> SolarTerm {
+pub fn SolarTerm::from_index(year : Int32, index : Int32) -> SolarTerm {
   let parent = LoopTyme::from_index(solar_term_names(), index)
   let size = parent.get_size()
   let y = (year * size + index) / size
@@ -30,7 +30,7 @@ pub fn SolarTerm::from_index(year : Int, index : Int) -> SolarTerm {
 
 ///|
 pub fn SolarTerm::from_name(
-  year : Int,
+  year : Int32,
   name : String,
 ) -> Result[SolarTerm, String] {
   match LoopTyme::from_name(solar_term_names(), name) {
@@ -43,7 +43,7 @@ pub fn SolarTerm::from_name(
 }
 
 ///|
-fn init_by_year(year : Int, offset : Int) -> Double {
+fn init_by_year(year : Int32, offset : Int32) -> Double {
   let jd = @math.floor((year - 2000).to_double() * 365.2422 + 180.0)
   let mut w = @math.floor((jd - 355.0 + 183.0) / 365.2422) * 365.2422 + 355.0
   if calc_qi(w) > jd {
@@ -63,7 +63,7 @@ pub impl Show for SolarTerm with fn to_string(self : SolarTerm) -> String {
 }
 
 ///|
-pub impl Tyme for SolarTerm with fn next(self : SolarTerm, n : Int) -> SolarTerm {
+pub impl Tyme for SolarTerm with fn next(self : SolarTerm, n : Int32) -> SolarTerm {
   let size = self.loop_tyme.get_size()
   let i = self.loop_tyme.get_index() + n
   SolarTerm::from_index(
@@ -106,7 +106,7 @@ pub fn SolarTerm::get_solar_day(self : SolarTerm) -> SolarDay {
 // get_year 年
 
 ///|
-pub fn SolarTerm::get_year(self : SolarTerm) -> Int {
+pub fn SolarTerm::get_year(self : SolarTerm) -> Int32 {
   self.year
 }
 

@@ -11,7 +11,7 @@ pub struct SixStar {
 }
 
 ///|
-pub fn SixStar::from_index(index : Int) -> SixStar {
+pub fn SixStar::from_index(index : Int32) -> SixStar {
   { loop_tyme: LoopTyme::from_index(six_star_names(), index), }
 }
 
@@ -24,7 +24,7 @@ pub fn SixStar::from_name(name : String) -> Result[SixStar, String] {
 }
 
 ///|
-pub fn SixStar::get_index(self : SixStar) -> Int {
+pub fn SixStar::get_index(self : SixStar) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -48,6 +48,6 @@ pub impl Show for SixStar with fn to_string(self : SixStar) -> String {
 pub extend SixStar with Tyme::{next}
 
 ///|
-pub impl Tyme for SixStar with fn next(self : SixStar, n : Int) -> SixStar {
+pub impl Tyme for SixStar with fn next(self : SixStar, n : Int32) -> SixStar {
   SixStar::from_index(self.loop_tyme.get_index() + n)
 }

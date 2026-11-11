@@ -78,8 +78,8 @@ pub fn ThreePillars::equals(self : ThreePillars, target : ThreePillars) -> Bool 
 // get_solar_days 公历日列表
 pub fn ThreePillars::get_solar_days(
   self : ThreePillars,
-  start_year : Int,
-  end_year : Int,
+  start_year : Int32,
+  end_year : Int32,
 ) -> Array[SolarDay] {
   let l : Array[SolarDay] = []
   // 月地支距寅月的偏移值

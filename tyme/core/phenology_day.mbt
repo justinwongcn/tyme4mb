@@ -5,7 +5,7 @@ pub struct PhenologyDay {
 }
 
 ///|
-pub fn PhenologyDay::new(o : Phenology, index : Int) -> PhenologyDay {
+pub fn PhenologyDay::new(o : Phenology, index : Int32) -> PhenologyDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
@@ -17,7 +17,7 @@ pub fn PhenologyDay::get_phenology(self : PhenologyDay) -> Phenology {
 
 ///|
 // get_day_index 天索引
-pub fn PhenologyDay::get_day_index(self : PhenologyDay) -> Int {
+pub fn PhenologyDay::get_day_index(self : PhenologyDay) -> Int32 {
   self.abstract_culture_day.get_day_index()
 }
 

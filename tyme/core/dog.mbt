@@ -11,7 +11,7 @@ pub struct Dog {
 }
 
 ///|
-pub fn Dog::from_index(index : Int) -> Dog {
+pub fn Dog::from_index(index : Int32) -> Dog {
   { loop_tyme: LoopTyme::from_index(dog_names(), index), }
 }
 
@@ -24,7 +24,7 @@ pub fn Dog::from_name(name : String) -> Result[Dog, String] {
 }
 
 ///|
-pub fn Dog::get_index(self : Dog) -> Int {
+pub fn Dog::get_index(self : Dog) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -39,7 +39,7 @@ pub impl Show for Dog with fn to_string(self : Dog) -> String {
 }
 
 ///|
-pub impl Tyme for Dog with fn next(self : Dog, n : Int) -> Dog {
+pub impl Tyme for Dog with fn next(self : Dog, n : Int32) -> Dog {
   Dog::from_index(self.loop_tyme.get_index() + n)
 }
 

@@ -20,32 +20,38 @@ pub extend HeavenStem with Show::{to_string, output}
 pub extend HeavenStem with Tyme::{next}
 
 ///|
-pub fn HeavenStem::get_index(self : HeavenStem) -> Int {
+pub fn HeavenStem::get_index(self : HeavenStem) -> Int32 {
   self.loop_tyme.get_index()
 }
 
 ///|
-pub fn HeavenStem::get_size(self : HeavenStem) -> Int {
+pub fn HeavenStem::get_size(self : HeavenStem) -> Int32 {
   self.loop_tyme.get_size()
 }
 
 ///|
-pub fn HeavenStem::steps_to(self : HeavenStem, target_index : Int) -> Int {
+pub fn HeavenStem::steps_to(self : HeavenStem, target_index : Int32) -> Int32 {
   self.loop_tyme.steps_to(target_index)
 }
 
 ///|
-pub fn HeavenStem::steps_back_to(self : HeavenStem, target_index : Int) -> Int {
+pub fn HeavenStem::steps_back_to(
+  self : HeavenStem,
+  target_index : Int32,
+) -> Int32 {
   self.loop_tyme.steps_back_to(target_index)
 }
 
 ///|
-pub fn HeavenStem::steps_close_to(self : HeavenStem, target_index : Int) -> Int {
+pub fn HeavenStem::steps_close_to(
+  self : HeavenStem,
+  target_index : Int32,
+) -> Int32 {
   self.loop_tyme.steps_close_to(target_index)
 }
 
 ///|
-pub fn HeavenStem::from_index(index : Int) -> HeavenStem {
+pub fn HeavenStem::from_index(index : Int32) -> HeavenStem {
   { loop_tyme: LoopTyme::from_index(heaven_stem_names(), index), }
 }
 
@@ -183,6 +189,6 @@ pub impl Show for HeavenStem with fn to_string(self : HeavenStem) -> String {
 }
 
 ///|
-pub impl Tyme for HeavenStem with fn next(self : HeavenStem, n : Int) -> HeavenStem {
+pub impl Tyme for HeavenStem with fn next(self : HeavenStem, n : Int32) -> HeavenStem {
   HeavenStem::from_index(self.loop_tyme.get_index() + n)
 }

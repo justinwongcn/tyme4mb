@@ -20,7 +20,7 @@ pub struct ShenSha {
 }
 
 ///|
-pub fn ShenSha::from_index(index : Int) -> ShenSha {
+pub fn ShenSha::from_index(index : Int32) -> ShenSha {
   { loop_tyme: LoopTyme::from_index(shensha_names(), index), }
 }
 
@@ -34,7 +34,7 @@ pub fn ShenSha::from_name(name : String) -> Result[ShenSha, String] {
 
 ///|
 // get_id 神煞编号（1~55，与 shensha.json 的 id 一致）
-pub fn ShenSha::get_id(self : ShenSha) -> Int {
+pub fn ShenSha::get_id(self : ShenSha) -> Int32 {
   self.loop_tyme.get_index() + 1
 }
 
@@ -246,14 +246,14 @@ fn ec_pillars(ec : EightChar) -> Array[SixtyCycle] {
 // pillar_stem 第 i 柱天干
 
 ///|
-fn pillar_stem(ec : EightChar, i : Int) -> HeavenStem {
+fn pillar_stem(ec : EightChar, i : Int32) -> HeavenStem {
   ec_pillars(ec)[i].get_heaven_stem()
 }
 
 // pillar_branch 第 i 柱地支
 
 ///|
-fn pillar_branch(ec : EightChar, i : Int) -> EarthBranch {
+fn pillar_branch(ec : EightChar, i : Int32) -> EarthBranch {
   ec_pillars(ec)[i].get_earth_branch()
 }
 
@@ -273,7 +273,7 @@ fn all_branches(ec : EightChar) -> Array[EarthBranch] {
 // branches_except 除第 except_i 柱外其余三支
 
 ///|
-fn branches_except(ec : EightChar, except_i : Int) -> Array[EarthBranch] {
+fn branches_except(ec : EightChar, except_i : Int32) -> Array[EarthBranch] {
   let l : Array[EarthBranch] = []
   for i in 0..<4 {
     if i != except_i {
@@ -318,7 +318,7 @@ fn has_stem(ec : EightChar, stem : HeavenStem) -> Bool {
 // 三合局：0水(申子辰) 1火(寅午戌) 2金(巳酉丑) 3木(亥卯未)
 
 // san_he_group 支所在三合局编号
-fn san_he_group(b : EarthBranch) -> Int {
+fn san_he_group(b : EarthBranch) -> Int32 {
   let m = [0, 2, 1, 3, 0, 2, 1, 3, 0, 2, 1, 3]
   m[b.get_index()]
 }
@@ -326,7 +326,7 @@ fn san_he_group(b : EarthBranch) -> Int {
 // san_he_pos 三合局长生、中神、墓库位
 
 ///|
-fn san_he_pos(g : Int) -> (Int, Int, Int) {
+fn san_he_pos(g : Int32) -> (Int32, Int32, Int32) {
   match g {
     0 => (8, 0, 4) // 申子辰
     1 => (2, 6, 10) // 寅午戌
@@ -339,7 +339,7 @@ fn san_he_pos(g : Int) -> (Int, Int, Int) {
 // 方局：0水(亥子丑) 1木(寅卯辰) 2火(巳午未) 3金(申酉戌)
 
 // fang_ju_group 支所在方局编号
-fn fang_ju_group(b : EarthBranch) -> Int {
+fn fang_ju_group(b : EarthBranch) -> Int32 {
   let m = [0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 0]
   m[b.get_index()]
 }
@@ -347,7 +347,7 @@ fn fang_ju_group(b : EarthBranch) -> Int {
 // fang_ju_first 方局首字
 
 ///|
-fn fang_ju_first(g : Int) -> EarthBranch {
+fn fang_ju_first(g : Int32) -> EarthBranch {
   match g {
     0 => EarthBranch::from_index(11) // 亥
     1 => EarthBranch::from_index(2) // 寅
@@ -358,7 +358,7 @@ fn fang_ju_first(g : Int) -> EarthBranch {
 
 ///|
 // 纳音五行（index 0-29 → 木0 火1 土2 金3 水4）
-fn sound_element(index : Int) -> Int {
+fn sound_element(index : Int32) -> Int32 {
   let m = [
     3, 1, 0, 2, 3, 1, 4, 2, 3, 0, 4, 2, 1, 0, 4, 3, 1, 0, 2, 3, 1, 4, 2, 3, 0, 4,
     2, 1, 0, 4,
@@ -369,13 +369,13 @@ fn sound_element(index : Int) -> Int {
 // year_sound_element 年柱纳音五行
 
 ///|
-fn year_sound_element(ec : EightChar) -> Int {
+fn year_sound_element(ec : EightChar) -> Int32 {
   sound_element(ec.get_year().get_sound().get_index())
 }
 
 ///|
 // 季节：0春(寅卯辰) 1夏(巳午未) 2秋(申酉戌) 3冬(亥子丑)，以月支论
-fn season_of_month(ec : EightChar) -> Int {
+fn season_of_month(ec : EightChar) -> Int32 {
   let m = [3, 3, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3]
   m[pillar_branch(ec, 1).get_index()]
 }
@@ -383,6 +383,6 @@ fn season_of_month(ec : EightChar) -> Int {
 // month_branch_index 月支索引
 
 ///|
-fn month_branch_index(ec : EightChar) -> Int {
+fn month_branch_index(ec : EightChar) -> Int32 {
   pillar_branch(ec, 1).get_index()
 }

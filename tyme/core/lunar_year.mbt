@@ -15,7 +15,7 @@ pub extend LunarYear with Tyme::{next}
 
 ///|
 // validate 校验
-pub fn LunarYear::validate(year : Int) -> Result[Unit, String] {
+pub fn LunarYear::validate(year : Int32) -> Result[Unit, String] {
   if year < -1 || year > 9999 {
     return Err("illegal lunar year: " + year.to_string())
   }
@@ -45,7 +45,7 @@ let lunar_year_leap_data : Array[String] = [
 
 ///|
 // build_lunar_year_leap_index 构建按年份直接索引的闰月表；下标为 year + 1
-fn build_lunar_year_leap_index() -> Array[Int] {
+fn build_lunar_year_leap_index() -> Array[Int32] {
   let leap_months = Array::make(10001, 0)
   leap_months[0] = 11
   for month_index = 0
@@ -73,7 +73,7 @@ fn build_lunar_year_leap_index() -> Array[Int] {
 
 ///|
 // chars_index 字符在表中的索引
-fn chars_index(chars : String, c : Int) -> Int {
+fn chars_index(chars : String, c : Int32) -> Int32 {
   for i = 0; i < chars.length(); i = i + 1 {
     if chars.unsafe_get(i).to_int() == c {
       return i
@@ -83,11 +83,11 @@ fn chars_index(chars : String, c : Int) -> Int {
 }
 
 ///|
-let lunar_year_leap_index : Array[Int] = build_lunar_year_leap_index()
+let lunar_year_leap_index : Array[Int32] = build_lunar_year_leap_index()
 
 ///|
 // from_year 从年构造
-pub fn LunarYear::from_year(year : Int) -> Result[LunarYear, String] {
+pub fn LunarYear::from_year(year : Int32) -> Result[LunarYear, String] {
   match LunarYear::validate(year) {
     Ok(_) => Ok({ year_unit: YearUnit::new(year), })
     Err(e) => Err(e)
@@ -96,13 +96,13 @@ pub fn LunarYear::from_year(year : Int) -> Result[LunarYear, String] {
 
 ///|
 // get_year 年
-pub fn LunarYear::get_year(self : LunarYear) -> Int {
+pub fn LunarYear::get_year(self : LunarYear) -> Int32 {
   self.year_unit.get_year()
 }
 
 ///|
 // get_day_count 天数
-pub fn LunarYear::get_day_count(self : LunarYear) -> Int {
+pub fn LunarYear::get_day_count(self : LunarYear) -> Int32 {
   let mut n = 0
   let months = self.get_months()
   for i = 0; i < months.length(); i = i + 1 {
@@ -113,7 +113,7 @@ pub fn LunarYear::get_day_count(self : LunarYear) -> Int {
 
 ///|
 // get_month_count 月数
-pub fn LunarYear::get_month_count(self : LunarYear) -> Int {
+pub fn LunarYear::get_month_count(self : LunarYear) -> Int32 {
   if self.get_leap_month() < 1 {
     return 12
   }
@@ -122,7 +122,7 @@ pub fn LunarYear::get_month_count(self : LunarYear) -> Int {
 
 ///|
 // get_leap_month 闰月数字，1代表闰1月，0代表无闰月
-pub fn LunarYear::get_leap_month(self : LunarYear) -> Int {
+pub fn LunarYear::get_leap_month(self : LunarYear) -> Int32 {
   let year = self.get_year()
   if year < -1 || year > 9999 {
     return 0
@@ -215,7 +215,7 @@ pub impl Show for LunarYear with fn to_string(self : LunarYear) -> String {
 }
 
 ///|
-pub impl Tyme for LunarYear with fn next(self : LunarYear, n : Int) -> LunarYear {
+pub impl Tyme for LunarYear with fn next(self : LunarYear, n : Int32) -> LunarYear {
   match LunarYear::from_year(self.get_year() + n) {
     Ok(y) => y
     Err(_) => self

@@ -14,7 +14,7 @@ pub struct Nine {
 }
 
 ///|
-pub fn Nine::from_index(index : Int) -> Nine {
+pub fn Nine::from_index(index : Int32) -> Nine {
   { loop_tyme: LoopTyme::from_index(nine_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn Nine::from_name(name : String) -> Result[Nine, String] {
 }
 
 ///|
-pub fn Nine::get_index(self : Nine) -> Int {
+pub fn Nine::get_index(self : Nine) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -51,6 +51,6 @@ pub impl Show for Nine with fn to_string(self : Nine) -> String {
 pub extend Nine with Tyme::{next}
 
 ///|
-pub impl Tyme for Nine with fn next(self : Nine, n : Int) -> Nine {
+pub impl Tyme for Nine with fn next(self : Nine, n : Int32) -> Nine {
   Nine::from_index(self.loop_tyme.get_index() + n)
 }

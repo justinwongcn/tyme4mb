@@ -23,7 +23,10 @@ pub extend RabByungMonth with Show::{to_string, output}
 
 ///|
 // validate 校验
-pub fn RabByungMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
+pub fn RabByungMonth::validate(
+  year : Int32,
+  month : Int32,
+) -> Result[Unit, String] {
   if month == 0 || month > 12 || month < -12 {
     return Err("illegal rab-byung month: " + month.to_string())
   }
@@ -51,16 +54,16 @@ pub let rab_byung_month_data : String = "2c>,182[>1:2TA4ZI=n1E2Bk1J2Ff3Mk503Oc62
 
 ///|
 // build_rab_byung_month_days 构建特殊日表
-fn build_rab_byung_month_days() -> Array[(Int, Array[Int])] {
+fn build_rab_byung_month_days() -> Array[(Int32, Array[Int32])] {
   let data = rab_byung_month_data
   let n = data.length()
-  let res : Array[(Int, Array[Int])] = []
+  let res : Array[(Int32, Array[Int32])] = []
   let mut y = 1950
   let mut m = 11
   let mut i = 0
   while i < n {
     let length = data.unsafe_get(i).to_int() - '0'.to_int()
-    let arr : Array[Int] = []
+    let arr : Array[Int32] = []
     for j = 0; j < length; j = j + 1 {
       arr.push(data.unsafe_get(i + 1 + j).to_int() - '5'.to_int() - 30)
     }
@@ -77,13 +80,13 @@ fn build_rab_byung_month_days() -> Array[(Int, Array[Int])] {
 }
 
 ///|
-let rab_byung_month_days : Array[(Int, Array[Int])] = build_rab_byung_month_days()
+let rab_byung_month_days : Array[(Int32, Array[Int32])] = build_rab_byung_month_days()
 
 ///|
 // new 从年月构造
 pub fn RabByungMonth::new(
-  year : Int,
-  month : Int,
+  year : Int32,
+  month : Int32,
 ) -> Result[RabByungMonth, String] {
   match RabByungMonth::validate(year, month) {
     Err(e) => return Err(e)
@@ -99,21 +102,21 @@ pub fn RabByungMonth::new(
 ///|
 // from_ym 从年月构造
 pub fn RabByungMonth::from_ym(
-  year : Int,
-  month : Int,
+  year : Int32,
+  month : Int32,
 ) -> Result[RabByungMonth, String] {
   RabByungMonth::new(year, month)
 }
 
 ///|
 // get_year 年
-pub fn RabByungMonth::get_year(self : RabByungMonth) -> Int {
+pub fn RabByungMonth::get_year(self : RabByungMonth) -> Int32 {
   self.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn RabByungMonth::get_month(self : RabByungMonth) -> Int {
+pub fn RabByungMonth::get_month(self : RabByungMonth) -> Int32 {
   self.month_unit.get_month()
 }
 
@@ -128,7 +131,7 @@ pub fn RabByungMonth::get_rab_byung_year(self : RabByungMonth) -> RabByungYear {
 
 ///|
 // get_month_with_leap 带闰标记的月
-pub fn RabByungMonth::get_month_with_leap(self : RabByungMonth) -> Int {
+pub fn RabByungMonth::get_month_with_leap(self : RabByungMonth) -> Int32 {
   if self.leap {
     return -self.get_month()
   }
@@ -137,7 +140,7 @@ pub fn RabByungMonth::get_month_with_leap(self : RabByungMonth) -> Int {
 
 ///|
 // get_index_in_year 位于当年的索引
-pub fn RabByungMonth::get_index_in_year(self : RabByungMonth) -> Int {
+pub fn RabByungMonth::get_index_in_year(self : RabByungMonth) -> Int32 {
   let mut index = self.get_month() - 1
   if self.leap {
     index = index + 1
@@ -170,7 +173,7 @@ pub fn RabByungMonth::get_alias(self : RabByungMonth) -> String {
 // next 推移
 pub fn RabByungMonth::next(
   self : RabByungMonth,
-  n : Int,
+  n : Int32,
 ) -> Result[RabByungMonth, String] {
   if n == 0 {
     return RabByungMonth::new(self.get_year(), self.get_month_with_leap())
@@ -255,13 +258,13 @@ pub fn RabByungMonth::get_days(self : RabByungMonth) -> Array[RabByungDay] {
 
 ///|
 // get_day_count 天数
-pub fn RabByungMonth::get_day_count(self : RabByungMonth) -> Int {
+pub fn RabByungMonth::get_day_count(self : RabByungMonth) -> Int32 {
   30 + self.get_leap_days().length() - self.get_miss_days().length()
 }
 
 ///|
 // get_special_days 特殊日
-pub fn RabByungMonth::get_special_days(self : RabByungMonth) -> Array[Int] {
+pub fn RabByungMonth::get_special_days(self : RabByungMonth) -> Array[Int32] {
   let key = self.get_year() * 13 + self.get_index_in_year()
   for i = 0; i < rab_byung_month_days.length(); i = i + 1 {
     if rab_byung_month_days[i].0 == key {
@@ -273,8 +276,8 @@ pub fn RabByungMonth::get_special_days(self : RabByungMonth) -> Array[Int] {
 
 ///|
 // get_leap_days 闰日列表
-pub fn RabByungMonth::get_leap_days(self : RabByungMonth) -> Array[Int] {
-  let days : Array[Int] = []
+pub fn RabByungMonth::get_leap_days(self : RabByungMonth) -> Array[Int32] {
+  let days : Array[Int32] = []
   let special = self.get_special_days()
   for i = 0; i < special.length(); i = i + 1 {
     let d = special[i]
@@ -287,8 +290,8 @@ pub fn RabByungMonth::get_leap_days(self : RabByungMonth) -> Array[Int] {
 
 ///|
 // get_miss_days 缺日列表
-pub fn RabByungMonth::get_miss_days(self : RabByungMonth) -> Array[Int] {
-  let days : Array[Int] = []
+pub fn RabByungMonth::get_miss_days(self : RabByungMonth) -> Array[Int32] {
+  let days : Array[Int32] = []
   let special = self.get_special_days()
   for i = 0; i < special.length(); i = i + 1 {
     let d = special[i]
@@ -310,7 +313,7 @@ pub fn RabByungMonth::equals(
 
 ///|
 // arr_contains 数组包含
-fn arr_contains(arr : Array[Int], v : Int) -> Bool {
+fn arr_contains(arr : Array[Int32], v : Int32) -> Bool {
   for i = 0; i < arr.length(); i = i + 1 {
     if arr[i] == v {
       return true

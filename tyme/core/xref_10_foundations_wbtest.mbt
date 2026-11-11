@@ -8,11 +8,11 @@
 /// 通用循环：复刻 Go TestXrefAllLoop 的 es 表，逐 tag 打印 name|str、next 边界、from_name 往返。
 fn xref_loop(
   tag : String,
-  size : Int,
-  name : (Int) -> String,
-  str : (Int) -> String,
-  nxt : (Int, Int) -> String,
-  from_name : ((String) -> (Int, String))?,
+  size : Int32,
+  name : (Int32) -> String,
+  str : (Int32) -> String,
+  nxt : (Int32, Int32) -> String,
+  from_name : ((String) -> (Int32, String))?,
 ) -> Unit {
   for i = 0; i < size; i = i + 1 {
     println("\{tag} \{i} \{name(i)}|\{str(i)}")
@@ -35,7 +35,7 @@ fn xref_loop(
 
 ///|
 /// 复刻 Go `fmt.Sprintf("%v", []int{...})`：形如 `[1 2 3]`（空数组为 `[]`）。
-fn go_array(v : Array[Int]) -> String {
+fn go_array(v : Array[Int32]) -> String {
   let mut s = "["
   let mut first = true
   for x in v {
@@ -54,10 +54,12 @@ test "xref_allloop" {
   xref_loop(
     "AN",
     12,
-    fn(i : Int) -> String { Animal::from_index(i).get_name() },
-    fn(i : Int) -> String { Animal::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Animal::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Animal::from_index(i).get_name() },
+    fn(i : Int32) -> String { Animal::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Animal::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Animal::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -67,12 +69,12 @@ test "xref_allloop" {
   xref_loop(
     "CO",
     12,
-    fn(i : Int) -> String { Constellation::from_index(i).get_name() },
-    fn(i : Int) -> String { Constellation::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String {
+    fn(i : Int32) -> String { Constellation::from_index(i).get_name() },
+    fn(i : Int32) -> String { Constellation::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
       Constellation::from_index(i).next(n).get_name()
     },
-    Some(fn(s : String) -> (Int, String) {
+    Some(fn(s : String) -> (Int32, String) {
       match Constellation::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -82,10 +84,12 @@ test "xref_allloop" {
   xref_loop(
     "DI",
     7,
-    fn(i : Int) -> String { Dipper::from_index(i).get_name() },
-    fn(i : Int) -> String { Dipper::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Dipper::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Dipper::from_index(i).get_name() },
+    fn(i : Int32) -> String { Dipper::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Dipper::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Dipper::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -95,10 +99,10 @@ test "xref_allloop" {
   xref_loop(
     "DG",
     3,
-    fn(i : Int) -> String { Dog::from_index(i).get_name() },
-    fn(i : Int) -> String { Dog::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Dog::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Dog::from_index(i).get_name() },
+    fn(i : Int32) -> String { Dog::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String { Dog::from_index(i).next(n).get_name() },
+    Some(fn(s : String) -> (Int32, String) {
       match Dog::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -108,10 +112,12 @@ test "xref_allloop" {
   xref_loop(
     "DU",
     12,
-    fn(i : Int) -> String { Duty::from_index(i).get_name() },
-    fn(i : Int) -> String { Duty::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Duty::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Duty::from_index(i).get_name() },
+    fn(i : Int32) -> String { Duty::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Duty::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Duty::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -121,9 +127,9 @@ test "xref_allloop" {
   xref_loop(
     "FE",
     12,
-    fn(i : Int) -> String { FetusEarthBranch::new(i).get_name() },
-    fn(i : Int) -> String { FetusEarthBranch::new(i).to_string() },
-    fn(i : Int, n : Int) -> String {
+    fn(i : Int32) -> String { FetusEarthBranch::new(i).get_name() },
+    fn(i : Int32) -> String { FetusEarthBranch::new(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
       FetusEarthBranch::new(i).next(n).get_name()
     },
     None,
@@ -131,9 +137,9 @@ test "xref_allloop" {
   xref_loop(
     "FH",
     5,
-    fn(i : Int) -> String { FetusHeavenStem::new(i).get_name() },
-    fn(i : Int) -> String { FetusHeavenStem::new(i).to_string() },
-    fn(i : Int, n : Int) -> String {
+    fn(i : Int32) -> String { FetusHeavenStem::new(i).get_name() },
+    fn(i : Int32) -> String { FetusHeavenStem::new(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
       FetusHeavenStem::new(i).next(n).get_name()
     },
     None,
@@ -141,10 +147,12 @@ test "xref_allloop" {
   xref_loop(
     "LU",
     2,
-    fn(i : Int) -> String { Luck::from_index(i).get_name() },
-    fn(i : Int) -> String { Luck::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Luck::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Luck::from_index(i).get_name() },
+    fn(i : Int32) -> String { Luck::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Luck::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Luck::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -154,12 +162,12 @@ test "xref_allloop" {
   xref_loop(
     "LS",
     12,
-    fn(i : Int) -> String { LunarSeason::from_index(i).get_name() },
-    fn(i : Int) -> String { LunarSeason::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String {
+    fn(i : Int32) -> String { LunarSeason::from_index(i).get_name() },
+    fn(i : Int32) -> String { LunarSeason::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
       LunarSeason::from_index(i).next(n).get_name()
     },
-    Some(fn(s : String) -> (Int, String) {
+    Some(fn(s : String) -> (Int32, String) {
       match LunarSeason::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -169,10 +177,12 @@ test "xref_allloop" {
   xref_loop(
     "NI",
     9,
-    fn(i : Int) -> String { Nine::from_index(i).get_name() },
-    fn(i : Int) -> String { Nine::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Nine::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Nine::from_index(i).get_name() },
+    fn(i : Int32) -> String { Nine::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Nine::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Nine::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -182,9 +192,9 @@ test "xref_allloop" {
   xref_loop(
     "PE",
     12,
-    fn(i : Int) -> String { PengZuEarthBranch::from_index(i).get_name() },
-    fn(i : Int) -> String { PengZuEarthBranch::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String {
+    fn(i : Int32) -> String { PengZuEarthBranch::from_index(i).get_name() },
+    fn(i : Int32) -> String { PengZuEarthBranch::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
       PengZuEarthBranch::from_index(i).next(n).get_name()
     },
     None,
@@ -192,9 +202,9 @@ test "xref_allloop" {
   xref_loop(
     "PH",
     10,
-    fn(i : Int) -> String { PengZuHeavenStem::from_index(i).get_name() },
-    fn(i : Int) -> String { PengZuHeavenStem::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String {
+    fn(i : Int32) -> String { PengZuHeavenStem::from_index(i).get_name() },
+    fn(i : Int32) -> String { PengZuHeavenStem::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
       PengZuHeavenStem::from_index(i).next(n).get_name()
     },
     None,
@@ -202,12 +212,12 @@ test "xref_allloop" {
   xref_loop(
     "PR",
     2,
-    fn(i : Int) -> String { PlumRain::from_index(i).get_name() },
-    fn(i : Int) -> String { PlumRain::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String {
+    fn(i : Int32) -> String { PlumRain::from_index(i).get_name() },
+    fn(i : Int32) -> String { PlumRain::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
       PlumRain::from_index(i).next(n).get_name()
     },
-    Some(fn(s : String) -> (Int, String) {
+    Some(fn(s : String) -> (Int32, String) {
       match PlumRain::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -217,10 +227,12 @@ test "xref_allloop" {
   xref_loop(
     "SS",
     6,
-    fn(i : Int) -> String { SixStar::from_index(i).get_name() },
-    fn(i : Int) -> String { SixStar::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { SixStar::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { SixStar::from_index(i).get_name() },
+    fn(i : Int32) -> String { SixStar::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      SixStar::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match SixStar::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -230,10 +242,12 @@ test "xref_allloop" {
   xref_loop(
     "SX",
     3,
-    fn(i : Int) -> String { Sixty::from_index(i).get_name() },
-    fn(i : Int) -> String { Sixty::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Sixty::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Sixty::from_index(i).get_name() },
+    fn(i : Int32) -> String { Sixty::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Sixty::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Sixty::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -243,10 +257,12 @@ test "xref_allloop" {
   xref_loop(
     "SO",
     30,
-    fn(i : Int) -> String { Sound::from_index(i).get_name() },
-    fn(i : Int) -> String { Sound::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Sound::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Sound::from_index(i).get_name() },
+    fn(i : Int32) -> String { Sound::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Sound::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Sound::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -256,10 +272,10 @@ test "xref_allloop" {
   xref_loop(
     "TE",
     6,
-    fn(i : Int) -> String { Ten::from_index(i).get_name() },
-    fn(i : Int) -> String { Ten::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Ten::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Ten::from_index(i).get_name() },
+    fn(i : Int32) -> String { Ten::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String { Ten::from_index(i).next(n).get_name() },
+    Some(fn(s : String) -> (Int32, String) {
       match Ten::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -269,10 +285,12 @@ test "xref_allloop" {
   xref_loop(
     "TS",
     10,
-    fn(i : Int) -> String { TenStar::from_index(i).get_name() },
-    fn(i : Int) -> String { TenStar::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { TenStar::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { TenStar::from_index(i).get_name() },
+    fn(i : Int32) -> String { TenStar::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      TenStar::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match TenStar::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -282,10 +300,12 @@ test "xref_allloop" {
   xref_loop(
     "TR",
     12,
-    fn(i : Int) -> String { Terrain::from_index(i).get_name() },
-    fn(i : Int) -> String { Terrain::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Terrain::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Terrain::from_index(i).get_name() },
+    fn(i : Int32) -> String { Terrain::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Terrain::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Terrain::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -295,12 +315,12 @@ test "xref_allloop" {
   xref_loop(
     "TP",
     3,
-    fn(i : Int) -> String { ThreePhenology::from_index(i).get_name() },
-    fn(i : Int) -> String { ThreePhenology::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String {
+    fn(i : Int32) -> String { ThreePhenology::from_index(i).get_name() },
+    fn(i : Int32) -> String { ThreePhenology::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
       ThreePhenology::from_index(i).next(n).get_name()
     },
-    Some(fn(s : String) -> (Int, String) {
+    Some(fn(s : String) -> (Int32, String) {
       match ThreePhenology::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)
@@ -310,10 +330,12 @@ test "xref_allloop" {
   xref_loop(
     "ZO",
     12,
-    fn(i : Int) -> String { Zodiac::from_index(i).get_name() },
-    fn(i : Int) -> String { Zodiac::from_index(i).to_string() },
-    fn(i : Int, n : Int) -> String { Zodiac::from_index(i).next(n).get_name() },
-    Some(fn(s : String) -> (Int, String) {
+    fn(i : Int32) -> String { Zodiac::from_index(i).get_name() },
+    fn(i : Int32) -> String { Zodiac::from_index(i).to_string() },
+    fn(i : Int32, n : Int32) -> String {
+      Zodiac::from_index(i).next(n).get_name()
+    },
+    Some(fn(s : String) -> (Int32, String) {
       match Zodiac::from_name(s) {
         Ok(v) => (v.get_index(), "")
         Err(e) => (-1, e)

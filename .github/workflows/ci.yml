@@ -25,5 +25,11 @@ jobs:
       - name: Build
         run: moon build
 
+      - name: Build all supported targets
+        run: |
+          for t in wasm-gc wasm js native; do
+            moon build --target "$t"
+          done
+
       - name: Test
         run: moon test --deny-warn

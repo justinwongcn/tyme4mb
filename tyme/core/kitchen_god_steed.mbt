@@ -16,26 +16,29 @@ pub fn numbers() -> Array[String] {
 
 ///|
 // new 从农历年构造
-pub fn KitchenGodSteed::new(lunar_year : Int) -> KitchenGodSteed {
+pub fn KitchenGodSteed::new(lunar_year : Int32) -> KitchenGodSteed {
   let lunar_day = LunarDay::from_ymd(lunar_year, 1, 1).unwrap()
   { first_day_sixty_cycle: lunar_day.get_sixty_cycle(), }
 }
 
 ///|
 // from_lunar_year 从农历年初始化
-pub fn KitchenGodSteed::from_lunar_year(lunar_year : Int) -> KitchenGodSteed {
+pub fn KitchenGodSteed::from_lunar_year(lunar_year : Int32) -> KitchenGodSteed {
   KitchenGodSteed::new(lunar_year)
 }
 
 ///|
 // by_heaven_stem 根据天干获取序数
-fn KitchenGodSteed::by_heaven_stem(self : KitchenGodSteed, n : Int) -> String {
+fn KitchenGodSteed::by_heaven_stem(self : KitchenGodSteed, n : Int32) -> String {
   numbers()[self.first_day_sixty_cycle.get_heaven_stem().steps_to(n)]
 }
 
 ///|
 // by_earth_branch 根据地支获取序数
-fn KitchenGodSteed::by_earth_branch(self : KitchenGodSteed, n : Int) -> String {
+fn KitchenGodSteed::by_earth_branch(
+  self : KitchenGodSteed,
+  n : Int32,
+) -> String {
   numbers()[self.first_day_sixty_cycle.get_earth_branch().steps_to(n)]
 }
 

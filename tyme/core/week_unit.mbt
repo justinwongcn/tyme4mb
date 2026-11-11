@@ -9,9 +9,9 @@ pub fn week_unit_names() -> Array[String] {
 pub struct WeekUnit {
   month_unit : MonthUnit
   // 索引，0-5
-  index : Int
+  index : Int32
   // 起始星期，1234560分别代表星期一至星期天
-  start : Int
+  start : Int32
 }
 
 ///|
@@ -20,15 +20,15 @@ pub extend WeekUnit with Culture::{get_name}
 ///|
 pub fn WeekUnit::new(
   month_unit : MonthUnit,
-  index : Int,
-  start : Int,
+  index : Int32,
+  start : Int32,
 ) -> WeekUnit {
   { month_unit, index, start, }
 }
 
 ///|
 // get_index 索引，0-5
-pub fn WeekUnit::get_index(self : WeekUnit) -> Int {
+pub fn WeekUnit::get_index(self : WeekUnit) -> Int32 {
   self.index
 }
 
@@ -40,17 +40,17 @@ pub fn WeekUnit::get_start(self : WeekUnit) -> Week {
 
 ///|
 // get_compare_index 用于比较大小的索引
-pub fn WeekUnit::get_compare_index(self : WeekUnit) -> Int {
+pub fn WeekUnit::get_compare_index(self : WeekUnit) -> Int32 {
   self.month_unit.get_compare_index()
 }
 
 ///|
 // validate 校验
 pub fn WeekUnit::validate(
-  _year : Int,
-  _month : Int,
-  index : Int,
-  start : Int,
+  _year : Int32,
+  _month : Int32,
+  index : Int32,
+  start : Int32,
 ) -> Result[Unit, String] {
   if index < 0 || index > 5 {
     return Err("illegal week index: " + index.to_string())

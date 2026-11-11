@@ -11,7 +11,7 @@ pub struct Beast {
 }
 
 ///|
-pub fn Beast::from_index(index : Int) -> Beast {
+pub fn Beast::from_index(index : Int32) -> Beast {
   { loop_tyme: LoopTyme::from_index(beast_names(), index), }
 }
 
@@ -24,7 +24,7 @@ pub fn Beast::from_name(name : String) -> Result[Beast, String] {
 }
 
 ///|
-pub fn Beast::get_index(self : Beast) -> Int {
+pub fn Beast::get_index(self : Beast) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -48,7 +48,7 @@ pub impl Show for Beast with fn to_string(self : Beast) -> String {
 pub extend Beast with Tyme::{next}
 
 ///|
-pub impl Tyme for Beast with fn next(self : Beast, n : Int) -> Beast {
+pub impl Tyme for Beast with fn next(self : Beast, n : Int32) -> Beast {
   Beast::from_index(self.loop_tyme.get_index() + n)
 }
 

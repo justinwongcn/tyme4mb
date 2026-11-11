@@ -1,7 +1,7 @@
 // two_digits 两位补零
 
 ///|
-fn two_digits(n : Int) -> String {
+fn two_digits(n : Int32) -> String {
   if n < 10 {
     "0" + n.to_string()
   } else {
@@ -34,37 +34,37 @@ pub fn SolarTime::equals(self : SolarTime, target : SolarTime) -> Bool {
 
 ///|
 // get_year 年
-pub fn SolarTime::get_year(self : SolarTime) -> Int {
+pub fn SolarTime::get_year(self : SolarTime) -> Int32 {
   self.second_unit.day_unit.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn SolarTime::get_month(self : SolarTime) -> Int {
+pub fn SolarTime::get_month(self : SolarTime) -> Int32 {
   self.second_unit.day_unit.month_unit.get_month()
 }
 
 ///|
 // get_day 日
-pub fn SolarTime::get_day(self : SolarTime) -> Int {
+pub fn SolarTime::get_day(self : SolarTime) -> Int32 {
   self.second_unit.day_unit.get_day()
 }
 
 ///|
 // get_hour 时
-pub fn SolarTime::get_hour(self : SolarTime) -> Int {
+pub fn SolarTime::get_hour(self : SolarTime) -> Int32 {
   self.second_unit.get_hour()
 }
 
 ///|
 // get_minute 分
-pub fn SolarTime::get_minute(self : SolarTime) -> Int {
+pub fn SolarTime::get_minute(self : SolarTime) -> Int32 {
   self.second_unit.get_minute()
 }
 
 ///|
 // get_second 秒
-pub fn SolarTime::get_second(self : SolarTime) -> Int {
+pub fn SolarTime::get_second(self : SolarTime) -> Int32 {
   self.second_unit.get_second()
 }
 
@@ -102,12 +102,12 @@ pub fn SolarTime::is_after(self : SolarTime, target : SolarTime) -> Bool {
 ///|
 // validate 校验
 pub fn SolarTime::validate(
-  year : Int,
-  month : Int,
-  day : Int,
-  hour : Int,
-  minute : Int,
-  second : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
+  hour : Int32,
+  minute : Int32,
+  second : Int32,
 ) -> Result[Unit, String] {
   match SecondUnit::validate(year, month, day, hour, minute, second) {
     Ok(_) => SolarDay::validate(year, month, day)
@@ -118,12 +118,12 @@ pub fn SolarTime::validate(
 ///|
 // from_ymdhms 从年月日时分秒构造
 pub fn SolarTime::from_ymdhms(
-  year : Int,
-  month : Int,
-  day : Int,
-  hour : Int,
-  minute : Int,
-  second : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
+  hour : Int32,
+  minute : Int32,
+  second : Int32,
 ) -> Result[SolarTime, String] {
   match SolarTime::validate(year, month, day, hour, minute, second) {
     Ok(_) =>
@@ -150,7 +150,7 @@ pub fn SolarTime::get_solar_day(self : SolarTime) -> SolarDay {
 
 ///|
 // next 偏移 n 秒
-pub fn SolarTime::next(self : SolarTime, n : Int) -> SolarTime {
+pub fn SolarTime::next(self : SolarTime, n : Int32) -> SolarTime {
   if n == 0 {
     match
       SolarTime::from_ymdhms(

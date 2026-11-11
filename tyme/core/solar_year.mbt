@@ -23,13 +23,13 @@ pub fn SolarYear::equals(self : SolarYear, target : SolarYear) -> Bool {
 
 ///|
 // get_year 年
-pub fn SolarYear::get_year(self : SolarYear) -> Int {
+pub fn SolarYear::get_year(self : SolarYear) -> Int32 {
   self.year_unit.get_year()
 }
 
 ///|
 // validate 校验
-pub fn SolarYear::validate(year : Int) -> Result[Unit, String] {
+pub fn SolarYear::validate(year : Int32) -> Result[Unit, String] {
   if year < 1 || year > 9999 {
     return Err("illegal solar year: " + year.to_string())
   }
@@ -38,7 +38,7 @@ pub fn SolarYear::validate(year : Int) -> Result[Unit, String] {
 
 ///|
 // from_year 从年构造
-pub fn SolarYear::from_year(year : Int) -> Result[SolarYear, String] {
+pub fn SolarYear::from_year(year : Int32) -> Result[SolarYear, String] {
   match SolarYear::validate(year) {
     Ok(_) => Ok({ year_unit: YearUnit::new(year), })
     Err(e) => Err(e)
@@ -57,7 +57,7 @@ pub fn SolarYear::is_leap(self : SolarYear) -> Bool {
 
 ///|
 // get_day_count 天数（1582年355天，平年365天，闰年366天）
-pub fn SolarYear::get_day_count(self : SolarYear) -> Int {
+pub fn SolarYear::get_day_count(self : SolarYear) -> Int32 {
   let y = self.get_year()
   if y == 1582 {
     return 355
@@ -128,7 +128,7 @@ pub impl Show for SolarYear with fn to_string(self : SolarYear) -> String {
 pub extend SolarYear with Tyme::{next}
 
 ///|
-pub impl Tyme for SolarYear with fn next(self : SolarYear, n : Int) -> SolarYear {
+pub impl Tyme for SolarYear with fn next(self : SolarYear, n : Int32) -> SolarYear {
   match SolarYear::from_year(self.get_year() + n) {
     Ok(y) => y
     Err(_) => self

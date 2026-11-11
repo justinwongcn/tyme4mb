@@ -14,7 +14,7 @@ pub struct Dipper {
 }
 
 ///|
-pub fn Dipper::from_index(index : Int) -> Dipper {
+pub fn Dipper::from_index(index : Int32) -> Dipper {
   { loop_tyme: LoopTyme::from_index(dipper_names(), index), }
 }
 
@@ -27,7 +27,7 @@ pub fn Dipper::from_name(name : String) -> Result[Dipper, String] {
 }
 
 ///|
-pub fn Dipper::get_index(self : Dipper) -> Int {
+pub fn Dipper::get_index(self : Dipper) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -42,7 +42,7 @@ pub impl Show for Dipper with fn to_string(self : Dipper) -> String {
 }
 
 ///|
-pub impl Tyme for Dipper with fn next(self : Dipper, n : Int) -> Dipper {
+pub impl Tyme for Dipper with fn next(self : Dipper, n : Int32) -> Dipper {
   Dipper::from_index(self.loop_tyme.get_index() + n)
 }
 

@@ -10,12 +10,12 @@ pub extend LunarHour with Show::{to_string, output}
 ///|
 // validate 校验
 pub fn LunarHour::validate(
-  year : Int,
-  month : Int,
-  day : Int,
-  hour : Int,
-  minute : Int,
-  second : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
+  hour : Int32,
+  minute : Int32,
+  second : Int32,
 ) -> Result[Unit, String] {
   match SecondUnit::validate(year, month, day, hour, minute, second) {
     Err(e) => return Err(e)
@@ -27,12 +27,12 @@ pub fn LunarHour::validate(
 ///|
 // from_ymd_hms 从年月日时分秒构造
 pub fn LunarHour::from_ymd_hms(
-  year : Int,
-  month : Int,
-  day : Int,
-  hour : Int,
-  minute : Int,
-  second : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
+  hour : Int32,
+  minute : Int32,
+  second : Int32,
 ) -> Result[LunarHour, String] {
   match LunarHour::validate(year, month, day, hour, minute, second) {
     Err(e) => return Err(e)
@@ -50,37 +50,37 @@ pub fn LunarHour::from_ymd_hms(
 
 ///|
 // get_year 年
-pub fn LunarHour::get_year(self : LunarHour) -> Int {
+pub fn LunarHour::get_year(self : LunarHour) -> Int32 {
   self.second_unit.day_unit.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn LunarHour::get_month(self : LunarHour) -> Int {
+pub fn LunarHour::get_month(self : LunarHour) -> Int32 {
   self.second_unit.day_unit.month_unit.get_month()
 }
 
 ///|
 // get_day 日
-pub fn LunarHour::get_day(self : LunarHour) -> Int {
+pub fn LunarHour::get_day(self : LunarHour) -> Int32 {
   self.second_unit.day_unit.get_day()
 }
 
 ///|
 // get_hour 时
-pub fn LunarHour::get_hour(self : LunarHour) -> Int {
+pub fn LunarHour::get_hour(self : LunarHour) -> Int32 {
   self.second_unit.hour
 }
 
 ///|
 // get_minute 分
-pub fn LunarHour::get_minute(self : LunarHour) -> Int {
+pub fn LunarHour::get_minute(self : LunarHour) -> Int32 {
   self.second_unit.minute
 }
 
 ///|
 // get_second 秒
-pub fn LunarHour::get_second(self : LunarHour) -> Int {
+pub fn LunarHour::get_second(self : LunarHour) -> Int32 {
   self.second_unit.second
 }
 
@@ -101,7 +101,7 @@ pub fn LunarHour::get_lunar_day(self : LunarHour) -> LunarDay {
 
 ///|
 // get_index_in_day 位于当天的索引
-pub fn LunarHour::get_index_in_day(self : LunarHour) -> Int {
+pub fn LunarHour::get_index_in_day(self : LunarHour) -> Int32 {
   (self.second_unit.hour + 1) / 2
 }
 
@@ -258,7 +258,7 @@ pub impl Show for LunarHour with fn to_string(self : LunarHour) -> String {
 }
 
 ///|
-pub impl Tyme for LunarHour with fn next(self : LunarHour, n : Int) -> LunarHour {
+pub impl Tyme for LunarHour with fn next(self : LunarHour, n : Int32) -> LunarHour {
   if n == 0 {
     return LunarHour::from_ymd_hms(
       self.get_year(),

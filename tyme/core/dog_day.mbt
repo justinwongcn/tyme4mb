@@ -5,7 +5,7 @@ pub struct DogDay {
 }
 
 ///|
-pub fn DogDay::new(o : Dog, index : Int) -> DogDay {
+pub fn DogDay::new(o : Dog, index : Int32) -> DogDay {
   { abstract_culture_day: AbstractCultureDay::new(o, index), }
 }
 
@@ -17,7 +17,7 @@ pub fn DogDay::get_dog(self : DogDay) -> Dog {
 
 ///|
 // get_day_index 天索引
-pub fn DogDay::get_day_index(self : DogDay) -> Int {
+pub fn DogDay::get_day_index(self : DogDay) -> Int32 {
   self.abstract_culture_day.get_day_index()
 }
 

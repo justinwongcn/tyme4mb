@@ -10,10 +10,10 @@ pub extend SolarWeek with Culture::{get_name}
 ///|
 // validate 校验
 pub fn SolarWeek::validate(
-  year : Int,
-  month : Int,
-  index : Int,
-  start : Int,
+  year : Int32,
+  month : Int32,
+  index : Int32,
+  start : Int32,
 ) -> Result[Unit, String] {
   match WeekUnit::validate(year, month, index, start) {
     Err(e) => return Err(e)
@@ -37,10 +37,10 @@ pub fn SolarWeek::validate(
 ///|
 // from_ym 从年月索引与起始星期构造
 pub fn SolarWeek::from_ym(
-  year : Int,
-  month : Int,
-  index : Int,
-  start : Int,
+  year : Int32,
+  month : Int32,
+  index : Int32,
+  start : Int32,
 ) -> Result[SolarWeek, String] {
   match SolarWeek::validate(year, month, index, start) {
     Err(e) => return Err(e)
@@ -57,19 +57,19 @@ pub fn SolarWeek::from_ym(
 
 ///|
 // get_year 年
-pub fn SolarWeek::get_year(self : SolarWeek) -> Int {
+pub fn SolarWeek::get_year(self : SolarWeek) -> Int32 {
   self.week_unit.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn SolarWeek::get_month(self : SolarWeek) -> Int {
+pub fn SolarWeek::get_month(self : SolarWeek) -> Int32 {
   self.week_unit.month_unit.get_month()
 }
 
 ///|
 // get_index 索引，0-5
-pub fn SolarWeek::get_index(self : SolarWeek) -> Int {
+pub fn SolarWeek::get_index(self : SolarWeek) -> Int32 {
   self.week_unit.get_index()
 }
 
@@ -87,7 +87,7 @@ pub fn SolarWeek::get_solar_month(self : SolarWeek) -> SolarMonth {
 
 ///|
 // get_index_in_year 位于当年的索引(0-11)
-pub fn SolarWeek::get_index_in_year(self : SolarWeek) -> Int {
+pub fn SolarWeek::get_index_in_year(self : SolarWeek) -> Int32 {
   let mut i = 0
   let first_day = self.get_first_day()
   let mut w = SolarWeek::from_ym(self.get_year(), 1, 0, self.week_unit.start).unwrap()
@@ -113,7 +113,7 @@ pub fn SolarWeek::get_first_day(self : SolarWeek) -> SolarDay {
 
 ///|
 // next 偏移n个周
-pub fn SolarWeek::next(self : SolarWeek, n : Int) -> SolarWeek {
+pub fn SolarWeek::next(self : SolarWeek, n : Int32) -> SolarWeek {
   let mut d = self.week_unit.get_index() + n
   let mut m = self.get_solar_month()
   if n > 0 {

@@ -11,7 +11,7 @@ pub extend AbstractCulture with Show::{to_string, output}
 
 ///|
 // index_of 转换为不超范围的索引
-pub fn AbstractCulture::index_of(index : Int, size : Int) -> Int {
+pub fn AbstractCulture::index_of(index : Int32, size : Int32) -> Int32 {
   let i = index % size
   if i < 0 {
     i + size
@@ -22,7 +22,7 @@ pub fn AbstractCulture::index_of(index : Int, size : Int) -> Int {
 
 ///|
 // floor_div 向下取整的除法（向负无穷取整）
-pub fn AbstractCulture::floor_div(x : Int, y : Int) -> Int {
+pub fn AbstractCulture::floor_div(x : Int32, y : Int32) -> Int32 {
   let r = x / y
   if (x ^ y) < 0 && r * y != x {
     r - 1

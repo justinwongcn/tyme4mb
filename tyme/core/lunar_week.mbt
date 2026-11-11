@@ -10,10 +10,10 @@ pub extend LunarWeek with Culture::{get_name}
 ///|
 // validate 校验
 pub fn LunarWeek::validate(
-  year : Int,
-  month : Int,
-  index : Int,
-  start : Int,
+  year : Int32,
+  month : Int32,
+  index : Int32,
+  start : Int32,
 ) -> Result[Unit, String] {
   match WeekUnit::validate(year, month, index, start) {
     Err(e) => return Err(e)
@@ -37,10 +37,10 @@ pub fn LunarWeek::validate(
 ///|
 // from_ym 从年月索引与起始星期构造
 pub fn LunarWeek::from_ym(
-  year : Int,
-  month : Int,
-  index : Int,
-  start : Int,
+  year : Int32,
+  month : Int32,
+  index : Int32,
+  start : Int32,
 ) -> Result[LunarWeek, String] {
   match LunarWeek::validate(year, month, index, start) {
     Err(e) => return Err(e)
@@ -57,19 +57,19 @@ pub fn LunarWeek::from_ym(
 
 ///|
 // get_year 年
-pub fn LunarWeek::get_year(self : LunarWeek) -> Int {
+pub fn LunarWeek::get_year(self : LunarWeek) -> Int32 {
   self.week_unit.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn LunarWeek::get_month(self : LunarWeek) -> Int {
+pub fn LunarWeek::get_month(self : LunarWeek) -> Int32 {
   self.week_unit.month_unit.get_month()
 }
 
 ///|
 // get_index 索引，0-5
-pub fn LunarWeek::get_index(self : LunarWeek) -> Int {
+pub fn LunarWeek::get_index(self : LunarWeek) -> Int32 {
   self.week_unit.get_index()
 }
 
@@ -110,7 +110,7 @@ pub fn LunarWeek::get_first_day(self : LunarWeek) -> LunarDay {
 
 ///|
 // next 推移
-pub fn LunarWeek::next(self : LunarWeek, n : Int) -> LunarWeek {
+pub fn LunarWeek::next(self : LunarWeek, n : Int32) -> LunarWeek {
   let mut d = self.week_unit.index + n
   let mut m = self.get_lunar_month()
   if n > 0 {

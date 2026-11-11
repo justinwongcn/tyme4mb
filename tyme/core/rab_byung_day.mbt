@@ -26,9 +26,9 @@ pub extend RabByungDay with Show::{to_string, output}
 ///|
 // validate 校验
 pub fn RabByungDay::validate(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[Unit, String] {
   if day == 0 || day < -30 || day > 30 {
     return Err(
@@ -63,9 +63,9 @@ pub fn RabByungDay::validate(
 ///|
 // new 从年月日构造
 pub fn RabByungDay::new(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[RabByungDay, String] {
   match RabByungDay::validate(year, month, day) {
     Err(e) => return Err(e)
@@ -84,28 +84,28 @@ pub fn RabByungDay::new(
 ///|
 // from_ymd 从年月日构造
 pub fn RabByungDay::from_ymd(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
 ) -> Result[RabByungDay, String] {
   RabByungDay::new(year, month, day)
 }
 
 ///|
 // get_year 年
-pub fn RabByungDay::get_year(self : RabByungDay) -> Int {
+pub fn RabByungDay::get_year(self : RabByungDay) -> Int32 {
   self.day_unit.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn RabByungDay::get_month(self : RabByungDay) -> Int {
+pub fn RabByungDay::get_month(self : RabByungDay) -> Int32 {
   self.day_unit.month_unit.get_month()
 }
 
 ///|
 // get_day 日
-pub fn RabByungDay::get_day(self : RabByungDay) -> Int {
+pub fn RabByungDay::get_day(self : RabByungDay) -> Int32 {
   self.day_unit.get_day()
 }
 
@@ -173,7 +173,7 @@ pub fn RabByungDay::is_leap(self : RabByungDay) -> Bool {
 
 ///|
 // get_day_with_leap 带闰标记的日
-pub fn RabByungDay::get_day_with_leap(self : RabByungDay) -> Int {
+pub fn RabByungDay::get_day_with_leap(self : RabByungDay) -> Int32 {
   if self.leap {
     return -self.get_day()
   }
@@ -182,7 +182,7 @@ pub fn RabByungDay::get_day_with_leap(self : RabByungDay) -> Int {
 
 ///|
 // subtract 相减
-pub fn RabByungDay::subtract(self : RabByungDay, target : RabByungDay) -> Int {
+pub fn RabByungDay::subtract(self : RabByungDay, target : RabByungDay) -> Int32 {
   self.get_solar_day().subtract(target.get_solar_day())
 }
 
@@ -221,7 +221,7 @@ pub fn RabByungDay::get_solar_day(self : RabByungDay) -> SolarDay {
 // next 推移
 pub fn RabByungDay::next(
   self : RabByungDay,
-  n : Int,
+  n : Int32,
 ) -> Result[RabByungDay, String] {
   RabByungDay::from_solar_day(self.get_solar_day().next(n))
 }

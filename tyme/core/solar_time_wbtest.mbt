@@ -193,9 +193,9 @@ test "sunrise_sunset_polar" {
 // expect_rise_set 断言日出/日落时刻：小时相等且分钟落在 [lo, hi]
 fn expect_rise_set(
   t : SolarTime?,
-  hour : Int,
-  lo : Int,
-  hi : Int,
+  hour : Int32,
+  lo : Int32,
+  hi : Int32,
   label : String,
 ) -> Unit {
   match t {
@@ -211,9 +211,9 @@ fn expect_rise_set(
 // day_length_at 指定日期与地点（经度东正西负）的昼长秒数
 // 极昼或极夜（日出或日落为 None）返回 None
 fn day_length_at(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
   latitude : Double,
   longitude : Double,
 ) -> Int64? {
@@ -232,9 +232,9 @@ fn day_length_at(
 // expect_polar_day_or_night 断言极昼或极夜：日出与日落同时为 None
 // get_sunrise/get_sunset 不区分极昼与极夜，只以 None 表示"太阳当日不穿越地平线"
 fn expect_polar_day_or_night(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
   latitude : Double,
   longitude : Double,
   label : String,
@@ -253,9 +253,9 @@ fn expect_polar_day_or_night(
 ///|
 // expect_rise_before_set 断言非极昼极夜：日出日落均有值，且日出早于日落
 fn expect_rise_before_set(
-  year : Int,
-  month : Int,
-  day : Int,
+  year : Int32,
+  month : Int32,
+  day : Int32,
   latitude : Double,
   longitude : Double,
   label : String,
@@ -312,7 +312,7 @@ test "sunrise_sunset_day_length_trend_south" {
 ///|
 test "sunrise_sunset_equator_day_length_stable" {
   // 赤道全年昼长稳定在 12h07m 附近，波动不足 1 分钟
-  let dates : Array[(Int, Int, Int)] = [
+  let dates : Array[(Int32, Int32, Int32)] = [
     (2025, 1, 1),
     (2025, 3, 20),
     (2025, 6, 21),

@@ -7,8 +7,8 @@ test "build_god_query_index_preserves_record_order" {
 
 ///|
 fn god_taboo_case(
-  month_index : Int,
-  day_index : Int,
+  month_index : Int32,
+  day_index : Int32,
 ) -> (SixtyCycleMonth, SixtyCycleDay) {
   let month = SixtyCycleMonth::new(
     SixtyCycleYear::from_year(2024).unwrap(),

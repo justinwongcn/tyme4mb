@@ -10,7 +10,7 @@ pub struct EclipticHideHeavenStemDay {
   month_lon : Double
   lon_offset : Double
   angle_in_sector : Double
-  sector_index : Int
+  sector_index : Int32
 }
 
 ///|
@@ -22,7 +22,7 @@ pub fn EclipticHideHeavenStemDay::new(
   month_lon : Double,
   lon_offset : Double,
   angle_in_sector : Double,
-  sector_index : Int,
+  sector_index : Int32,
 ) -> EclipticHideHeavenStemDay {
   { hide_heaven_stem, month_lon, lon_offset, angle_in_sector, sector_index, }
 }
@@ -39,7 +39,7 @@ pub fn EclipticHideHeavenStemDay::get_hide_heaven_stem(
 // get_sector_index 司令段序（0/1/2 = 第1/2/3段当令，与藏干分类无关）
 pub fn EclipticHideHeavenStemDay::get_sector_index(
   self : EclipticHideHeavenStemDay,
-) -> Int {
+) -> Int32 {
   self.sector_index
 }
 
@@ -92,7 +92,7 @@ pub impl Show for EclipticHideHeavenStemDay with fn to_string(
 // 段序（数组下标 0/1/2）仅表示第1/2/3段当令，与藏干的本气/中气/余气分类无关
 
 ///|
-fn ecliptic_hide_heaven_stem_sectors(k : Int) -> Array[(Int, Int)] {
+fn ecliptic_hide_heaven_stem_sectors(k : Int32) -> Array[(Int32, Int32)] {
   match k {
     // 小寒(285°): 癸9 辛3 己18
     0 => [(9, 9), (7, 3), (5, 18)]

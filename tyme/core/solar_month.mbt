@@ -9,7 +9,7 @@ pub fn solar_month_names() -> Array[String] {
 
 ///|
 // solar_month_days 各月天数（平年）
-pub fn solar_month_days() -> Array[Int] {
+pub fn solar_month_days() -> Array[Int32] {
   [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 }
 
@@ -41,19 +41,22 @@ pub fn SolarMonth::equals(self : SolarMonth, target : SolarMonth) -> Bool {
 
 ///|
 // get_year 年
-pub fn SolarMonth::get_year(self : SolarMonth) -> Int {
+pub fn SolarMonth::get_year(self : SolarMonth) -> Int32 {
   self.month_unit.year_unit.get_year()
 }
 
 ///|
 // get_month 月
-pub fn SolarMonth::get_month(self : SolarMonth) -> Int {
+pub fn SolarMonth::get_month(self : SolarMonth) -> Int32 {
   self.month_unit.get_month()
 }
 
 ///|
 // validate 校验
-pub fn SolarMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
+pub fn SolarMonth::validate(
+  year : Int32,
+  month : Int32,
+) -> Result[Unit, String] {
   if month < 1 || month > 12 {
     return Err("illegal solar month: " + month.to_string())
   }
@@ -63,8 +66,8 @@ pub fn SolarMonth::validate(year : Int, month : Int) -> Result[Unit, String] {
 ///|
 // from_ym 从年月构造
 pub fn SolarMonth::from_ym(
-  year : Int,
-  month : Int,
+  year : Int32,
+  month : Int32,
 ) -> Result[SolarMonth, String] {
   match SolarMonth::validate(year, month) {
     Ok(_) => Ok({ month_unit: MonthUnit::new(YearUnit::new(year), month), })
@@ -83,13 +86,13 @@ pub fn SolarMonth::get_solar_year(self : SolarMonth) -> SolarYear {
 
 ///|
 // get_index_in_year 位于当年的索引(0-11)
-pub fn SolarMonth::get_index_in_year(self : SolarMonth) -> Int {
+pub fn SolarMonth::get_index_in_year(self : SolarMonth) -> Int32 {
   self.get_month() - 1
 }
 
 ///|
 // get_day_count 天数（1582年10月只有21天）
-pub fn SolarMonth::get_day_count(self : SolarMonth) -> Int {
+pub fn SolarMonth::get_day_count(self : SolarMonth) -> Int32 {
   if self.get_year() == 1582 && self.get_month() == 10 {
     return 21
   }
@@ -103,7 +106,7 @@ pub fn SolarMonth::get_day_count(self : SolarMonth) -> Int {
 
 ///|
 // get_week_count 周数
-pub fn SolarMonth::get_week_count(self : SolarMonth, start : Int) -> Int {
+pub fn SolarMonth::get_week_count(self : SolarMonth, start : Int32) -> Int32 {
   match SolarDay::from_ymd(self.get_year(), self.get_month(), 1) {
     Ok(d) =>
       @math.ceil(
@@ -151,7 +154,7 @@ pub fn SolarMonth::get_first_day(self : SolarMonth) -> SolarDay {
 // get_weeks 本月公历周列表（参数 start：起始星期，1234560 分别代表星期一至星期天）
 pub fn SolarMonth::get_weeks(
   self : SolarMonth,
-  start : Int,
+  start : Int32,
 ) -> Array[SolarWeek] {
   let size = self.get_week_count(start)
   let l : Array[SolarWeek] = []
@@ -178,7 +181,7 @@ pub impl Show for SolarMonth with fn to_string(self : SolarMonth) -> String {
 }
 
 ///|
-pub impl Tyme for SolarMonth with fn next(self : SolarMonth, n : Int) -> SolarMonth {
+pub impl Tyme for SolarMonth with fn next(self : SolarMonth, n : Int32) -> SolarMonth {
   let i = self.get_month() - 1 + n
   match
     SolarMonth::from_ym(

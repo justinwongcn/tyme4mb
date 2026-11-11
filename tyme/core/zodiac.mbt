@@ -20,7 +20,7 @@ pub extend Zodiac with Culture::{get_name}
 pub extend Zodiac with Show::{to_string, output}
 
 ///|
-pub fn Zodiac::from_index(index : Int) -> Zodiac {
+pub fn Zodiac::from_index(index : Int32) -> Zodiac {
   { loop_tyme: LoopTyme::from_index(zodiac_names(), index), }
 }
 
@@ -38,7 +38,7 @@ pub fn Zodiac::equals(self : Zodiac, target : Zodiac) -> Bool {
 }
 
 ///|
-pub fn Zodiac::get_index(self : Zodiac) -> Int {
+pub fn Zodiac::get_index(self : Zodiac) -> Int32 {
   self.loop_tyme.get_index()
 }
 
@@ -53,7 +53,7 @@ pub impl Show for Zodiac with fn to_string(self : Zodiac) -> String {
 }
 
 ///|
-pub impl Tyme for Zodiac with fn next(self : Zodiac, n : Int) -> Zodiac {
+pub impl Tyme for Zodiac with fn next(self : Zodiac, n : Int32) -> Zodiac {
   Zodiac::from_index(self.loop_tyme.get_index() + n)
 }
 

@@ -2,7 +2,7 @@
 /// Moonbit 中不需要 package 和 import 声明，导入在 moon.pkg 中配置
 
 ///|
-const J2000 : Int = 2451545
+const J2000 : Int32 = 2451545
 
 ///|
 pub const Pi2 : Double = 2.0 * @math.PI

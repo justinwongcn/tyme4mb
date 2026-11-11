@@ -17,7 +17,7 @@ pub extend RabByungElement with Culture::{get_name}
 pub extend RabByungElement with Tyme::{next}
 
 ///|
-pub fn RabByungElement::from_index(index : Int) -> RabByungElement {
+pub fn RabByungElement::from_index(index : Int32) -> RabByungElement {
   {
     element: {
       loop_tyme: LoopTyme::from_index(rab_byung_element_names(), index),
@@ -36,7 +36,7 @@ pub fn RabByungElement::from_name(
 }
 
 ///|
-pub fn RabByungElement::get_index(self : RabByungElement) -> Int {
+pub fn RabByungElement::get_index(self : RabByungElement) -> Int32 {
   self.element.get_index()
 }
 
@@ -87,7 +87,10 @@ pub impl Show for RabByungElement with fn to_string(self : RabByungElement) -> S
 }
 
 ///|
-pub impl Tyme for RabByungElement with fn next(self : RabByungElement, n : Int) -> RabByungElement {
+pub impl Tyme for RabByungElement with fn next(
+  self : RabByungElement,
+  n : Int32,
+) -> RabByungElement {
   RabByungElement::from_index(self.element.get_index() + n)
 }
 

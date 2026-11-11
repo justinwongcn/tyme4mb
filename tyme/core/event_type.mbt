@@ -10,7 +10,7 @@ pub(all) enum EventType {
 }
 
 ///|
-pub fn EventType::get_code(self : EventType) -> Int {
+pub fn EventType::get_code(self : EventType) -> Int32 {
   match self {
     SolarDay => 0
     SolarWeek => 1
@@ -22,7 +22,7 @@ pub fn EventType::get_code(self : EventType) -> Int {
 }
 
 ///|
-pub fn EventType::from_code(code : Int) -> EventType {
+pub fn EventType::from_code(code : Int32) -> EventType {
   match code {
     1 => SolarWeek
     2 => LunarDay
